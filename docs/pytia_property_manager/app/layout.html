@@ -1,0 +1,1767 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>pytia_property_manager.app.layout API documentation</title>
+<meta name="description" content="The layout of the app." />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>pytia_property_manager.app.layout</code></h1>
+</header>
+<section id="section-intro">
+<p>The layout of the app.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;
+    The layout of the app.
+&#34;&#34;&#34;
+from tkinter import DISABLED, Tk, ttk
+
+from const import Source
+from helper.values import increase_revision
+from pytia_ui_tools.widgets.texts import ScrolledText
+from resources import resource
+
+from app.frames import Frames
+from app.vars import Variables
+from app.widgets.notes import NoteWidgets
+from app.widgets.processes import ProcessWidgets
+
+
+class Layout:
+    &#34;&#34;&#34;The layout class of the app, holds all widgets.&#34;&#34;&#34;
+
+    MARGIN_X = 10
+    MARGIN_Y = 10
+
+    def __init__(self, root: Tk, frames: Frames, variables: Variables) -&gt; None:
+        &#34;&#34;&#34;
+        Inits the Layout class. Creates and places the widgets of the main window.
+
+        Args:
+            root (Tk): The main window.
+            frames (Frames): The frames of the main window.
+            variables (Variables): The variables of the main window.
+        &#34;&#34;&#34; &#34;&#34;&#34;&#34;&#34;&#34;
+        # region FRAME Infra ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+        # region partnumber
+        lbl_partnumber = ttk.Label(
+            frames.infrastructure,
+            text=&#34;Partnumber&#34;,
+            width=12,
+            font=(&#34;Segoe UI&#34;, 9, &#34;bold&#34;),
+        )
+        lbl_partnumber.grid(
+            row=0,
+            column=0,
+            padx=(Layout.MARGIN_X, 5),
+            pady=(Layout.MARGIN_Y, 2),
+            sticky=&#34;nsew&#34;,
+        )
+
+        self._entry_partnumber = ttk.Entry(
+            frames.infrastructure,
+            textvariable=variables.partnumber,
+            width=30,
+            state=DISABLED,
+            cursor=&#34;arrow&#34;,
+        )
+        self._entry_partnumber.grid(
+            row=0,
+            column=1,
+            padx=(5, Layout.MARGIN_X),
+            pady=(Layout.MARGIN_Y, 2),
+            ipadx=2,
+            ipady=2,
+            sticky=&#34;nsew&#34;,
+            columnspan=2,
+        )
+        # endregion
+
+        # region project
+        lbl_project = ttk.Label(frames.infrastructure, text=&#34;Project&#34;)
+        lbl_project.grid(
+            row=1, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky=&#34;nsew&#34;
+        )
+
+        self._combo_project = ttk.Combobox(
+            frames.infrastructure,
+            values=[],
+            textvariable=variables.project,
+            width=27,
+            state=DISABLED,
+        )
+        self._combo_project.grid(
+            row=1,
+            column=1,
+            padx=(5, Layout.MARGIN_X),
+            pady=(1, 2),
+            ipadx=2,
+            ipady=2,
+            sticky=&#34;nsew&#34;,
+            columnspan=2,
+        )
+        # endregion
+
+        # region machine
+        lbl_project = ttk.Label(frames.infrastructure, text=&#34;Machine&#34;)
+        lbl_project.grid(
+            row=2, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky=&#34;nsew&#34;
+        )
+
+        self._entry_machine = ttk.Entry(
+            frames.infrastructure,
+            textvariable=variables.machine,
+            state=DISABLED,
+        )
+        self._entry_machine.grid(
+            row=2,
+            column=1,
+            padx=(5, Layout.MARGIN_X),
+            pady=2,
+            ipadx=2,
+            ipady=2,
+            sticky=&#34;nsew&#34;,
+            columnspan=2,
+        )
+        # endregion
+
+        # region definition
+        lbl_definition = ttk.Label(frames.infrastructure, text=&#34;Definition&#34;)
+        lbl_definition.grid(
+            row=3, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky=&#34;nsew&#34;
+        )
+
+        self._entry_definition = ttk.Entry(
+            frames.infrastructure,
+            textvariable=variables.definition,
+            state=DISABLED,
+        )
+        self._entry_definition.grid(
+            row=3,
+            column=1,
+            padx=(5, Layout.MARGIN_X),
+            pady=2,
+            ipadx=2,
+            ipady=2,
+            sticky=&#34;nsew&#34;,
+            columnspan=2,
+        )
+        # endregion
+
+        # region revision
+        lbl_revision = ttk.Label(frames.infrastructure, text=&#34;Revision&#34;)
+        lbl_revision.grid(
+            row=4, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky=&#34;nsew&#34;
+        )
+
+        self._entry_revision = ttk.Entry(
+            frames.infrastructure,
+            textvariable=variables.revision,
+            width=18,
+            state=DISABLED,
+            cursor=&#34;arrow&#34;,
+        )
+        self._entry_revision.grid(
+            row=4, column=1, padx=5, pady=2, ipadx=2, ipady=2, sticky=&#34;nsew&#34;
+        )
+
+        self._btn_revision = ttk.Button(
+            frames.infrastructure,
+            text=&#34;New Revision&#34;,
+            width=12,
+            state=DISABLED,
+            command=lambda: increase_revision(variables.revision),
+        )
+        self._btn_revision.grid(
+            row=4, column=2, padx=(5, Layout.MARGIN_X), pady=1, sticky=&#34;nsew&#34;
+        )
+        # endregion
+
+        # region source
+        lbl_source = ttk.Label(
+            frames.infrastructure,
+            text=&#34;Source&#34;,
+        )
+        lbl_source.grid(
+            row=5, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky=&#34;nsew&#34;
+        )
+
+        self._combo_source = ttk.Combobox(
+            frames.infrastructure,
+            values=[s.value for s in Source],
+            textvariable=variables.source,
+            width=15,
+            state=DISABLED,
+        )
+        self._combo_source.grid(
+            row=5, column=1, padx=5, pady=2, ipadx=2, ipady=2, sticky=&#34;nsew&#34;
+        )
+
+        self._btn_reload_source = ttk.Button(
+            frames.infrastructure,
+            text=&#34;Reload&#34;,
+            state=DISABLED,
+            # command=root.on_btn_reload_source,
+        )
+        self._btn_reload_source.grid(
+            row=5, column=2, padx=(5, Layout.MARGIN_X), pady=1, sticky=&#34;nsew&#34;
+        )
+        # endregion
+
+        # region material
+        lbl_material = ttk.Label(frames.infrastructure, text=&#34;Material&#34;)
+        lbl_material.grid(
+            row=6, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky=&#34;nsew&#34;
+        )
+
+        self._entry_material = ttk.Entry(
+            frames.infrastructure,
+            textvariable=variables.material,
+            width=18,
+            state=DISABLED,
+        )
+        self._entry_material.grid(
+            row=6, column=1, padx=5, pady=2, ipadx=2, ipady=2, sticky=&#34;nsew&#34;
+        )
+
+        self._btn_material = ttk.Button(
+            frames.infrastructure,
+            text=&#34;Select&#34;,
+            state=DISABLED,
+        )
+        self._btn_material.grid(
+            row=6, column=2, padx=(5, Layout.MARGIN_X), pady=1, sticky=&#34;nsew&#34;
+        )
+        # endregion
+
+        # region base size
+        lbl_base_size = ttk.Label(frames.infrastructure, text=&#34;Base Size&#34;)
+        lbl_base_size.grid(
+            row=7, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky=&#34;nsew&#34;
+        )
+
+        self._entry_base_size = ttk.Entry(
+            frames.infrastructure,
+            textvariable=variables.base_size,
+            width=18,
+            state=DISABLED,
+            cursor=&#34;arrow&#34;,
+        )
+        self._entry_base_size.grid(
+            row=7, column=1, padx=5, pady=2, ipadx=2, ipady=2, sticky=&#34;nsew&#34;
+        )
+
+        self._btn_base_size = ttk.Button(
+            frames.infrastructure,
+            text=&#34;Calculate&#34;,
+            state=DISABLED,
+        )
+        self._btn_base_size.grid(
+            row=7,
+            column=2,
+            padx=(5, Layout.MARGIN_X),
+            pady=1,
+            sticky=&#34;nsew&#34;,
+            rowspan=2,
+        )
+
+        lbl_base_size_preset = ttk.Label(frames.infrastructure, text=&#34;Base Size Preset&#34;)
+        lbl_base_size_preset.grid(
+            row=8, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky=&#34;nsew&#34;
+        )
+
+        self._entry_base_size_preset = ttk.Entry(
+            frames.infrastructure,
+            textvariable=variables.base_size_preset,
+            width=18,
+            state=DISABLED,
+            cursor=&#34;arrow&#34;,
+        )
+        self._entry_base_size_preset.grid(
+            row=8, column=1, padx=5, pady=2, ipadx=2, ipady=2, sticky=&#34;nsew&#34;
+        )
+        # endregion
+
+        # region mass
+        lbl_mass = ttk.Label(frames.infrastructure, text=&#34;Mass&#34;)
+        lbl_mass.grid(row=9, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky=&#34;nsew&#34;)
+
+        self._entry_mass = ttk.Entry(
+            frames.infrastructure,
+            textvariable=variables.mass,
+            width=18,
+            state=DISABLED,
+            cursor=&#34;arrow&#34;,
+        )
+        self._entry_mass.grid(
+            row=9, column=1, padx=5, pady=2, ipadx=2, ipady=2, sticky=&#34;nsew&#34;
+        )
+
+        self._btn_mass = ttk.Button(
+            frames.infrastructure,
+            text=&#34;Calculate&#34;,
+            state=DISABLED,
+        )
+        self._btn_mass.grid(
+            row=9, column=2, padx=(5, Layout.MARGIN_X), pady=1, sticky=&#34;nsew&#34;
+        )
+        # endregion
+
+        # region manufacturer
+        lbl_manufacturer = ttk.Label(frames.infrastructure, text=&#34;Manufacturer&#34;)
+        lbl_manufacturer.grid(
+            row=10, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky=&#34;nsew&#34;
+        )
+
+        self._entry_manufacturer = ttk.Entry(
+            frames.infrastructure,
+            textvariable=variables.manufacturer,
+            width=30,
+            state=DISABLED,
+        )
+        self._entry_manufacturer.grid(
+            row=10,
+            column=1,
+            padx=(5, Layout.MARGIN_X),
+            pady=2,
+            ipadx=2,
+            ipady=2,
+            sticky=&#34;nsew&#34;,
+            columnspan=2,
+        )
+        # endregion
+
+        # region supplier
+        lbl_supplier = ttk.Label(frames.infrastructure, text=&#34;Supplier&#34;)
+        lbl_supplier.grid(
+            row=11, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky=&#34;nsew&#34;
+        )
+
+        self._entry_supplier = ttk.Entry(
+            frames.infrastructure,
+            textvariable=variables.supplier,
+            state=DISABLED,
+        )
+        self._entry_supplier.grid(
+            row=11,
+            column=1,
+            padx=(5, Layout.MARGIN_X),
+            pady=2,
+            ipadx=2,
+            ipady=2,
+            sticky=&#34;nsew&#34;,
+            columnspan=2,
+        )
+        # endregion
+
+        # region tolerance
+        lbl_tolerance = ttk.Label(frames.infrastructure, text=&#34;Tolerance&#34;)
+        lbl_tolerance.grid(
+            row=12, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky=&#34;nsew&#34;
+        )
+
+        self._combo_tolerance = ttk.Combobox(
+            frames.infrastructure,
+            values=resource.settings.tolerances,
+            textvariable=variables.tolerance,
+            width=27,
+            state=DISABLED,
+        )
+        self._combo_tolerance.grid(
+            row=12,
+            column=1,
+            padx=(5, Layout.MARGIN_X),
+            pady=2,
+            ipadx=2,
+            ipady=2,
+            sticky=&#34;new&#34;,
+            columnspan=2,
+        )
+        # endregion
+
+        # region spare part level
+        lbl_spare_part = ttk.Label(
+            frames.infrastructure, text=&#34;Spare Part Level&#34;, state=&#34;readonly&#34;
+        )
+        lbl_spare_part.grid(
+            row=13, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky=&#34;nsew&#34;
+        )
+
+        self._combo_spare_part = ttk.Combobox(
+            frames.infrastructure,
+            values=resource.settings.spare_part_level,
+            textvariable=variables.spare_part_level,
+            state=DISABLED,
+            width=27,
+        )
+        self._combo_spare_part.grid(
+            row=13,
+            column=1,
+            padx=(5, Layout.MARGIN_X),
+            pady=2,
+            ipadx=2,
+            ipady=2,
+            sticky=&#34;new&#34;,
+            columnspan=2,
+        )
+        # endregion
+
+        # region description
+        lbl_description = ttk.Label(frames.infrastructure, text=&#34;Description&#34;)
+        lbl_description.grid(
+            row=14,
+            column=0,
+            padx=(Layout.MARGIN_X, 5),
+            pady=2,
+            ipadx=2,
+            ipady=2,
+            sticky=&#34;new&#34;,
+        )
+
+        self._text_description = ScrolledText(
+            parent=frames.infrastructure,
+            textvariable=variables.description,
+            height=6,
+            width=30,
+            state=DISABLED,
+            background=&#34;#f0f0f0&#34;,
+            cursor=&#34;arrow&#34;,
+            font=(&#34;Segoe UI&#34;, 9),
+        )
+        self._text_description.grid(
+            row=14,
+            column=1,
+            padx=(5, Layout.MARGIN_X + 1),
+            pady=2,
+            sticky=&#34;nsew&#34;,
+            columnspan=2,
+        )
+        # endregion
+
+        # region creator
+        lbl_creator = ttk.Label(frames.infrastructure, text=&#34;Creator&#34;)
+        lbl_creator.grid(
+            row=15,
+            column=0,
+            padx=(Layout.MARGIN_X, 5),
+            pady=(20, 2),
+            ipadx=2,
+            ipady=2,
+            sticky=&#34;new&#34;,
+        )
+        self._lbl_creator_value = ttk.Label(
+            frames.infrastructure, textvariable=variables.creator
+        )
+        self._lbl_creator_value.grid(
+            row=15,
+            column=1,
+            padx=(5, Layout.MARGIN_X),
+            pady=(20, 2),
+            ipadx=2,
+            ipady=2,
+            sticky=&#34;nw&#34;,
+            columnspan=2,
+        )
+        # endregion
+
+        # region creator
+        lbl_modifier = ttk.Label(frames.infrastructure, text=&#34;Modifier&#34;)
+        lbl_modifier.grid(
+            row=16,
+            column=0,
+            padx=(Layout.MARGIN_X, 5),
+            pady=(2, Layout.MARGIN_Y),
+            ipadx=2,
+            ipady=2,
+            sticky=&#34;new&#34;,
+        )
+        self._lbl_modifier_value = ttk.Label(
+            frames.infrastructure, textvariable=variables.modifier
+        )
+        self._lbl_modifier_value.grid(
+            row=16,
+            column=1,
+            padx=(5, Layout.MARGIN_X),
+            pady=(2, Layout.MARGIN_Y),
+            ipadx=2,
+            ipady=2,
+            sticky=&#34;nw&#34;,
+            columnspan=2,
+        )
+        # endregion
+        # endregion
+
+        # region FRAME Notes ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+        self._notes = NoteWidgets(root=frames.notes)
+
+        # endregion
+
+        # region FRAME Processes ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+        self._processes = ProcessWidgets(
+            root=frames.processes, material_metadata=variables.material_meta
+        )
+
+        # endregion
+
+        # region FRAME Footer ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+        # region info
+        lbl_info = ttk.Label(
+            frames.footer,
+            text=&#34;&#34;,
+        )
+        lbl_info.grid(
+            row=0, column=0, padx=(0, 5), pady=0, ipadx=2, ipady=2, sticky=&#34;nsew&#34;
+        )
+        # endregion
+
+        # region button save
+        self._btn_save = ttk.Button(
+            frames.footer,
+            text=&#34;Save&#34;,
+            style=&#34;Footer.TButton&#34;,
+        )
+        self._btn_save.grid(row=0, column=1, padx=(5, 2), pady=0, sticky=&#34;e&#34;)
+        # endregion
+
+        # region button abort
+        self._btn_abort = ttk.Button(
+            frames.footer,
+            text=&#34;Abort&#34;,
+            style=&#34;Footer.TButton&#34;,
+        )
+        self._btn_abort.grid(row=0, column=2, padx=(2, 0), pady=0, sticky=&#34;e&#34;)
+        # endregion
+        # endregion
+
+    @property
+    def input_partnumber(self) -&gt; ttk.Entry:
+        &#34;&#34;&#34;Returns the part number entry.&#34;&#34;&#34;
+        return self._entry_partnumber
+
+    @property
+    def input_project(self) -&gt; ttk.Combobox:
+        &#34;&#34;&#34;Returns the project combobox.&#34;&#34;&#34;
+        return self._combo_project
+
+    @property
+    def input_machine(self) -&gt; ttk.Entry:
+        &#34;&#34;&#34;Returns the machine entry.&#34;&#34;&#34;
+        return self._entry_machine
+
+    @property
+    def input_definition(self) -&gt; ttk.Entry:
+        &#34;&#34;&#34;Returns the definition entry.&#34;&#34;&#34;
+        return self._entry_definition
+
+    @property
+    def input_revision(self) -&gt; ttk.Entry:
+        &#34;&#34;&#34;Returns the revision entry.&#34;&#34;&#34;
+        return self._entry_revision
+
+    @property
+    def button_revision(self) -&gt; ttk.Button:
+        &#34;&#34;&#34;Returns the revision button.&#34;&#34;&#34;
+        return self._btn_revision
+
+    @property
+    def input_source(self) -&gt; ttk.Entry:
+        &#34;&#34;&#34;Returns the source entry.&#34;&#34;&#34;
+        return self._combo_source
+
+    @property
+    def button_source(self) -&gt; ttk.Button:
+        &#34;&#34;&#34;Returns the source button.&#34;&#34;&#34;
+        return self._btn_reload_source
+
+    @property
+    def input_material(self) -&gt; ttk.Entry:
+        &#34;&#34;&#34;Returns the material entry.&#34;&#34;&#34;
+        return self._entry_material
+
+    @property
+    def button_material(self) -&gt; ttk.Button:
+        &#34;&#34;&#34;Returns the material button.&#34;&#34;&#34;
+        return self._btn_material
+
+    @property
+    def input_base_size(self) -&gt; ttk.Entry:
+        &#34;&#34;&#34;Returns the base size entry.&#34;&#34;&#34;
+        return self._entry_base_size
+
+    @property
+    def input_base_size_preset(self) -&gt; ttk.Entry:
+        &#34;&#34;&#34;Returns the base size preset entry.&#34;&#34;&#34;
+        return self._entry_base_size_preset
+
+    @property
+    def button_base_size(self) -&gt; ttk.Button:
+        &#34;&#34;&#34;Returns the base size button.&#34;&#34;&#34;
+        return self._btn_base_size
+
+    @property
+    def input_mass(self) -&gt; ttk.Entry:
+        &#34;&#34;&#34;Returns the mass entry.&#34;&#34;&#34;
+        return self._entry_mass
+
+    @property
+    def button_mass(self) -&gt; ttk.Button:
+        &#34;&#34;&#34;Returns the mass button.&#34;&#34;&#34;
+        return self._btn_mass
+
+    @property
+    def input_manufacturer(self) -&gt; ttk.Entry:
+        &#34;&#34;&#34;Returns the manufacturer entry.&#34;&#34;&#34;
+        return self._entry_manufacturer
+
+    @property
+    def input_supplier(self) -&gt; ttk.Entry:
+        &#34;&#34;&#34;Returns the supplier entry.&#34;&#34;&#34;
+        return self._entry_supplier
+
+    @property
+    def input_tolerance(self) -&gt; ttk.Combobox:
+        &#34;&#34;&#34;Returns the tolerance combobox.&#34;&#34;&#34;
+        return self._combo_tolerance
+
+    @property
+    def input_spare_part(self) -&gt; ttk.Combobox:
+        &#34;&#34;&#34;Returns the spare part combobox.&#34;&#34;&#34;
+        return self._combo_spare_part
+
+    @property
+    def input_description(self) -&gt; ScrolledText:
+        &#34;&#34;&#34;Returns the description text widget.&#34;&#34;&#34;
+        return self._text_description
+
+    @property
+    def label_creator(self) -&gt; ttk.Label:
+        &#34;&#34;&#34;Returns the creator label.&#34;&#34;&#34;
+        return self._lbl_creator_value
+
+    @property
+    def label_modifier(self) -&gt; ttk.Label:
+        &#34;&#34;&#34;Returns the modifier label.&#34;&#34;&#34;
+        return self._lbl_modifier_value
+
+    @property
+    def notes(self) -&gt; NoteWidgets:
+        &#34;&#34;&#34;Returns the notes widget.&#34;&#34;&#34;
+        return self._notes
+
+    @property
+    def processes(self) -&gt; ProcessWidgets:
+        &#34;&#34;&#34;Returns the processes widget.&#34;&#34;&#34;
+        return self._processes
+
+    @property
+    def button_save(self) -&gt; ttk.Button:
+        &#34;&#34;&#34;Returns the save button.&#34;&#34;&#34;
+        return self._btn_save
+
+    @property
+    def button_abort(self) -&gt; ttk.Button:
+        &#34;&#34;&#34;Returns the abort button.&#34;&#34;&#34;
+        return self._btn_abort</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="pytia_property_manager.app.layout.Layout"><code class="flex name class">
+<span>class <span class="ident">Layout</span></span>
+<span>(</span><span>root: tkinter.Tk, frames: app.frames.Frames, variables: app.vars.Variables)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>The layout class of the app, holds all widgets.</p>
+<p>Inits the Layout class. Creates and places the widgets of the main window.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>root</code></strong> :&ensp;<code>Tk</code></dt>
+<dd>The main window.</dd>
+<dt><strong><code>frames</code></strong> :&ensp;<code>Frames</code></dt>
+<dd>The frames of the main window.</dd>
+<dt><strong><code>variables</code></strong> :&ensp;<code>Variables</code></dt>
+<dd>The variables of the main window.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Layout:
+    &#34;&#34;&#34;The layout class of the app, holds all widgets.&#34;&#34;&#34;
+
+    MARGIN_X = 10
+    MARGIN_Y = 10
+
+    def __init__(self, root: Tk, frames: Frames, variables: Variables) -&gt; None:
+        &#34;&#34;&#34;
+        Inits the Layout class. Creates and places the widgets of the main window.
+
+        Args:
+            root (Tk): The main window.
+            frames (Frames): The frames of the main window.
+            variables (Variables): The variables of the main window.
+        &#34;&#34;&#34; &#34;&#34;&#34;&#34;&#34;&#34;
+        # region FRAME Infra ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+        # region partnumber
+        lbl_partnumber = ttk.Label(
+            frames.infrastructure,
+            text=&#34;Partnumber&#34;,
+            width=12,
+            font=(&#34;Segoe UI&#34;, 9, &#34;bold&#34;),
+        )
+        lbl_partnumber.grid(
+            row=0,
+            column=0,
+            padx=(Layout.MARGIN_X, 5),
+            pady=(Layout.MARGIN_Y, 2),
+            sticky=&#34;nsew&#34;,
+        )
+
+        self._entry_partnumber = ttk.Entry(
+            frames.infrastructure,
+            textvariable=variables.partnumber,
+            width=30,
+            state=DISABLED,
+            cursor=&#34;arrow&#34;,
+        )
+        self._entry_partnumber.grid(
+            row=0,
+            column=1,
+            padx=(5, Layout.MARGIN_X),
+            pady=(Layout.MARGIN_Y, 2),
+            ipadx=2,
+            ipady=2,
+            sticky=&#34;nsew&#34;,
+            columnspan=2,
+        )
+        # endregion
+
+        # region project
+        lbl_project = ttk.Label(frames.infrastructure, text=&#34;Project&#34;)
+        lbl_project.grid(
+            row=1, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky=&#34;nsew&#34;
+        )
+
+        self._combo_project = ttk.Combobox(
+            frames.infrastructure,
+            values=[],
+            textvariable=variables.project,
+            width=27,
+            state=DISABLED,
+        )
+        self._combo_project.grid(
+            row=1,
+            column=1,
+            padx=(5, Layout.MARGIN_X),
+            pady=(1, 2),
+            ipadx=2,
+            ipady=2,
+            sticky=&#34;nsew&#34;,
+            columnspan=2,
+        )
+        # endregion
+
+        # region machine
+        lbl_project = ttk.Label(frames.infrastructure, text=&#34;Machine&#34;)
+        lbl_project.grid(
+            row=2, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky=&#34;nsew&#34;
+        )
+
+        self._entry_machine = ttk.Entry(
+            frames.infrastructure,
+            textvariable=variables.machine,
+            state=DISABLED,
+        )
+        self._entry_machine.grid(
+            row=2,
+            column=1,
+            padx=(5, Layout.MARGIN_X),
+            pady=2,
+            ipadx=2,
+            ipady=2,
+            sticky=&#34;nsew&#34;,
+            columnspan=2,
+        )
+        # endregion
+
+        # region definition
+        lbl_definition = ttk.Label(frames.infrastructure, text=&#34;Definition&#34;)
+        lbl_definition.grid(
+            row=3, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky=&#34;nsew&#34;
+        )
+
+        self._entry_definition = ttk.Entry(
+            frames.infrastructure,
+            textvariable=variables.definition,
+            state=DISABLED,
+        )
+        self._entry_definition.grid(
+            row=3,
+            column=1,
+            padx=(5, Layout.MARGIN_X),
+            pady=2,
+            ipadx=2,
+            ipady=2,
+            sticky=&#34;nsew&#34;,
+            columnspan=2,
+        )
+        # endregion
+
+        # region revision
+        lbl_revision = ttk.Label(frames.infrastructure, text=&#34;Revision&#34;)
+        lbl_revision.grid(
+            row=4, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky=&#34;nsew&#34;
+        )
+
+        self._entry_revision = ttk.Entry(
+            frames.infrastructure,
+            textvariable=variables.revision,
+            width=18,
+            state=DISABLED,
+            cursor=&#34;arrow&#34;,
+        )
+        self._entry_revision.grid(
+            row=4, column=1, padx=5, pady=2, ipadx=2, ipady=2, sticky=&#34;nsew&#34;
+        )
+
+        self._btn_revision = ttk.Button(
+            frames.infrastructure,
+            text=&#34;New Revision&#34;,
+            width=12,
+            state=DISABLED,
+            command=lambda: increase_revision(variables.revision),
+        )
+        self._btn_revision.grid(
+            row=4, column=2, padx=(5, Layout.MARGIN_X), pady=1, sticky=&#34;nsew&#34;
+        )
+        # endregion
+
+        # region source
+        lbl_source = ttk.Label(
+            frames.infrastructure,
+            text=&#34;Source&#34;,
+        )
+        lbl_source.grid(
+            row=5, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky=&#34;nsew&#34;
+        )
+
+        self._combo_source = ttk.Combobox(
+            frames.infrastructure,
+            values=[s.value for s in Source],
+            textvariable=variables.source,
+            width=15,
+            state=DISABLED,
+        )
+        self._combo_source.grid(
+            row=5, column=1, padx=5, pady=2, ipadx=2, ipady=2, sticky=&#34;nsew&#34;
+        )
+
+        self._btn_reload_source = ttk.Button(
+            frames.infrastructure,
+            text=&#34;Reload&#34;,
+            state=DISABLED,
+            # command=root.on_btn_reload_source,
+        )
+        self._btn_reload_source.grid(
+            row=5, column=2, padx=(5, Layout.MARGIN_X), pady=1, sticky=&#34;nsew&#34;
+        )
+        # endregion
+
+        # region material
+        lbl_material = ttk.Label(frames.infrastructure, text=&#34;Material&#34;)
+        lbl_material.grid(
+            row=6, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky=&#34;nsew&#34;
+        )
+
+        self._entry_material = ttk.Entry(
+            frames.infrastructure,
+            textvariable=variables.material,
+            width=18,
+            state=DISABLED,
+        )
+        self._entry_material.grid(
+            row=6, column=1, padx=5, pady=2, ipadx=2, ipady=2, sticky=&#34;nsew&#34;
+        )
+
+        self._btn_material = ttk.Button(
+            frames.infrastructure,
+            text=&#34;Select&#34;,
+            state=DISABLED,
+        )
+        self._btn_material.grid(
+            row=6, column=2, padx=(5, Layout.MARGIN_X), pady=1, sticky=&#34;nsew&#34;
+        )
+        # endregion
+
+        # region base size
+        lbl_base_size = ttk.Label(frames.infrastructure, text=&#34;Base Size&#34;)
+        lbl_base_size.grid(
+            row=7, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky=&#34;nsew&#34;
+        )
+
+        self._entry_base_size = ttk.Entry(
+            frames.infrastructure,
+            textvariable=variables.base_size,
+            width=18,
+            state=DISABLED,
+            cursor=&#34;arrow&#34;,
+        )
+        self._entry_base_size.grid(
+            row=7, column=1, padx=5, pady=2, ipadx=2, ipady=2, sticky=&#34;nsew&#34;
+        )
+
+        self._btn_base_size = ttk.Button(
+            frames.infrastructure,
+            text=&#34;Calculate&#34;,
+            state=DISABLED,
+        )
+        self._btn_base_size.grid(
+            row=7,
+            column=2,
+            padx=(5, Layout.MARGIN_X),
+            pady=1,
+            sticky=&#34;nsew&#34;,
+            rowspan=2,
+        )
+
+        lbl_base_size_preset = ttk.Label(frames.infrastructure, text=&#34;Base Size Preset&#34;)
+        lbl_base_size_preset.grid(
+            row=8, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky=&#34;nsew&#34;
+        )
+
+        self._entry_base_size_preset = ttk.Entry(
+            frames.infrastructure,
+            textvariable=variables.base_size_preset,
+            width=18,
+            state=DISABLED,
+            cursor=&#34;arrow&#34;,
+        )
+        self._entry_base_size_preset.grid(
+            row=8, column=1, padx=5, pady=2, ipadx=2, ipady=2, sticky=&#34;nsew&#34;
+        )
+        # endregion
+
+        # region mass
+        lbl_mass = ttk.Label(frames.infrastructure, text=&#34;Mass&#34;)
+        lbl_mass.grid(row=9, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky=&#34;nsew&#34;)
+
+        self._entry_mass = ttk.Entry(
+            frames.infrastructure,
+            textvariable=variables.mass,
+            width=18,
+            state=DISABLED,
+            cursor=&#34;arrow&#34;,
+        )
+        self._entry_mass.grid(
+            row=9, column=1, padx=5, pady=2, ipadx=2, ipady=2, sticky=&#34;nsew&#34;
+        )
+
+        self._btn_mass = ttk.Button(
+            frames.infrastructure,
+            text=&#34;Calculate&#34;,
+            state=DISABLED,
+        )
+        self._btn_mass.grid(
+            row=9, column=2, padx=(5, Layout.MARGIN_X), pady=1, sticky=&#34;nsew&#34;
+        )
+        # endregion
+
+        # region manufacturer
+        lbl_manufacturer = ttk.Label(frames.infrastructure, text=&#34;Manufacturer&#34;)
+        lbl_manufacturer.grid(
+            row=10, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky=&#34;nsew&#34;
+        )
+
+        self._entry_manufacturer = ttk.Entry(
+            frames.infrastructure,
+            textvariable=variables.manufacturer,
+            width=30,
+            state=DISABLED,
+        )
+        self._entry_manufacturer.grid(
+            row=10,
+            column=1,
+            padx=(5, Layout.MARGIN_X),
+            pady=2,
+            ipadx=2,
+            ipady=2,
+            sticky=&#34;nsew&#34;,
+            columnspan=2,
+        )
+        # endregion
+
+        # region supplier
+        lbl_supplier = ttk.Label(frames.infrastructure, text=&#34;Supplier&#34;)
+        lbl_supplier.grid(
+            row=11, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky=&#34;nsew&#34;
+        )
+
+        self._entry_supplier = ttk.Entry(
+            frames.infrastructure,
+            textvariable=variables.supplier,
+            state=DISABLED,
+        )
+        self._entry_supplier.grid(
+            row=11,
+            column=1,
+            padx=(5, Layout.MARGIN_X),
+            pady=2,
+            ipadx=2,
+            ipady=2,
+            sticky=&#34;nsew&#34;,
+            columnspan=2,
+        )
+        # endregion
+
+        # region tolerance
+        lbl_tolerance = ttk.Label(frames.infrastructure, text=&#34;Tolerance&#34;)
+        lbl_tolerance.grid(
+            row=12, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky=&#34;nsew&#34;
+        )
+
+        self._combo_tolerance = ttk.Combobox(
+            frames.infrastructure,
+            values=resource.settings.tolerances,
+            textvariable=variables.tolerance,
+            width=27,
+            state=DISABLED,
+        )
+        self._combo_tolerance.grid(
+            row=12,
+            column=1,
+            padx=(5, Layout.MARGIN_X),
+            pady=2,
+            ipadx=2,
+            ipady=2,
+            sticky=&#34;new&#34;,
+            columnspan=2,
+        )
+        # endregion
+
+        # region spare part level
+        lbl_spare_part = ttk.Label(
+            frames.infrastructure, text=&#34;Spare Part Level&#34;, state=&#34;readonly&#34;
+        )
+        lbl_spare_part.grid(
+            row=13, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky=&#34;nsew&#34;
+        )
+
+        self._combo_spare_part = ttk.Combobox(
+            frames.infrastructure,
+            values=resource.settings.spare_part_level,
+            textvariable=variables.spare_part_level,
+            state=DISABLED,
+            width=27,
+        )
+        self._combo_spare_part.grid(
+            row=13,
+            column=1,
+            padx=(5, Layout.MARGIN_X),
+            pady=2,
+            ipadx=2,
+            ipady=2,
+            sticky=&#34;new&#34;,
+            columnspan=2,
+        )
+        # endregion
+
+        # region description
+        lbl_description = ttk.Label(frames.infrastructure, text=&#34;Description&#34;)
+        lbl_description.grid(
+            row=14,
+            column=0,
+            padx=(Layout.MARGIN_X, 5),
+            pady=2,
+            ipadx=2,
+            ipady=2,
+            sticky=&#34;new&#34;,
+        )
+
+        self._text_description = ScrolledText(
+            parent=frames.infrastructure,
+            textvariable=variables.description,
+            height=6,
+            width=30,
+            state=DISABLED,
+            background=&#34;#f0f0f0&#34;,
+            cursor=&#34;arrow&#34;,
+            font=(&#34;Segoe UI&#34;, 9),
+        )
+        self._text_description.grid(
+            row=14,
+            column=1,
+            padx=(5, Layout.MARGIN_X + 1),
+            pady=2,
+            sticky=&#34;nsew&#34;,
+            columnspan=2,
+        )
+        # endregion
+
+        # region creator
+        lbl_creator = ttk.Label(frames.infrastructure, text=&#34;Creator&#34;)
+        lbl_creator.grid(
+            row=15,
+            column=0,
+            padx=(Layout.MARGIN_X, 5),
+            pady=(20, 2),
+            ipadx=2,
+            ipady=2,
+            sticky=&#34;new&#34;,
+        )
+        self._lbl_creator_value = ttk.Label(
+            frames.infrastructure, textvariable=variables.creator
+        )
+        self._lbl_creator_value.grid(
+            row=15,
+            column=1,
+            padx=(5, Layout.MARGIN_X),
+            pady=(20, 2),
+            ipadx=2,
+            ipady=2,
+            sticky=&#34;nw&#34;,
+            columnspan=2,
+        )
+        # endregion
+
+        # region creator
+        lbl_modifier = ttk.Label(frames.infrastructure, text=&#34;Modifier&#34;)
+        lbl_modifier.grid(
+            row=16,
+            column=0,
+            padx=(Layout.MARGIN_X, 5),
+            pady=(2, Layout.MARGIN_Y),
+            ipadx=2,
+            ipady=2,
+            sticky=&#34;new&#34;,
+        )
+        self._lbl_modifier_value = ttk.Label(
+            frames.infrastructure, textvariable=variables.modifier
+        )
+        self._lbl_modifier_value.grid(
+            row=16,
+            column=1,
+            padx=(5, Layout.MARGIN_X),
+            pady=(2, Layout.MARGIN_Y),
+            ipadx=2,
+            ipady=2,
+            sticky=&#34;nw&#34;,
+            columnspan=2,
+        )
+        # endregion
+        # endregion
+
+        # region FRAME Notes ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+        self._notes = NoteWidgets(root=frames.notes)
+
+        # endregion
+
+        # region FRAME Processes ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+        self._processes = ProcessWidgets(
+            root=frames.processes, material_metadata=variables.material_meta
+        )
+
+        # endregion
+
+        # region FRAME Footer ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+        # region info
+        lbl_info = ttk.Label(
+            frames.footer,
+            text=&#34;&#34;,
+        )
+        lbl_info.grid(
+            row=0, column=0, padx=(0, 5), pady=0, ipadx=2, ipady=2, sticky=&#34;nsew&#34;
+        )
+        # endregion
+
+        # region button save
+        self._btn_save = ttk.Button(
+            frames.footer,
+            text=&#34;Save&#34;,
+            style=&#34;Footer.TButton&#34;,
+        )
+        self._btn_save.grid(row=0, column=1, padx=(5, 2), pady=0, sticky=&#34;e&#34;)
+        # endregion
+
+        # region button abort
+        self._btn_abort = ttk.Button(
+            frames.footer,
+            text=&#34;Abort&#34;,
+            style=&#34;Footer.TButton&#34;,
+        )
+        self._btn_abort.grid(row=0, column=2, padx=(2, 0), pady=0, sticky=&#34;e&#34;)
+        # endregion
+        # endregion
+
+    @property
+    def input_partnumber(self) -&gt; ttk.Entry:
+        &#34;&#34;&#34;Returns the part number entry.&#34;&#34;&#34;
+        return self._entry_partnumber
+
+    @property
+    def input_project(self) -&gt; ttk.Combobox:
+        &#34;&#34;&#34;Returns the project combobox.&#34;&#34;&#34;
+        return self._combo_project
+
+    @property
+    def input_machine(self) -&gt; ttk.Entry:
+        &#34;&#34;&#34;Returns the machine entry.&#34;&#34;&#34;
+        return self._entry_machine
+
+    @property
+    def input_definition(self) -&gt; ttk.Entry:
+        &#34;&#34;&#34;Returns the definition entry.&#34;&#34;&#34;
+        return self._entry_definition
+
+    @property
+    def input_revision(self) -&gt; ttk.Entry:
+        &#34;&#34;&#34;Returns the revision entry.&#34;&#34;&#34;
+        return self._entry_revision
+
+    @property
+    def button_revision(self) -&gt; ttk.Button:
+        &#34;&#34;&#34;Returns the revision button.&#34;&#34;&#34;
+        return self._btn_revision
+
+    @property
+    def input_source(self) -&gt; ttk.Entry:
+        &#34;&#34;&#34;Returns the source entry.&#34;&#34;&#34;
+        return self._combo_source
+
+    @property
+    def button_source(self) -&gt; ttk.Button:
+        &#34;&#34;&#34;Returns the source button.&#34;&#34;&#34;
+        return self._btn_reload_source
+
+    @property
+    def input_material(self) -&gt; ttk.Entry:
+        &#34;&#34;&#34;Returns the material entry.&#34;&#34;&#34;
+        return self._entry_material
+
+    @property
+    def button_material(self) -&gt; ttk.Button:
+        &#34;&#34;&#34;Returns the material button.&#34;&#34;&#34;
+        return self._btn_material
+
+    @property
+    def input_base_size(self) -&gt; ttk.Entry:
+        &#34;&#34;&#34;Returns the base size entry.&#34;&#34;&#34;
+        return self._entry_base_size
+
+    @property
+    def input_base_size_preset(self) -&gt; ttk.Entry:
+        &#34;&#34;&#34;Returns the base size preset entry.&#34;&#34;&#34;
+        return self._entry_base_size_preset
+
+    @property
+    def button_base_size(self) -&gt; ttk.Button:
+        &#34;&#34;&#34;Returns the base size button.&#34;&#34;&#34;
+        return self._btn_base_size
+
+    @property
+    def input_mass(self) -&gt; ttk.Entry:
+        &#34;&#34;&#34;Returns the mass entry.&#34;&#34;&#34;
+        return self._entry_mass
+
+    @property
+    def button_mass(self) -&gt; ttk.Button:
+        &#34;&#34;&#34;Returns the mass button.&#34;&#34;&#34;
+        return self._btn_mass
+
+    @property
+    def input_manufacturer(self) -&gt; ttk.Entry:
+        &#34;&#34;&#34;Returns the manufacturer entry.&#34;&#34;&#34;
+        return self._entry_manufacturer
+
+    @property
+    def input_supplier(self) -&gt; ttk.Entry:
+        &#34;&#34;&#34;Returns the supplier entry.&#34;&#34;&#34;
+        return self._entry_supplier
+
+    @property
+    def input_tolerance(self) -&gt; ttk.Combobox:
+        &#34;&#34;&#34;Returns the tolerance combobox.&#34;&#34;&#34;
+        return self._combo_tolerance
+
+    @property
+    def input_spare_part(self) -&gt; ttk.Combobox:
+        &#34;&#34;&#34;Returns the spare part combobox.&#34;&#34;&#34;
+        return self._combo_spare_part
+
+    @property
+    def input_description(self) -&gt; ScrolledText:
+        &#34;&#34;&#34;Returns the description text widget.&#34;&#34;&#34;
+        return self._text_description
+
+    @property
+    def label_creator(self) -&gt; ttk.Label:
+        &#34;&#34;&#34;Returns the creator label.&#34;&#34;&#34;
+        return self._lbl_creator_value
+
+    @property
+    def label_modifier(self) -&gt; ttk.Label:
+        &#34;&#34;&#34;Returns the modifier label.&#34;&#34;&#34;
+        return self._lbl_modifier_value
+
+    @property
+    def notes(self) -&gt; NoteWidgets:
+        &#34;&#34;&#34;Returns the notes widget.&#34;&#34;&#34;
+        return self._notes
+
+    @property
+    def processes(self) -&gt; ProcessWidgets:
+        &#34;&#34;&#34;Returns the processes widget.&#34;&#34;&#34;
+        return self._processes
+
+    @property
+    def button_save(self) -&gt; ttk.Button:
+        &#34;&#34;&#34;Returns the save button.&#34;&#34;&#34;
+        return self._btn_save
+
+    @property
+    def button_abort(self) -&gt; ttk.Button:
+        &#34;&#34;&#34;Returns the abort button.&#34;&#34;&#34;
+        return self._btn_abort</code></pre>
+</details>
+<h3>Class variables</h3>
+<dl>
+<dt id="pytia_property_manager.app.layout.Layout.MARGIN_X"><code class="name">var <span class="ident">MARGIN_X</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="pytia_property_manager.app.layout.Layout.MARGIN_Y"><code class="name">var <span class="ident">MARGIN_Y</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Instance variables</h3>
+<dl>
+<dt id="pytia_property_manager.app.layout.Layout.button_abort"><code class="name">var <span class="ident">button_abort</span> : tkinter.ttk.Button</code></dt>
+<dd>
+<div class="desc"><p>Returns the abort button.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def button_abort(self) -&gt; ttk.Button:
+    &#34;&#34;&#34;Returns the abort button.&#34;&#34;&#34;
+    return self._btn_abort</code></pre>
+</details>
+</dd>
+<dt id="pytia_property_manager.app.layout.Layout.button_base_size"><code class="name">var <span class="ident">button_base_size</span> : tkinter.ttk.Button</code></dt>
+<dd>
+<div class="desc"><p>Returns the base size button.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def button_base_size(self) -&gt; ttk.Button:
+    &#34;&#34;&#34;Returns the base size button.&#34;&#34;&#34;
+    return self._btn_base_size</code></pre>
+</details>
+</dd>
+<dt id="pytia_property_manager.app.layout.Layout.button_mass"><code class="name">var <span class="ident">button_mass</span> : tkinter.ttk.Button</code></dt>
+<dd>
+<div class="desc"><p>Returns the mass button.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def button_mass(self) -&gt; ttk.Button:
+    &#34;&#34;&#34;Returns the mass button.&#34;&#34;&#34;
+    return self._btn_mass</code></pre>
+</details>
+</dd>
+<dt id="pytia_property_manager.app.layout.Layout.button_material"><code class="name">var <span class="ident">button_material</span> : tkinter.ttk.Button</code></dt>
+<dd>
+<div class="desc"><p>Returns the material button.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def button_material(self) -&gt; ttk.Button:
+    &#34;&#34;&#34;Returns the material button.&#34;&#34;&#34;
+    return self._btn_material</code></pre>
+</details>
+</dd>
+<dt id="pytia_property_manager.app.layout.Layout.button_revision"><code class="name">var <span class="ident">button_revision</span> : tkinter.ttk.Button</code></dt>
+<dd>
+<div class="desc"><p>Returns the revision button.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def button_revision(self) -&gt; ttk.Button:
+    &#34;&#34;&#34;Returns the revision button.&#34;&#34;&#34;
+    return self._btn_revision</code></pre>
+</details>
+</dd>
+<dt id="pytia_property_manager.app.layout.Layout.button_save"><code class="name">var <span class="ident">button_save</span> : tkinter.ttk.Button</code></dt>
+<dd>
+<div class="desc"><p>Returns the save button.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def button_save(self) -&gt; ttk.Button:
+    &#34;&#34;&#34;Returns the save button.&#34;&#34;&#34;
+    return self._btn_save</code></pre>
+</details>
+</dd>
+<dt id="pytia_property_manager.app.layout.Layout.button_source"><code class="name">var <span class="ident">button_source</span> : tkinter.ttk.Button</code></dt>
+<dd>
+<div class="desc"><p>Returns the source button.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def button_source(self) -&gt; ttk.Button:
+    &#34;&#34;&#34;Returns the source button.&#34;&#34;&#34;
+    return self._btn_reload_source</code></pre>
+</details>
+</dd>
+<dt id="pytia_property_manager.app.layout.Layout.input_base_size"><code class="name">var <span class="ident">input_base_size</span> : tkinter.ttk.Entry</code></dt>
+<dd>
+<div class="desc"><p>Returns the base size entry.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def input_base_size(self) -&gt; ttk.Entry:
+    &#34;&#34;&#34;Returns the base size entry.&#34;&#34;&#34;
+    return self._entry_base_size</code></pre>
+</details>
+</dd>
+<dt id="pytia_property_manager.app.layout.Layout.input_base_size_preset"><code class="name">var <span class="ident">input_base_size_preset</span> : tkinter.ttk.Entry</code></dt>
+<dd>
+<div class="desc"><p>Returns the base size preset entry.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def input_base_size_preset(self) -&gt; ttk.Entry:
+    &#34;&#34;&#34;Returns the base size preset entry.&#34;&#34;&#34;
+    return self._entry_base_size_preset</code></pre>
+</details>
+</dd>
+<dt id="pytia_property_manager.app.layout.Layout.input_definition"><code class="name">var <span class="ident">input_definition</span> : tkinter.ttk.Entry</code></dt>
+<dd>
+<div class="desc"><p>Returns the definition entry.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def input_definition(self) -&gt; ttk.Entry:
+    &#34;&#34;&#34;Returns the definition entry.&#34;&#34;&#34;
+    return self._entry_definition</code></pre>
+</details>
+</dd>
+<dt id="pytia_property_manager.app.layout.Layout.input_description"><code class="name">var <span class="ident">input_description</span> : pytia_ui_tools.widgets.texts.ScrolledText</code></dt>
+<dd>
+<div class="desc"><p>Returns the description text widget.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def input_description(self) -&gt; ScrolledText:
+    &#34;&#34;&#34;Returns the description text widget.&#34;&#34;&#34;
+    return self._text_description</code></pre>
+</details>
+</dd>
+<dt id="pytia_property_manager.app.layout.Layout.input_machine"><code class="name">var <span class="ident">input_machine</span> : tkinter.ttk.Entry</code></dt>
+<dd>
+<div class="desc"><p>Returns the machine entry.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def input_machine(self) -&gt; ttk.Entry:
+    &#34;&#34;&#34;Returns the machine entry.&#34;&#34;&#34;
+    return self._entry_machine</code></pre>
+</details>
+</dd>
+<dt id="pytia_property_manager.app.layout.Layout.input_manufacturer"><code class="name">var <span class="ident">input_manufacturer</span> : tkinter.ttk.Entry</code></dt>
+<dd>
+<div class="desc"><p>Returns the manufacturer entry.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def input_manufacturer(self) -&gt; ttk.Entry:
+    &#34;&#34;&#34;Returns the manufacturer entry.&#34;&#34;&#34;
+    return self._entry_manufacturer</code></pre>
+</details>
+</dd>
+<dt id="pytia_property_manager.app.layout.Layout.input_mass"><code class="name">var <span class="ident">input_mass</span> : tkinter.ttk.Entry</code></dt>
+<dd>
+<div class="desc"><p>Returns the mass entry.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def input_mass(self) -&gt; ttk.Entry:
+    &#34;&#34;&#34;Returns the mass entry.&#34;&#34;&#34;
+    return self._entry_mass</code></pre>
+</details>
+</dd>
+<dt id="pytia_property_manager.app.layout.Layout.input_material"><code class="name">var <span class="ident">input_material</span> : tkinter.ttk.Entry</code></dt>
+<dd>
+<div class="desc"><p>Returns the material entry.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def input_material(self) -&gt; ttk.Entry:
+    &#34;&#34;&#34;Returns the material entry.&#34;&#34;&#34;
+    return self._entry_material</code></pre>
+</details>
+</dd>
+<dt id="pytia_property_manager.app.layout.Layout.input_partnumber"><code class="name">var <span class="ident">input_partnumber</span> : tkinter.ttk.Entry</code></dt>
+<dd>
+<div class="desc"><p>Returns the part number entry.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def input_partnumber(self) -&gt; ttk.Entry:
+    &#34;&#34;&#34;Returns the part number entry.&#34;&#34;&#34;
+    return self._entry_partnumber</code></pre>
+</details>
+</dd>
+<dt id="pytia_property_manager.app.layout.Layout.input_project"><code class="name">var <span class="ident">input_project</span> : tkinter.ttk.Combobox</code></dt>
+<dd>
+<div class="desc"><p>Returns the project combobox.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def input_project(self) -&gt; ttk.Combobox:
+    &#34;&#34;&#34;Returns the project combobox.&#34;&#34;&#34;
+    return self._combo_project</code></pre>
+</details>
+</dd>
+<dt id="pytia_property_manager.app.layout.Layout.input_revision"><code class="name">var <span class="ident">input_revision</span> : tkinter.ttk.Entry</code></dt>
+<dd>
+<div class="desc"><p>Returns the revision entry.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def input_revision(self) -&gt; ttk.Entry:
+    &#34;&#34;&#34;Returns the revision entry.&#34;&#34;&#34;
+    return self._entry_revision</code></pre>
+</details>
+</dd>
+<dt id="pytia_property_manager.app.layout.Layout.input_source"><code class="name">var <span class="ident">input_source</span> : tkinter.ttk.Entry</code></dt>
+<dd>
+<div class="desc"><p>Returns the source entry.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def input_source(self) -&gt; ttk.Entry:
+    &#34;&#34;&#34;Returns the source entry.&#34;&#34;&#34;
+    return self._combo_source</code></pre>
+</details>
+</dd>
+<dt id="pytia_property_manager.app.layout.Layout.input_spare_part"><code class="name">var <span class="ident">input_spare_part</span> : tkinter.ttk.Combobox</code></dt>
+<dd>
+<div class="desc"><p>Returns the spare part combobox.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def input_spare_part(self) -&gt; ttk.Combobox:
+    &#34;&#34;&#34;Returns the spare part combobox.&#34;&#34;&#34;
+    return self._combo_spare_part</code></pre>
+</details>
+</dd>
+<dt id="pytia_property_manager.app.layout.Layout.input_supplier"><code class="name">var <span class="ident">input_supplier</span> : tkinter.ttk.Entry</code></dt>
+<dd>
+<div class="desc"><p>Returns the supplier entry.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def input_supplier(self) -&gt; ttk.Entry:
+    &#34;&#34;&#34;Returns the supplier entry.&#34;&#34;&#34;
+    return self._entry_supplier</code></pre>
+</details>
+</dd>
+<dt id="pytia_property_manager.app.layout.Layout.input_tolerance"><code class="name">var <span class="ident">input_tolerance</span> : tkinter.ttk.Combobox</code></dt>
+<dd>
+<div class="desc"><p>Returns the tolerance combobox.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def input_tolerance(self) -&gt; ttk.Combobox:
+    &#34;&#34;&#34;Returns the tolerance combobox.&#34;&#34;&#34;
+    return self._combo_tolerance</code></pre>
+</details>
+</dd>
+<dt id="pytia_property_manager.app.layout.Layout.label_creator"><code class="name">var <span class="ident">label_creator</span> : tkinter.ttk.Label</code></dt>
+<dd>
+<div class="desc"><p>Returns the creator label.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def label_creator(self) -&gt; ttk.Label:
+    &#34;&#34;&#34;Returns the creator label.&#34;&#34;&#34;
+    return self._lbl_creator_value</code></pre>
+</details>
+</dd>
+<dt id="pytia_property_manager.app.layout.Layout.label_modifier"><code class="name">var <span class="ident">label_modifier</span> : tkinter.ttk.Label</code></dt>
+<dd>
+<div class="desc"><p>Returns the modifier label.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def label_modifier(self) -&gt; ttk.Label:
+    &#34;&#34;&#34;Returns the modifier label.&#34;&#34;&#34;
+    return self._lbl_modifier_value</code></pre>
+</details>
+</dd>
+<dt id="pytia_property_manager.app.layout.Layout.notes"><code class="name">var <span class="ident">notes</span> : app.widgets.notes.NoteWidgets</code></dt>
+<dd>
+<div class="desc"><p>Returns the notes widget.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def notes(self) -&gt; NoteWidgets:
+    &#34;&#34;&#34;Returns the notes widget.&#34;&#34;&#34;
+    return self._notes</code></pre>
+</details>
+</dd>
+<dt id="pytia_property_manager.app.layout.Layout.processes"><code class="name">var <span class="ident">processes</span> : app.widgets.processes.ProcessWidgets</code></dt>
+<dd>
+<div class="desc"><p>Returns the processes widget.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def processes(self) -&gt; ProcessWidgets:
+    &#34;&#34;&#34;Returns the processes widget.&#34;&#34;&#34;
+    return self._processes</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="pytia_property_manager.app" href="index.html">pytia_property_manager.app</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="pytia_property_manager.app.layout.Layout" href="#pytia_property_manager.app.layout.Layout">Layout</a></code></h4>
+<ul class="">
+<li><code><a title="pytia_property_manager.app.layout.Layout.MARGIN_X" href="#pytia_property_manager.app.layout.Layout.MARGIN_X">MARGIN_X</a></code></li>
+<li><code><a title="pytia_property_manager.app.layout.Layout.MARGIN_Y" href="#pytia_property_manager.app.layout.Layout.MARGIN_Y">MARGIN_Y</a></code></li>
+<li><code><a title="pytia_property_manager.app.layout.Layout.button_abort" href="#pytia_property_manager.app.layout.Layout.button_abort">button_abort</a></code></li>
+<li><code><a title="pytia_property_manager.app.layout.Layout.button_base_size" href="#pytia_property_manager.app.layout.Layout.button_base_size">button_base_size</a></code></li>
+<li><code><a title="pytia_property_manager.app.layout.Layout.button_mass" href="#pytia_property_manager.app.layout.Layout.button_mass">button_mass</a></code></li>
+<li><code><a title="pytia_property_manager.app.layout.Layout.button_material" href="#pytia_property_manager.app.layout.Layout.button_material">button_material</a></code></li>
+<li><code><a title="pytia_property_manager.app.layout.Layout.button_revision" href="#pytia_property_manager.app.layout.Layout.button_revision">button_revision</a></code></li>
+<li><code><a title="pytia_property_manager.app.layout.Layout.button_save" href="#pytia_property_manager.app.layout.Layout.button_save">button_save</a></code></li>
+<li><code><a title="pytia_property_manager.app.layout.Layout.button_source" href="#pytia_property_manager.app.layout.Layout.button_source">button_source</a></code></li>
+<li><code><a title="pytia_property_manager.app.layout.Layout.input_base_size" href="#pytia_property_manager.app.layout.Layout.input_base_size">input_base_size</a></code></li>
+<li><code><a title="pytia_property_manager.app.layout.Layout.input_base_size_preset" href="#pytia_property_manager.app.layout.Layout.input_base_size_preset">input_base_size_preset</a></code></li>
+<li><code><a title="pytia_property_manager.app.layout.Layout.input_definition" href="#pytia_property_manager.app.layout.Layout.input_definition">input_definition</a></code></li>
+<li><code><a title="pytia_property_manager.app.layout.Layout.input_description" href="#pytia_property_manager.app.layout.Layout.input_description">input_description</a></code></li>
+<li><code><a title="pytia_property_manager.app.layout.Layout.input_machine" href="#pytia_property_manager.app.layout.Layout.input_machine">input_machine</a></code></li>
+<li><code><a title="pytia_property_manager.app.layout.Layout.input_manufacturer" href="#pytia_property_manager.app.layout.Layout.input_manufacturer">input_manufacturer</a></code></li>
+<li><code><a title="pytia_property_manager.app.layout.Layout.input_mass" href="#pytia_property_manager.app.layout.Layout.input_mass">input_mass</a></code></li>
+<li><code><a title="pytia_property_manager.app.layout.Layout.input_material" href="#pytia_property_manager.app.layout.Layout.input_material">input_material</a></code></li>
+<li><code><a title="pytia_property_manager.app.layout.Layout.input_partnumber" href="#pytia_property_manager.app.layout.Layout.input_partnumber">input_partnumber</a></code></li>
+<li><code><a title="pytia_property_manager.app.layout.Layout.input_project" href="#pytia_property_manager.app.layout.Layout.input_project">input_project</a></code></li>
+<li><code><a title="pytia_property_manager.app.layout.Layout.input_revision" href="#pytia_property_manager.app.layout.Layout.input_revision">input_revision</a></code></li>
+<li><code><a title="pytia_property_manager.app.layout.Layout.input_source" href="#pytia_property_manager.app.layout.Layout.input_source">input_source</a></code></li>
+<li><code><a title="pytia_property_manager.app.layout.Layout.input_spare_part" href="#pytia_property_manager.app.layout.Layout.input_spare_part">input_spare_part</a></code></li>
+<li><code><a title="pytia_property_manager.app.layout.Layout.input_supplier" href="#pytia_property_manager.app.layout.Layout.input_supplier">input_supplier</a></code></li>
+<li><code><a title="pytia_property_manager.app.layout.Layout.input_tolerance" href="#pytia_property_manager.app.layout.Layout.input_tolerance">input_tolerance</a></code></li>
+<li><code><a title="pytia_property_manager.app.layout.Layout.label_creator" href="#pytia_property_manager.app.layout.Layout.label_creator">label_creator</a></code></li>
+<li><code><a title="pytia_property_manager.app.layout.Layout.label_modifier" href="#pytia_property_manager.app.layout.Layout.label_modifier">label_modifier</a></code></li>
+<li><code><a title="pytia_property_manager.app.layout.Layout.notes" href="#pytia_property_manager.app.layout.Layout.notes">notes</a></code></li>
+<li><code><a title="pytia_property_manager.app.layout.Layout.processes" href="#pytia_property_manager.app.layout.Layout.processes">processes</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>

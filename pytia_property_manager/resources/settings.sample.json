@@ -1,0 +1,58 @@
+{
+    "title": "PYTIA Property Manager",
+    "debug": false,
+    "demo": false,
+    "revision": 0,
+    "restrictions": {
+        "allow_all_users": true,
+        "allow_all_editors": true,
+        "allow_unsaved": true,
+        "allow_outside_workspace": true,
+        "strict_project": false,
+        "strict_machine": false,
+        "enable_information": true
+    },
+    "separators": {
+        "bought": " - ",
+        "metadata": " -- "
+    },
+    "nomenclature": {
+        "made": "MACHINE-ASSEMBLY-PART",
+        "bought": "NAME - ORDER NUMBER - MANUFACTURER"
+    },
+    "processes": {
+        "first": 1,
+        "min": 3,
+        "max": 6
+    },
+    "tolerances": [
+        "ISO 2768 1-m 2-K",
+        "ISO 2768 1-f 2-K",
+        "ISO 2768 1-c 2-K",
+        "ISO 2768 1-v 2-K"
+    ],
+    "spare_part_level": [
+        "None",
+        "Reserve",
+        "Annual"
+    ],
+    "paths": {
+        "catia": "C:\\CATIA\\V5-6R2017\\B27",
+        "material": "C:\\pytia\\material",
+        "local_dependencies": "C:\\pytia\\local_deps",
+        "release": "C:\\pytia\\release"
+    },
+    "files": {
+        "app": "pytia_property_manager.pyz",
+        "launcher": "pytia_property_manager.catvbs",
+        "bounding_box_launcher": "pytia_bounding_box.catvbs",
+        "material": "Material.CATMaterial",
+        "workspace": "workspace.yml"
+    },
+    "urls": {
+        "help": null
+    },
+    "mails": {
+        "admin": "admin@company.com"
+    }
+}

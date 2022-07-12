@@ -1,0 +1,42 @@
+{
+    "cSpell.words": [
+        "appdata",
+        "CATIA",
+        "CATP",
+        "catvbs",
+        "CNEXT",
+        "columnspan",
+        "datafield",
+        "deps",
+        "endregion",
+        "gaierror",
+        "getpid",
+        "ipadx",
+        "ipady",
+        "padx",
+        "pady",
+        "partnumber",
+        "pdoc",
+        "projectnumber",
+        "pylint",
+        "pylintrc",
+        "pyproject",
+        "pytest",
+        "pythonw",
+        "PYTIA",
+        "pyversion",
+        "pyyaml",
+        "rcfile",
+        "relx",
+        "rowspan",
+        "Segoe",
+        "textvariable",
+        "tkmsg",
+        "zipfile"
+    ],
+    "python.testing.pytestArgs": [
+        "tests"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true
+}

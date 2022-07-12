@@ -1,0 +1,1794 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>pytia_property_manager.helper.lazy_loaders API documentation</title>
+<meta name="description" content="Lazy loader for the UI." />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>pytia_property_manager.helper.lazy_loaders</code></h1>
+</header>
+<section id="section-intro">
+<p>Lazy loader for the UI.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;
+    Lazy loader for the UI.
+&#34;&#34;&#34;
+
+import atexit
+import functools
+import os
+import time
+from dataclasses import asdict
+from tkinter import StringVar, ttk
+from typing import List, Optional
+
+from app.vars import Variables
+from app.widgets.notes import NoteWidgets
+from app.widgets.processes import ProcessWidgets
+from const import LOGON, Source
+from pytia.exceptions import (
+    PytiaDifferentDocumentError,
+    PytiaDocumentNotSavedError,
+    PytiaWrongDocumentTypeError,
+)
+from pytia.log import log
+from resources import resource
+
+
+class LazyDocumentHelper:
+    &#34;&#34;&#34;
+    Helper class for late imports of any kind of methods related to handle document operations.
+
+    Important: This class loads the current document only once (on instantiation). If the
+    document changes all operations will be made on the original document.
+
+    Use the ensure_doc_not_changed method if you&#39;re not sure if the part hasn&#39;t changed.
+    &#34;&#34;&#34;
+
+    def __init__(self) -&gt; None:
+        # Import the PyPartDocument after the GUI exception handler is initialized.
+        # Otherwise the CATIA-not-running-exception will not be caught.
+        # Also: The UI will load a little bit faster.
+
+        start_time = time.perf_counter()
+        # pylint: disable=C0415
+        from pytia.framework import framework
+
+        # pylint: enable=C0415
+
+        self.framework = framework
+        self.lazy_document = framework.catia.active_document
+        self.is_part = self.lazy_document.is_part
+        self.is_document = self.lazy_document.is_product
+
+        self._lock_catia(True)
+        atexit.register(lambda: self._lock_catia(False))
+
+        if not resource.settings.restrictions.allow_unsaved and not os.path.isabs(
+            self.lazy_document.full_name
+        ):
+            raise PytiaDocumentNotSavedError(
+                &#34;It is not allowed to edit the parameters of an unsaved document. &#34;
+                &#34;Please save the document first.&#34;
+            )
+
+        if self.lazy_document.is_part:
+            # pylint: disable=C0415
+            from pytia.wrapper.documents.part_documents import PyPartDocument
+
+            # pylint: enable=C0415
+
+            self.document = PyPartDocument(strict_naming=False)
+            log.debug(&#34;Current document is a CATPart.&#34;)
+
+        elif self.lazy_document.is_product:
+            # pylint: disable=C0415
+            from pytia.wrapper.documents.product_documents import PyProductDocument
+
+            # pylint: enable=C0415
+
+            self.document = PyProductDocument(strict_naming=False)
+            log.debug(&#34;Current document is a CATProduct.&#34;)
+
+        else:
+            raise PytiaWrongDocumentTypeError(
+                &#34;The current document is neither a part nor a product.&#34;
+            )
+
+        end_time = time.perf_counter()
+        log.debug(f&#34;Loaded PyPartDocument in {(end_time-start_time):.4f}s&#34;)
+
+        self.document.current()
+        self.document.product.part_number = self.document.document.name.split(&#34;.CATP&#34;)[
+            0
+        ]
+        self.name = self.document.document.name
+
+    @property
+    def path(self) -&gt; str:
+        &#34;&#34;&#34;Returns the documents absolute path with filename and file extension.&#34;&#34;&#34;
+        return self.document.document.full_name
+
+    @property
+    def partnumber(self) -&gt; str:
+        &#34;&#34;&#34;Returns the part number of the document.&#34;&#34;&#34;
+        return self.document.product.part_number
+
+    @property
+    def definition(self) -&gt; str:
+        &#34;&#34;&#34;Returns the definition of the document.&#34;&#34;&#34;
+        return self.document.product.definition
+
+    @definition.setter
+    def definition(self, value: str) -&gt; None:
+        &#34;&#34;&#34;Sets the definition value of the document.&#34;&#34;&#34;
+        self.document.product.definition = value
+
+    @property
+    def revision(self) -&gt; str:
+        &#34;&#34;&#34;Returns the revision of the document.&#34;&#34;&#34;
+        return self.document.product.revision
+
+    @revision.setter
+    def revision(self, value: str) -&gt; None:
+        &#34;&#34;&#34;Sets the revision value of the document.&#34;&#34;&#34;
+        self.document.product.revision = value
+
+    @property
+    def nomenclature(self) -&gt; str:
+        &#34;&#34;&#34;Returns the nomenclature of the document&#34;&#34;&#34;
+        return self.document.product.nomenclature
+
+    @nomenclature.setter
+    def nomenclature(self, value: str) -&gt; None:
+        &#34;&#34;&#34;Sets the nomenclature value of the document.&#34;&#34;&#34;
+        self.document.product.nomenclature = value
+
+    @property
+    def source(self) -&gt; int:
+        &#34;&#34;&#34;Returns the source of the document.&#34;&#34;&#34;
+        return self.document.product.source
+
+    @source.setter
+    def source(self, value: int) -&gt; None:
+        &#34;&#34;&#34;Sets the source value of the document.&#34;&#34;&#34;
+        self.document.product.source = value
+
+    @property
+    def description(self) -&gt; str:
+        &#34;&#34;&#34;Returns the description of the document&#34;&#34;&#34;
+        return self.document.product.description_reference
+
+    @description.setter
+    def description(self, value: str) -&gt; None:
+        &#34;&#34;&#34;Returns the description value of the document.&#34;&#34;&#34;
+        self.document.product.description_reference = value
+
+    def _lock_catia(self, value: bool) -&gt; None:
+        &#34;&#34;&#34;
+        Sets the lock-state of catia.
+
+        Args:
+            value (bool): True: Locks the catia UI, False: Releases the lock.
+        &#34;&#34;&#34;
+        log.debug(f&#34;Setting catia lock to {value!r}&#34;)
+        self.framework.catia.refresh_display = not value
+        self.framework.catia.interactive = not value
+        self.framework.catia.display_file_alerts = value
+        self.framework.catia.undo_redo_lock = value
+        if value:
+            self.framework.catia.disable_new_undo_redo_transaction()
+        else:
+            self.framework.catia.enable_new_undo_redo_transaction()
+
+    def _doc_changed(self) -&gt; bool:
+        &#34;&#34;&#34;Returns True if the current part document has changed, False if not.&#34;&#34;&#34;
+        part_document = self.document
+        part_document.current()
+        log.warning(
+            f&#34;The document has changed: {part_document.document.name} -&gt; {self.name}&#34;
+        )
+        return part_document.document.name != self.name
+
+    def setup_main_body(self, variables: Variables) -&gt; None:
+        &#34;&#34;&#34;
+        Sets up the main body of the document (if the document is a part document).
+        Sets the main body as &#34;in work object&#34; and sets the name of the main body depending
+        on the source.
+
+        Args:
+            variables (Variables): The variables of the main app.
+        &#34;&#34;&#34;
+        # pylint: disable=C0415
+        from pytia.wrapper.documents.part_documents import PyPartDocument
+
+        # pylint: enable=C0415
+
+        if isinstance(self.document, PyPartDocument):
+            log.info(&#34;Setting the main bodies name...&#34;)
+
+            self.document.part.in_work_object = self.document.bodies.main_body
+
+            match variables.source.get():
+                case Source.MADE.value:
+                    self.document.bodies.main_body.name = (
+                        f&#34;{variables.machine.get()}&#34;
+                        &#34; - &#34;
+                        f&#34;{variables.partnumber.get()}&#34;
+                        &#34; - &#34;
+                        f&#34;{variables.revision.get()}&#34;
+                    )
+                case Source.BOUGHT.value | _:
+                    self.document.bodies.main_body.name = variables.partnumber.get()
+
+    @staticmethod
+    def _ensure_doc_not_changed(func):
+        &#34;&#34;&#34;
+        Ensures that the document hasn&#39;t changed.
+        Raises the PytiaDifferentDocumentError if the document has changed.
+        &#34;&#34;&#34;
+
+        # pylint: disable=W0212
+        # pylint: disable=R1710
+        @functools.wraps(func)
+        def _ensure_part_not_changed_wrapper(self, *args, **kwargs):
+            if self._doc_changed():
+                document = self.document
+                document.current()
+                raise PytiaDifferentDocumentError(
+                    f&#34;The name of the current document has changed:\n&#34;
+                    f&#34; - Original was {self.name}\n&#34;
+                    f&#34; - Current is {document.document.name}&#34;
+                )
+            return func(self, *args, **kwargs)
+
+        return _ensure_part_not_changed_wrapper
+        # pylint: enable=W0212
+        # pylint: enable=R1710
+
+    # @_ensure_doc_not_changed
+    def get_property(self, name: str) -&gt; Optional[str]:
+        &#34;&#34;&#34;
+        Retrieves a properties value from the documents properties.
+
+        Args:
+            name (str): The name of the property to retrieve the value from.
+
+        Returns:
+            Optional[str]: The value of the property as string. Returns None, if the property \
+                doesn&#39;t exists.
+        &#34;&#34;&#34;
+        if self.document.properties.exists(name):
+            param = str(self.document.properties.get_by_name(name).value)
+            log.info(f&#34;Retrieved property {name} ({param}) from part.&#34;)
+            return param
+        log.info(f&#34;Couldn&#39;t retrieve property {name} from part: Doesn&#39;t exists.&#34;)
+        return None
+
+    # @_ensure_doc_not_changed
+    def write_property(self, name: str, value: str) -&gt; None:
+        &#34;&#34;&#34;
+        Writes the property to the documents properties. Deletes properties with empty values.
+
+        Args:
+            name (str): The name of the property.
+            value (str): The value of the property.
+        &#34;&#34;&#34;
+
+        if self.document.properties.exists(name):
+            if value:
+                self.document.properties.set_value(name, value)
+                log.info(f&#34;Wrote property {name!r} with value {value!r}.&#34;)
+            else:
+                self.document.properties.delete(name)
+        else:
+            if value:
+                self.document.properties.create(name, value)
+            else:
+                log.debug(f&#34;Didn&#39;t write property {name!r}: Value is empty.&#34;)
+
+    # @_ensure_doc_not_changed
+    def write_modifier(self, write_creator: bool = True) -&gt; None:
+        &#34;&#34;&#34;
+        Saves the modifier to the documents properties.
+
+        Args:
+            write_creator (bool, optional): Also write the creator. Defaults to True.
+        &#34;&#34;&#34;
+        self.write_property(resource.props.infra.modifier, LOGON)
+        if not self.get_property(resource.props.infra.creator) and write_creator:
+            self.write_property(resource.props.infra.creator, LOGON)
+
+    def write_notes(self, notes: NoteWidgets) -&gt; None:
+        &#34;&#34;&#34;
+        Writes the notes from the notes-widgets to the documents properties.
+
+        Args:
+            notes (NoteWidgets): The notes-widgets object.
+        &#34;&#34;&#34;
+        for key, value in asdict(resource.props.notes).items():
+            note = notes.get(key)
+            self.write_property(name=value, value=note.note_var.get())
+
+    def write_processes(self, processes: ProcessWidgets) -&gt; None:
+        &#34;&#34;&#34;
+        Writes the processes from the processes-widgets to the documents properties.
+
+        Args:
+            processes (ProcessWidgets): The processes-widgets object.
+        &#34;&#34;&#34;
+        for i in range(
+            resource.settings.processes.first,
+            resource.settings.processes.max + resource.settings.processes.first,
+        ):
+            property_name = resource.props.production.process_n.replace(&#34;$&#34;, str(i))
+            if processes.exists(pid=i):
+                self.write_property(
+                    property_name, processes.get(pid=i).process_var.get()
+                )
+            else:
+                self.write_property(property_name, &#34;&#34;)
+
+    def write_process_notes(self, processes: ProcessWidgets) -&gt; None:
+        &#34;&#34;&#34;
+        Writes the process-notes from the processes-widgets to the documents properties.
+
+        Args:
+            processes (ProcessWidgets): The processes-widgets object.
+        &#34;&#34;&#34;
+        for i in range(
+            resource.settings.processes.first,
+            resource.settings.processes.max + resource.settings.processes.first,
+        ):
+            property_name = resource.props.production.note_process_n.replace(
+                &#34;$&#34;, str(i)
+            )
+            if processes.exists(pid=i):
+                self.write_property(property_name, processes.get(pid=i).note_var.get())
+            else:
+                self.write_property(property_name, &#34;&#34;)
+
+    @staticmethod
+    def setvar(
+        variable: StringVar,
+        value: str | int | None,
+        default: Optional[str | int] = None,
+    ) -&gt; None:
+        &#34;&#34;&#34;
+        Sets the value of a tkinter variable. Omits None values. All values will be casted to str.
+
+        Args:
+            variable (StringVar | IntVar): The tkinter variable. Omits
+            value (str | int | None): The value.
+            default (Optional[str | int], optional): The default value, if the value is None.
+        &#34;&#34;&#34;
+        if value or isinstance(default, int | str):
+            variable.set(str(value or default))
+            log.info(f&#34;Set value &#39;{value or default}&#39; for variable &#39;{variable}&#39;&#34;)
+
+    def setvar_property(
+        self,
+        variable: StringVar,
+        property_name: str,
+        default: Optional[str | int] = None,
+    ) -&gt; None:
+        &#34;&#34;&#34;
+        Sets the value of a tkinter variable. Fetches the value from the documents property,
+        which name matches the given property_name. Omits None values.
+
+        Args:
+            variable (StringVar | IntVar): The tkinter variable.
+            property_name (str): The name of the property, from which the value will be fetched.
+            default (Optional[str | int], optional): The default value, if the value is None.
+        &#34;&#34;&#34;
+        self.setvar(
+            variable=variable, value=self.get_property(property_name), default=default
+        )
+
+    def setvar_combo_property(
+        self,
+        variable: StringVar,
+        property_name: str,
+        widget: ttk.Combobox,
+        default: Optional[str | int] = None,
+        items: Optional[List[str]] = None,
+    ) -&gt; None:
+        &#34;&#34;&#34;
+        Sets the value of a tkinter variable. Fetches the value from the documents property,
+        which name matches the given property_name. Omits None values.
+
+        Args:
+            variable (StringVar | IntVar): The tkinter variable.
+            property_name (str): The name of the property, from which the value will be fetched.
+            widget (Combobox): The widget where the variable will be added.
+            default (Optional[str | int], optional): The default value, if the value is None.
+        &#34;&#34;&#34;
+        self.setvar(
+            variable=variable, value=self.get_property(property_name), default=default
+        )
+        if items:
+            widget.configure(values=items)
+
+    def setvar_user(self, variable: StringVar, property_name: str) -&gt; None:
+        &#34;&#34;&#34;
+        Sets the value of a tkinter variable. Fetches the value from the documents property,
+        which name matches the given property_name. Only use this for User-variables.
+
+        Args:
+            variable (StringVar): The tkinter variable.
+            property_name (str): The name of the property, from which the value will be fetched.
+        &#34;&#34;&#34;
+        value = self.get_property(property_name) or LOGON
+        if resource.logon_exists(value):
+            self.setvar(variable=variable, value=resource.get_user_by_logon(value).name)
+        else:
+            self.setvar(variable=variable, value=f&#34;Unknown user ({value})&#34;)
+
+    def setvar_mass(self, variable: StringVar, force: bool = False) -&gt; None:
+        &#34;&#34;&#34;
+        Sets the value of a tkinter variable. Adds the unit &#39;kg&#39; to the value. Only use this for
+        mass-related variables.
+
+        Args:
+            variable (StringVar): The tkinter variable.
+            force (bool, optional): Force writing the mass. Defaults to False.
+        &#34;&#34;&#34;
+        if self.is_part or force:
+            mass = round(self.document.product.analyze.mass, 2)
+            variable.set(f&#34;{mass} kg&#34;)
+
+    def setvar_material(self, variable: StringVar, metadata: StringVar) -&gt; None:
+        &#34;&#34;&#34;
+        Sets the value of a tkinter variable. Only use this for material-related variables.
+        Writes the applied material to the UI, overwrites any existing material (retrieved from the
+        properties) -&gt; The material applied to the document is always preferred.
+
+        Args:
+            variable (StringVar): The material variable.
+            metadata (StringVar): The material metadata variable.
+        &#34;&#34;&#34;
+        # pylint: disable=C0415
+        if self.is_part:
+            from pytia.utilities.material import get_material_from_part as get_material
+        else:
+            from pytia.utilities.material import (
+                get_material_from_product as get_material,
+            )
+        # pylint: enable=C0415
+        if applied_material := get_material():
+            if resource.settings.separators.metadata in applied_material:
+                splitted = applied_material.split(resource.settings.separators.metadata)
+                applied_material = splitted[0]
+                metadata.set(splitted[1])
+            variable.set(applied_material)
+
+    def setvar_notes(self, notes: NoteWidgets) -&gt; None:
+        &#34;&#34;&#34;
+        Sets the value of all notes-tkinter variables.
+
+        Args:
+            notes (NoteWidgets): The note widgets object.
+        &#34;&#34;&#34;
+        for key, value in asdict(resource.props.notes).items():
+            note = notes.get(key)
+            self.setvar_property(variable=note.note_var, property_name=value)
+
+    def setvar_process(self, processes: ProcessWidgets) -&gt; None:
+        &#34;&#34;&#34;
+        Sets the value of all processes-tkinter variables.
+
+        Args:
+            notes (NoteWidgets): The process widgets object.
+        &#34;&#34;&#34;
+        index = resource.settings.processes.first
+
+        while True:
+            process_name = resource.props.production.process_n.replace(&#34;$&#34;, str(index))
+
+            if self.document.properties.exists(process_name):
+                if not processes.exists(pid=index):
+                    processes.add()
+                process = processes.get(pid=index)
+
+                self.setvar_property(
+                    variable=process.process_var, property_name=process_name
+                )
+                index += 1
+            else:
+                break
+
+        if not processes.exists(pid=index):
+            processes.add()
+
+    def setvar_process_notes(self, processes: ProcessWidgets) -&gt; None:
+        &#34;&#34;&#34;
+        Sets the value of all processes-notes-tkinter variables.
+
+        Args:
+            notes (NoteWidgets): The process widgets object.
+        &#34;&#34;&#34;
+        index = resource.settings.processes.first
+
+        while True:
+            process_name = resource.props.production.process_n.replace(&#34;$&#34;, str(index))
+            note_name = resource.props.production.note_process_n.replace(
+                &#34;$&#34;, str(index)
+            )
+
+            # Ignore notes for non-existent processes
+            if self.document.properties.exists(process_name) and processes.exists(
+                pid=index
+            ):
+                if self.document.properties.exists(note_name):
+                    process = processes.get(pid=index)
+                    self.setvar_property(
+                        variable=process.note_var, property_name=note_name
+                    )
+                index += 1
+            else:
+                break</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper"><code class="flex name class">
+<span>class <span class="ident">LazyDocumentHelper</span></span>
+</code></dt>
+<dd>
+<div class="desc"><p>Helper class for late imports of any kind of methods related to handle document operations.</p>
+<p>Important: This class loads the current document only once (on instantiation). If the
+document changes all operations will be made on the original document.</p>
+<p>Use the ensure_doc_not_changed method if you're not sure if the part hasn't changed.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class LazyDocumentHelper:
+    &#34;&#34;&#34;
+    Helper class for late imports of any kind of methods related to handle document operations.
+
+    Important: This class loads the current document only once (on instantiation). If the
+    document changes all operations will be made on the original document.
+
+    Use the ensure_doc_not_changed method if you&#39;re not sure if the part hasn&#39;t changed.
+    &#34;&#34;&#34;
+
+    def __init__(self) -&gt; None:
+        # Import the PyPartDocument after the GUI exception handler is initialized.
+        # Otherwise the CATIA-not-running-exception will not be caught.
+        # Also: The UI will load a little bit faster.
+
+        start_time = time.perf_counter()
+        # pylint: disable=C0415
+        from pytia.framework import framework
+
+        # pylint: enable=C0415
+
+        self.framework = framework
+        self.lazy_document = framework.catia.active_document
+        self.is_part = self.lazy_document.is_part
+        self.is_document = self.lazy_document.is_product
+
+        self._lock_catia(True)
+        atexit.register(lambda: self._lock_catia(False))
+
+        if not resource.settings.restrictions.allow_unsaved and not os.path.isabs(
+            self.lazy_document.full_name
+        ):
+            raise PytiaDocumentNotSavedError(
+                &#34;It is not allowed to edit the parameters of an unsaved document. &#34;
+                &#34;Please save the document first.&#34;
+            )
+
+        if self.lazy_document.is_part:
+            # pylint: disable=C0415
+            from pytia.wrapper.documents.part_documents import PyPartDocument
+
+            # pylint: enable=C0415
+
+            self.document = PyPartDocument(strict_naming=False)
+            log.debug(&#34;Current document is a CATPart.&#34;)
+
+        elif self.lazy_document.is_product:
+            # pylint: disable=C0415
+            from pytia.wrapper.documents.product_documents import PyProductDocument
+
+            # pylint: enable=C0415
+
+            self.document = PyProductDocument(strict_naming=False)
+            log.debug(&#34;Current document is a CATProduct.&#34;)
+
+        else:
+            raise PytiaWrongDocumentTypeError(
+                &#34;The current document is neither a part nor a product.&#34;
+            )
+
+        end_time = time.perf_counter()
+        log.debug(f&#34;Loaded PyPartDocument in {(end_time-start_time):.4f}s&#34;)
+
+        self.document.current()
+        self.document.product.part_number = self.document.document.name.split(&#34;.CATP&#34;)[
+            0
+        ]
+        self.name = self.document.document.name
+
+    @property
+    def path(self) -&gt; str:
+        &#34;&#34;&#34;Returns the documents absolute path with filename and file extension.&#34;&#34;&#34;
+        return self.document.document.full_name
+
+    @property
+    def partnumber(self) -&gt; str:
+        &#34;&#34;&#34;Returns the part number of the document.&#34;&#34;&#34;
+        return self.document.product.part_number
+
+    @property
+    def definition(self) -&gt; str:
+        &#34;&#34;&#34;Returns the definition of the document.&#34;&#34;&#34;
+        return self.document.product.definition
+
+    @definition.setter
+    def definition(self, value: str) -&gt; None:
+        &#34;&#34;&#34;Sets the definition value of the document.&#34;&#34;&#34;
+        self.document.product.definition = value
+
+    @property
+    def revision(self) -&gt; str:
+        &#34;&#34;&#34;Returns the revision of the document.&#34;&#34;&#34;
+        return self.document.product.revision
+
+    @revision.setter
+    def revision(self, value: str) -&gt; None:
+        &#34;&#34;&#34;Sets the revision value of the document.&#34;&#34;&#34;
+        self.document.product.revision = value
+
+    @property
+    def nomenclature(self) -&gt; str:
+        &#34;&#34;&#34;Returns the nomenclature of the document&#34;&#34;&#34;
+        return self.document.product.nomenclature
+
+    @nomenclature.setter
+    def nomenclature(self, value: str) -&gt; None:
+        &#34;&#34;&#34;Sets the nomenclature value of the document.&#34;&#34;&#34;
+        self.document.product.nomenclature = value
+
+    @property
+    def source(self) -&gt; int:
+        &#34;&#34;&#34;Returns the source of the document.&#34;&#34;&#34;
+        return self.document.product.source
+
+    @source.setter
+    def source(self, value: int) -&gt; None:
+        &#34;&#34;&#34;Sets the source value of the document.&#34;&#34;&#34;
+        self.document.product.source = value
+
+    @property
+    def description(self) -&gt; str:
+        &#34;&#34;&#34;Returns the description of the document&#34;&#34;&#34;
+        return self.document.product.description_reference
+
+    @description.setter
+    def description(self, value: str) -&gt; None:
+        &#34;&#34;&#34;Returns the description value of the document.&#34;&#34;&#34;
+        self.document.product.description_reference = value
+
+    def _lock_catia(self, value: bool) -&gt; None:
+        &#34;&#34;&#34;
+        Sets the lock-state of catia.
+
+        Args:
+            value (bool): True: Locks the catia UI, False: Releases the lock.
+        &#34;&#34;&#34;
+        log.debug(f&#34;Setting catia lock to {value!r}&#34;)
+        self.framework.catia.refresh_display = not value
+        self.framework.catia.interactive = not value
+        self.framework.catia.display_file_alerts = value
+        self.framework.catia.undo_redo_lock = value
+        if value:
+            self.framework.catia.disable_new_undo_redo_transaction()
+        else:
+            self.framework.catia.enable_new_undo_redo_transaction()
+
+    def _doc_changed(self) -&gt; bool:
+        &#34;&#34;&#34;Returns True if the current part document has changed, False if not.&#34;&#34;&#34;
+        part_document = self.document
+        part_document.current()
+        log.warning(
+            f&#34;The document has changed: {part_document.document.name} -&gt; {self.name}&#34;
+        )
+        return part_document.document.name != self.name
+
+    def setup_main_body(self, variables: Variables) -&gt; None:
+        &#34;&#34;&#34;
+        Sets up the main body of the document (if the document is a part document).
+        Sets the main body as &#34;in work object&#34; and sets the name of the main body depending
+        on the source.
+
+        Args:
+            variables (Variables): The variables of the main app.
+        &#34;&#34;&#34;
+        # pylint: disable=C0415
+        from pytia.wrapper.documents.part_documents import PyPartDocument
+
+        # pylint: enable=C0415
+
+        if isinstance(self.document, PyPartDocument):
+            log.info(&#34;Setting the main bodies name...&#34;)
+
+            self.document.part.in_work_object = self.document.bodies.main_body
+
+            match variables.source.get():
+                case Source.MADE.value:
+                    self.document.bodies.main_body.name = (
+                        f&#34;{variables.machine.get()}&#34;
+                        &#34; - &#34;
+                        f&#34;{variables.partnumber.get()}&#34;
+                        &#34; - &#34;
+                        f&#34;{variables.revision.get()}&#34;
+                    )
+                case Source.BOUGHT.value | _:
+                    self.document.bodies.main_body.name = variables.partnumber.get()
+
+    @staticmethod
+    def _ensure_doc_not_changed(func):
+        &#34;&#34;&#34;
+        Ensures that the document hasn&#39;t changed.
+        Raises the PytiaDifferentDocumentError if the document has changed.
+        &#34;&#34;&#34;
+
+        # pylint: disable=W0212
+        # pylint: disable=R1710
+        @functools.wraps(func)
+        def _ensure_part_not_changed_wrapper(self, *args, **kwargs):
+            if self._doc_changed():
+                document = self.document
+                document.current()
+                raise PytiaDifferentDocumentError(
+                    f&#34;The name of the current document has changed:\n&#34;
+                    f&#34; - Original was {self.name}\n&#34;
+                    f&#34; - Current is {document.document.name}&#34;
+                )
+            return func(self, *args, **kwargs)
+
+        return _ensure_part_not_changed_wrapper
+        # pylint: enable=W0212
+        # pylint: enable=R1710
+
+    # @_ensure_doc_not_changed
+    def get_property(self, name: str) -&gt; Optional[str]:
+        &#34;&#34;&#34;
+        Retrieves a properties value from the documents properties.
+
+        Args:
+            name (str): The name of the property to retrieve the value from.
+
+        Returns:
+            Optional[str]: The value of the property as string. Returns None, if the property \
+                doesn&#39;t exists.
+        &#34;&#34;&#34;
+        if self.document.properties.exists(name):
+            param = str(self.document.properties.get_by_name(name).value)
+            log.info(f&#34;Retrieved property {name} ({param}) from part.&#34;)
+            return param
+        log.info(f&#34;Couldn&#39;t retrieve property {name} from part: Doesn&#39;t exists.&#34;)
+        return None
+
+    # @_ensure_doc_not_changed
+    def write_property(self, name: str, value: str) -&gt; None:
+        &#34;&#34;&#34;
+        Writes the property to the documents properties. Deletes properties with empty values.
+
+        Args:
+            name (str): The name of the property.
+            value (str): The value of the property.
+        &#34;&#34;&#34;
+
+        if self.document.properties.exists(name):
+            if value:
+                self.document.properties.set_value(name, value)
+                log.info(f&#34;Wrote property {name!r} with value {value!r}.&#34;)
+            else:
+                self.document.properties.delete(name)
+        else:
+            if value:
+                self.document.properties.create(name, value)
+            else:
+                log.debug(f&#34;Didn&#39;t write property {name!r}: Value is empty.&#34;)
+
+    # @_ensure_doc_not_changed
+    def write_modifier(self, write_creator: bool = True) -&gt; None:
+        &#34;&#34;&#34;
+        Saves the modifier to the documents properties.
+
+        Args:
+            write_creator (bool, optional): Also write the creator. Defaults to True.
+        &#34;&#34;&#34;
+        self.write_property(resource.props.infra.modifier, LOGON)
+        if not self.get_property(resource.props.infra.creator) and write_creator:
+            self.write_property(resource.props.infra.creator, LOGON)
+
+    def write_notes(self, notes: NoteWidgets) -&gt; None:
+        &#34;&#34;&#34;
+        Writes the notes from the notes-widgets to the documents properties.
+
+        Args:
+            notes (NoteWidgets): The notes-widgets object.
+        &#34;&#34;&#34;
+        for key, value in asdict(resource.props.notes).items():
+            note = notes.get(key)
+            self.write_property(name=value, value=note.note_var.get())
+
+    def write_processes(self, processes: ProcessWidgets) -&gt; None:
+        &#34;&#34;&#34;
+        Writes the processes from the processes-widgets to the documents properties.
+
+        Args:
+            processes (ProcessWidgets): The processes-widgets object.
+        &#34;&#34;&#34;
+        for i in range(
+            resource.settings.processes.first,
+            resource.settings.processes.max + resource.settings.processes.first,
+        ):
+            property_name = resource.props.production.process_n.replace(&#34;$&#34;, str(i))
+            if processes.exists(pid=i):
+                self.write_property(
+                    property_name, processes.get(pid=i).process_var.get()
+                )
+            else:
+                self.write_property(property_name, &#34;&#34;)
+
+    def write_process_notes(self, processes: ProcessWidgets) -&gt; None:
+        &#34;&#34;&#34;
+        Writes the process-notes from the processes-widgets to the documents properties.
+
+        Args:
+            processes (ProcessWidgets): The processes-widgets object.
+        &#34;&#34;&#34;
+        for i in range(
+            resource.settings.processes.first,
+            resource.settings.processes.max + resource.settings.processes.first,
+        ):
+            property_name = resource.props.production.note_process_n.replace(
+                &#34;$&#34;, str(i)
+            )
+            if processes.exists(pid=i):
+                self.write_property(property_name, processes.get(pid=i).note_var.get())
+            else:
+                self.write_property(property_name, &#34;&#34;)
+
+    @staticmethod
+    def setvar(
+        variable: StringVar,
+        value: str | int | None,
+        default: Optional[str | int] = None,
+    ) -&gt; None:
+        &#34;&#34;&#34;
+        Sets the value of a tkinter variable. Omits None values. All values will be casted to str.
+
+        Args:
+            variable (StringVar | IntVar): The tkinter variable. Omits
+            value (str | int | None): The value.
+            default (Optional[str | int], optional): The default value, if the value is None.
+        &#34;&#34;&#34;
+        if value or isinstance(default, int | str):
+            variable.set(str(value or default))
+            log.info(f&#34;Set value &#39;{value or default}&#39; for variable &#39;{variable}&#39;&#34;)
+
+    def setvar_property(
+        self,
+        variable: StringVar,
+        property_name: str,
+        default: Optional[str | int] = None,
+    ) -&gt; None:
+        &#34;&#34;&#34;
+        Sets the value of a tkinter variable. Fetches the value from the documents property,
+        which name matches the given property_name. Omits None values.
+
+        Args:
+            variable (StringVar | IntVar): The tkinter variable.
+            property_name (str): The name of the property, from which the value will be fetched.
+            default (Optional[str | int], optional): The default value, if the value is None.
+        &#34;&#34;&#34;
+        self.setvar(
+            variable=variable, value=self.get_property(property_name), default=default
+        )
+
+    def setvar_combo_property(
+        self,
+        variable: StringVar,
+        property_name: str,
+        widget: ttk.Combobox,
+        default: Optional[str | int] = None,
+        items: Optional[List[str]] = None,
+    ) -&gt; None:
+        &#34;&#34;&#34;
+        Sets the value of a tkinter variable. Fetches the value from the documents property,
+        which name matches the given property_name. Omits None values.
+
+        Args:
+            variable (StringVar | IntVar): The tkinter variable.
+            property_name (str): The name of the property, from which the value will be fetched.
+            widget (Combobox): The widget where the variable will be added.
+            default (Optional[str | int], optional): The default value, if the value is None.
+        &#34;&#34;&#34;
+        self.setvar(
+            variable=variable, value=self.get_property(property_name), default=default
+        )
+        if items:
+            widget.configure(values=items)
+
+    def setvar_user(self, variable: StringVar, property_name: str) -&gt; None:
+        &#34;&#34;&#34;
+        Sets the value of a tkinter variable. Fetches the value from the documents property,
+        which name matches the given property_name. Only use this for User-variables.
+
+        Args:
+            variable (StringVar): The tkinter variable.
+            property_name (str): The name of the property, from which the value will be fetched.
+        &#34;&#34;&#34;
+        value = self.get_property(property_name) or LOGON
+        if resource.logon_exists(value):
+            self.setvar(variable=variable, value=resource.get_user_by_logon(value).name)
+        else:
+            self.setvar(variable=variable, value=f&#34;Unknown user ({value})&#34;)
+
+    def setvar_mass(self, variable: StringVar, force: bool = False) -&gt; None:
+        &#34;&#34;&#34;
+        Sets the value of a tkinter variable. Adds the unit &#39;kg&#39; to the value. Only use this for
+        mass-related variables.
+
+        Args:
+            variable (StringVar): The tkinter variable.
+            force (bool, optional): Force writing the mass. Defaults to False.
+        &#34;&#34;&#34;
+        if self.is_part or force:
+            mass = round(self.document.product.analyze.mass, 2)
+            variable.set(f&#34;{mass} kg&#34;)
+
+    def setvar_material(self, variable: StringVar, metadata: StringVar) -&gt; None:
+        &#34;&#34;&#34;
+        Sets the value of a tkinter variable. Only use this for material-related variables.
+        Writes the applied material to the UI, overwrites any existing material (retrieved from the
+        properties) -&gt; The material applied to the document is always preferred.
+
+        Args:
+            variable (StringVar): The material variable.
+            metadata (StringVar): The material metadata variable.
+        &#34;&#34;&#34;
+        # pylint: disable=C0415
+        if self.is_part:
+            from pytia.utilities.material import get_material_from_part as get_material
+        else:
+            from pytia.utilities.material import (
+                get_material_from_product as get_material,
+            )
+        # pylint: enable=C0415
+        if applied_material := get_material():
+            if resource.settings.separators.metadata in applied_material:
+                splitted = applied_material.split(resource.settings.separators.metadata)
+                applied_material = splitted[0]
+                metadata.set(splitted[1])
+            variable.set(applied_material)
+
+    def setvar_notes(self, notes: NoteWidgets) -&gt; None:
+        &#34;&#34;&#34;
+        Sets the value of all notes-tkinter variables.
+
+        Args:
+            notes (NoteWidgets): The note widgets object.
+        &#34;&#34;&#34;
+        for key, value in asdict(resource.props.notes).items():
+            note = notes.get(key)
+            self.setvar_property(variable=note.note_var, property_name=value)
+
+    def setvar_process(self, processes: ProcessWidgets) -&gt; None:
+        &#34;&#34;&#34;
+        Sets the value of all processes-tkinter variables.
+
+        Args:
+            notes (NoteWidgets): The process widgets object.
+        &#34;&#34;&#34;
+        index = resource.settings.processes.first
+
+        while True:
+            process_name = resource.props.production.process_n.replace(&#34;$&#34;, str(index))
+
+            if self.document.properties.exists(process_name):
+                if not processes.exists(pid=index):
+                    processes.add()
+                process = processes.get(pid=index)
+
+                self.setvar_property(
+                    variable=process.process_var, property_name=process_name
+                )
+                index += 1
+            else:
+                break
+
+        if not processes.exists(pid=index):
+            processes.add()
+
+    def setvar_process_notes(self, processes: ProcessWidgets) -&gt; None:
+        &#34;&#34;&#34;
+        Sets the value of all processes-notes-tkinter variables.
+
+        Args:
+            notes (NoteWidgets): The process widgets object.
+        &#34;&#34;&#34;
+        index = resource.settings.processes.first
+
+        while True:
+            process_name = resource.props.production.process_n.replace(&#34;$&#34;, str(index))
+            note_name = resource.props.production.note_process_n.replace(
+                &#34;$&#34;, str(index)
+            )
+
+            # Ignore notes for non-existent processes
+            if self.document.properties.exists(process_name) and processes.exists(
+                pid=index
+            ):
+                if self.document.properties.exists(note_name):
+                    process = processes.get(pid=index)
+                    self.setvar_property(
+                        variable=process.note_var, property_name=note_name
+                    )
+                index += 1
+            else:
+                break</code></pre>
+</details>
+<h3>Static methods</h3>
+<dl>
+<dt id="pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.setvar"><code class="name flex">
+<span>def <span class="ident">setvar</span></span>(<span>variable: tkinter.StringVar, value: str | int | None, default: str | int | None = None) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Sets the value of a tkinter variable. Omits None values. All values will be casted to str.</p>
+<h2 id="args">Args</h2>
+<p>variable (StringVar | IntVar): The tkinter variable. Omits
+value (str | int | None): The value.
+default (Optional[str | int], optional): The default value, if the value is None.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@staticmethod
+def setvar(
+    variable: StringVar,
+    value: str | int | None,
+    default: Optional[str | int] = None,
+) -&gt; None:
+    &#34;&#34;&#34;
+    Sets the value of a tkinter variable. Omits None values. All values will be casted to str.
+
+    Args:
+        variable (StringVar | IntVar): The tkinter variable. Omits
+        value (str | int | None): The value.
+        default (Optional[str | int], optional): The default value, if the value is None.
+    &#34;&#34;&#34;
+    if value or isinstance(default, int | str):
+        variable.set(str(value or default))
+        log.info(f&#34;Set value &#39;{value or default}&#39; for variable &#39;{variable}&#39;&#34;)</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Instance variables</h3>
+<dl>
+<dt id="pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.definition"><code class="name">var <span class="ident">definition</span> : str</code></dt>
+<dd>
+<div class="desc"><p>Returns the definition of the document.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def definition(self) -&gt; str:
+    &#34;&#34;&#34;Returns the definition of the document.&#34;&#34;&#34;
+    return self.document.product.definition</code></pre>
+</details>
+</dd>
+<dt id="pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.description"><code class="name">var <span class="ident">description</span> : str</code></dt>
+<dd>
+<div class="desc"><p>Returns the description of the document</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def description(self) -&gt; str:
+    &#34;&#34;&#34;Returns the description of the document&#34;&#34;&#34;
+    return self.document.product.description_reference</code></pre>
+</details>
+</dd>
+<dt id="pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.nomenclature"><code class="name">var <span class="ident">nomenclature</span> : str</code></dt>
+<dd>
+<div class="desc"><p>Returns the nomenclature of the document</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def nomenclature(self) -&gt; str:
+    &#34;&#34;&#34;Returns the nomenclature of the document&#34;&#34;&#34;
+    return self.document.product.nomenclature</code></pre>
+</details>
+</dd>
+<dt id="pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.partnumber"><code class="name">var <span class="ident">partnumber</span> : str</code></dt>
+<dd>
+<div class="desc"><p>Returns the part number of the document.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def partnumber(self) -&gt; str:
+    &#34;&#34;&#34;Returns the part number of the document.&#34;&#34;&#34;
+    return self.document.product.part_number</code></pre>
+</details>
+</dd>
+<dt id="pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.path"><code class="name">var <span class="ident">path</span> : str</code></dt>
+<dd>
+<div class="desc"><p>Returns the documents absolute path with filename and file extension.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def path(self) -&gt; str:
+    &#34;&#34;&#34;Returns the documents absolute path with filename and file extension.&#34;&#34;&#34;
+    return self.document.document.full_name</code></pre>
+</details>
+</dd>
+<dt id="pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.revision"><code class="name">var <span class="ident">revision</span> : str</code></dt>
+<dd>
+<div class="desc"><p>Returns the revision of the document.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def revision(self) -&gt; str:
+    &#34;&#34;&#34;Returns the revision of the document.&#34;&#34;&#34;
+    return self.document.product.revision</code></pre>
+</details>
+</dd>
+<dt id="pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.source"><code class="name">var <span class="ident">source</span> : int</code></dt>
+<dd>
+<div class="desc"><p>Returns the source of the document.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def source(self) -&gt; int:
+    &#34;&#34;&#34;Returns the source of the document.&#34;&#34;&#34;
+    return self.document.product.source</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.get_property"><code class="name flex">
+<span>def <span class="ident">get_property</span></span>(<span>self, name: str) ‑> Optional[str]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Retrieves a properties value from the documents properties.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>name</code></strong> :&ensp;<code>str</code></dt>
+<dd>The name of the property to retrieve the value from.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>Optional[str]</code></dt>
+<dd>The value of the property as string. Returns None, if the property
+doesn't exists.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_property(self, name: str) -&gt; Optional[str]:
+    &#34;&#34;&#34;
+    Retrieves a properties value from the documents properties.
+
+    Args:
+        name (str): The name of the property to retrieve the value from.
+
+    Returns:
+        Optional[str]: The value of the property as string. Returns None, if the property \
+            doesn&#39;t exists.
+    &#34;&#34;&#34;
+    if self.document.properties.exists(name):
+        param = str(self.document.properties.get_by_name(name).value)
+        log.info(f&#34;Retrieved property {name} ({param}) from part.&#34;)
+        return param
+    log.info(f&#34;Couldn&#39;t retrieve property {name} from part: Doesn&#39;t exists.&#34;)
+    return None</code></pre>
+</details>
+</dd>
+<dt id="pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.setup_main_body"><code class="name flex">
+<span>def <span class="ident">setup_main_body</span></span>(<span>self, variables: app.vars.Variables) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Sets up the main body of the document (if the document is a part document).
+Sets the main body as "in work object" and sets the name of the main body depending
+on the source.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>variables</code></strong> :&ensp;<code>Variables</code></dt>
+<dd>The variables of the main app.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def setup_main_body(self, variables: Variables) -&gt; None:
+    &#34;&#34;&#34;
+    Sets up the main body of the document (if the document is a part document).
+    Sets the main body as &#34;in work object&#34; and sets the name of the main body depending
+    on the source.
+
+    Args:
+        variables (Variables): The variables of the main app.
+    &#34;&#34;&#34;
+    # pylint: disable=C0415
+    from pytia.wrapper.documents.part_documents import PyPartDocument
+
+    # pylint: enable=C0415
+
+    if isinstance(self.document, PyPartDocument):
+        log.info(&#34;Setting the main bodies name...&#34;)
+
+        self.document.part.in_work_object = self.document.bodies.main_body
+
+        match variables.source.get():
+            case Source.MADE.value:
+                self.document.bodies.main_body.name = (
+                    f&#34;{variables.machine.get()}&#34;
+                    &#34; - &#34;
+                    f&#34;{variables.partnumber.get()}&#34;
+                    &#34; - &#34;
+                    f&#34;{variables.revision.get()}&#34;
+                )
+            case Source.BOUGHT.value | _:
+                self.document.bodies.main_body.name = variables.partnumber.get()</code></pre>
+</details>
+</dd>
+<dt id="pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.setvar_combo_property"><code class="name flex">
+<span>def <span class="ident">setvar_combo_property</span></span>(<span>self, variable: tkinter.StringVar, property_name: str, widget: tkinter.ttk.Combobox, default: str | int | None = None, items: Optional[List[str]] = None) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Sets the value of a tkinter variable. Fetches the value from the documents property,
+which name matches the given property_name. Omits None values.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt>variable (StringVar | IntVar): The tkinter variable.</dt>
+<dt><strong><code>property_name</code></strong> :&ensp;<code>str</code></dt>
+<dd>The name of the property, from which the value will be fetched.</dd>
+<dt><strong><code>widget</code></strong> :&ensp;<code>Combobox</code></dt>
+<dd>The widget where the variable will be added.</dd>
+</dl>
+<p>default (Optional[str | int], optional): The default value, if the value is None.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def setvar_combo_property(
+    self,
+    variable: StringVar,
+    property_name: str,
+    widget: ttk.Combobox,
+    default: Optional[str | int] = None,
+    items: Optional[List[str]] = None,
+) -&gt; None:
+    &#34;&#34;&#34;
+    Sets the value of a tkinter variable. Fetches the value from the documents property,
+    which name matches the given property_name. Omits None values.
+
+    Args:
+        variable (StringVar | IntVar): The tkinter variable.
+        property_name (str): The name of the property, from which the value will be fetched.
+        widget (Combobox): The widget where the variable will be added.
+        default (Optional[str | int], optional): The default value, if the value is None.
+    &#34;&#34;&#34;
+    self.setvar(
+        variable=variable, value=self.get_property(property_name), default=default
+    )
+    if items:
+        widget.configure(values=items)</code></pre>
+</details>
+</dd>
+<dt id="pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.setvar_mass"><code class="name flex">
+<span>def <span class="ident">setvar_mass</span></span>(<span>self, variable: tkinter.StringVar, force: bool = False) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Sets the value of a tkinter variable. Adds the unit 'kg' to the value. Only use this for
+mass-related variables.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>variable</code></strong> :&ensp;<code>StringVar</code></dt>
+<dd>The tkinter variable.</dd>
+<dt><strong><code>force</code></strong> :&ensp;<code>bool</code>, optional</dt>
+<dd>Force writing the mass. Defaults to False.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def setvar_mass(self, variable: StringVar, force: bool = False) -&gt; None:
+    &#34;&#34;&#34;
+    Sets the value of a tkinter variable. Adds the unit &#39;kg&#39; to the value. Only use this for
+    mass-related variables.
+
+    Args:
+        variable (StringVar): The tkinter variable.
+        force (bool, optional): Force writing the mass. Defaults to False.
+    &#34;&#34;&#34;
+    if self.is_part or force:
+        mass = round(self.document.product.analyze.mass, 2)
+        variable.set(f&#34;{mass} kg&#34;)</code></pre>
+</details>
+</dd>
+<dt id="pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.setvar_material"><code class="name flex">
+<span>def <span class="ident">setvar_material</span></span>(<span>self, variable: tkinter.StringVar, metadata: tkinter.StringVar) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Sets the value of a tkinter variable. Only use this for material-related variables.
+Writes the applied material to the UI, overwrites any existing material (retrieved from the
+properties) -&gt; The material applied to the document is always preferred.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>variable</code></strong> :&ensp;<code>StringVar</code></dt>
+<dd>The material variable.</dd>
+<dt><strong><code>metadata</code></strong> :&ensp;<code>StringVar</code></dt>
+<dd>The material metadata variable.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def setvar_material(self, variable: StringVar, metadata: StringVar) -&gt; None:
+    &#34;&#34;&#34;
+    Sets the value of a tkinter variable. Only use this for material-related variables.
+    Writes the applied material to the UI, overwrites any existing material (retrieved from the
+    properties) -&gt; The material applied to the document is always preferred.
+
+    Args:
+        variable (StringVar): The material variable.
+        metadata (StringVar): The material metadata variable.
+    &#34;&#34;&#34;
+    # pylint: disable=C0415
+    if self.is_part:
+        from pytia.utilities.material import get_material_from_part as get_material
+    else:
+        from pytia.utilities.material import (
+            get_material_from_product as get_material,
+        )
+    # pylint: enable=C0415
+    if applied_material := get_material():
+        if resource.settings.separators.metadata in applied_material:
+            splitted = applied_material.split(resource.settings.separators.metadata)
+            applied_material = splitted[0]
+            metadata.set(splitted[1])
+        variable.set(applied_material)</code></pre>
+</details>
+</dd>
+<dt id="pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.setvar_notes"><code class="name flex">
+<span>def <span class="ident">setvar_notes</span></span>(<span>self, notes: app.widgets.notes.NoteWidgets) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Sets the value of all notes-tkinter variables.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>notes</code></strong> :&ensp;<code>NoteWidgets</code></dt>
+<dd>The note widgets object.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def setvar_notes(self, notes: NoteWidgets) -&gt; None:
+    &#34;&#34;&#34;
+    Sets the value of all notes-tkinter variables.
+
+    Args:
+        notes (NoteWidgets): The note widgets object.
+    &#34;&#34;&#34;
+    for key, value in asdict(resource.props.notes).items():
+        note = notes.get(key)
+        self.setvar_property(variable=note.note_var, property_name=value)</code></pre>
+</details>
+</dd>
+<dt id="pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.setvar_process"><code class="name flex">
+<span>def <span class="ident">setvar_process</span></span>(<span>self, processes: app.widgets.processes.ProcessWidgets) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Sets the value of all processes-tkinter variables.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>notes</code></strong> :&ensp;<code>NoteWidgets</code></dt>
+<dd>The process widgets object.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def setvar_process(self, processes: ProcessWidgets) -&gt; None:
+    &#34;&#34;&#34;
+    Sets the value of all processes-tkinter variables.
+
+    Args:
+        notes (NoteWidgets): The process widgets object.
+    &#34;&#34;&#34;
+    index = resource.settings.processes.first
+
+    while True:
+        process_name = resource.props.production.process_n.replace(&#34;$&#34;, str(index))
+
+        if self.document.properties.exists(process_name):
+            if not processes.exists(pid=index):
+                processes.add()
+            process = processes.get(pid=index)
+
+            self.setvar_property(
+                variable=process.process_var, property_name=process_name
+            )
+            index += 1
+        else:
+            break
+
+    if not processes.exists(pid=index):
+        processes.add()</code></pre>
+</details>
+</dd>
+<dt id="pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.setvar_process_notes"><code class="name flex">
+<span>def <span class="ident">setvar_process_notes</span></span>(<span>self, processes: app.widgets.processes.ProcessWidgets) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Sets the value of all processes-notes-tkinter variables.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>notes</code></strong> :&ensp;<code>NoteWidgets</code></dt>
+<dd>The process widgets object.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def setvar_process_notes(self, processes: ProcessWidgets) -&gt; None:
+    &#34;&#34;&#34;
+    Sets the value of all processes-notes-tkinter variables.
+
+    Args:
+        notes (NoteWidgets): The process widgets object.
+    &#34;&#34;&#34;
+    index = resource.settings.processes.first
+
+    while True:
+        process_name = resource.props.production.process_n.replace(&#34;$&#34;, str(index))
+        note_name = resource.props.production.note_process_n.replace(
+            &#34;$&#34;, str(index)
+        )
+
+        # Ignore notes for non-existent processes
+        if self.document.properties.exists(process_name) and processes.exists(
+            pid=index
+        ):
+            if self.document.properties.exists(note_name):
+                process = processes.get(pid=index)
+                self.setvar_property(
+                    variable=process.note_var, property_name=note_name
+                )
+            index += 1
+        else:
+            break</code></pre>
+</details>
+</dd>
+<dt id="pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.setvar_property"><code class="name flex">
+<span>def <span class="ident">setvar_property</span></span>(<span>self, variable: tkinter.StringVar, property_name: str, default: str | int | None = None) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Sets the value of a tkinter variable. Fetches the value from the documents property,
+which name matches the given property_name. Omits None values.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt>variable (StringVar | IntVar): The tkinter variable.</dt>
+<dt><strong><code>property_name</code></strong> :&ensp;<code>str</code></dt>
+<dd>The name of the property, from which the value will be fetched.</dd>
+</dl>
+<p>default (Optional[str | int], optional): The default value, if the value is None.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def setvar_property(
+    self,
+    variable: StringVar,
+    property_name: str,
+    default: Optional[str | int] = None,
+) -&gt; None:
+    &#34;&#34;&#34;
+    Sets the value of a tkinter variable. Fetches the value from the documents property,
+    which name matches the given property_name. Omits None values.
+
+    Args:
+        variable (StringVar | IntVar): The tkinter variable.
+        property_name (str): The name of the property, from which the value will be fetched.
+        default (Optional[str | int], optional): The default value, if the value is None.
+    &#34;&#34;&#34;
+    self.setvar(
+        variable=variable, value=self.get_property(property_name), default=default
+    )</code></pre>
+</details>
+</dd>
+<dt id="pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.setvar_user"><code class="name flex">
+<span>def <span class="ident">setvar_user</span></span>(<span>self, variable: tkinter.StringVar, property_name: str) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Sets the value of a tkinter variable. Fetches the value from the documents property,
+which name matches the given property_name. Only use this for User-variables.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>variable</code></strong> :&ensp;<code>StringVar</code></dt>
+<dd>The tkinter variable.</dd>
+<dt><strong><code>property_name</code></strong> :&ensp;<code>str</code></dt>
+<dd>The name of the property, from which the value will be fetched.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def setvar_user(self, variable: StringVar, property_name: str) -&gt; None:
+    &#34;&#34;&#34;
+    Sets the value of a tkinter variable. Fetches the value from the documents property,
+    which name matches the given property_name. Only use this for User-variables.
+
+    Args:
+        variable (StringVar): The tkinter variable.
+        property_name (str): The name of the property, from which the value will be fetched.
+    &#34;&#34;&#34;
+    value = self.get_property(property_name) or LOGON
+    if resource.logon_exists(value):
+        self.setvar(variable=variable, value=resource.get_user_by_logon(value).name)
+    else:
+        self.setvar(variable=variable, value=f&#34;Unknown user ({value})&#34;)</code></pre>
+</details>
+</dd>
+<dt id="pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.write_modifier"><code class="name flex">
+<span>def <span class="ident">write_modifier</span></span>(<span>self, write_creator: bool = True) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Saves the modifier to the documents properties.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>write_creator</code></strong> :&ensp;<code>bool</code>, optional</dt>
+<dd>Also write the creator. Defaults to True.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def write_modifier(self, write_creator: bool = True) -&gt; None:
+    &#34;&#34;&#34;
+    Saves the modifier to the documents properties.
+
+    Args:
+        write_creator (bool, optional): Also write the creator. Defaults to True.
+    &#34;&#34;&#34;
+    self.write_property(resource.props.infra.modifier, LOGON)
+    if not self.get_property(resource.props.infra.creator) and write_creator:
+        self.write_property(resource.props.infra.creator, LOGON)</code></pre>
+</details>
+</dd>
+<dt id="pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.write_notes"><code class="name flex">
+<span>def <span class="ident">write_notes</span></span>(<span>self, notes: app.widgets.notes.NoteWidgets) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Writes the notes from the notes-widgets to the documents properties.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>notes</code></strong> :&ensp;<code>NoteWidgets</code></dt>
+<dd>The notes-widgets object.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def write_notes(self, notes: NoteWidgets) -&gt; None:
+    &#34;&#34;&#34;
+    Writes the notes from the notes-widgets to the documents properties.
+
+    Args:
+        notes (NoteWidgets): The notes-widgets object.
+    &#34;&#34;&#34;
+    for key, value in asdict(resource.props.notes).items():
+        note = notes.get(key)
+        self.write_property(name=value, value=note.note_var.get())</code></pre>
+</details>
+</dd>
+<dt id="pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.write_process_notes"><code class="name flex">
+<span>def <span class="ident">write_process_notes</span></span>(<span>self, processes: app.widgets.processes.ProcessWidgets) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Writes the process-notes from the processes-widgets to the documents properties.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>processes</code></strong> :&ensp;<code>ProcessWidgets</code></dt>
+<dd>The processes-widgets object.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def write_process_notes(self, processes: ProcessWidgets) -&gt; None:
+    &#34;&#34;&#34;
+    Writes the process-notes from the processes-widgets to the documents properties.
+
+    Args:
+        processes (ProcessWidgets): The processes-widgets object.
+    &#34;&#34;&#34;
+    for i in range(
+        resource.settings.processes.first,
+        resource.settings.processes.max + resource.settings.processes.first,
+    ):
+        property_name = resource.props.production.note_process_n.replace(
+            &#34;$&#34;, str(i)
+        )
+        if processes.exists(pid=i):
+            self.write_property(property_name, processes.get(pid=i).note_var.get())
+        else:
+            self.write_property(property_name, &#34;&#34;)</code></pre>
+</details>
+</dd>
+<dt id="pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.write_processes"><code class="name flex">
+<span>def <span class="ident">write_processes</span></span>(<span>self, processes: app.widgets.processes.ProcessWidgets) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Writes the processes from the processes-widgets to the documents properties.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>processes</code></strong> :&ensp;<code>ProcessWidgets</code></dt>
+<dd>The processes-widgets object.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def write_processes(self, processes: ProcessWidgets) -&gt; None:
+    &#34;&#34;&#34;
+    Writes the processes from the processes-widgets to the documents properties.
+
+    Args:
+        processes (ProcessWidgets): The processes-widgets object.
+    &#34;&#34;&#34;
+    for i in range(
+        resource.settings.processes.first,
+        resource.settings.processes.max + resource.settings.processes.first,
+    ):
+        property_name = resource.props.production.process_n.replace(&#34;$&#34;, str(i))
+        if processes.exists(pid=i):
+            self.write_property(
+                property_name, processes.get(pid=i).process_var.get()
+            )
+        else:
+            self.write_property(property_name, &#34;&#34;)</code></pre>
+</details>
+</dd>
+<dt id="pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.write_property"><code class="name flex">
+<span>def <span class="ident">write_property</span></span>(<span>self, name: str, value: str) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Writes the property to the documents properties. Deletes properties with empty values.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>name</code></strong> :&ensp;<code>str</code></dt>
+<dd>The name of the property.</dd>
+<dt><strong><code>value</code></strong> :&ensp;<code>str</code></dt>
+<dd>The value of the property.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def write_property(self, name: str, value: str) -&gt; None:
+    &#34;&#34;&#34;
+    Writes the property to the documents properties. Deletes properties with empty values.
+
+    Args:
+        name (str): The name of the property.
+        value (str): The value of the property.
+    &#34;&#34;&#34;
+
+    if self.document.properties.exists(name):
+        if value:
+            self.document.properties.set_value(name, value)
+            log.info(f&#34;Wrote property {name!r} with value {value!r}.&#34;)
+        else:
+            self.document.properties.delete(name)
+    else:
+        if value:
+            self.document.properties.create(name, value)
+        else:
+            log.debug(f&#34;Didn&#39;t write property {name!r}: Value is empty.&#34;)</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="pytia_property_manager.helper" href="index.html">pytia_property_manager.helper</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper" href="#pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper">LazyDocumentHelper</a></code></h4>
+<ul class="">
+<li><code><a title="pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.definition" href="#pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.definition">definition</a></code></li>
+<li><code><a title="pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.description" href="#pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.description">description</a></code></li>
+<li><code><a title="pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.get_property" href="#pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.get_property">get_property</a></code></li>
+<li><code><a title="pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.nomenclature" href="#pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.nomenclature">nomenclature</a></code></li>
+<li><code><a title="pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.partnumber" href="#pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.partnumber">partnumber</a></code></li>
+<li><code><a title="pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.path" href="#pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.path">path</a></code></li>
+<li><code><a title="pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.revision" href="#pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.revision">revision</a></code></li>
+<li><code><a title="pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.setup_main_body" href="#pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.setup_main_body">setup_main_body</a></code></li>
+<li><code><a title="pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.setvar" href="#pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.setvar">setvar</a></code></li>
+<li><code><a title="pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.setvar_combo_property" href="#pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.setvar_combo_property">setvar_combo_property</a></code></li>
+<li><code><a title="pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.setvar_mass" href="#pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.setvar_mass">setvar_mass</a></code></li>
+<li><code><a title="pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.setvar_material" href="#pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.setvar_material">setvar_material</a></code></li>
+<li><code><a title="pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.setvar_notes" href="#pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.setvar_notes">setvar_notes</a></code></li>
+<li><code><a title="pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.setvar_process" href="#pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.setvar_process">setvar_process</a></code></li>
+<li><code><a title="pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.setvar_process_notes" href="#pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.setvar_process_notes">setvar_process_notes</a></code></li>
+<li><code><a title="pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.setvar_property" href="#pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.setvar_property">setvar_property</a></code></li>
+<li><code><a title="pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.setvar_user" href="#pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.setvar_user">setvar_user</a></code></li>
+<li><code><a title="pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.source" href="#pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.source">source</a></code></li>
+<li><code><a title="pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.write_modifier" href="#pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.write_modifier">write_modifier</a></code></li>
+<li><code><a title="pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.write_notes" href="#pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.write_notes">write_notes</a></code></li>
+<li><code><a title="pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.write_process_notes" href="#pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.write_process_notes">write_process_notes</a></code></li>
+<li><code><a title="pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.write_processes" href="#pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.write_processes">write_processes</a></code></li>
+<li><code><a title="pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.write_property" href="#pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.write_property">write_property</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>

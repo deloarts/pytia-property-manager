@@ -1,0 +1,27 @@
+{
+    "infra": {
+        "project": "pytia.project",
+        "machine": "pytia.machine",
+        "material": "pytia.material",
+        "base_size": "pytia.base_size",
+        "base_size_preset": "pytia.base_size_preset",
+        "mass": "pytia.mass",
+        "manufacturer": "pytia.manufacturer",
+        "supplier": "pytia.supplier",
+        "tolerance": "pytia.tolerance",
+        "spare_part_level": "pytia.spare_part_level",
+        "creator": "pytia.creator",
+        "modifier": "pytia.modifier"
+    },
+    "notes": {
+        "general": "pytia.note_general",
+        "material": "pytia.note_material",
+        "base_size": "pytia.note_base_size",
+        "supplier": "pytia.note_supplier",
+        "production": "pytia.note_production"
+    },
+    "production": {
+        "process_n": "pytia.process_$",
+        "note_process_n": "pytia.note_process_$"
+    }
+}
