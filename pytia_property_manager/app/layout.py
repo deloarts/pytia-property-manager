@@ -207,6 +207,7 @@ class Layout:
             textvariable=variables.material,
             width=18,
             state=DISABLED,
+            cursor="arrow",
         )
         self._entry_material.grid(
             row=6, column=1, padx=5, pady=2, ipadx=2, ipady=2, sticky="nsew"

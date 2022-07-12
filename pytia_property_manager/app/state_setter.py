@@ -169,9 +169,9 @@ class UISetter:
         self.layout.input_source.config(state="readonly")
         self.layout.button_source.configure(state=tk.DISABLED)
 
-        self.layout.button_material.configure(state=tk.NORMAL)
+        self.layout.input_material.configure(state="readonly")
         self.doc_helper.setvar_material(self.vars.material, self.vars.material_meta)
-        self.layout.input_material.configure(state=tk.NORMAL)
+        self.layout.button_material.configure(state=tk.NORMAL)
 
         self.layout.input_base_size.config(state="readonly")
         self.layout.input_base_size_preset.config(state="readonly")
@@ -233,7 +233,7 @@ class UISetter:
         self.layout.input_source.config(state="readonly")
         self.layout.button_source.configure(state=tk.NORMAL)
 
-        self.layout.input_material.config(state=tk.NORMAL)
+        self.layout.input_material.config(state="readonly")
         self.doc_helper.setvar_material(self.vars.material, self.vars.material_meta)
         self.layout.button_material.configure(state=tk.NORMAL)
 
