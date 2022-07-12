@@ -122,7 +122,7 @@ class ToolTips:
         # endregion
 
         # region CREATOR
-        if creator := resource.get_user_by_name(name=variables.creator.get()):
+        if creator := resource.get_user_by_logon(logon=variables.creator.get()):
             ToolTip(
                 layout.label_creator,
                 (
@@ -135,7 +135,7 @@ class ToolTips:
         # endregion
 
         # region MODIFIER
-        if modifier := resource.get_user_by_name(name=variables.modifier.get()):
+        if modifier := resource.get_user_by_logon(logon=variables.modifier.get()):
             ToolTip(
                 layout.label_modifier,
                 (

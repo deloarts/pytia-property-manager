@@ -6,6 +6,7 @@ from tkinter import messagebox as tkmsg
 
 from const import Source
 from pytia.log import log
+from resources import resource
 
 from app.callbacks import on_source_bought
 from app.state_setter import UISetter
@@ -35,6 +36,8 @@ class Traces:
         self.vars.mass.trace_add("write", self.trace_mass)
         self.vars.project.trace_add("write", self.trace_project)
         self.vars.base_size.trace_add("write", self.trace_base_size)
+        self.vars.creator.trace_add("write", self.trace_creator)
+        self.vars.modifier.trace_add("write", self.trace_modifier)
 
     def trace_mass(self, *_) -> None:
         """Trace callback for the `mass` StringVar"""
@@ -92,3 +95,19 @@ class Traces:
                     self.set_ui.unknown()
         else:
             self.vars.source.set(self.vars.previous_source.get())
+
+    def trace_creator(self, *_) -> None:
+        """Trace callback for the `creator` StringVar"""
+        creator = self.vars.creator.get()
+        if resource.logon_exists(creator):
+            self.vars.creator_display.set(resource.get_user_by_logon(creator).name)
+        else:
+            self.vars.creator_display.set(f"Unknown user ({creator})")
+
+    def trace_modifier(self, *_) -> None:
+        """Trace callback for the `modifier` StringVar"""
+        modifier = self.vars.modifier.get()
+        if resource.logon_exists(modifier):
+            self.vars.modifier_display.set(resource.get_user_by_logon(modifier).name)
+        else:
+            self.vars.modifier_display.set(f"Unknown user ({modifier})")

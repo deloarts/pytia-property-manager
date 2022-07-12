@@ -438,7 +438,7 @@ class Layout:
             sticky="new",
         )
         self._lbl_creator_value = ttk.Label(
-            frames.infrastructure, textvariable=variables.creator
+            frames.infrastructure, textvariable=variables.creator_display
         )
         self._lbl_creator_value.grid(
             row=15,
@@ -464,7 +464,7 @@ class Layout:
             sticky="new",
         )
         self._lbl_modifier_value = ttk.Label(
-            frames.infrastructure, textvariable=variables.modifier
+            frames.infrastructure, textvariable=variables.modifier_display
         )
         self._lbl_modifier_value.grid(
             row=16,

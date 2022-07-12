@@ -30,7 +30,9 @@ class Variables:
     spare_part_level: StringVar
 
     creator: StringVar
+    creator_display: StringVar
     modifier: StringVar
+    modifier_display: StringVar
 
     def __init__(self, root: Tk) -> None:
         """
@@ -59,4 +61,6 @@ class Variables:
         self.spare_part_level = StringVar(master=root, name="spare_part_level")
 
         self.creator = StringVar(master=root, name="creator")
+        self.creator_display = StringVar(master=root, name="creator_display")
         self.modifier = StringVar(master=root, name="modifier")
+        self.modifier_display = StringVar(master=root, name="modifier_display")
