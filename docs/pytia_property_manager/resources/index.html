@@ -1,0 +1,2250 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>pytia_property_manager.resources API documentation</title>
+<meta name="description" content="Loads the content from config files …" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>pytia_property_manager.resources</code></h1>
+</header>
+<section id="section-intro">
+<p>Loads the content from config files.</p>
+<p>Important: Do not import third party modules here. This module
+must work on its own without any other dependencies!</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;
+    Loads the content from config files.
+
+    Important: Do not import third party modules here. This module
+    must work on its own without any other dependencies!
+&#34;&#34;&#34;
+
+import atexit
+import importlib.resources
+import json
+import os
+import tkinter.messagebox as tkmsg
+from dataclasses import asdict, dataclass, field, fields
+from json.decoder import JSONDecodeError
+from pathlib import Path
+from typing import List, Optional
+
+from const import (
+    APP_VERSION,
+    APPDATA,
+    CONFIG_APPDATA,
+    CONFIG_INFOS,
+    CONFIG_INFOS_DEFAULT,
+    CONFIG_PROCESSES,
+    CONFIG_PROCESSES_DEFAULT,
+    CONFIG_PROPS,
+    CONFIG_PROPS_DEFAULT,
+    CONFIG_SETTINGS,
+    CONFIG_USERS,
+    LOGON,
+)
+
+
+@dataclass(slots=True, kw_only=True, frozen=True)
+class SettingsRestrictions:
+    &#34;&#34;&#34;Dataclass for restrictive settings.&#34;&#34;&#34;
+
+    allow_all_users: bool
+    allow_all_editors: bool
+    allow_unsaved: bool
+    allow_outside_workspace: bool
+    strict_project: bool
+    strict_machine: bool
+    enable_information: bool
+
+
+@dataclass(slots=True, kw_only=True, frozen=True)
+class SettingsSeparators:
+    &#34;&#34;&#34;Dataclass for separators.&#34;&#34;&#34;
+
+    bought: str
+    metadata: str
+
+
+@dataclass(slots=True, kw_only=True, frozen=True)
+class SettingsNomenclature:
+    &#34;&#34;&#34;Dataclass for nomenclature.&#34;&#34;&#34;
+
+    made: str
+    bought: str
+
+
+@dataclass(slots=True, kw_only=True, frozen=True)
+class SettingsProcesses:
+    &#34;&#34;&#34;Dataclass for min and max values.&#34;&#34;&#34;
+
+    first: int
+    min: int
+    max: int
+
+
+@dataclass(slots=True, kw_only=True, frozen=True)
+class SettingsPaths:
+    &#34;&#34;&#34;Dataclass for paths (settings.json).&#34;&#34;&#34;
+
+    catia: Path
+    material: Path
+    local_dependencies: Path
+    release: Path
+
+
+@dataclass(slots=True, kw_only=True, frozen=True)
+class SettingsFiles:
+    &#34;&#34;&#34;Dataclass for files (settings.json).&#34;&#34;&#34;
+
+    app: str
+    launcher: str
+    bounding_box_launcher: Optional[str]
+    material: str
+    workspace: str
+
+
+@dataclass(slots=True, kw_only=True, frozen=True)
+class SettingsUrls:
+    &#34;&#34;&#34;Dataclass for urls (settings.json).&#34;&#34;&#34;
+
+    help: str | None
+
+
+@dataclass(slots=True, kw_only=True, frozen=True)
+class SettingsMails:
+    &#34;&#34;&#34;Dataclass for mails (settings.json).&#34;&#34;&#34;
+
+    admin: str
+
+
+@dataclass(slots=True, kw_only=True)
+class Settings:  # pylint: disable=R0902
+    &#34;&#34;&#34;Dataclass for settings (settings.json).&#34;&#34;&#34;
+
+    title: str
+    debug: bool
+    demo: bool
+    revision: int | str
+    restrictions: SettingsRestrictions
+    separators: SettingsSeparators
+    nomenclature: SettingsNomenclature
+    processes: SettingsProcesses
+    tolerances: List[str]
+    spare_part_level: List[str]
+    files: SettingsFiles
+    paths: SettingsPaths
+    urls: SettingsUrls
+    mails: SettingsMails
+
+    def __post_init__(self) -&gt; None:
+        self.restrictions = SettingsRestrictions(**dict(self.restrictions))  # type: ignore
+        self.separators = SettingsSeparators(**dict(self.separators))  # type: ignore
+        self.nomenclature = SettingsNomenclature(**dict(self.nomenclature))  # type: ignore
+        self.processes = SettingsProcesses(**dict(self.processes))  # type: ignore
+        self.files = SettingsFiles(**dict(self.files))  # type: ignore
+        self.paths = SettingsPaths(**dict(self.paths))  # type: ignore
+        self.urls = SettingsUrls(**dict(self.urls))  # type: ignore
+        self.mails = SettingsMails(**dict(self.mails))  # type: ignore
+
+
+@dataclass(slots=True, kw_only=True, frozen=True)
+class PropsInfra:
+    &#34;&#34;&#34;Dataclass for infrastructure properties on the document (properties.json).&#34;&#34;&#34;
+
+    project: str
+    machine: str
+    material: str
+    base_size: str
+    base_size_preset: str
+    mass: str
+    manufacturer: str
+    supplier: str
+    tolerance: str
+    spare_part_level: str
+    creator: str
+    modifier: str
+
+    @property
+    def keys(self) -&gt; List[str]:
+        &#34;&#34;&#34;Returns a list of all keys from the PropsInfra dataclass.&#34;&#34;&#34;
+        return [f.name for f in fields(self)]
+
+    @property
+    def values(self) -&gt; List[str]:
+        &#34;&#34;&#34;Returns a list of all values from the PropsInfra dataclass.&#34;&#34;&#34;
+        return [getattr(self, f.name) for f in fields(self)]
+
+
+@dataclass(slots=True, kw_only=True, frozen=True)
+class PropsNotes:
+    &#34;&#34;&#34;Dataclass for note properties on the document (properties.json).&#34;&#34;&#34;
+
+    general: str
+    material: str
+    base_size: str
+    supplier: str
+    production: str
+
+    @property
+    def keys(self) -&gt; List[str]:
+        &#34;&#34;&#34;Returns a list of all keys from the PropsNotes dataclass.&#34;&#34;&#34;
+        return [f.name for f in fields(self)]
+
+    @property
+    def values(self) -&gt; List[str]:
+        &#34;&#34;&#34;Returns a list of all values from the PropsNotes dataclass.&#34;&#34;&#34;
+        return [getattr(self, f.name) for f in fields(self)]
+
+
+@dataclass(slots=True, kw_only=True, frozen=True)
+class PropsProduction:
+    &#34;&#34;&#34;Dataclass for production properties on the document (properties.json).&#34;&#34;&#34;
+
+    process_n: str
+    note_process_n: str
+
+    @property
+    def keys(self) -&gt; List[str]:
+        &#34;&#34;&#34;Returns a list of all keys from the PropsProduction dataclass.&#34;&#34;&#34;
+        return [f.name for f in fields(self)]
+
+    @property
+    def values(self) -&gt; List[str]:
+        &#34;&#34;&#34;Returns a list of all values from the PropsProduction dataclass.&#34;&#34;&#34;
+        return [getattr(self, f.name) for f in fields(self)]
+
+
+@dataclass(slots=True, kw_only=True)
+class Props:
+    &#34;&#34;&#34;Dataclass for properties on the document (properties.json).&#34;&#34;&#34;
+
+    infra: PropsInfra
+    notes: PropsNotes
+    production: PropsProduction
+
+    def __post_init__(self) -&gt; None:
+        self.infra = PropsInfra(**dict(self.infra))  # type: ignore
+        self.notes = PropsNotes(**dict(self.notes))  # type: ignore
+        self.production = PropsProduction(**dict(self.production))  # type: ignore
+
+    @property
+    def keys(self) -&gt; List[str]:
+        &#34;&#34;&#34;Returns a list of all keys from the Props dataclass.&#34;&#34;&#34;
+        return [f.name for f in fields(self)]
+
+    @property
+    def values(self) -&gt; List[str]:
+        &#34;&#34;&#34;Returns a list of all values from the Props dataclass.&#34;&#34;&#34;
+        return [getattr(self, f.name) for f in fields(self)]
+
+
+@dataclass(slots=True, kw_only=True, frozen=True)
+class Process:
+    &#34;&#34;&#34;Dataclass for the process to preset conversion (processes.json).&#34;&#34;&#34;
+
+    name: str
+    note: Optional[str]
+    metadata_required: Optional[bool]
+
+    @property
+    def keys(self) -&gt; List[str]:
+        &#34;&#34;&#34;Returns a list of all keys from the Process dataclass.&#34;&#34;&#34;
+        return [f.name for f in fields(self)]
+
+    @property
+    def values(self) -&gt; List[str]:
+        &#34;&#34;&#34;Returns a list of all values from the Process dataclass.&#34;&#34;&#34;
+        return [getattr(self, f.name) for f in fields(self)]
+
+
+@dataclass(slots=True, kw_only=True, frozen=True)
+class User:
+    &#34;&#34;&#34;Dataclass a user (users.json).&#34;&#34;&#34;
+
+    logon: str
+    id: str
+    name: str
+    mail: str
+
+    @property
+    def keys(self) -&gt; List[str]:
+        &#34;&#34;&#34;Returns a list of all keys from the User dataclass.&#34;&#34;&#34;
+        return [f.name for f in fields(self)]
+
+    @property
+    def values(self) -&gt; List[str]:
+        &#34;&#34;&#34;Returns a list of all values from the User dataclass.&#34;&#34;&#34;
+        return [getattr(self, f.name) for f in fields(self)]
+
+
+@dataclass(slots=True, kw_only=True, frozen=True)
+class Info:
+    &#34;&#34;&#34;Dataclass for an info messages (information.json).&#34;&#34;&#34;
+
+    counter: int
+    msg: str
+
+
+@dataclass(slots=True, kw_only=True, frozen=True)
+class Links:
+    &#34;&#34;&#34;TODO: Dataclass for bought parts-links.&#34;&#34;&#34;
+
+
+@dataclass(slots=True, kw_only=True)
+class AppData:
+    &#34;&#34;&#34;Dataclass for appdata settings.&#34;&#34;&#34;
+
+    version: str = field(default=APP_VERSION)
+    counter: int = 0
+    save_on_apply: bool = True
+
+    def __post_init__(self) -&gt; None:
+        self.version = (
+            APP_VERSION  # Always store the latest version in the appdata json
+        )
+        self.counter += 1
+
+
+class Resources:  # pylint: disable=R0902
+    &#34;&#34;&#34;Class for handling resource files.&#34;&#34;&#34;
+
+    __slots__ = (
+        &#34;_settings&#34;,
+        &#34;_props&#34;,
+        &#34;_processes&#34;,
+        &#34;_users&#34;,
+        &#34;_infos&#34;,
+        &#34;_appdata&#34;,
+    )
+
+    def __init__(self) -&gt; None:
+        self._read_settings()
+        self._read_props()
+        self._read_users()
+        self._read_processes()
+        self._read_infos()
+        self._read_appdata()
+
+        atexit.register(self._write_appdata)
+
+    @property
+    def settings(self) -&gt; Settings:
+        &#34;&#34;&#34;settings.json&#34;&#34;&#34;
+        return self._settings
+
+    @property
+    def props(self) -&gt; Props:
+        &#34;&#34;&#34;properties.json&#34;&#34;&#34;
+        return self._props
+
+    @property
+    def processes(self) -&gt; List[Process]:
+        &#34;&#34;&#34;processes.json&#34;&#34;&#34;
+        return self._processes
+
+    @property
+    def users(self) -&gt; List[User]:
+        &#34;&#34;&#34;users.json&#34;&#34;&#34;
+        return self._users
+
+    @property
+    def infos(self) -&gt; List[Info]:
+        &#34;&#34;&#34;infos.json&#34;&#34;&#34;
+        return self._infos
+
+    @property
+    def appdata(self) -&gt; AppData:
+        &#34;&#34;&#34;Property for the appdata config file.&#34;&#34;&#34;
+        return self._appdata
+
+    def _read_settings(self) -&gt; None:
+        &#34;&#34;&#34;Reads the settings json from the resources folder.&#34;&#34;&#34;
+        with importlib.resources.open_binary(&#34;resources&#34;, CONFIG_SETTINGS) as f:
+            self._settings = Settings(**json.load(f))
+
+    def _read_users(self) -&gt; None:
+        &#34;&#34;&#34;Reads the users json from the resources folder.&#34;&#34;&#34;
+        with importlib.resources.open_binary(&#34;resources&#34;, CONFIG_USERS) as f:
+            self._users = [User(**i) for i in json.load(f)]
+
+    def _read_props(self) -&gt; None:
+        &#34;&#34;&#34;Reads the props json from the resources folder.&#34;&#34;&#34;
+        props_resource = (
+            CONFIG_PROPS
+            if importlib.resources.is_resource(&#34;resources&#34;, CONFIG_PROPS)
+            else CONFIG_PROPS_DEFAULT
+        )
+        with importlib.resources.open_binary(&#34;resources&#34;, props_resource) as f:
+            self._props = Props(**json.load(f))
+
+    def _read_processes(self) -&gt; None:
+        &#34;&#34;&#34;Reads the processes json from the resources folder.&#34;&#34;&#34;
+        processes_resource = (
+            CONFIG_PROCESSES
+            if importlib.resources.is_resource(&#34;resources&#34;, CONFIG_PROCESSES)
+            else CONFIG_PROCESSES_DEFAULT
+        )
+        with importlib.resources.open_binary(&#34;resources&#34;, processes_resource) as f:
+            self._processes = [Process(**i) for i in json.load(f)]
+
+    def _read_infos(self) -&gt; None:
+        &#34;&#34;&#34;Reads the information json from the resources folder.&#34;&#34;&#34;
+        infos_resource = (
+            CONFIG_INFOS
+            if importlib.resources.is_resource(&#34;resources&#34;, CONFIG_INFOS)
+            else CONFIG_INFOS_DEFAULT
+        )
+        with importlib.resources.open_binary(&#34;resources&#34;, infos_resource) as f:
+            self._infos = [Info(**i) for i in json.load(f)]
+
+    def _read_appdata(self) -&gt; None:
+        &#34;&#34;&#34;Reads the json config file from the appdata folder.&#34;&#34;&#34;
+        if os.path.exists(appdata_file := f&#34;{APPDATA}\\{CONFIG_APPDATA}&#34;):
+            with open(appdata_file, &#34;r&#34;, encoding=&#34;utf8&#34;) as f:
+                try:
+                    value = AppData(**json.load(f))
+                except JSONDecodeError:
+                    value = AppData()
+                    tkmsg.showwarning(
+                        title=&#34;Configuration warning&#34;,
+                        message=&#34;The AppData config file has been corrupted. \
+                            You may need to apply your preferences again.&#34;,
+                    )
+                self._appdata = value
+        else:
+            self._appdata = AppData()
+
+    def _write_appdata(self) -&gt; None:
+        &#34;&#34;&#34;Saves appdata config to file.&#34;&#34;&#34;
+        os.makedirs(APPDATA, exist_ok=True)
+        with open(f&#34;{APPDATA}\\{CONFIG_APPDATA}&#34;, &#34;w&#34;, encoding=&#34;utf8&#34;) as f:
+            json.dump(asdict(self._appdata), f)
+
+    def get_user_by_logon(self, logon: Optional[str] = None) -&gt; User:
+        &#34;&#34;&#34;
+        Returns the user dataclass that matches the logon value. Returns the User of the current
+        session if logon is omitted.
+
+        Args:
+            logon (Optional[str]): The user to fetch from the dataclass list.
+
+        Raises:
+            PytiaValueError: Raised when the user doesn&#39;t exist.
+
+        Returns:
+            User: The user from the dataclass list that matches the provided logon name.
+        &#34;&#34;&#34;
+        if logon is None:
+            logon = LOGON
+
+        for index, value in enumerate(self._users):
+            if value.logon == logon:
+                return self._users[index]
+        raise ValueError(f&#34;The user {logon} does not exist.&#34;)
+
+    def get_user_by_name(self, name: str) -&gt; Optional[User]:
+        &#34;&#34;&#34;
+        Returns the user dataclass that matches the name.
+
+        Args:
+            name (str): The username to fetch from the dataclass list.
+
+        Returns:
+            User: The user from the dataclass list that matches the provided name.
+        &#34;&#34;&#34;
+        for index, value in enumerate(self._users):
+            if value.name == name:
+                return self._users[index]
+        return None
+
+    def logon_exists(self, logon: Optional[str] = None) -&gt; bool:
+        &#34;&#34;&#34;
+        Returns wether the users logon exists in the dataclass, or not. Uses the logon-value of the
+        current session if logon is omitted.
+
+        Args:
+            logon (str): The logon name to search for.
+
+        Returns:
+            bool: The user from the dataclass list that matches the provided logon name.
+        &#34;&#34;&#34;
+        if logon is None:
+            logon = LOGON
+
+        for user in self._users:
+            if user.logon == logon:
+                return True
+        return False
+
+    def get_info_msg_by_counter(self) -&gt; List[str]:
+        &#34;&#34;&#34;
+        Returns the info message by the app usage counter.
+
+        Returns:
+            List[str]: A list of all messages that should be shown at the counter value.
+        &#34;&#34;&#34;
+        values = []
+        for index, value in enumerate(self._infos):
+            if value.counter == self._appdata.counter:
+                values.append(self._infos[index].msg)
+        return values
+
+    def get_process_by_name(self, name: str) -&gt; Optional[Process]:
+        &#34;&#34;&#34;
+        Returns the process dataclass that matches the name.
+
+        Args:
+            name (str): The process name to fetch from the dataclass list.
+
+        Returns:
+            User: The process from the dataclass list that matches the provided name.
+        &#34;&#34;&#34;
+        for index, value in enumerate(self._processes):
+            if value.name == name:
+                return self._processes[index]
+        return None
+
+    def get_process_note(self, name: str) -&gt; str:
+        &#34;&#34;&#34;
+        Retrieves the note of the given process name.
+
+        Args:
+            name (str): The name of the process.
+
+        Returns:
+            str: The note of the process.
+
+        Raises:
+            PytiaValueError: Raised if the name is not in the list of processes.
+        &#34;&#34;&#34;
+        for item in self._processes:
+            if item.name == name:
+                return item.note if item.note else &#34;&#34;
+        raise ValueError(f&#34;No process found with name {name}.&#34;)
+
+
+resource = Resources()</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="pytia_property_manager.resources.AppData"><code class="flex name class">
+<span>class <span class="ident">AppData</span></span>
+<span>(</span><span>*, version: str = '0.1.0', counter: int = 0, save_on_apply: bool = True)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Dataclass for appdata settings.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass(slots=True, kw_only=True)
+class AppData:
+    &#34;&#34;&#34;Dataclass for appdata settings.&#34;&#34;&#34;
+
+    version: str = field(default=APP_VERSION)
+    counter: int = 0
+    save_on_apply: bool = True
+
+    def __post_init__(self) -&gt; None:
+        self.version = (
+            APP_VERSION  # Always store the latest version in the appdata json
+        )
+        self.counter += 1</code></pre>
+</details>
+<h3>Instance variables</h3>
+<dl>
+<dt id="pytia_property_manager.resources.AppData.counter"><code class="name">var <span class="ident">counter</span> : int</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.AppData.save_on_apply"><code class="name">var <span class="ident">save_on_apply</span> : bool</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.AppData.version"><code class="name">var <span class="ident">version</span> : str</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="pytia_property_manager.resources.Info"><code class="flex name class">
+<span>class <span class="ident">Info</span></span>
+<span>(</span><span>*, counter: int, msg: str)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Dataclass for an info messages (information.json).</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass(slots=True, kw_only=True, frozen=True)
+class Info:
+    &#34;&#34;&#34;Dataclass for an info messages (information.json).&#34;&#34;&#34;
+
+    counter: int
+    msg: str</code></pre>
+</details>
+<h3>Instance variables</h3>
+<dl>
+<dt id="pytia_property_manager.resources.Info.counter"><code class="name">var <span class="ident">counter</span> : int</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.Info.msg"><code class="name">var <span class="ident">msg</span> : str</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="pytia_property_manager.resources.Links"><code class="flex name class">
+<span>class <span class="ident">Links</span></span>
+</code></dt>
+<dd>
+<div class="desc"><p>TODO: Dataclass for bought parts-links.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass(slots=True, kw_only=True, frozen=True)
+class Links:
+    &#34;&#34;&#34;TODO: Dataclass for bought parts-links.&#34;&#34;&#34;</code></pre>
+</details>
+</dd>
+<dt id="pytia_property_manager.resources.Process"><code class="flex name class">
+<span>class <span class="ident">Process</span></span>
+<span>(</span><span>*, name: str, note: Optional[str], metadata_required: Optional[bool])</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Dataclass for the process to preset conversion (processes.json).</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass(slots=True, kw_only=True, frozen=True)
+class Process:
+    &#34;&#34;&#34;Dataclass for the process to preset conversion (processes.json).&#34;&#34;&#34;
+
+    name: str
+    note: Optional[str]
+    metadata_required: Optional[bool]
+
+    @property
+    def keys(self) -&gt; List[str]:
+        &#34;&#34;&#34;Returns a list of all keys from the Process dataclass.&#34;&#34;&#34;
+        return [f.name for f in fields(self)]
+
+    @property
+    def values(self) -&gt; List[str]:
+        &#34;&#34;&#34;Returns a list of all values from the Process dataclass.&#34;&#34;&#34;
+        return [getattr(self, f.name) for f in fields(self)]</code></pre>
+</details>
+<h3>Instance variables</h3>
+<dl>
+<dt id="pytia_property_manager.resources.Process.keys"><code class="name">var <span class="ident">keys</span> : List[str]</code></dt>
+<dd>
+<div class="desc"><p>Returns a list of all keys from the Process dataclass.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def keys(self) -&gt; List[str]:
+    &#34;&#34;&#34;Returns a list of all keys from the Process dataclass.&#34;&#34;&#34;
+    return [f.name for f in fields(self)]</code></pre>
+</details>
+</dd>
+<dt id="pytia_property_manager.resources.Process.metadata_required"><code class="name">var <span class="ident">metadata_required</span> : Optional[bool]</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.Process.name"><code class="name">var <span class="ident">name</span> : str</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.Process.note"><code class="name">var <span class="ident">note</span> : Optional[str]</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.Process.values"><code class="name">var <span class="ident">values</span> : List[str]</code></dt>
+<dd>
+<div class="desc"><p>Returns a list of all values from the Process dataclass.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def values(self) -&gt; List[str]:
+    &#34;&#34;&#34;Returns a list of all values from the Process dataclass.&#34;&#34;&#34;
+    return [getattr(self, f.name) for f in fields(self)]</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="pytia_property_manager.resources.Props"><code class="flex name class">
+<span>class <span class="ident">Props</span></span>
+<span>(</span><span>*, infra: <a title="pytia_property_manager.resources.PropsInfra" href="#pytia_property_manager.resources.PropsInfra">PropsInfra</a>, notes: <a title="pytia_property_manager.resources.PropsNotes" href="#pytia_property_manager.resources.PropsNotes">PropsNotes</a>, production: <a title="pytia_property_manager.resources.PropsProduction" href="#pytia_property_manager.resources.PropsProduction">PropsProduction</a>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Dataclass for properties on the document (properties.json).</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass(slots=True, kw_only=True)
+class Props:
+    &#34;&#34;&#34;Dataclass for properties on the document (properties.json).&#34;&#34;&#34;
+
+    infra: PropsInfra
+    notes: PropsNotes
+    production: PropsProduction
+
+    def __post_init__(self) -&gt; None:
+        self.infra = PropsInfra(**dict(self.infra))  # type: ignore
+        self.notes = PropsNotes(**dict(self.notes))  # type: ignore
+        self.production = PropsProduction(**dict(self.production))  # type: ignore
+
+    @property
+    def keys(self) -&gt; List[str]:
+        &#34;&#34;&#34;Returns a list of all keys from the Props dataclass.&#34;&#34;&#34;
+        return [f.name for f in fields(self)]
+
+    @property
+    def values(self) -&gt; List[str]:
+        &#34;&#34;&#34;Returns a list of all values from the Props dataclass.&#34;&#34;&#34;
+        return [getattr(self, f.name) for f in fields(self)]</code></pre>
+</details>
+<h3>Instance variables</h3>
+<dl>
+<dt id="pytia_property_manager.resources.Props.infra"><code class="name">var <span class="ident">infra</span> : <a title="pytia_property_manager.resources.PropsInfra" href="#pytia_property_manager.resources.PropsInfra">PropsInfra</a></code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.Props.keys"><code class="name">var <span class="ident">keys</span> : List[str]</code></dt>
+<dd>
+<div class="desc"><p>Returns a list of all keys from the Props dataclass.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def keys(self) -&gt; List[str]:
+    &#34;&#34;&#34;Returns a list of all keys from the Props dataclass.&#34;&#34;&#34;
+    return [f.name for f in fields(self)]</code></pre>
+</details>
+</dd>
+<dt id="pytia_property_manager.resources.Props.notes"><code class="name">var <span class="ident">notes</span> : <a title="pytia_property_manager.resources.PropsNotes" href="#pytia_property_manager.resources.PropsNotes">PropsNotes</a></code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.Props.production"><code class="name">var <span class="ident">production</span> : <a title="pytia_property_manager.resources.PropsProduction" href="#pytia_property_manager.resources.PropsProduction">PropsProduction</a></code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.Props.values"><code class="name">var <span class="ident">values</span> : List[str]</code></dt>
+<dd>
+<div class="desc"><p>Returns a list of all values from the Props dataclass.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def values(self) -&gt; List[str]:
+    &#34;&#34;&#34;Returns a list of all values from the Props dataclass.&#34;&#34;&#34;
+    return [getattr(self, f.name) for f in fields(self)]</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="pytia_property_manager.resources.PropsInfra"><code class="flex name class">
+<span>class <span class="ident">PropsInfra</span></span>
+<span>(</span><span>*, project: str, machine: str, material: str, base_size: str, base_size_preset: str, mass: str, manufacturer: str, supplier: str, tolerance: str, spare_part_level: str, creator: str, modifier: str)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Dataclass for infrastructure properties on the document (properties.json).</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass(slots=True, kw_only=True, frozen=True)
+class PropsInfra:
+    &#34;&#34;&#34;Dataclass for infrastructure properties on the document (properties.json).&#34;&#34;&#34;
+
+    project: str
+    machine: str
+    material: str
+    base_size: str
+    base_size_preset: str
+    mass: str
+    manufacturer: str
+    supplier: str
+    tolerance: str
+    spare_part_level: str
+    creator: str
+    modifier: str
+
+    @property
+    def keys(self) -&gt; List[str]:
+        &#34;&#34;&#34;Returns a list of all keys from the PropsInfra dataclass.&#34;&#34;&#34;
+        return [f.name for f in fields(self)]
+
+    @property
+    def values(self) -&gt; List[str]:
+        &#34;&#34;&#34;Returns a list of all values from the PropsInfra dataclass.&#34;&#34;&#34;
+        return [getattr(self, f.name) for f in fields(self)]</code></pre>
+</details>
+<h3>Instance variables</h3>
+<dl>
+<dt id="pytia_property_manager.resources.PropsInfra.base_size"><code class="name">var <span class="ident">base_size</span> : str</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.PropsInfra.base_size_preset"><code class="name">var <span class="ident">base_size_preset</span> : str</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.PropsInfra.creator"><code class="name">var <span class="ident">creator</span> : str</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.PropsInfra.keys"><code class="name">var <span class="ident">keys</span> : List[str]</code></dt>
+<dd>
+<div class="desc"><p>Returns a list of all keys from the PropsInfra dataclass.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def keys(self) -&gt; List[str]:
+    &#34;&#34;&#34;Returns a list of all keys from the PropsInfra dataclass.&#34;&#34;&#34;
+    return [f.name for f in fields(self)]</code></pre>
+</details>
+</dd>
+<dt id="pytia_property_manager.resources.PropsInfra.machine"><code class="name">var <span class="ident">machine</span> : str</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.PropsInfra.manufacturer"><code class="name">var <span class="ident">manufacturer</span> : str</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.PropsInfra.mass"><code class="name">var <span class="ident">mass</span> : str</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.PropsInfra.material"><code class="name">var <span class="ident">material</span> : str</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.PropsInfra.modifier"><code class="name">var <span class="ident">modifier</span> : str</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.PropsInfra.project"><code class="name">var <span class="ident">project</span> : str</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.PropsInfra.spare_part_level"><code class="name">var <span class="ident">spare_part_level</span> : str</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.PropsInfra.supplier"><code class="name">var <span class="ident">supplier</span> : str</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.PropsInfra.tolerance"><code class="name">var <span class="ident">tolerance</span> : str</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.PropsInfra.values"><code class="name">var <span class="ident">values</span> : List[str]</code></dt>
+<dd>
+<div class="desc"><p>Returns a list of all values from the PropsInfra dataclass.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def values(self) -&gt; List[str]:
+    &#34;&#34;&#34;Returns a list of all values from the PropsInfra dataclass.&#34;&#34;&#34;
+    return [getattr(self, f.name) for f in fields(self)]</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="pytia_property_manager.resources.PropsNotes"><code class="flex name class">
+<span>class <span class="ident">PropsNotes</span></span>
+<span>(</span><span>*, general: str, material: str, base_size: str, supplier: str, production: str)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Dataclass for note properties on the document (properties.json).</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass(slots=True, kw_only=True, frozen=True)
+class PropsNotes:
+    &#34;&#34;&#34;Dataclass for note properties on the document (properties.json).&#34;&#34;&#34;
+
+    general: str
+    material: str
+    base_size: str
+    supplier: str
+    production: str
+
+    @property
+    def keys(self) -&gt; List[str]:
+        &#34;&#34;&#34;Returns a list of all keys from the PropsNotes dataclass.&#34;&#34;&#34;
+        return [f.name for f in fields(self)]
+
+    @property
+    def values(self) -&gt; List[str]:
+        &#34;&#34;&#34;Returns a list of all values from the PropsNotes dataclass.&#34;&#34;&#34;
+        return [getattr(self, f.name) for f in fields(self)]</code></pre>
+</details>
+<h3>Instance variables</h3>
+<dl>
+<dt id="pytia_property_manager.resources.PropsNotes.base_size"><code class="name">var <span class="ident">base_size</span> : str</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.PropsNotes.general"><code class="name">var <span class="ident">general</span> : str</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.PropsNotes.keys"><code class="name">var <span class="ident">keys</span> : List[str]</code></dt>
+<dd>
+<div class="desc"><p>Returns a list of all keys from the PropsNotes dataclass.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def keys(self) -&gt; List[str]:
+    &#34;&#34;&#34;Returns a list of all keys from the PropsNotes dataclass.&#34;&#34;&#34;
+    return [f.name for f in fields(self)]</code></pre>
+</details>
+</dd>
+<dt id="pytia_property_manager.resources.PropsNotes.material"><code class="name">var <span class="ident">material</span> : str</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.PropsNotes.production"><code class="name">var <span class="ident">production</span> : str</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.PropsNotes.supplier"><code class="name">var <span class="ident">supplier</span> : str</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.PropsNotes.values"><code class="name">var <span class="ident">values</span> : List[str]</code></dt>
+<dd>
+<div class="desc"><p>Returns a list of all values from the PropsNotes dataclass.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def values(self) -&gt; List[str]:
+    &#34;&#34;&#34;Returns a list of all values from the PropsNotes dataclass.&#34;&#34;&#34;
+    return [getattr(self, f.name) for f in fields(self)]</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="pytia_property_manager.resources.PropsProduction"><code class="flex name class">
+<span>class <span class="ident">PropsProduction</span></span>
+<span>(</span><span>*, process_n: str, note_process_n: str)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Dataclass for production properties on the document (properties.json).</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass(slots=True, kw_only=True, frozen=True)
+class PropsProduction:
+    &#34;&#34;&#34;Dataclass for production properties on the document (properties.json).&#34;&#34;&#34;
+
+    process_n: str
+    note_process_n: str
+
+    @property
+    def keys(self) -&gt; List[str]:
+        &#34;&#34;&#34;Returns a list of all keys from the PropsProduction dataclass.&#34;&#34;&#34;
+        return [f.name for f in fields(self)]
+
+    @property
+    def values(self) -&gt; List[str]:
+        &#34;&#34;&#34;Returns a list of all values from the PropsProduction dataclass.&#34;&#34;&#34;
+        return [getattr(self, f.name) for f in fields(self)]</code></pre>
+</details>
+<h3>Instance variables</h3>
+<dl>
+<dt id="pytia_property_manager.resources.PropsProduction.keys"><code class="name">var <span class="ident">keys</span> : List[str]</code></dt>
+<dd>
+<div class="desc"><p>Returns a list of all keys from the PropsProduction dataclass.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def keys(self) -&gt; List[str]:
+    &#34;&#34;&#34;Returns a list of all keys from the PropsProduction dataclass.&#34;&#34;&#34;
+    return [f.name for f in fields(self)]</code></pre>
+</details>
+</dd>
+<dt id="pytia_property_manager.resources.PropsProduction.note_process_n"><code class="name">var <span class="ident">note_process_n</span> : str</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.PropsProduction.process_n"><code class="name">var <span class="ident">process_n</span> : str</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.PropsProduction.values"><code class="name">var <span class="ident">values</span> : List[str]</code></dt>
+<dd>
+<div class="desc"><p>Returns a list of all values from the PropsProduction dataclass.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def values(self) -&gt; List[str]:
+    &#34;&#34;&#34;Returns a list of all values from the PropsProduction dataclass.&#34;&#34;&#34;
+    return [getattr(self, f.name) for f in fields(self)]</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="pytia_property_manager.resources.Resources"><code class="flex name class">
+<span>class <span class="ident">Resources</span></span>
+</code></dt>
+<dd>
+<div class="desc"><p>Class for handling resource files.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Resources:  # pylint: disable=R0902
+    &#34;&#34;&#34;Class for handling resource files.&#34;&#34;&#34;
+
+    __slots__ = (
+        &#34;_settings&#34;,
+        &#34;_props&#34;,
+        &#34;_processes&#34;,
+        &#34;_users&#34;,
+        &#34;_infos&#34;,
+        &#34;_appdata&#34;,
+    )
+
+    def __init__(self) -&gt; None:
+        self._read_settings()
+        self._read_props()
+        self._read_users()
+        self._read_processes()
+        self._read_infos()
+        self._read_appdata()
+
+        atexit.register(self._write_appdata)
+
+    @property
+    def settings(self) -&gt; Settings:
+        &#34;&#34;&#34;settings.json&#34;&#34;&#34;
+        return self._settings
+
+    @property
+    def props(self) -&gt; Props:
+        &#34;&#34;&#34;properties.json&#34;&#34;&#34;
+        return self._props
+
+    @property
+    def processes(self) -&gt; List[Process]:
+        &#34;&#34;&#34;processes.json&#34;&#34;&#34;
+        return self._processes
+
+    @property
+    def users(self) -&gt; List[User]:
+        &#34;&#34;&#34;users.json&#34;&#34;&#34;
+        return self._users
+
+    @property
+    def infos(self) -&gt; List[Info]:
+        &#34;&#34;&#34;infos.json&#34;&#34;&#34;
+        return self._infos
+
+    @property
+    def appdata(self) -&gt; AppData:
+        &#34;&#34;&#34;Property for the appdata config file.&#34;&#34;&#34;
+        return self._appdata
+
+    def _read_settings(self) -&gt; None:
+        &#34;&#34;&#34;Reads the settings json from the resources folder.&#34;&#34;&#34;
+        with importlib.resources.open_binary(&#34;resources&#34;, CONFIG_SETTINGS) as f:
+            self._settings = Settings(**json.load(f))
+
+    def _read_users(self) -&gt; None:
+        &#34;&#34;&#34;Reads the users json from the resources folder.&#34;&#34;&#34;
+        with importlib.resources.open_binary(&#34;resources&#34;, CONFIG_USERS) as f:
+            self._users = [User(**i) for i in json.load(f)]
+
+    def _read_props(self) -&gt; None:
+        &#34;&#34;&#34;Reads the props json from the resources folder.&#34;&#34;&#34;
+        props_resource = (
+            CONFIG_PROPS
+            if importlib.resources.is_resource(&#34;resources&#34;, CONFIG_PROPS)
+            else CONFIG_PROPS_DEFAULT
+        )
+        with importlib.resources.open_binary(&#34;resources&#34;, props_resource) as f:
+            self._props = Props(**json.load(f))
+
+    def _read_processes(self) -&gt; None:
+        &#34;&#34;&#34;Reads the processes json from the resources folder.&#34;&#34;&#34;
+        processes_resource = (
+            CONFIG_PROCESSES
+            if importlib.resources.is_resource(&#34;resources&#34;, CONFIG_PROCESSES)
+            else CONFIG_PROCESSES_DEFAULT
+        )
+        with importlib.resources.open_binary(&#34;resources&#34;, processes_resource) as f:
+            self._processes = [Process(**i) for i in json.load(f)]
+
+    def _read_infos(self) -&gt; None:
+        &#34;&#34;&#34;Reads the information json from the resources folder.&#34;&#34;&#34;
+        infos_resource = (
+            CONFIG_INFOS
+            if importlib.resources.is_resource(&#34;resources&#34;, CONFIG_INFOS)
+            else CONFIG_INFOS_DEFAULT
+        )
+        with importlib.resources.open_binary(&#34;resources&#34;, infos_resource) as f:
+            self._infos = [Info(**i) for i in json.load(f)]
+
+    def _read_appdata(self) -&gt; None:
+        &#34;&#34;&#34;Reads the json config file from the appdata folder.&#34;&#34;&#34;
+        if os.path.exists(appdata_file := f&#34;{APPDATA}\\{CONFIG_APPDATA}&#34;):
+            with open(appdata_file, &#34;r&#34;, encoding=&#34;utf8&#34;) as f:
+                try:
+                    value = AppData(**json.load(f))
+                except JSONDecodeError:
+                    value = AppData()
+                    tkmsg.showwarning(
+                        title=&#34;Configuration warning&#34;,
+                        message=&#34;The AppData config file has been corrupted. \
+                            You may need to apply your preferences again.&#34;,
+                    )
+                self._appdata = value
+        else:
+            self._appdata = AppData()
+
+    def _write_appdata(self) -&gt; None:
+        &#34;&#34;&#34;Saves appdata config to file.&#34;&#34;&#34;
+        os.makedirs(APPDATA, exist_ok=True)
+        with open(f&#34;{APPDATA}\\{CONFIG_APPDATA}&#34;, &#34;w&#34;, encoding=&#34;utf8&#34;) as f:
+            json.dump(asdict(self._appdata), f)
+
+    def get_user_by_logon(self, logon: Optional[str] = None) -&gt; User:
+        &#34;&#34;&#34;
+        Returns the user dataclass that matches the logon value. Returns the User of the current
+        session if logon is omitted.
+
+        Args:
+            logon (Optional[str]): The user to fetch from the dataclass list.
+
+        Raises:
+            PytiaValueError: Raised when the user doesn&#39;t exist.
+
+        Returns:
+            User: The user from the dataclass list that matches the provided logon name.
+        &#34;&#34;&#34;
+        if logon is None:
+            logon = LOGON
+
+        for index, value in enumerate(self._users):
+            if value.logon == logon:
+                return self._users[index]
+        raise ValueError(f&#34;The user {logon} does not exist.&#34;)
+
+    def get_user_by_name(self, name: str) -&gt; Optional[User]:
+        &#34;&#34;&#34;
+        Returns the user dataclass that matches the name.
+
+        Args:
+            name (str): The username to fetch from the dataclass list.
+
+        Returns:
+            User: The user from the dataclass list that matches the provided name.
+        &#34;&#34;&#34;
+        for index, value in enumerate(self._users):
+            if value.name == name:
+                return self._users[index]
+        return None
+
+    def logon_exists(self, logon: Optional[str] = None) -&gt; bool:
+        &#34;&#34;&#34;
+        Returns wether the users logon exists in the dataclass, or not. Uses the logon-value of the
+        current session if logon is omitted.
+
+        Args:
+            logon (str): The logon name to search for.
+
+        Returns:
+            bool: The user from the dataclass list that matches the provided logon name.
+        &#34;&#34;&#34;
+        if logon is None:
+            logon = LOGON
+
+        for user in self._users:
+            if user.logon == logon:
+                return True
+        return False
+
+    def get_info_msg_by_counter(self) -&gt; List[str]:
+        &#34;&#34;&#34;
+        Returns the info message by the app usage counter.
+
+        Returns:
+            List[str]: A list of all messages that should be shown at the counter value.
+        &#34;&#34;&#34;
+        values = []
+        for index, value in enumerate(self._infos):
+            if value.counter == self._appdata.counter:
+                values.append(self._infos[index].msg)
+        return values
+
+    def get_process_by_name(self, name: str) -&gt; Optional[Process]:
+        &#34;&#34;&#34;
+        Returns the process dataclass that matches the name.
+
+        Args:
+            name (str): The process name to fetch from the dataclass list.
+
+        Returns:
+            User: The process from the dataclass list that matches the provided name.
+        &#34;&#34;&#34;
+        for index, value in enumerate(self._processes):
+            if value.name == name:
+                return self._processes[index]
+        return None
+
+    def get_process_note(self, name: str) -&gt; str:
+        &#34;&#34;&#34;
+        Retrieves the note of the given process name.
+
+        Args:
+            name (str): The name of the process.
+
+        Returns:
+            str: The note of the process.
+
+        Raises:
+            PytiaValueError: Raised if the name is not in the list of processes.
+        &#34;&#34;&#34;
+        for item in self._processes:
+            if item.name == name:
+                return item.note if item.note else &#34;&#34;
+        raise ValueError(f&#34;No process found with name {name}.&#34;)</code></pre>
+</details>
+<h3>Instance variables</h3>
+<dl>
+<dt id="pytia_property_manager.resources.Resources.appdata"><code class="name">var <span class="ident">appdata</span> : <a title="pytia_property_manager.resources.AppData" href="#pytia_property_manager.resources.AppData">AppData</a></code></dt>
+<dd>
+<div class="desc"><p>Property for the appdata config file.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def appdata(self) -&gt; AppData:
+    &#34;&#34;&#34;Property for the appdata config file.&#34;&#34;&#34;
+    return self._appdata</code></pre>
+</details>
+</dd>
+<dt id="pytia_property_manager.resources.Resources.infos"><code class="name">var <span class="ident">infos</span> : List[<a title="pytia_property_manager.resources.Info" href="#pytia_property_manager.resources.Info">Info</a>]</code></dt>
+<dd>
+<div class="desc"><p>infos.json</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def infos(self) -&gt; List[Info]:
+    &#34;&#34;&#34;infos.json&#34;&#34;&#34;
+    return self._infos</code></pre>
+</details>
+</dd>
+<dt id="pytia_property_manager.resources.Resources.processes"><code class="name">var <span class="ident">processes</span> : List[<a title="pytia_property_manager.resources.Process" href="#pytia_property_manager.resources.Process">Process</a>]</code></dt>
+<dd>
+<div class="desc"><p>processes.json</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def processes(self) -&gt; List[Process]:
+    &#34;&#34;&#34;processes.json&#34;&#34;&#34;
+    return self._processes</code></pre>
+</details>
+</dd>
+<dt id="pytia_property_manager.resources.Resources.props"><code class="name">var <span class="ident">props</span> : <a title="pytia_property_manager.resources.Props" href="#pytia_property_manager.resources.Props">Props</a></code></dt>
+<dd>
+<div class="desc"><p>properties.json</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def props(self) -&gt; Props:
+    &#34;&#34;&#34;properties.json&#34;&#34;&#34;
+    return self._props</code></pre>
+</details>
+</dd>
+<dt id="pytia_property_manager.resources.Resources.settings"><code class="name">var <span class="ident">settings</span> : <a title="pytia_property_manager.resources.Settings" href="#pytia_property_manager.resources.Settings">Settings</a></code></dt>
+<dd>
+<div class="desc"><p>settings.json</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def settings(self) -&gt; Settings:
+    &#34;&#34;&#34;settings.json&#34;&#34;&#34;
+    return self._settings</code></pre>
+</details>
+</dd>
+<dt id="pytia_property_manager.resources.Resources.users"><code class="name">var <span class="ident">users</span> : List[<a title="pytia_property_manager.resources.User" href="#pytia_property_manager.resources.User">User</a>]</code></dt>
+<dd>
+<div class="desc"><p>users.json</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def users(self) -&gt; List[User]:
+    &#34;&#34;&#34;users.json&#34;&#34;&#34;
+    return self._users</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="pytia_property_manager.resources.Resources.get_info_msg_by_counter"><code class="name flex">
+<span>def <span class="ident">get_info_msg_by_counter</span></span>(<span>self) ‑> List[str]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Returns the info message by the app usage counter.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>List[str]</code></dt>
+<dd>A list of all messages that should be shown at the counter value.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_info_msg_by_counter(self) -&gt; List[str]:
+    &#34;&#34;&#34;
+    Returns the info message by the app usage counter.
+
+    Returns:
+        List[str]: A list of all messages that should be shown at the counter value.
+    &#34;&#34;&#34;
+    values = []
+    for index, value in enumerate(self._infos):
+        if value.counter == self._appdata.counter:
+            values.append(self._infos[index].msg)
+    return values</code></pre>
+</details>
+</dd>
+<dt id="pytia_property_manager.resources.Resources.get_process_by_name"><code class="name flex">
+<span>def <span class="ident">get_process_by_name</span></span>(<span>self, name: str) ‑> Optional[<a title="pytia_property_manager.resources.Process" href="#pytia_property_manager.resources.Process">Process</a>]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Returns the process dataclass that matches the name.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>name</code></strong> :&ensp;<code>str</code></dt>
+<dd>The process name to fetch from the dataclass list.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a title="pytia_property_manager.resources.User" href="#pytia_property_manager.resources.User">User</a></code></dt>
+<dd>The process from the dataclass list that matches the provided name.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_process_by_name(self, name: str) -&gt; Optional[Process]:
+    &#34;&#34;&#34;
+    Returns the process dataclass that matches the name.
+
+    Args:
+        name (str): The process name to fetch from the dataclass list.
+
+    Returns:
+        User: The process from the dataclass list that matches the provided name.
+    &#34;&#34;&#34;
+    for index, value in enumerate(self._processes):
+        if value.name == name:
+            return self._processes[index]
+    return None</code></pre>
+</details>
+</dd>
+<dt id="pytia_property_manager.resources.Resources.get_process_note"><code class="name flex">
+<span>def <span class="ident">get_process_note</span></span>(<span>self, name: str) ‑> str</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Retrieves the note of the given process name.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>name</code></strong> :&ensp;<code>str</code></dt>
+<dd>The name of the process.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>str</code></dt>
+<dd>The note of the process.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>PytiaValueError</code></dt>
+<dd>Raised if the name is not in the list of processes.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_process_note(self, name: str) -&gt; str:
+    &#34;&#34;&#34;
+    Retrieves the note of the given process name.
+
+    Args:
+        name (str): The name of the process.
+
+    Returns:
+        str: The note of the process.
+
+    Raises:
+        PytiaValueError: Raised if the name is not in the list of processes.
+    &#34;&#34;&#34;
+    for item in self._processes:
+        if item.name == name:
+            return item.note if item.note else &#34;&#34;
+    raise ValueError(f&#34;No process found with name {name}.&#34;)</code></pre>
+</details>
+</dd>
+<dt id="pytia_property_manager.resources.Resources.get_user_by_logon"><code class="name flex">
+<span>def <span class="ident">get_user_by_logon</span></span>(<span>self, logon: Optional[str] = None) ‑> <a title="pytia_property_manager.resources.User" href="#pytia_property_manager.resources.User">User</a></span>
+</code></dt>
+<dd>
+<div class="desc"><p>Returns the user dataclass that matches the logon value. Returns the User of the current
+session if logon is omitted.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>logon</code></strong> :&ensp;<code>Optional[str]</code></dt>
+<dd>The user to fetch from the dataclass list.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>PytiaValueError</code></dt>
+<dd>Raised when the user doesn't exist.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a title="pytia_property_manager.resources.User" href="#pytia_property_manager.resources.User">User</a></code></dt>
+<dd>The user from the dataclass list that matches the provided logon name.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_user_by_logon(self, logon: Optional[str] = None) -&gt; User:
+    &#34;&#34;&#34;
+    Returns the user dataclass that matches the logon value. Returns the User of the current
+    session if logon is omitted.
+
+    Args:
+        logon (Optional[str]): The user to fetch from the dataclass list.
+
+    Raises:
+        PytiaValueError: Raised when the user doesn&#39;t exist.
+
+    Returns:
+        User: The user from the dataclass list that matches the provided logon name.
+    &#34;&#34;&#34;
+    if logon is None:
+        logon = LOGON
+
+    for index, value in enumerate(self._users):
+        if value.logon == logon:
+            return self._users[index]
+    raise ValueError(f&#34;The user {logon} does not exist.&#34;)</code></pre>
+</details>
+</dd>
+<dt id="pytia_property_manager.resources.Resources.get_user_by_name"><code class="name flex">
+<span>def <span class="ident">get_user_by_name</span></span>(<span>self, name: str) ‑> Optional[<a title="pytia_property_manager.resources.User" href="#pytia_property_manager.resources.User">User</a>]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Returns the user dataclass that matches the name.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>name</code></strong> :&ensp;<code>str</code></dt>
+<dd>The username to fetch from the dataclass list.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a title="pytia_property_manager.resources.User" href="#pytia_property_manager.resources.User">User</a></code></dt>
+<dd>The user from the dataclass list that matches the provided name.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_user_by_name(self, name: str) -&gt; Optional[User]:
+    &#34;&#34;&#34;
+    Returns the user dataclass that matches the name.
+
+    Args:
+        name (str): The username to fetch from the dataclass list.
+
+    Returns:
+        User: The user from the dataclass list that matches the provided name.
+    &#34;&#34;&#34;
+    for index, value in enumerate(self._users):
+        if value.name == name:
+            return self._users[index]
+    return None</code></pre>
+</details>
+</dd>
+<dt id="pytia_property_manager.resources.Resources.logon_exists"><code class="name flex">
+<span>def <span class="ident">logon_exists</span></span>(<span>self, logon: Optional[str] = None) ‑> bool</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Returns wether the users logon exists in the dataclass, or not. Uses the logon-value of the
+current session if logon is omitted.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>logon</code></strong> :&ensp;<code>str</code></dt>
+<dd>The logon name to search for.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>bool</code></dt>
+<dd>The user from the dataclass list that matches the provided logon name.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def logon_exists(self, logon: Optional[str] = None) -&gt; bool:
+    &#34;&#34;&#34;
+    Returns wether the users logon exists in the dataclass, or not. Uses the logon-value of the
+    current session if logon is omitted.
+
+    Args:
+        logon (str): The logon name to search for.
+
+    Returns:
+        bool: The user from the dataclass list that matches the provided logon name.
+    &#34;&#34;&#34;
+    if logon is None:
+        logon = LOGON
+
+    for user in self._users:
+        if user.logon == logon:
+            return True
+    return False</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="pytia_property_manager.resources.Settings"><code class="flex name class">
+<span>class <span class="ident">Settings</span></span>
+<span>(</span><span>*, title: str, debug: bool, demo: bool, revision: int | str, restrictions: <a title="pytia_property_manager.resources.SettingsRestrictions" href="#pytia_property_manager.resources.SettingsRestrictions">SettingsRestrictions</a>, separators: <a title="pytia_property_manager.resources.SettingsSeparators" href="#pytia_property_manager.resources.SettingsSeparators">SettingsSeparators</a>, nomenclature: <a title="pytia_property_manager.resources.SettingsNomenclature" href="#pytia_property_manager.resources.SettingsNomenclature">SettingsNomenclature</a>, processes: <a title="pytia_property_manager.resources.SettingsProcesses" href="#pytia_property_manager.resources.SettingsProcesses">SettingsProcesses</a>, tolerances: List[str], spare_part_level: List[str], files: <a title="pytia_property_manager.resources.SettingsFiles" href="#pytia_property_manager.resources.SettingsFiles">SettingsFiles</a>, paths: <a title="pytia_property_manager.resources.SettingsPaths" href="#pytia_property_manager.resources.SettingsPaths">SettingsPaths</a>, urls: <a title="pytia_property_manager.resources.SettingsUrls" href="#pytia_property_manager.resources.SettingsUrls">SettingsUrls</a>, mails: <a title="pytia_property_manager.resources.SettingsMails" href="#pytia_property_manager.resources.SettingsMails">SettingsMails</a>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Dataclass for settings (settings.json).</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass(slots=True, kw_only=True)
+class Settings:  # pylint: disable=R0902
+    &#34;&#34;&#34;Dataclass for settings (settings.json).&#34;&#34;&#34;
+
+    title: str
+    debug: bool
+    demo: bool
+    revision: int | str
+    restrictions: SettingsRestrictions
+    separators: SettingsSeparators
+    nomenclature: SettingsNomenclature
+    processes: SettingsProcesses
+    tolerances: List[str]
+    spare_part_level: List[str]
+    files: SettingsFiles
+    paths: SettingsPaths
+    urls: SettingsUrls
+    mails: SettingsMails
+
+    def __post_init__(self) -&gt; None:
+        self.restrictions = SettingsRestrictions(**dict(self.restrictions))  # type: ignore
+        self.separators = SettingsSeparators(**dict(self.separators))  # type: ignore
+        self.nomenclature = SettingsNomenclature(**dict(self.nomenclature))  # type: ignore
+        self.processes = SettingsProcesses(**dict(self.processes))  # type: ignore
+        self.files = SettingsFiles(**dict(self.files))  # type: ignore
+        self.paths = SettingsPaths(**dict(self.paths))  # type: ignore
+        self.urls = SettingsUrls(**dict(self.urls))  # type: ignore
+        self.mails = SettingsMails(**dict(self.mails))  # type: ignore</code></pre>
+</details>
+<h3>Instance variables</h3>
+<dl>
+<dt id="pytia_property_manager.resources.Settings.debug"><code class="name">var <span class="ident">debug</span> : bool</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.Settings.demo"><code class="name">var <span class="ident">demo</span> : bool</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.Settings.files"><code class="name">var <span class="ident">files</span> : <a title="pytia_property_manager.resources.SettingsFiles" href="#pytia_property_manager.resources.SettingsFiles">SettingsFiles</a></code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.Settings.mails"><code class="name">var <span class="ident">mails</span> : <a title="pytia_property_manager.resources.SettingsMails" href="#pytia_property_manager.resources.SettingsMails">SettingsMails</a></code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.Settings.nomenclature"><code class="name">var <span class="ident">nomenclature</span> : <a title="pytia_property_manager.resources.SettingsNomenclature" href="#pytia_property_manager.resources.SettingsNomenclature">SettingsNomenclature</a></code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.Settings.paths"><code class="name">var <span class="ident">paths</span> : <a title="pytia_property_manager.resources.SettingsPaths" href="#pytia_property_manager.resources.SettingsPaths">SettingsPaths</a></code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.Settings.processes"><code class="name">var <span class="ident">processes</span> : <a title="pytia_property_manager.resources.SettingsProcesses" href="#pytia_property_manager.resources.SettingsProcesses">SettingsProcesses</a></code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.Settings.restrictions"><code class="name">var <span class="ident">restrictions</span> : <a title="pytia_property_manager.resources.SettingsRestrictions" href="#pytia_property_manager.resources.SettingsRestrictions">SettingsRestrictions</a></code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.Settings.revision"><code class="name">var <span class="ident">revision</span> : int | str</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.Settings.separators"><code class="name">var <span class="ident">separators</span> : <a title="pytia_property_manager.resources.SettingsSeparators" href="#pytia_property_manager.resources.SettingsSeparators">SettingsSeparators</a></code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.Settings.spare_part_level"><code class="name">var <span class="ident">spare_part_level</span> : List[str]</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.Settings.title"><code class="name">var <span class="ident">title</span> : str</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.Settings.tolerances"><code class="name">var <span class="ident">tolerances</span> : List[str]</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.Settings.urls"><code class="name">var <span class="ident">urls</span> : <a title="pytia_property_manager.resources.SettingsUrls" href="#pytia_property_manager.resources.SettingsUrls">SettingsUrls</a></code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="pytia_property_manager.resources.SettingsFiles"><code class="flex name class">
+<span>class <span class="ident">SettingsFiles</span></span>
+<span>(</span><span>*, app: str, launcher: str, bounding_box_launcher: Optional[str], material: str, workspace: str)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Dataclass for files (settings.json).</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass(slots=True, kw_only=True, frozen=True)
+class SettingsFiles:
+    &#34;&#34;&#34;Dataclass for files (settings.json).&#34;&#34;&#34;
+
+    app: str
+    launcher: str
+    bounding_box_launcher: Optional[str]
+    material: str
+    workspace: str</code></pre>
+</details>
+<h3>Instance variables</h3>
+<dl>
+<dt id="pytia_property_manager.resources.SettingsFiles.app"><code class="name">var <span class="ident">app</span> : str</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.SettingsFiles.bounding_box_launcher"><code class="name">var <span class="ident">bounding_box_launcher</span> : Optional[str]</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.SettingsFiles.launcher"><code class="name">var <span class="ident">launcher</span> : str</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.SettingsFiles.material"><code class="name">var <span class="ident">material</span> : str</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.SettingsFiles.workspace"><code class="name">var <span class="ident">workspace</span> : str</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="pytia_property_manager.resources.SettingsMails"><code class="flex name class">
+<span>class <span class="ident">SettingsMails</span></span>
+<span>(</span><span>*, admin: str)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Dataclass for mails (settings.json).</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass(slots=True, kw_only=True, frozen=True)
+class SettingsMails:
+    &#34;&#34;&#34;Dataclass for mails (settings.json).&#34;&#34;&#34;
+
+    admin: str</code></pre>
+</details>
+<h3>Instance variables</h3>
+<dl>
+<dt id="pytia_property_manager.resources.SettingsMails.admin"><code class="name">var <span class="ident">admin</span> : str</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="pytia_property_manager.resources.SettingsNomenclature"><code class="flex name class">
+<span>class <span class="ident">SettingsNomenclature</span></span>
+<span>(</span><span>*, made: str, bought: str)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Dataclass for nomenclature.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass(slots=True, kw_only=True, frozen=True)
+class SettingsNomenclature:
+    &#34;&#34;&#34;Dataclass for nomenclature.&#34;&#34;&#34;
+
+    made: str
+    bought: str</code></pre>
+</details>
+<h3>Instance variables</h3>
+<dl>
+<dt id="pytia_property_manager.resources.SettingsNomenclature.bought"><code class="name">var <span class="ident">bought</span> : str</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.SettingsNomenclature.made"><code class="name">var <span class="ident">made</span> : str</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="pytia_property_manager.resources.SettingsPaths"><code class="flex name class">
+<span>class <span class="ident">SettingsPaths</span></span>
+<span>(</span><span>*, catia: pathlib.Path, material: pathlib.Path, local_dependencies: pathlib.Path, release: pathlib.Path)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Dataclass for paths (settings.json).</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass(slots=True, kw_only=True, frozen=True)
+class SettingsPaths:
+    &#34;&#34;&#34;Dataclass for paths (settings.json).&#34;&#34;&#34;
+
+    catia: Path
+    material: Path
+    local_dependencies: Path
+    release: Path</code></pre>
+</details>
+<h3>Instance variables</h3>
+<dl>
+<dt id="pytia_property_manager.resources.SettingsPaths.catia"><code class="name">var <span class="ident">catia</span> : pathlib.Path</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.SettingsPaths.local_dependencies"><code class="name">var <span class="ident">local_dependencies</span> : pathlib.Path</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.SettingsPaths.material"><code class="name">var <span class="ident">material</span> : pathlib.Path</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.SettingsPaths.release"><code class="name">var <span class="ident">release</span> : pathlib.Path</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="pytia_property_manager.resources.SettingsProcesses"><code class="flex name class">
+<span>class <span class="ident">SettingsProcesses</span></span>
+<span>(</span><span>*, first: int, min: int, max: int)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Dataclass for min and max values.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass(slots=True, kw_only=True, frozen=True)
+class SettingsProcesses:
+    &#34;&#34;&#34;Dataclass for min and max values.&#34;&#34;&#34;
+
+    first: int
+    min: int
+    max: int</code></pre>
+</details>
+<h3>Instance variables</h3>
+<dl>
+<dt id="pytia_property_manager.resources.SettingsProcesses.first"><code class="name">var <span class="ident">first</span> : int</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.SettingsProcesses.max"><code class="name">var <span class="ident">max</span> : int</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.SettingsProcesses.min"><code class="name">var <span class="ident">min</span> : int</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="pytia_property_manager.resources.SettingsRestrictions"><code class="flex name class">
+<span>class <span class="ident">SettingsRestrictions</span></span>
+<span>(</span><span>*, allow_all_users: bool, allow_all_editors: bool, allow_unsaved: bool, allow_outside_workspace: bool, strict_project: bool, strict_machine: bool, enable_information: bool)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Dataclass for restrictive settings.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass(slots=True, kw_only=True, frozen=True)
+class SettingsRestrictions:
+    &#34;&#34;&#34;Dataclass for restrictive settings.&#34;&#34;&#34;
+
+    allow_all_users: bool
+    allow_all_editors: bool
+    allow_unsaved: bool
+    allow_outside_workspace: bool
+    strict_project: bool
+    strict_machine: bool
+    enable_information: bool</code></pre>
+</details>
+<h3>Instance variables</h3>
+<dl>
+<dt id="pytia_property_manager.resources.SettingsRestrictions.allow_all_editors"><code class="name">var <span class="ident">allow_all_editors</span> : bool</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.SettingsRestrictions.allow_all_users"><code class="name">var <span class="ident">allow_all_users</span> : bool</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.SettingsRestrictions.allow_outside_workspace"><code class="name">var <span class="ident">allow_outside_workspace</span> : bool</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.SettingsRestrictions.allow_unsaved"><code class="name">var <span class="ident">allow_unsaved</span> : bool</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.SettingsRestrictions.enable_information"><code class="name">var <span class="ident">enable_information</span> : bool</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.SettingsRestrictions.strict_machine"><code class="name">var <span class="ident">strict_machine</span> : bool</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.SettingsRestrictions.strict_project"><code class="name">var <span class="ident">strict_project</span> : bool</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="pytia_property_manager.resources.SettingsSeparators"><code class="flex name class">
+<span>class <span class="ident">SettingsSeparators</span></span>
+<span>(</span><span>*, bought: str, metadata: str)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Dataclass for separators.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass(slots=True, kw_only=True, frozen=True)
+class SettingsSeparators:
+    &#34;&#34;&#34;Dataclass for separators.&#34;&#34;&#34;
+
+    bought: str
+    metadata: str</code></pre>
+</details>
+<h3>Instance variables</h3>
+<dl>
+<dt id="pytia_property_manager.resources.SettingsSeparators.bought"><code class="name">var <span class="ident">bought</span> : str</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.SettingsSeparators.metadata"><code class="name">var <span class="ident">metadata</span> : str</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="pytia_property_manager.resources.SettingsUrls"><code class="flex name class">
+<span>class <span class="ident">SettingsUrls</span></span>
+<span>(</span><span>*, help: Optional[str])</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Dataclass for urls (settings.json).</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass(slots=True, kw_only=True, frozen=True)
+class SettingsUrls:
+    &#34;&#34;&#34;Dataclass for urls (settings.json).&#34;&#34;&#34;
+
+    help: str | None</code></pre>
+</details>
+<h3>Instance variables</h3>
+<dl>
+<dt id="pytia_property_manager.resources.SettingsUrls.help"><code class="name">var <span class="ident">help</span> : Optional[str]</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="pytia_property_manager.resources.User"><code class="flex name class">
+<span>class <span class="ident">User</span></span>
+<span>(</span><span>*, logon: str, id: str, name: str, mail: str)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Dataclass a user (users.json).</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass(slots=True, kw_only=True, frozen=True)
+class User:
+    &#34;&#34;&#34;Dataclass a user (users.json).&#34;&#34;&#34;
+
+    logon: str
+    id: str
+    name: str
+    mail: str
+
+    @property
+    def keys(self) -&gt; List[str]:
+        &#34;&#34;&#34;Returns a list of all keys from the User dataclass.&#34;&#34;&#34;
+        return [f.name for f in fields(self)]
+
+    @property
+    def values(self) -&gt; List[str]:
+        &#34;&#34;&#34;Returns a list of all values from the User dataclass.&#34;&#34;&#34;
+        return [getattr(self, f.name) for f in fields(self)]</code></pre>
+</details>
+<h3>Instance variables</h3>
+<dl>
+<dt id="pytia_property_manager.resources.User.id"><code class="name">var <span class="ident">id</span> : str</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.User.keys"><code class="name">var <span class="ident">keys</span> : List[str]</code></dt>
+<dd>
+<div class="desc"><p>Returns a list of all keys from the User dataclass.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def keys(self) -&gt; List[str]:
+    &#34;&#34;&#34;Returns a list of all keys from the User dataclass.&#34;&#34;&#34;
+    return [f.name for f in fields(self)]</code></pre>
+</details>
+</dd>
+<dt id="pytia_property_manager.resources.User.logon"><code class="name">var <span class="ident">logon</span> : str</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.User.mail"><code class="name">var <span class="ident">mail</span> : str</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.User.name"><code class="name">var <span class="ident">name</span> : str</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.User.values"><code class="name">var <span class="ident">values</span> : List[str]</code></dt>
+<dd>
+<div class="desc"><p>Returns a list of all values from the User dataclass.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def values(self) -&gt; List[str]:
+    &#34;&#34;&#34;Returns a list of all values from the User dataclass.&#34;&#34;&#34;
+    return [getattr(self, f.name) for f in fields(self)]</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="pytia_property_manager" href="../index.html">pytia_property_manager</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="pytia_property_manager.resources.AppData" href="#pytia_property_manager.resources.AppData">AppData</a></code></h4>
+<ul class="">
+<li><code><a title="pytia_property_manager.resources.AppData.counter" href="#pytia_property_manager.resources.AppData.counter">counter</a></code></li>
+<li><code><a title="pytia_property_manager.resources.AppData.save_on_apply" href="#pytia_property_manager.resources.AppData.save_on_apply">save_on_apply</a></code></li>
+<li><code><a title="pytia_property_manager.resources.AppData.version" href="#pytia_property_manager.resources.AppData.version">version</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="pytia_property_manager.resources.Info" href="#pytia_property_manager.resources.Info">Info</a></code></h4>
+<ul class="">
+<li><code><a title="pytia_property_manager.resources.Info.counter" href="#pytia_property_manager.resources.Info.counter">counter</a></code></li>
+<li><code><a title="pytia_property_manager.resources.Info.msg" href="#pytia_property_manager.resources.Info.msg">msg</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="pytia_property_manager.resources.Links" href="#pytia_property_manager.resources.Links">Links</a></code></h4>
+</li>
+<li>
+<h4><code><a title="pytia_property_manager.resources.Process" href="#pytia_property_manager.resources.Process">Process</a></code></h4>
+<ul class="">
+<li><code><a title="pytia_property_manager.resources.Process.keys" href="#pytia_property_manager.resources.Process.keys">keys</a></code></li>
+<li><code><a title="pytia_property_manager.resources.Process.metadata_required" href="#pytia_property_manager.resources.Process.metadata_required">metadata_required</a></code></li>
+<li><code><a title="pytia_property_manager.resources.Process.name" href="#pytia_property_manager.resources.Process.name">name</a></code></li>
+<li><code><a title="pytia_property_manager.resources.Process.note" href="#pytia_property_manager.resources.Process.note">note</a></code></li>
+<li><code><a title="pytia_property_manager.resources.Process.values" href="#pytia_property_manager.resources.Process.values">values</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="pytia_property_manager.resources.Props" href="#pytia_property_manager.resources.Props">Props</a></code></h4>
+<ul class="">
+<li><code><a title="pytia_property_manager.resources.Props.infra" href="#pytia_property_manager.resources.Props.infra">infra</a></code></li>
+<li><code><a title="pytia_property_manager.resources.Props.keys" href="#pytia_property_manager.resources.Props.keys">keys</a></code></li>
+<li><code><a title="pytia_property_manager.resources.Props.notes" href="#pytia_property_manager.resources.Props.notes">notes</a></code></li>
+<li><code><a title="pytia_property_manager.resources.Props.production" href="#pytia_property_manager.resources.Props.production">production</a></code></li>
+<li><code><a title="pytia_property_manager.resources.Props.values" href="#pytia_property_manager.resources.Props.values">values</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="pytia_property_manager.resources.PropsInfra" href="#pytia_property_manager.resources.PropsInfra">PropsInfra</a></code></h4>
+<ul class="two-column">
+<li><code><a title="pytia_property_manager.resources.PropsInfra.base_size" href="#pytia_property_manager.resources.PropsInfra.base_size">base_size</a></code></li>
+<li><code><a title="pytia_property_manager.resources.PropsInfra.base_size_preset" href="#pytia_property_manager.resources.PropsInfra.base_size_preset">base_size_preset</a></code></li>
+<li><code><a title="pytia_property_manager.resources.PropsInfra.creator" href="#pytia_property_manager.resources.PropsInfra.creator">creator</a></code></li>
+<li><code><a title="pytia_property_manager.resources.PropsInfra.keys" href="#pytia_property_manager.resources.PropsInfra.keys">keys</a></code></li>
+<li><code><a title="pytia_property_manager.resources.PropsInfra.machine" href="#pytia_property_manager.resources.PropsInfra.machine">machine</a></code></li>
+<li><code><a title="pytia_property_manager.resources.PropsInfra.manufacturer" href="#pytia_property_manager.resources.PropsInfra.manufacturer">manufacturer</a></code></li>
+<li><code><a title="pytia_property_manager.resources.PropsInfra.mass" href="#pytia_property_manager.resources.PropsInfra.mass">mass</a></code></li>
+<li><code><a title="pytia_property_manager.resources.PropsInfra.material" href="#pytia_property_manager.resources.PropsInfra.material">material</a></code></li>
+<li><code><a title="pytia_property_manager.resources.PropsInfra.modifier" href="#pytia_property_manager.resources.PropsInfra.modifier">modifier</a></code></li>
+<li><code><a title="pytia_property_manager.resources.PropsInfra.project" href="#pytia_property_manager.resources.PropsInfra.project">project</a></code></li>
+<li><code><a title="pytia_property_manager.resources.PropsInfra.spare_part_level" href="#pytia_property_manager.resources.PropsInfra.spare_part_level">spare_part_level</a></code></li>
+<li><code><a title="pytia_property_manager.resources.PropsInfra.supplier" href="#pytia_property_manager.resources.PropsInfra.supplier">supplier</a></code></li>
+<li><code><a title="pytia_property_manager.resources.PropsInfra.tolerance" href="#pytia_property_manager.resources.PropsInfra.tolerance">tolerance</a></code></li>
+<li><code><a title="pytia_property_manager.resources.PropsInfra.values" href="#pytia_property_manager.resources.PropsInfra.values">values</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="pytia_property_manager.resources.PropsNotes" href="#pytia_property_manager.resources.PropsNotes">PropsNotes</a></code></h4>
+<ul class="two-column">
+<li><code><a title="pytia_property_manager.resources.PropsNotes.base_size" href="#pytia_property_manager.resources.PropsNotes.base_size">base_size</a></code></li>
+<li><code><a title="pytia_property_manager.resources.PropsNotes.general" href="#pytia_property_manager.resources.PropsNotes.general">general</a></code></li>
+<li><code><a title="pytia_property_manager.resources.PropsNotes.keys" href="#pytia_property_manager.resources.PropsNotes.keys">keys</a></code></li>
+<li><code><a title="pytia_property_manager.resources.PropsNotes.material" href="#pytia_property_manager.resources.PropsNotes.material">material</a></code></li>
+<li><code><a title="pytia_property_manager.resources.PropsNotes.production" href="#pytia_property_manager.resources.PropsNotes.production">production</a></code></li>
+<li><code><a title="pytia_property_manager.resources.PropsNotes.supplier" href="#pytia_property_manager.resources.PropsNotes.supplier">supplier</a></code></li>
+<li><code><a title="pytia_property_manager.resources.PropsNotes.values" href="#pytia_property_manager.resources.PropsNotes.values">values</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="pytia_property_manager.resources.PropsProduction" href="#pytia_property_manager.resources.PropsProduction">PropsProduction</a></code></h4>
+<ul class="">
+<li><code><a title="pytia_property_manager.resources.PropsProduction.keys" href="#pytia_property_manager.resources.PropsProduction.keys">keys</a></code></li>
+<li><code><a title="pytia_property_manager.resources.PropsProduction.note_process_n" href="#pytia_property_manager.resources.PropsProduction.note_process_n">note_process_n</a></code></li>
+<li><code><a title="pytia_property_manager.resources.PropsProduction.process_n" href="#pytia_property_manager.resources.PropsProduction.process_n">process_n</a></code></li>
+<li><code><a title="pytia_property_manager.resources.PropsProduction.values" href="#pytia_property_manager.resources.PropsProduction.values">values</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="pytia_property_manager.resources.Resources" href="#pytia_property_manager.resources.Resources">Resources</a></code></h4>
+<ul class="">
+<li><code><a title="pytia_property_manager.resources.Resources.appdata" href="#pytia_property_manager.resources.Resources.appdata">appdata</a></code></li>
+<li><code><a title="pytia_property_manager.resources.Resources.get_info_msg_by_counter" href="#pytia_property_manager.resources.Resources.get_info_msg_by_counter">get_info_msg_by_counter</a></code></li>
+<li><code><a title="pytia_property_manager.resources.Resources.get_process_by_name" href="#pytia_property_manager.resources.Resources.get_process_by_name">get_process_by_name</a></code></li>
+<li><code><a title="pytia_property_manager.resources.Resources.get_process_note" href="#pytia_property_manager.resources.Resources.get_process_note">get_process_note</a></code></li>
+<li><code><a title="pytia_property_manager.resources.Resources.get_user_by_logon" href="#pytia_property_manager.resources.Resources.get_user_by_logon">get_user_by_logon</a></code></li>
+<li><code><a title="pytia_property_manager.resources.Resources.get_user_by_name" href="#pytia_property_manager.resources.Resources.get_user_by_name">get_user_by_name</a></code></li>
+<li><code><a title="pytia_property_manager.resources.Resources.infos" href="#pytia_property_manager.resources.Resources.infos">infos</a></code></li>
+<li><code><a title="pytia_property_manager.resources.Resources.logon_exists" href="#pytia_property_manager.resources.Resources.logon_exists">logon_exists</a></code></li>
+<li><code><a title="pytia_property_manager.resources.Resources.processes" href="#pytia_property_manager.resources.Resources.processes">processes</a></code></li>
+<li><code><a title="pytia_property_manager.resources.Resources.props" href="#pytia_property_manager.resources.Resources.props">props</a></code></li>
+<li><code><a title="pytia_property_manager.resources.Resources.settings" href="#pytia_property_manager.resources.Resources.settings">settings</a></code></li>
+<li><code><a title="pytia_property_manager.resources.Resources.users" href="#pytia_property_manager.resources.Resources.users">users</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="pytia_property_manager.resources.Settings" href="#pytia_property_manager.resources.Settings">Settings</a></code></h4>
+<ul class="two-column">
+<li><code><a title="pytia_property_manager.resources.Settings.debug" href="#pytia_property_manager.resources.Settings.debug">debug</a></code></li>
+<li><code><a title="pytia_property_manager.resources.Settings.demo" href="#pytia_property_manager.resources.Settings.demo">demo</a></code></li>
+<li><code><a title="pytia_property_manager.resources.Settings.files" href="#pytia_property_manager.resources.Settings.files">files</a></code></li>
+<li><code><a title="pytia_property_manager.resources.Settings.mails" href="#pytia_property_manager.resources.Settings.mails">mails</a></code></li>
+<li><code><a title="pytia_property_manager.resources.Settings.nomenclature" href="#pytia_property_manager.resources.Settings.nomenclature">nomenclature</a></code></li>
+<li><code><a title="pytia_property_manager.resources.Settings.paths" href="#pytia_property_manager.resources.Settings.paths">paths</a></code></li>
+<li><code><a title="pytia_property_manager.resources.Settings.processes" href="#pytia_property_manager.resources.Settings.processes">processes</a></code></li>
+<li><code><a title="pytia_property_manager.resources.Settings.restrictions" href="#pytia_property_manager.resources.Settings.restrictions">restrictions</a></code></li>
+<li><code><a title="pytia_property_manager.resources.Settings.revision" href="#pytia_property_manager.resources.Settings.revision">revision</a></code></li>
+<li><code><a title="pytia_property_manager.resources.Settings.separators" href="#pytia_property_manager.resources.Settings.separators">separators</a></code></li>
+<li><code><a title="pytia_property_manager.resources.Settings.spare_part_level" href="#pytia_property_manager.resources.Settings.spare_part_level">spare_part_level</a></code></li>
+<li><code><a title="pytia_property_manager.resources.Settings.title" href="#pytia_property_manager.resources.Settings.title">title</a></code></li>
+<li><code><a title="pytia_property_manager.resources.Settings.tolerances" href="#pytia_property_manager.resources.Settings.tolerances">tolerances</a></code></li>
+<li><code><a title="pytia_property_manager.resources.Settings.urls" href="#pytia_property_manager.resources.Settings.urls">urls</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="pytia_property_manager.resources.SettingsFiles" href="#pytia_property_manager.resources.SettingsFiles">SettingsFiles</a></code></h4>
+<ul class="">
+<li><code><a title="pytia_property_manager.resources.SettingsFiles.app" href="#pytia_property_manager.resources.SettingsFiles.app">app</a></code></li>
+<li><code><a title="pytia_property_manager.resources.SettingsFiles.bounding_box_launcher" href="#pytia_property_manager.resources.SettingsFiles.bounding_box_launcher">bounding_box_launcher</a></code></li>
+<li><code><a title="pytia_property_manager.resources.SettingsFiles.launcher" href="#pytia_property_manager.resources.SettingsFiles.launcher">launcher</a></code></li>
+<li><code><a title="pytia_property_manager.resources.SettingsFiles.material" href="#pytia_property_manager.resources.SettingsFiles.material">material</a></code></li>
+<li><code><a title="pytia_property_manager.resources.SettingsFiles.workspace" href="#pytia_property_manager.resources.SettingsFiles.workspace">workspace</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="pytia_property_manager.resources.SettingsMails" href="#pytia_property_manager.resources.SettingsMails">SettingsMails</a></code></h4>
+<ul class="">
+<li><code><a title="pytia_property_manager.resources.SettingsMails.admin" href="#pytia_property_manager.resources.SettingsMails.admin">admin</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="pytia_property_manager.resources.SettingsNomenclature" href="#pytia_property_manager.resources.SettingsNomenclature">SettingsNomenclature</a></code></h4>
+<ul class="">
+<li><code><a title="pytia_property_manager.resources.SettingsNomenclature.bought" href="#pytia_property_manager.resources.SettingsNomenclature.bought">bought</a></code></li>
+<li><code><a title="pytia_property_manager.resources.SettingsNomenclature.made" href="#pytia_property_manager.resources.SettingsNomenclature.made">made</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="pytia_property_manager.resources.SettingsPaths" href="#pytia_property_manager.resources.SettingsPaths">SettingsPaths</a></code></h4>
+<ul class="">
+<li><code><a title="pytia_property_manager.resources.SettingsPaths.catia" href="#pytia_property_manager.resources.SettingsPaths.catia">catia</a></code></li>
+<li><code><a title="pytia_property_manager.resources.SettingsPaths.local_dependencies" href="#pytia_property_manager.resources.SettingsPaths.local_dependencies">local_dependencies</a></code></li>
+<li><code><a title="pytia_property_manager.resources.SettingsPaths.material" href="#pytia_property_manager.resources.SettingsPaths.material">material</a></code></li>
+<li><code><a title="pytia_property_manager.resources.SettingsPaths.release" href="#pytia_property_manager.resources.SettingsPaths.release">release</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="pytia_property_manager.resources.SettingsProcesses" href="#pytia_property_manager.resources.SettingsProcesses">SettingsProcesses</a></code></h4>
+<ul class="">
+<li><code><a title="pytia_property_manager.resources.SettingsProcesses.first" href="#pytia_property_manager.resources.SettingsProcesses.first">first</a></code></li>
+<li><code><a title="pytia_property_manager.resources.SettingsProcesses.max" href="#pytia_property_manager.resources.SettingsProcesses.max">max</a></code></li>
+<li><code><a title="pytia_property_manager.resources.SettingsProcesses.min" href="#pytia_property_manager.resources.SettingsProcesses.min">min</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="pytia_property_manager.resources.SettingsRestrictions" href="#pytia_property_manager.resources.SettingsRestrictions">SettingsRestrictions</a></code></h4>
+<ul class="">
+<li><code><a title="pytia_property_manager.resources.SettingsRestrictions.allow_all_editors" href="#pytia_property_manager.resources.SettingsRestrictions.allow_all_editors">allow_all_editors</a></code></li>
+<li><code><a title="pytia_property_manager.resources.SettingsRestrictions.allow_all_users" href="#pytia_property_manager.resources.SettingsRestrictions.allow_all_users">allow_all_users</a></code></li>
+<li><code><a title="pytia_property_manager.resources.SettingsRestrictions.allow_outside_workspace" href="#pytia_property_manager.resources.SettingsRestrictions.allow_outside_workspace">allow_outside_workspace</a></code></li>
+<li><code><a title="pytia_property_manager.resources.SettingsRestrictions.allow_unsaved" href="#pytia_property_manager.resources.SettingsRestrictions.allow_unsaved">allow_unsaved</a></code></li>
+<li><code><a title="pytia_property_manager.resources.SettingsRestrictions.enable_information" href="#pytia_property_manager.resources.SettingsRestrictions.enable_information">enable_information</a></code></li>
+<li><code><a title="pytia_property_manager.resources.SettingsRestrictions.strict_machine" href="#pytia_property_manager.resources.SettingsRestrictions.strict_machine">strict_machine</a></code></li>
+<li><code><a title="pytia_property_manager.resources.SettingsRestrictions.strict_project" href="#pytia_property_manager.resources.SettingsRestrictions.strict_project">strict_project</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="pytia_property_manager.resources.SettingsSeparators" href="#pytia_property_manager.resources.SettingsSeparators">SettingsSeparators</a></code></h4>
+<ul class="">
+<li><code><a title="pytia_property_manager.resources.SettingsSeparators.bought" href="#pytia_property_manager.resources.SettingsSeparators.bought">bought</a></code></li>
+<li><code><a title="pytia_property_manager.resources.SettingsSeparators.metadata" href="#pytia_property_manager.resources.SettingsSeparators.metadata">metadata</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="pytia_property_manager.resources.SettingsUrls" href="#pytia_property_manager.resources.SettingsUrls">SettingsUrls</a></code></h4>
+<ul class="">
+<li><code><a title="pytia_property_manager.resources.SettingsUrls.help" href="#pytia_property_manager.resources.SettingsUrls.help">help</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="pytia_property_manager.resources.User" href="#pytia_property_manager.resources.User">User</a></code></h4>
+<ul class="two-column">
+<li><code><a title="pytia_property_manager.resources.User.id" href="#pytia_property_manager.resources.User.id">id</a></code></li>
+<li><code><a title="pytia_property_manager.resources.User.keys" href="#pytia_property_manager.resources.User.keys">keys</a></code></li>
+<li><code><a title="pytia_property_manager.resources.User.logon" href="#pytia_property_manager.resources.User.logon">logon</a></code></li>
+<li><code><a title="pytia_property_manager.resources.User.mail" href="#pytia_property_manager.resources.User.mail">mail</a></code></li>
+<li><code><a title="pytia_property_manager.resources.User.name" href="#pytia_property_manager.resources.User.name">name</a></code></li>
+<li><code><a title="pytia_property_manager.resources.User.values" href="#pytia_property_manager.resources.User.values">values</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>

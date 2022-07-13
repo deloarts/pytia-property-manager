@@ -1,0 +1,22 @@
+[
+    {
+        "name": "Milling",
+        "note": null,
+        "metadata_required": false
+    },
+    {
+        "name": "Turning",
+        "note": "Bar",
+        "metadata_required": false
+    },
+    {
+        "name": "Cutting",
+        "note": null,
+        "metadata_required": false
+    },
+    {
+        "name": "Painting",
+        "note": "Color: $\nLayers: 2\nLayer-thickness: 150-200µm",
+        "metadata_required": true
+    }
+]
