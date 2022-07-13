@@ -203,7 +203,7 @@ class LazyDocumentHelper:
                         f"{variables.machine.get()}"
                         " - "
                         f"{variables.partnumber.get()}"
-                        " - "
+                        " - Rev"
                         f"{variables.revision.get()}"
                     )
                 case Source.BOUGHT.value | _:
