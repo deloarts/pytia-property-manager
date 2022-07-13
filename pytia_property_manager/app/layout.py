@@ -159,6 +159,7 @@ class Layout:
             width=12,
             state=DISABLED,
             command=lambda: increase_revision(variables.revision),
+            # TODO: Add proper revision handling.
         )
         self._btn_revision.grid(
             row=4, column=2, padx=(5, Layout.MARGIN_X), pady=1, sticky="nsew"
