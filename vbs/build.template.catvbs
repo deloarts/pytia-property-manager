@@ -14,7 +14,7 @@
 Option Explicit
 
 Sub CATMain()
-    ' On Error Resume Next
+    On Error Resume Next
 
     Dim Shell, Fso
     Dim Prefix, Postfix
