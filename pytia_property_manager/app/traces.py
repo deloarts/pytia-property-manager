@@ -4,7 +4,7 @@
 
 from tkinter import messagebox as tkmsg
 
-from const import Source
+from const import LOGON, Source
 from pytia.log import log
 from resources import resource
 
