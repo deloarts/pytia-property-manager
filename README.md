@@ -164,7 +164,59 @@ On a new revision, do the following:
 
 ## 3 usage
 
-TODO
+Use the launcher (a.k.a the catvbs-file) to launch the app. On the first run all required dependencies will be installed:
+
+![Installer](assets/images/installer.png)
+
+After the installation the app starts automatically:
+
+![App](assets/images/app.png)
+
+The app retrieves all information from the documents properties, except the material value, which is fetched from the applied material.
+
+The usage itself is pretty straight forward, as long as all config files are setup properly.
+
+### 3.1 buttons
+
+#### 3.1.1 revision button
+
+Increases the revision.
+
+> Later this will also create a backup of the current document, then increases the revision. This allows a nice revision handling.
+
+#### 3.1.2 reload button
+
+This reloads the definition and the manufacturer. Works as long as the partnumbers' nomenclature matches the nomenclature of the **settings file**.
+
+#### 3.1.3 select material button
+
+This button opens the material manager.
+
+![App](assets/images/material_manager.png)
+
+To use the material manager, all materials must be named like specified in the **settings file**. The default looks like this:
+
+![App](assets/images/material_catalog.png)
+
+#### 3.1.4 calculate bounding box button
+
+This opens the [pytia bounding box app](https://github.com/deloarts/pytia-bounding-box). This requires the app to be available.
+
+#### 3.1.5 calculate mass button
+
+This triggers the mass calculation. For parts this is done when the app starts, but for products this must be done by hand (mass calculation takes a fair amount of time on big assemblies).
+
+#### 3.1.6 save button
+
+Writes the changes to the documents' properties and closes the app.
+
+#### 3.1.6 abort button
+
+Discards all changes and closes the app.
+
+### 3.2 text inputs
+
+A double click on a text input widget opens the text editor.
 
 ## 4 workspace
 
