@@ -188,6 +188,7 @@ class Layout:
             width=12,
             state=DISABLED,
             command=lambda: increase_revision(variables.revision),
+            # TODO: Add proper revision handling.
         )
         self._btn_revision.grid(
             row=4, column=2, padx=(5, Layout.MARGIN_X), pady=1, sticky=&#34;nsew&#34;
@@ -236,6 +237,7 @@ class Layout:
             textvariable=variables.material,
             width=18,
             state=DISABLED,
+            cursor=&#34;arrow&#34;,
         )
         self._entry_material.grid(
             row=6, column=1, padx=5, pady=2, ipadx=2, ipady=2, sticky=&#34;nsew&#34;
@@ -467,7 +469,7 @@ class Layout:
             sticky=&#34;new&#34;,
         )
         self._lbl_creator_value = ttk.Label(
-            frames.infrastructure, textvariable=variables.creator
+            frames.infrastructure, textvariable=variables.creator_display
         )
         self._lbl_creator_value.grid(
             row=15,
@@ -493,7 +495,7 @@ class Layout:
             sticky=&#34;new&#34;,
         )
         self._lbl_modifier_value = ttk.Label(
-            frames.infrastructure, textvariable=variables.modifier
+            frames.infrastructure, textvariable=variables.modifier_display
         )
         self._lbl_modifier_value.grid(
             row=16,
@@ -858,6 +860,7 @@ class Layout:
             width=12,
             state=DISABLED,
             command=lambda: increase_revision(variables.revision),
+            # TODO: Add proper revision handling.
         )
         self._btn_revision.grid(
             row=4, column=2, padx=(5, Layout.MARGIN_X), pady=1, sticky=&#34;nsew&#34;
@@ -906,6 +909,7 @@ class Layout:
             textvariable=variables.material,
             width=18,
             state=DISABLED,
+            cursor=&#34;arrow&#34;,
         )
         self._entry_material.grid(
             row=6, column=1, padx=5, pady=2, ipadx=2, ipady=2, sticky=&#34;nsew&#34;
@@ -1137,7 +1141,7 @@ class Layout:
             sticky=&#34;new&#34;,
         )
         self._lbl_creator_value = ttk.Label(
-            frames.infrastructure, textvariable=variables.creator
+            frames.infrastructure, textvariable=variables.creator_display
         )
         self._lbl_creator_value.grid(
             row=15,
@@ -1163,7 +1167,7 @@ class Layout:
             sticky=&#34;new&#34;,
         )
         self._lbl_modifier_value = ttk.Label(
-            frames.infrastructure, textvariable=variables.modifier
+            frames.infrastructure, textvariable=variables.modifier_display
         )
         self._lbl_modifier_value.grid(
             row=16,

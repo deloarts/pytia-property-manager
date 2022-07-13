@@ -59,7 +59,9 @@ class Variables:
     spare_part_level: StringVar
 
     creator: StringVar
+    creator_display: StringVar
     modifier: StringVar
+    modifier_display: StringVar
 
     def __init__(self, root: Tk) -&gt; None:
         &#34;&#34;&#34;
@@ -88,7 +90,9 @@ class Variables:
         self.spare_part_level = StringVar(master=root, name=&#34;spare_part_level&#34;)
 
         self.creator = StringVar(master=root, name=&#34;creator&#34;)
-        self.modifier = StringVar(master=root, name=&#34;modifier&#34;)</code></pre>
+        self.creator_display = StringVar(master=root, name=&#34;creator_display&#34;)
+        self.modifier = StringVar(master=root, name=&#34;modifier&#34;)
+        self.modifier_display = StringVar(master=root, name=&#34;modifier_display&#34;)</code></pre>
 </details>
 </section>
 <section>
@@ -140,7 +144,9 @@ class Variables:
     spare_part_level: StringVar
 
     creator: StringVar
+    creator_display: StringVar
     modifier: StringVar
+    modifier_display: StringVar
 
     def __init__(self, root: Tk) -&gt; None:
         &#34;&#34;&#34;
@@ -169,7 +175,9 @@ class Variables:
         self.spare_part_level = StringVar(master=root, name=&#34;spare_part_level&#34;)
 
         self.creator = StringVar(master=root, name=&#34;creator&#34;)
-        self.modifier = StringVar(master=root, name=&#34;modifier&#34;)</code></pre>
+        self.creator_display = StringVar(master=root, name=&#34;creator_display&#34;)
+        self.modifier = StringVar(master=root, name=&#34;modifier&#34;)
+        self.modifier_display = StringVar(master=root, name=&#34;modifier_display&#34;)</code></pre>
 </details>
 <h3>Instance variables</h3>
 <dl>
@@ -182,6 +190,10 @@ class Variables:
 <div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
 </dd>
 <dt id="pytia_property_manager.app.vars.Variables.creator"><code class="name">var <span class="ident">creator</span> : tkinter.StringVar</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.app.vars.Variables.creator_display"><code class="name">var <span class="ident">creator_display</span> : tkinter.StringVar</code></dt>
 <dd>
 <div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
 </dd>
@@ -214,6 +226,10 @@ class Variables:
 <div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
 </dd>
 <dt id="pytia_property_manager.app.vars.Variables.modifier"><code class="name">var <span class="ident">modifier</span> : tkinter.StringVar</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.app.vars.Variables.modifier_display"><code class="name">var <span class="ident">modifier_display</span> : tkinter.StringVar</code></dt>
 <dd>
 <div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
 </dd>
@@ -273,6 +289,7 @@ class Variables:
 <li><code><a title="pytia_property_manager.app.vars.Variables.base_size" href="#pytia_property_manager.app.vars.Variables.base_size">base_size</a></code></li>
 <li><code><a title="pytia_property_manager.app.vars.Variables.base_size_preset" href="#pytia_property_manager.app.vars.Variables.base_size_preset">base_size_preset</a></code></li>
 <li><code><a title="pytia_property_manager.app.vars.Variables.creator" href="#pytia_property_manager.app.vars.Variables.creator">creator</a></code></li>
+<li><code><a title="pytia_property_manager.app.vars.Variables.creator_display" href="#pytia_property_manager.app.vars.Variables.creator_display">creator_display</a></code></li>
 <li><code><a title="pytia_property_manager.app.vars.Variables.definition" href="#pytia_property_manager.app.vars.Variables.definition">definition</a></code></li>
 <li><code><a title="pytia_property_manager.app.vars.Variables.description" href="#pytia_property_manager.app.vars.Variables.description">description</a></code></li>
 <li><code><a title="pytia_property_manager.app.vars.Variables.machine" href="#pytia_property_manager.app.vars.Variables.machine">machine</a></code></li>
@@ -281,6 +298,7 @@ class Variables:
 <li><code><a title="pytia_property_manager.app.vars.Variables.material" href="#pytia_property_manager.app.vars.Variables.material">material</a></code></li>
 <li><code><a title="pytia_property_manager.app.vars.Variables.material_meta" href="#pytia_property_manager.app.vars.Variables.material_meta">material_meta</a></code></li>
 <li><code><a title="pytia_property_manager.app.vars.Variables.modifier" href="#pytia_property_manager.app.vars.Variables.modifier">modifier</a></code></li>
+<li><code><a title="pytia_property_manager.app.vars.Variables.modifier_display" href="#pytia_property_manager.app.vars.Variables.modifier_display">modifier_display</a></code></li>
 <li><code><a title="pytia_property_manager.app.vars.Variables.partnumber" href="#pytia_property_manager.app.vars.Variables.partnumber">partnumber</a></code></li>
 <li><code><a title="pytia_property_manager.app.vars.Variables.previous_source" href="#pytia_property_manager.app.vars.Variables.previous_source">previous_source</a></code></li>
 <li><code><a title="pytia_property_manager.app.vars.Variables.project" href="#pytia_property_manager.app.vars.Variables.project">project</a></code></li>
