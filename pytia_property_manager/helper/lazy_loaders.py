@@ -397,20 +397,17 @@ class LazyDocumentHelper:
         if items:
             widget.configure(values=items)
 
-    # def setvar_user(self, variable: StringVar, property_name: str) -> None:
-    #     """
-    #     Sets the value of a tkinter variable. Fetches the value from the documents property,
-    #     which name matches the given property_name. Only use this for User-variables.
+    def setvar_user(self, variable: StringVar, property_name: str) -> None:
+        """
+        Sets the value of a tkinter variable. Fetches the value from the documents property,
+        which name matches the given property_name. Only use this for User-variables.
 
-    #     Args:
-    #         variable (StringVar): The tkinter variable.
-    #         property_name (str): The name of the property, from which the value will be fetched.
-    #     """
-    #     value = self.get_property(property_name) or LOGON
-    #     if resource.logon_exists(value):
-    #         self.setvar(variable=variable, value=resource.get_user_by_logon(value).name)
-    #     else:
-    #         self.setvar(variable=variable, value=f"Unknown user ({value})")
+        Args:
+            variable (StringVar): The tkinter variable.
+            property_name (str): The name of the property, from which the value will be fetched.
+        """
+        value = self.get_property(property_name) or LOGON
+        self.setvar(variable=variable, value=value)
 
     def setvar_mass(self, variable: StringVar, force: bool = False) -> None:
         """

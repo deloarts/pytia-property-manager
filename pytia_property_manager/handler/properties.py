@@ -192,12 +192,8 @@ class Properties:
         self.doc_helper.setvar_property(
             self.vars.spare_part_level, resource.props.infra.spare_part_level
         )
-        # self.doc_helper.setvar_user(self.vars.creator, resource.props.infra.creator)
-        # self.doc_helper.setvar_user(self.vars.modifier, resource.props.infra.modifier)
-        self.doc_helper.setvar_property(self.vars.creator, resource.props.infra.creator)
-        self.doc_helper.setvar_property(
-            self.vars.modifier, resource.props.infra.modifier
-        )
+        self.doc_helper.setvar_user(self.vars.creator, resource.props.infra.creator)
+        self.doc_helper.setvar_user(self.vars.modifier, resource.props.infra.modifier)
 
         self.doc_helper.setvar_notes(self.layout.notes)
 
