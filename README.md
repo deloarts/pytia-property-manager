@@ -257,3 +257,7 @@ The filename of the workspace file can be changed in the **settings.json** file,
 
 **v0.1.1**: Fixed logon bug.  
 **v0.1.0**: Initial commit.  
+
+## 7 to dos
+
+Using VS Code [Comment Anchors](https://marketplace.visualstudio.com/items?itemName=ExodiusStudios.comment-anchors) to keep track of to-dos.
