@@ -8,10 +8,6 @@
         "msg": "You can exit this app by pressing the Escape key on your keyboard."
     },
     {
-        "counter": 40,
-        "msg": "The shortcut for the save button is the middle mouse button."
-    },
-    {
         "counter": 60,
         "msg": "You can always reload the properties by pressing F5."
     },
