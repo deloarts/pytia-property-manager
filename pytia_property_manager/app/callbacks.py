@@ -9,10 +9,10 @@ from const import Source
 from handler.properties import Properties
 from helper.launcher import launch_bounding_box_app
 from helper.lazy_loaders import LazyDocumentHelper
-from helper.values import add_current_value_to_combobox_list
 from material_manager import MaterialManager
 from pytia.log import log
 from pytia_ui_tools.handlers.workspace_handler import Workspace
+from pytia_ui_tools.helper.values import add_current_value_to_combobox_list
 from resources import resource
 
 from app.layout import Layout
