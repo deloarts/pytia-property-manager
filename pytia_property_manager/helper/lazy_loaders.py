@@ -5,6 +5,7 @@
 import atexit
 import functools
 import os
+import re
 import time
 from dataclasses import asdict
 from tkinter import StringVar, ttk
@@ -203,7 +204,7 @@ class LazyDocumentHelper:
                         f"{variables.machine.get()}"
                         " - "
                         f"{variables.partnumber.get()}"
-                        " - Rev"
+                        " - "
                         f"{variables.revision.get()}"
                     )
                 case Source.BOUGHT.value | _:
@@ -343,13 +344,17 @@ class LazyDocumentHelper:
         default: Optional[str | int] = None,
     ) -> None:
         """
-        Sets the value of a tkinter variable. Omits None values. All values will be casted to str.
+        Sets the value of a tkinter variable. Omits None values. Omits empty string or
+        whitespace-only-strings. All values will be casted to str.
 
         Args:
-            variable (StringVar | IntVar): The tkinter variable. Omits
+            variable (StringVar | IntVar): The tkinter variable.
             value (str | int | None): The value.
             default (Optional[str | int], optional): The default value, if the value is None.
         """
+        if re.match(r"^\s+$", str(value)):
+            value = None
+
         if value or isinstance(default, int | str):
             variable.set(str(value or default))
             log.info(f"Set value '{value or default}' for variable '{variable}'")
@@ -390,7 +395,6 @@ class LazyDocumentHelper:
             property_name (str): The name of the property, from which the value will be fetched.
             widget (Combobox): The widget where the variable will be added.
             default (Optional[str | int], optional): The default value, if the value is None.
-            items (Optional[List[str]], optional): A list of items that will be added to the widget.
         """
         self.setvar(
             variable=variable, value=self.get_property(property_name), default=default
