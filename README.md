@@ -3,13 +3,21 @@
 A visual tool for managing CATIA properties.
 
 ![state](https://img.shields.io/badge/State-Alpha-brown.svg?style=for-the-badge)
-![version](https://img.shields.io/badge/Version-0.1.1-orange.svg?style=for-the-badge)
+![version](https://img.shields.io/badge/Version-0.1.2-orange.svg?style=for-the-badge)
 
 [![python](https://img.shields.io/badge/Python-3.10-blue.svg?style=for-the-badge)](https://www.python.org/downloads/)
 ![catia](https://img.shields.io/badge/CATIA-V5%206R2017-blue.svg?style=for-the-badge)
 ![OS](https://img.shields.io/badge/OS-WIN10%20|%20WIN11-blue.svg?style=for-the-badge)
 
 > ⚠️ The layout of this app is heavily biased towards the workflow and needs of my companies' engineering team. Although almost everything can be changed via config files and presets, the apps basic functionality is built to work in the environment of said company.
+
+Check out the pytia ecosystem:
+
+- [pytia](https://github.com/deloarts/pytia): The heart of this project.
+- [pytia-property-manager](https://github.com/deloarts/pytia-property-manager): An app to edit part and product properties.
+- [pytia-bounding-box](https://github.com/deloarts/pytia-bounding-box): An app to retrieve the bounding box of a part.
+- [pytia-bill-of-material](https://github.com/deloarts/pytia-bill-of-material): An app to retrieve the bill of material of a product.
+- [pytia-ui-tools](https://github.com/deloarts/pytia-ui-tools): A toolbox for all pytia apps.
 
 ## 1 installation
 
@@ -247,5 +255,10 @@ The filename of the workspace file can be changed in the **settings.json** file,
 
 ## 6 changelog
 
+**v0.1.2**: Add revision to main body, minor changes.  
 **v0.1.1**: Fixed logon bug.  
 **v0.1.0**: Initial commit.  
+
+## 7 to dos
+
+Using VS Code [Comment Anchors](https://marketplace.visualstudio.com/items?itemName=ExodiusStudios.comment-anchors) to keep track of to-dos.

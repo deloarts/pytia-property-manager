@@ -509,18 +509,14 @@ class Layout:
 
         # region button save
         self._btn_save = ttk.Button(
-            frames.footer,
-            text="Save",
-            style="Footer.TButton",
+            frames.footer, text="Save", style="Footer.TButton", state=DISABLED
         )
         self._btn_save.grid(row=0, column=1, padx=(5, 2), pady=0, sticky="e")
         # endregion
 
         # region button abort
         self._btn_abort = ttk.Button(
-            frames.footer,
-            text="Abort",
-            style="Footer.TButton",
+            frames.footer, text="Abort", style="Footer.TButton"
         )
         self._btn_abort.grid(row=0, column=2, padx=(2, 0), pady=0, sticky="e")
         # endregion

@@ -3,15 +3,11 @@
 """
 
 import tkinter as tk
+from pathlib import Path
 from tkinter import font
 from tkinter import messagebox as tkmsg
 from tkinter import ttk
 
-from const import APP_VERSION, LOG, LOGON, LOGS
-from decorators import timer
-from helper.lazy_loaders import LazyDocumentHelper
-from helper.messages import show_help
-from handler.properties import Properties
 from pytia.exceptions import (
     PytiaBodyEmptyError,
     PytiaDifferentDocumentError,
@@ -25,7 +21,6 @@ from pytia_ui_tools.handlers.error_handler import ErrorHandler
 from pytia_ui_tools.handlers.mail_handler import MailHandler
 from pytia_ui_tools.handlers.workspace_handler import Workspace
 from pytia_ui_tools.window_manager import WindowManager
-from resources import resource
 
 from app.callbacks import Callbacks
 from app.frames import Frames
@@ -34,6 +29,12 @@ from app.state_setter import UISetter
 from app.tooltips import ToolTips
 from app.traces import Traces
 from app.vars import Variables
+from const import APP_VERSION, LOG, LOGON, LOGS
+from decorators import timer
+from handler.properties import Properties
+from helper.lazy_loaders import LazyDocumentHelper
+from helper.messages import show_help
+from resources import resource
 
 
 class GUI(tk.Tk):
@@ -71,7 +72,7 @@ class GUI(tk.Tk):
             standard_receiver=resource.settings.mails.admin,
             app_title=resource.settings.title,
             app_version=APP_VERSION,
-            logfile=f"{LOGS}\\{LOG}",
+            logfile=Path(LOGS, LOG),
         )
         self.error_handler = ErrorHandler(
             mail_handler=self.mail_handler,
