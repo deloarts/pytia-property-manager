@@ -9,6 +9,7 @@ from const import Source
 from handler.properties import Properties
 from helper.launcher import launch_bounding_box_app
 from helper.lazy_loaders import LazyDocumentHelper
+from helper.values import increase_revision
 from material_manager import MaterialManager
 from pytia.log import log
 from pytia_ui_tools.handlers.workspace_handler import Workspace
@@ -108,6 +109,7 @@ class Callbacks:
 
     def _bind_button_callbacks(self) -> None:
         """Binds all callbacks to the main windows buttons."""
+        self.layout.button_revision.configure(command=self.on_btn_revision)
         self.layout.button_source.configure(command=self.on_btn_reload_source)
         self.layout.button_material.configure(command=self.on_btn_material)
         self.layout.button_base_size.configure(command=self.on_btn_bounding_box)
@@ -158,6 +160,11 @@ class Callbacks:
         log.info("Callback for button 'Abort'.")
         self.root.withdraw()
         self.root.destroy()
+
+    def on_btn_revision(self) -> None:
+        """Callback function for the revision button."""
+        log.info("Callback for button 'Revision'.")
+        increase_revision(self.vars.revision)
 
     def on_btn_material(self) -> None:
         """Callback function for the material button. Opens the material manager window."""
