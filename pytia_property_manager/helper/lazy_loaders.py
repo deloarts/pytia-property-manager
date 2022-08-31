@@ -8,13 +8,14 @@ import os
 import re
 import time
 from dataclasses import asdict
+from pathlib import Path
 from tkinter import StringVar, ttk
 from typing import List, Optional
 
 from app.vars import Variables
 from app.widgets.notes import NoteWidgets
 from app.widgets.processes import ProcessWidgets
-from const import LOGON, Source
+from const import LOGON, REVISION_FOLDER, Source
 from pytia.exceptions import (
     PytiaDifferentDocumentError,
     PytiaDocumentNotSavedError,
@@ -93,10 +94,21 @@ class LazyDocumentHelper:
         ]
         self.name = self.document.document.name
 
+        if REVISION_FOLDER in self.document.document.full_name:
+            raise PytiaWrongDocumentTypeError(
+                "You opened a document from the revision folder. "
+                "It's not allowed to modify documents from this folder."
+            )
+
     @property
     def path(self) -> str:
         """Returns the documents absolute path with filename and file extension."""
         return self.document.document.full_name
+
+    @property
+    def folder(self) -> Path:
+        """Returns the folder as absolute path in which this document is saved."""
+        return Path(self.path).parent
 
     @property
     def partnumber(self) -> str:

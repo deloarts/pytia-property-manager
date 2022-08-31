@@ -27,6 +27,7 @@ VENV = f"\\.env\\{APP_VERSION}"
 VENV_PYTHON = VENV + "\\Scripts\\python.exe"
 VENV_PYTHONW = VENV + "\\Scripts\\pythonw.exe"
 PY_VERSION = APPDATA + "\\pyversion.txt"
+REVISION_FOLDER = ".rev"
 
 CONFIG_APPDATA = "config.json"
 CONFIG_SETTINGS = "settings.json"
