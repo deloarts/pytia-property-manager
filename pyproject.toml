@@ -9,7 +9,7 @@ version = "0.1.2"
 [tool.poetry.dependencies]
 python = "^3.10"
 pytia = {git = "ssh://git@github.com/deloarts/pytia.git", tag = "v0.1.1"}
-pytia-ui-tools = {git = "ssh://git@github.com/deloarts/pytia-ui-tools.git", tag = "v0.5.0"}
+pytia-ui-tools = {git = "ssh://git@github.com/deloarts/pytia-ui-tools.git", tag = "v0.5.1"}
 
 [tool.poetry.dev-dependencies]
 Jinja2 = "^3.1.2"
