@@ -204,7 +204,7 @@ class LazyDocumentHelper:
                         f"{variables.machine.get()}"
                         " - "
                         f"{variables.partnumber.get()}"
-                        " - "
+                        " - Rev"
                         f"{variables.revision.get()}"
                     )
                 case Source.BOUGHT.value | _:
@@ -395,6 +395,7 @@ class LazyDocumentHelper:
             property_name (str): The name of the property, from which the value will be fetched.
             widget (Combobox): The widget where the variable will be added.
             default (Optional[str | int], optional): The default value, if the value is None.
+            items (Optional[List[str]], optional): A list of items that will be added to the widget.
         """
         self.setvar(
             variable=variable, value=self.get_property(property_name), default=default
