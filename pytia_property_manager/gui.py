@@ -94,6 +94,7 @@ class GUI(tk.Tk):
             f"{' (READ ONLY)' if self.readonly else ''}"
         )
         self.attributes("-topmost", True)
+        self.attributes("-toolwindow", True)
         self.config(cursor="wait")
         self.default_font = font.nametofont("TkDefaultFont")
         self.default_font.configure(family="Segoe UI", size=9)

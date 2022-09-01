@@ -33,6 +33,7 @@
         "Segoe",
         "textvariable",
         "tkmsg",
+        "toolwindow",
         "zipfile"
     ],
     "python.testing.pytestArgs": [
