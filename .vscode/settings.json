@@ -18,6 +18,7 @@
         "partnumber",
         "pdoc",
         "projectnumber",
+        "pygit",
         "pylint",
         "pylintrc",
         "pyproject",
