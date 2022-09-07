@@ -107,6 +107,7 @@ class ProcessWidget:
             width=30,
             font=("Segoe UI", 9),
             state=tk.DISABLED,
+            wrap=tk.WORD,
         )
         self.text_note_process.grid(
             row=(self._pid - resource.settings.processes.first) * 2 + 1,

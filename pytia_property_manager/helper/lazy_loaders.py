@@ -101,9 +101,9 @@ class LazyDocumentHelper:
             )
 
     @property
-    def path(self) -> str:
+    def path(self) -> Path:
         """Returns the documents absolute path with filename and file extension."""
-        return self.document.document.full_name
+        return Path(self.document.document.full_name)
 
     @property
     def folder(self) -> Path:

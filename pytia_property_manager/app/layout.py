@@ -1,7 +1,7 @@
 """
     The layout of the app.
 """
-from tkinter import DISABLED, Tk, ttk
+from tkinter import DISABLED, WORD, Tk, ttk
 
 from const import Source
 from pytia_ui_tools.widgets.texts import ScrolledText
@@ -411,6 +411,7 @@ class Layout:
             height=6,
             width=30,
             state=DISABLED,
+            wrap=WORD,
             background="#f0f0f0",
             cursor="arrow",
             font=("Segoe UI", 9),
