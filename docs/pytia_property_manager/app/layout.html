@@ -30,10 +30,9 @@
 <pre><code class="python">&#34;&#34;&#34;
     The layout of the app.
 &#34;&#34;&#34;
-from tkinter import DISABLED, Tk, ttk
+from tkinter import DISABLED, WORD, Tk, ttk
 
 from const import Source
-from helper.values import increase_revision
 from pytia_ui_tools.widgets.texts import ScrolledText
 from resources import resource
 
@@ -187,8 +186,6 @@ class Layout:
             text=&#34;New Revision&#34;,
             width=12,
             state=DISABLED,
-            command=lambda: increase_revision(variables.revision),
-            # TODO: Add proper revision handling.
         )
         self._btn_revision.grid(
             row=4, column=2, padx=(5, Layout.MARGIN_X), pady=1, sticky=&#34;nsew&#34;
@@ -443,6 +440,7 @@ class Layout:
             height=6,
             width=30,
             state=DISABLED,
+            wrap=WORD,
             background=&#34;#f0f0f0&#34;,
             cursor=&#34;arrow&#34;,
             font=(&#34;Segoe UI&#34;, 9),
@@ -855,8 +853,6 @@ class Layout:
             text=&#34;New Revision&#34;,
             width=12,
             state=DISABLED,
-            command=lambda: increase_revision(variables.revision),
-            # TODO: Add proper revision handling.
         )
         self._btn_revision.grid(
             row=4, column=2, padx=(5, Layout.MARGIN_X), pady=1, sticky=&#34;nsew&#34;
@@ -1111,6 +1107,7 @@ class Layout:
             height=6,
             width=30,
             state=DISABLED,
+            wrap=WORD,
             background=&#34;#f0f0f0&#34;,
             cursor=&#34;arrow&#34;,
             font=(&#34;Segoe UI&#34;, 9),

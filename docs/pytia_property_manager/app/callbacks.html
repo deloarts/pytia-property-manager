@@ -31,18 +31,28 @@
     The callbacks submodule for the main window.
 &#34;&#34;&#34;
 
+import os
+import re
+import shutil
+from pathlib import Path
+from stat import S_IREAD, S_IRGRP, S_IROTH, S_IWUSR
 from tkinter import StringVar, Tk
 from tkinter import messagebox as tkmsg
+from tkinter import simpledialog
 
-from const import Source
+from const import REVISION_FOLDER, Source
 from handler.properties import Properties
 from helper.launcher import launch_bounding_box_app
 from helper.lazy_loaders import LazyDocumentHelper
+from helper.values import get_new_revision
 from material_manager import MaterialManager
+from pytia.exceptions import PytiaDocumentOperationError
 from pytia.log import log
 from pytia_ui_tools.handlers.workspace_handler import Workspace
 from pytia_ui_tools.helper.values import add_current_value_to_combobox_list
 from resources import resource
+from win32api import SetFileAttributes
+from win32con import FILE_ATTRIBUTE_HIDDEN
 
 from app.layout import Layout
 from app.state_setter import UISetter
@@ -137,6 +147,7 @@ class Callbacks:
 
     def _bind_button_callbacks(self) -&gt; None:
         &#34;&#34;&#34;Binds all callbacks to the main windows buttons.&#34;&#34;&#34;
+        self.layout.button_revision.configure(command=self.on_btn_revision)
         self.layout.button_source.configure(command=self.on_btn_reload_source)
         self.layout.button_material.configure(command=self.on_btn_material)
         self.layout.button_base_size.configure(command=self.on_btn_bounding_box)
@@ -187,6 +198,64 @@ class Callbacks:
         log.info(&#34;Callback for button &#39;Abort&#39;.&#34;)
         self.root.withdraw()
         self.root.destroy()
+
+    def on_btn_revision(self) -&gt; None:
+        &#34;&#34;&#34;Callback function for the revision button.&#34;&#34;&#34;
+        log.info(&#34;Callback for button &#39;Revision&#39;.&#34;)
+
+        current_desc = self.vars.description.get()
+        line_ending = &#34;\n&#34; if len(current_desc) else &#34;&#34;
+
+        current_revision = self.vars.revision.get()
+        new_revision = get_new_revision(self.vars.revision)
+
+        user_input = simpledialog.askstring(
+            parent=self.root,
+            title=resource.settings.title,
+            prompt=(
+                &#34;Enter a brief description of the changes you&#39;re about to make between revision &#34;
+                f&#34;{current_revision} and {new_revision}.\n\n&#34;
+            ),
+        )
+
+        if user_input and not re.match(r&#34;^\s+$&#34;, str(user_input)):
+            revision_folder = Path(self.doc_helper.folder, REVISION_FOLDER)
+            revision_file = Path(
+                revision_folder, f&#34;{current_revision}.{self.doc_helper.name}&#34;
+            )
+            try:
+                os.makedirs(name=revision_folder, exist_ok=True)
+                SetFileAttributes(str(revision_folder), FILE_ATTRIBUTE_HIDDEN)  # type: ignore
+
+                if os.path.exists(revision_file):
+                    os.chmod(revision_file, S_IWUSR | S_IREAD)
+                    os.remove(revision_file)
+                shutil.copy(self.doc_helper.path, revision_file)
+                os.chmod(revision_file, S_IREAD | S_IRGRP | S_IROTH)
+
+                self.vars.revision.set(new_revision)
+                self.vars.description.set(
+                    f&#34;Revision {new_revision}: {user_input}{line_ending}{current_desc}&#34;
+                )
+
+                log.info(
+                    f&#34;Created new revision ({new_revision}) for document &#34;
+                    f&#34;{self.doc_helper.name} and saved a copy of the old revision to &#34;
+                    f&#34;{revision_folder}.&#34;
+                )
+            except PermissionError as e:
+                log.error(f&#34;Failed to create new revision: {e}&#34;)
+                tkmsg.showerror(
+                    title=resource.settings.title,
+                    message=(
+                        &#34;Failed to create a new revision: Permission error in the file system.&#34;
+                    ),
+                )
+        else:
+            tkmsg.showwarning(
+                title=resource.settings.title,
+                message=(&#34;Failed to create a new revision: Invalid description.&#34;),
+            )
 
     def on_btn_material(self) -&gt; None:
         &#34;&#34;&#34;Callback function for the material button. Opens the material manager window.&#34;&#34;&#34;
@@ -383,6 +452,7 @@ result of the nomenclature check. Defaults to False.</dd>
 
     def _bind_button_callbacks(self) -&gt; None:
         &#34;&#34;&#34;Binds all callbacks to the main windows buttons.&#34;&#34;&#34;
+        self.layout.button_revision.configure(command=self.on_btn_revision)
         self.layout.button_source.configure(command=self.on_btn_reload_source)
         self.layout.button_material.configure(command=self.on_btn_material)
         self.layout.button_base_size.configure(command=self.on_btn_bounding_box)
@@ -433,6 +503,64 @@ result of the nomenclature check. Defaults to False.</dd>
         log.info(&#34;Callback for button &#39;Abort&#39;.&#34;)
         self.root.withdraw()
         self.root.destroy()
+
+    def on_btn_revision(self) -&gt; None:
+        &#34;&#34;&#34;Callback function for the revision button.&#34;&#34;&#34;
+        log.info(&#34;Callback for button &#39;Revision&#39;.&#34;)
+
+        current_desc = self.vars.description.get()
+        line_ending = &#34;\n&#34; if len(current_desc) else &#34;&#34;
+
+        current_revision = self.vars.revision.get()
+        new_revision = get_new_revision(self.vars.revision)
+
+        user_input = simpledialog.askstring(
+            parent=self.root,
+            title=resource.settings.title,
+            prompt=(
+                &#34;Enter a brief description of the changes you&#39;re about to make between revision &#34;
+                f&#34;{current_revision} and {new_revision}.\n\n&#34;
+            ),
+        )
+
+        if user_input and not re.match(r&#34;^\s+$&#34;, str(user_input)):
+            revision_folder = Path(self.doc_helper.folder, REVISION_FOLDER)
+            revision_file = Path(
+                revision_folder, f&#34;{current_revision}.{self.doc_helper.name}&#34;
+            )
+            try:
+                os.makedirs(name=revision_folder, exist_ok=True)
+                SetFileAttributes(str(revision_folder), FILE_ATTRIBUTE_HIDDEN)  # type: ignore
+
+                if os.path.exists(revision_file):
+                    os.chmod(revision_file, S_IWUSR | S_IREAD)
+                    os.remove(revision_file)
+                shutil.copy(self.doc_helper.path, revision_file)
+                os.chmod(revision_file, S_IREAD | S_IRGRP | S_IROTH)
+
+                self.vars.revision.set(new_revision)
+                self.vars.description.set(
+                    f&#34;Revision {new_revision}: {user_input}{line_ending}{current_desc}&#34;
+                )
+
+                log.info(
+                    f&#34;Created new revision ({new_revision}) for document &#34;
+                    f&#34;{self.doc_helper.name} and saved a copy of the old revision to &#34;
+                    f&#34;{revision_folder}.&#34;
+                )
+            except PermissionError as e:
+                log.error(f&#34;Failed to create new revision: {e}&#34;)
+                tkmsg.showerror(
+                    title=resource.settings.title,
+                    message=(
+                        &#34;Failed to create a new revision: Permission error in the file system.&#34;
+                    ),
+                )
+        else:
+            tkmsg.showwarning(
+                title=resource.settings.title,
+                message=(&#34;Failed to create a new revision: Invalid description.&#34;),
+            )
 
     def on_btn_material(self) -&gt; None:
         &#34;&#34;&#34;Callback function for the material button. Opens the material manager window.&#34;&#34;&#34;
@@ -576,6 +704,74 @@ result of the nomenclature check. Defaults to False.</dd>
         )</code></pre>
 </details>
 </dd>
+<dt id="pytia_property_manager.app.callbacks.Callbacks.on_btn_revision"><code class="name flex">
+<span>def <span class="ident">on_btn_revision</span></span>(<span>self) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Callback function for the revision button.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def on_btn_revision(self) -&gt; None:
+    &#34;&#34;&#34;Callback function for the revision button.&#34;&#34;&#34;
+    log.info(&#34;Callback for button &#39;Revision&#39;.&#34;)
+
+    current_desc = self.vars.description.get()
+    line_ending = &#34;\n&#34; if len(current_desc) else &#34;&#34;
+
+    current_revision = self.vars.revision.get()
+    new_revision = get_new_revision(self.vars.revision)
+
+    user_input = simpledialog.askstring(
+        parent=self.root,
+        title=resource.settings.title,
+        prompt=(
+            &#34;Enter a brief description of the changes you&#39;re about to make between revision &#34;
+            f&#34;{current_revision} and {new_revision}.\n\n&#34;
+        ),
+    )
+
+    if user_input and not re.match(r&#34;^\s+$&#34;, str(user_input)):
+        revision_folder = Path(self.doc_helper.folder, REVISION_FOLDER)
+        revision_file = Path(
+            revision_folder, f&#34;{current_revision}.{self.doc_helper.name}&#34;
+        )
+        try:
+            os.makedirs(name=revision_folder, exist_ok=True)
+            SetFileAttributes(str(revision_folder), FILE_ATTRIBUTE_HIDDEN)  # type: ignore
+
+            if os.path.exists(revision_file):
+                os.chmod(revision_file, S_IWUSR | S_IREAD)
+                os.remove(revision_file)
+            shutil.copy(self.doc_helper.path, revision_file)
+            os.chmod(revision_file, S_IREAD | S_IRGRP | S_IROTH)
+
+            self.vars.revision.set(new_revision)
+            self.vars.description.set(
+                f&#34;Revision {new_revision}: {user_input}{line_ending}{current_desc}&#34;
+            )
+
+            log.info(
+                f&#34;Created new revision ({new_revision}) for document &#34;
+                f&#34;{self.doc_helper.name} and saved a copy of the old revision to &#34;
+                f&#34;{revision_folder}.&#34;
+            )
+        except PermissionError as e:
+            log.error(f&#34;Failed to create new revision: {e}&#34;)
+            tkmsg.showerror(
+                title=resource.settings.title,
+                message=(
+                    &#34;Failed to create a new revision: Permission error in the file system.&#34;
+                ),
+            )
+    else:
+        tkmsg.showwarning(
+            title=resource.settings.title,
+            message=(&#34;Failed to create a new revision: Invalid description.&#34;),
+        )</code></pre>
+</details>
+</dd>
 <dt id="pytia_property_manager.app.callbacks.Callbacks.on_btn_save"><code class="name flex">
 <span>def <span class="ident">on_btn_save</span></span>(<span>self) ‑> None</span>
 </code></dt>
@@ -641,6 +837,7 @@ documents properties.</p></div>
 <li><code><a title="pytia_property_manager.app.callbacks.Callbacks.on_btn_mass" href="#pytia_property_manager.app.callbacks.Callbacks.on_btn_mass">on_btn_mass</a></code></li>
 <li><code><a title="pytia_property_manager.app.callbacks.Callbacks.on_btn_material" href="#pytia_property_manager.app.callbacks.Callbacks.on_btn_material">on_btn_material</a></code></li>
 <li><code><a title="pytia_property_manager.app.callbacks.Callbacks.on_btn_reload_source" href="#pytia_property_manager.app.callbacks.Callbacks.on_btn_reload_source">on_btn_reload_source</a></code></li>
+<li><code><a title="pytia_property_manager.app.callbacks.Callbacks.on_btn_revision" href="#pytia_property_manager.app.callbacks.Callbacks.on_btn_revision">on_btn_revision</a></code></li>
 <li><code><a title="pytia_property_manager.app.callbacks.Callbacks.on_btn_save" href="#pytia_property_manager.app.callbacks.Callbacks.on_btn_save">on_btn_save</a></code></li>
 </ul>
 </li>

@@ -66,6 +66,7 @@ class NoteWidget:
             width=30,
             font=("Segoe UI", 9),
             state=tk.DISABLED,
+            wrap=tk.WORD,
         )
         self.text_note.grid(
             row=row,

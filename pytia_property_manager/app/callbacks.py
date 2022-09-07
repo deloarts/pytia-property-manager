@@ -2,18 +2,28 @@
     The callbacks submodule for the main window.
 """
 
+import os
+import re
+import shutil
+from pathlib import Path
+from stat import S_IREAD, S_IRGRP, S_IROTH, S_IWUSR
 from tkinter import StringVar, Tk
 from tkinter import messagebox as tkmsg
+from tkinter import simpledialog
 
-from const import Source
+from const import REVISION_FOLDER, Source
 from handler.properties import Properties
 from helper.launcher import launch_bounding_box_app
 from helper.lazy_loaders import LazyDocumentHelper
+from helper.values import get_new_revision
 from material_manager import MaterialManager
+from pytia.exceptions import PytiaDocumentOperationError
 from pytia.log import log
 from pytia_ui_tools.handlers.workspace_handler import Workspace
 from pytia_ui_tools.helper.values import add_current_value_to_combobox_list
 from resources import resource
+from win32api import SetFileAttributes
+from win32con import FILE_ATTRIBUTE_HIDDEN
 
 from app.layout import Layout
 from app.state_setter import UISetter
@@ -108,6 +118,7 @@ class Callbacks:
 
     def _bind_button_callbacks(self) -> None:
         """Binds all callbacks to the main windows buttons."""
+        self.layout.button_revision.configure(command=self.on_btn_revision)
         self.layout.button_source.configure(command=self.on_btn_reload_source)
         self.layout.button_material.configure(command=self.on_btn_material)
         self.layout.button_base_size.configure(command=self.on_btn_bounding_box)
@@ -158,6 +169,64 @@ class Callbacks:
         log.info("Callback for button 'Abort'.")
         self.root.withdraw()
         self.root.destroy()
+
+    def on_btn_revision(self) -> None:
+        """Callback function for the revision button."""
+        log.info("Callback for button 'Revision'.")
+
+        current_desc = self.vars.description.get()
+        line_ending = "\n" if len(current_desc) else ""
+
+        current_revision = self.vars.revision.get()
+        new_revision = get_new_revision(self.vars.revision)
+
+        user_input = simpledialog.askstring(
+            parent=self.root,
+            title=resource.settings.title,
+            prompt=(
+                "Enter a brief description of the changes you're about to make between revision "
+                f"{current_revision} and {new_revision}.\n\n"
+            ),
+        )
+
+        if user_input and not re.match(r"^\s+$", str(user_input)):
+            revision_folder = Path(self.doc_helper.folder, REVISION_FOLDER)
+            revision_file = Path(
+                revision_folder, f"{current_revision}.{self.doc_helper.name}"
+            )
+            try:
+                os.makedirs(name=revision_folder, exist_ok=True)
+                SetFileAttributes(str(revision_folder), FILE_ATTRIBUTE_HIDDEN)  # type: ignore
+
+                if os.path.exists(revision_file):
+                    os.chmod(revision_file, S_IWUSR | S_IREAD)
+                    os.remove(revision_file)
+                shutil.copy(self.doc_helper.path, revision_file)
+                os.chmod(revision_file, S_IREAD | S_IRGRP | S_IROTH)
+
+                self.vars.revision.set(new_revision)
+                self.vars.description.set(
+                    f"Revision {new_revision}: {user_input}{line_ending}{current_desc}"
+                )
+
+                log.info(
+                    f"Created new revision ({new_revision}) for document "
+                    f"{self.doc_helper.name} and saved a copy of the old revision to "
+                    f"{revision_folder}."
+                )
+            except PermissionError as e:
+                log.error(f"Failed to create new revision: {e}")
+                tkmsg.showerror(
+                    title=resource.settings.title,
+                    message=(
+                        "Failed to create a new revision: Permission error in the file system."
+                    ),
+                )
+        else:
+            tkmsg.showwarning(
+                title=resource.settings.title,
+                message=("Failed to create a new revision: Invalid description."),
+            )
 
     def on_btn_material(self) -> None:
         """Callback function for the material button. Opens the material manager window."""
