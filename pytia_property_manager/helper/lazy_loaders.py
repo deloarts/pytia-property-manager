@@ -9,13 +9,15 @@ import re
 import time
 from dataclasses import asdict
 from pathlib import Path
-from tkinter import StringVar, ttk
+from tkinter import StringVar
+from tkinter import messagebox as tkmsg
+from tkinter import ttk
 from typing import List, Optional
 
 from app.vars import Variables
 from app.widgets.notes import NoteWidgets
 from app.widgets.processes import ProcessWidgets
-from const import LOGON, REVISION_FOLDER, Source
+from const import LOGON, PROP_DRAWING_PATH, REVISION_FOLDER, Source
 from pytia.exceptions import (
     PytiaDifferentDocumentError,
     PytiaDocumentNotSavedError,
@@ -99,6 +101,21 @@ class LazyDocumentHelper:
                 "You opened a document from the revision folder. "
                 "It's not allowed to modify documents from this folder."
             )
+
+        if (
+            self.document.properties.exists(PROP_DRAWING_PATH)
+            and (prop := self.get_property(PROP_DRAWING_PATH))
+            and not os.path.exists(prop)
+        ):
+            tkmsg.showwarning(
+                title=resource.settings.title,
+                message=(
+                    "This document has a drawing file attached to it, but the drawing cannot be found. "
+                    "The link to the drawing file will be removed.\n\n"
+                    f"Last known location: {prop!r}."
+                ),
+            )
+            self.document.properties.delete(PROP_DRAWING_PATH)
 
     @property
     def path(self) -> Path:

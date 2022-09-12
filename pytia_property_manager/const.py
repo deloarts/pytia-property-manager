@@ -29,6 +29,8 @@ VENV_PYTHONW = VENV + "\\Scripts\\pythonw.exe"
 PY_VERSION = APPDATA + "\\pyversion.txt"
 REVISION_FOLDER = ".rev"
 
+PROP_DRAWING_PATH = "pytia.drawing_path"
+
 CONFIG_APPDATA = "config.json"
 CONFIG_SETTINGS = "settings.json"
 CONFIG_DEPS = "dependencies.json"

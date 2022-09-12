@@ -11,7 +11,7 @@ from tkinter import StringVar, Tk
 from tkinter import messagebox as tkmsg
 from tkinter import simpledialog
 
-from const import REVISION_FOLDER, Source
+from const import PROP_DRAWING_PATH, REVISION_FOLDER, Source
 from handler.properties import Properties
 from helper.launcher import launch_bounding_box_app
 from helper.lazy_loaders import LazyDocumentHelper
@@ -174,6 +174,18 @@ class Callbacks:
         """Callback function for the revision button."""
         log.info("Callback for button 'Revision'.")
 
+        if self.doc_helper.document.properties.exists(PROP_DRAWING_PATH):
+            if not tkmsg.askyesno(
+                title=resource.settings.title,
+                message=(
+                    "This document has a drawing file attached to it.\n\n"
+                    "Creating a new revision will remove the link to the attached drawing "
+                    "document.\n\n"
+                    "Do you want to continue?"
+                ),
+            ):
+                return
+
         current_desc = self.vars.description.get()
         line_ending = "\n" if len(current_desc) else ""
 
@@ -214,6 +226,10 @@ class Callbacks:
                     f"{self.doc_helper.name} and saved a copy of the old revision to "
                     f"{revision_folder}."
                 )
+                if self.doc_helper.document.properties.exists(PROP_DRAWING_PATH):
+                    self.doc_helper.document.properties.delete(PROP_DRAWING_PATH)
+                    log.info(f"Removed property {PROP_DRAWING_PATH!r} from document.")
+
             except PermissionError as e:
                 log.error(f"Failed to create new revision: {e}")
                 tkmsg.showerror(
