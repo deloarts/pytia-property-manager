@@ -108,11 +108,20 @@ class Properties:
                 "Please select a project number from the dropdown menu."
             )
 
-        if not self.vars.project.get():
+        if (
+            resource.settings.verifications.require_project
+            and not self.vars.project.get()
+        ):
             critical.append("The project number is not set.")
-        if not self.vars.machine.get():
+        if (
+            resource.settings.verifications.require_machine
+            and not self.vars.machine.get()
+        ):
             critical.append("The machine number is not set.")
-        if not self.vars.revision.get():
+        if (
+            resource.settings.verifications.require_revision
+            and not self.vars.revision.get()
+        ):
             critical.append("The revision is not set.")
 
         match self.vars.source.get():

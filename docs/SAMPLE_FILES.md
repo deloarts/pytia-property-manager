@@ -28,6 +28,11 @@ This file contains the basic settings for the app.
         "strict_machine": false,
         "enable_information": true
     },
+    "verification": {
+        "require_project": true,
+        "require_machine": true,
+        "require_revision": true
+    },
     "separators": {
         "bought": " - ",
         "metadata": " -- "
@@ -89,6 +94,9 @@ restrictions.allow_outside_workspace | `bool` | If set to `false` a **workspace*
 restrictions.strict_project | `bool` | If set to `true` the project number must be present in the **workspace** file, otherwise the changes to the properties cannot be saved. If no workspace file is found, or no **projects** list-item is inside the workspace file, then this is omitted, and any project number can be written to the documents properties.
 restrictions.strict_machine | `bool` | If set to `true` the machine number must be present in the **workspace** file, otherwise the changes to the properties cannot be saved. If no workspace file is found, or no **machine** item is inside the workspace file, then this is omitted, and any machine number can be written to the documents properties. Further, if set to `true`, an existing machine number (a value that is already present in the documents properties) will be overwritten with the value from the workspace file.
 restrictions.enable_information | `bool` | If set to `true` the user will see the notifications from the **information.json** file.
+verification.require_project | `bool` | If set to `true` the user can't save changes, if the project number is unset.
+verification.require_machine | `bool` | If set to `true` the user can't save changes, if the machine number is unset.
+verification.require_revision | `bool` | If set to `true` the user can't save changes, if the revision number is unset.
 separators.bought | `str` | The separator that is used for the bought nomenclature.
 separators.metadata | `str` | The separator that is used to distinguish the metadata from the name of a material.
 nomenclature.made | `str` | The nomenclature for made parts or products.
