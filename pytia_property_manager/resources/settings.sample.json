@@ -12,7 +12,7 @@
         "strict_machine": false,
         "enable_information": true
     },
-    "verification": {
+    "verifications": {
         "require_project": true,
         "require_machine": true,
         "require_revision": true
