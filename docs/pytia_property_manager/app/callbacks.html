@@ -40,7 +40,7 @@ from tkinter import StringVar, Tk
 from tkinter import messagebox as tkmsg
 from tkinter import simpledialog
 
-from const import REVISION_FOLDER, Source
+from const import PROP_DRAWING_PATH, REVISION_FOLDER, Source
 from handler.properties import Properties
 from helper.launcher import launch_bounding_box_app
 from helper.lazy_loaders import LazyDocumentHelper
@@ -203,6 +203,18 @@ class Callbacks:
         &#34;&#34;&#34;Callback function for the revision button.&#34;&#34;&#34;
         log.info(&#34;Callback for button &#39;Revision&#39;.&#34;)
 
+        if self.doc_helper.document.properties.exists(PROP_DRAWING_PATH):
+            if not tkmsg.askyesno(
+                title=resource.settings.title,
+                message=(
+                    &#34;This document has a drawing file attached to it.\n\n&#34;
+                    &#34;Creating a new revision will remove the link to the attached drawing &#34;
+                    &#34;document.\n\n&#34;
+                    &#34;Do you want to continue?&#34;
+                ),
+            ):
+                return
+
         current_desc = self.vars.description.get()
         line_ending = &#34;\n&#34; if len(current_desc) else &#34;&#34;
 
@@ -243,6 +255,10 @@ class Callbacks:
                     f&#34;{self.doc_helper.name} and saved a copy of the old revision to &#34;
                     f&#34;{revision_folder}.&#34;
                 )
+                if self.doc_helper.document.properties.exists(PROP_DRAWING_PATH):
+                    self.doc_helper.document.properties.delete(PROP_DRAWING_PATH)
+                    log.info(f&#34;Removed property {PROP_DRAWING_PATH!r} from document.&#34;)
+
             except PermissionError as e:
                 log.error(f&#34;Failed to create new revision: {e}&#34;)
                 tkmsg.showerror(
@@ -508,6 +524,18 @@ result of the nomenclature check. Defaults to False.</dd>
         &#34;&#34;&#34;Callback function for the revision button.&#34;&#34;&#34;
         log.info(&#34;Callback for button &#39;Revision&#39;.&#34;)
 
+        if self.doc_helper.document.properties.exists(PROP_DRAWING_PATH):
+            if not tkmsg.askyesno(
+                title=resource.settings.title,
+                message=(
+                    &#34;This document has a drawing file attached to it.\n\n&#34;
+                    &#34;Creating a new revision will remove the link to the attached drawing &#34;
+                    &#34;document.\n\n&#34;
+                    &#34;Do you want to continue?&#34;
+                ),
+            ):
+                return
+
         current_desc = self.vars.description.get()
         line_ending = &#34;\n&#34; if len(current_desc) else &#34;&#34;
 
@@ -548,6 +576,10 @@ result of the nomenclature check. Defaults to False.</dd>
                     f&#34;{self.doc_helper.name} and saved a copy of the old revision to &#34;
                     f&#34;{revision_folder}.&#34;
                 )
+                if self.doc_helper.document.properties.exists(PROP_DRAWING_PATH):
+                    self.doc_helper.document.properties.delete(PROP_DRAWING_PATH)
+                    log.info(f&#34;Removed property {PROP_DRAWING_PATH!r} from document.&#34;)
+
             except PermissionError as e:
                 log.error(f&#34;Failed to create new revision: {e}&#34;)
                 tkmsg.showerror(
@@ -717,6 +749,18 @@ result of the nomenclature check. Defaults to False.</dd>
     &#34;&#34;&#34;Callback function for the revision button.&#34;&#34;&#34;
     log.info(&#34;Callback for button &#39;Revision&#39;.&#34;)
 
+    if self.doc_helper.document.properties.exists(PROP_DRAWING_PATH):
+        if not tkmsg.askyesno(
+            title=resource.settings.title,
+            message=(
+                &#34;This document has a drawing file attached to it.\n\n&#34;
+                &#34;Creating a new revision will remove the link to the attached drawing &#34;
+                &#34;document.\n\n&#34;
+                &#34;Do you want to continue?&#34;
+            ),
+        ):
+            return
+
     current_desc = self.vars.description.get()
     line_ending = &#34;\n&#34; if len(current_desc) else &#34;&#34;
 
@@ -757,6 +801,10 @@ result of the nomenclature check. Defaults to False.</dd>
                 f&#34;{self.doc_helper.name} and saved a copy of the old revision to &#34;
                 f&#34;{revision_folder}.&#34;
             )
+            if self.doc_helper.document.properties.exists(PROP_DRAWING_PATH):
+                self.doc_helper.document.properties.delete(PROP_DRAWING_PATH)
+                log.info(f&#34;Removed property {PROP_DRAWING_PATH!r} from document.&#34;)
+
         except PermissionError as e:
             log.error(f&#34;Failed to create new revision: {e}&#34;)
             tkmsg.showerror(

@@ -76,6 +76,15 @@ class SettingsRestrictions:
 
 
 @dataclass(slots=True, kw_only=True, frozen=True)
+class SettingsVerifications:
+    &#34;&#34;&#34;Dataclass for property verification settings.&#34;&#34;&#34;
+
+    require_project: bool
+    require_machine: bool
+    require_revision: bool
+
+
+@dataclass(slots=True, kw_only=True, frozen=True)
 class SettingsSeparators:
     &#34;&#34;&#34;Dataclass for separators.&#34;&#34;&#34;
 
@@ -144,6 +153,7 @@ class Settings:  # pylint: disable=R0902
     demo: bool
     revision: int | str
     restrictions: SettingsRestrictions
+    verifications: SettingsVerifications
     separators: SettingsSeparators
     nomenclature: SettingsNomenclature
     processes: SettingsProcesses
@@ -156,6 +166,7 @@ class Settings:  # pylint: disable=R0902
 
     def __post_init__(self) -&gt; None:
         self.restrictions = SettingsRestrictions(**dict(self.restrictions))  # type: ignore
+        self.verifications = SettingsVerifications(**dict(self.verifications))  # type: ignore
         self.separators = SettingsSeparators(**dict(self.separators))  # type: ignore
         self.nomenclature = SettingsNomenclature(**dict(self.nomenclature))  # type: ignore
         self.processes = SettingsProcesses(**dict(self.processes))  # type: ignore
@@ -555,7 +566,7 @@ resource = Resources()</code></pre>
 <dl>
 <dt id="pytia_property_manager.resources.AppData"><code class="flex name class">
 <span>class <span class="ident">AppData</span></span>
-<span>(</span><span>*, version: str = '0.1.4', counter: int = 0, save_on_apply: bool = True)</span>
+<span>(</span><span>*, version: str = '0.1.5', counter: int = 0, save_on_apply: bool = True)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Dataclass for appdata settings.</p></div>
@@ -1583,7 +1594,7 @@ current session if logon is omitted.</p>
 </dd>
 <dt id="pytia_property_manager.resources.Settings"><code class="flex name class">
 <span>class <span class="ident">Settings</span></span>
-<span>(</span><span>*, title: str, debug: bool, demo: bool, revision: int | str, restrictions: <a title="pytia_property_manager.resources.SettingsRestrictions" href="#pytia_property_manager.resources.SettingsRestrictions">SettingsRestrictions</a>, separators: <a title="pytia_property_manager.resources.SettingsSeparators" href="#pytia_property_manager.resources.SettingsSeparators">SettingsSeparators</a>, nomenclature: <a title="pytia_property_manager.resources.SettingsNomenclature" href="#pytia_property_manager.resources.SettingsNomenclature">SettingsNomenclature</a>, processes: <a title="pytia_property_manager.resources.SettingsProcesses" href="#pytia_property_manager.resources.SettingsProcesses">SettingsProcesses</a>, tolerances: List[str], spare_part_level: List[str], files: <a title="pytia_property_manager.resources.SettingsFiles" href="#pytia_property_manager.resources.SettingsFiles">SettingsFiles</a>, paths: <a title="pytia_property_manager.resources.SettingsPaths" href="#pytia_property_manager.resources.SettingsPaths">SettingsPaths</a>, urls: <a title="pytia_property_manager.resources.SettingsUrls" href="#pytia_property_manager.resources.SettingsUrls">SettingsUrls</a>, mails: <a title="pytia_property_manager.resources.SettingsMails" href="#pytia_property_manager.resources.SettingsMails">SettingsMails</a>)</span>
+<span>(</span><span>*, title: str, debug: bool, demo: bool, revision: int | str, restrictions: <a title="pytia_property_manager.resources.SettingsRestrictions" href="#pytia_property_manager.resources.SettingsRestrictions">SettingsRestrictions</a>, verifications: <a title="pytia_property_manager.resources.SettingsVerifications" href="#pytia_property_manager.resources.SettingsVerifications">SettingsVerifications</a>, separators: <a title="pytia_property_manager.resources.SettingsSeparators" href="#pytia_property_manager.resources.SettingsSeparators">SettingsSeparators</a>, nomenclature: <a title="pytia_property_manager.resources.SettingsNomenclature" href="#pytia_property_manager.resources.SettingsNomenclature">SettingsNomenclature</a>, processes: <a title="pytia_property_manager.resources.SettingsProcesses" href="#pytia_property_manager.resources.SettingsProcesses">SettingsProcesses</a>, tolerances: List[str], spare_part_level: List[str], files: <a title="pytia_property_manager.resources.SettingsFiles" href="#pytia_property_manager.resources.SettingsFiles">SettingsFiles</a>, paths: <a title="pytia_property_manager.resources.SettingsPaths" href="#pytia_property_manager.resources.SettingsPaths">SettingsPaths</a>, urls: <a title="pytia_property_manager.resources.SettingsUrls" href="#pytia_property_manager.resources.SettingsUrls">SettingsUrls</a>, mails: <a title="pytia_property_manager.resources.SettingsMails" href="#pytia_property_manager.resources.SettingsMails">SettingsMails</a>)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Dataclass for settings (settings.json).</p></div>
@@ -1600,6 +1611,7 @@ class Settings:  # pylint: disable=R0902
     demo: bool
     revision: int | str
     restrictions: SettingsRestrictions
+    verifications: SettingsVerifications
     separators: SettingsSeparators
     nomenclature: SettingsNomenclature
     processes: SettingsProcesses
@@ -1612,6 +1624,7 @@ class Settings:  # pylint: disable=R0902
 
     def __post_init__(self) -&gt; None:
         self.restrictions = SettingsRestrictions(**dict(self.restrictions))  # type: ignore
+        self.verifications = SettingsVerifications(**dict(self.verifications))  # type: ignore
         self.separators = SettingsSeparators(**dict(self.separators))  # type: ignore
         self.nomenclature = SettingsNomenclature(**dict(self.nomenclature))  # type: ignore
         self.processes = SettingsProcesses(**dict(self.processes))  # type: ignore
@@ -1675,6 +1688,10 @@ class Settings:  # pylint: disable=R0902
 <div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
 </dd>
 <dt id="pytia_property_manager.resources.Settings.urls"><code class="name">var <span class="ident">urls</span> : <a title="pytia_property_manager.resources.SettingsUrls" href="#pytia_property_manager.resources.SettingsUrls">SettingsUrls</a></code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.Settings.verifications"><code class="name">var <span class="ident">verifications</span> : <a title="pytia_property_manager.resources.SettingsVerifications" href="#pytia_property_manager.resources.SettingsVerifications">SettingsVerifications</a></code></dt>
 <dd>
 <div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
 </dd>
@@ -1957,6 +1974,40 @@ class SettingsUrls:
 </dd>
 </dl>
 </dd>
+<dt id="pytia_property_manager.resources.SettingsVerifications"><code class="flex name class">
+<span>class <span class="ident">SettingsVerifications</span></span>
+<span>(</span><span>*, require_project: bool, require_machine: bool, require_revision: bool)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Dataclass for property verification settings.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass(slots=True, kw_only=True, frozen=True)
+class SettingsVerifications:
+    &#34;&#34;&#34;Dataclass for property verification settings.&#34;&#34;&#34;
+
+    require_project: bool
+    require_machine: bool
+    require_revision: bool</code></pre>
+</details>
+<h3>Instance variables</h3>
+<dl>
+<dt id="pytia_property_manager.resources.SettingsVerifications.require_machine"><code class="name">var <span class="ident">require_machine</span> : bool</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.SettingsVerifications.require_project"><code class="name">var <span class="ident">require_project</span> : bool</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.SettingsVerifications.require_revision"><code class="name">var <span class="ident">require_revision</span> : bool</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+</dl>
+</dd>
 <dt id="pytia_property_manager.resources.User"><code class="flex name class">
 <span>class <span class="ident">User</span></span>
 <span>(</span><span>*, logon: str, id: str, name: str, mail: str)</span>
@@ -2160,6 +2211,7 @@ def values(self) -&gt; List[str]:
 <li><code><a title="pytia_property_manager.resources.Settings.title" href="#pytia_property_manager.resources.Settings.title">title</a></code></li>
 <li><code><a title="pytia_property_manager.resources.Settings.tolerances" href="#pytia_property_manager.resources.Settings.tolerances">tolerances</a></code></li>
 <li><code><a title="pytia_property_manager.resources.Settings.urls" href="#pytia_property_manager.resources.Settings.urls">urls</a></code></li>
+<li><code><a title="pytia_property_manager.resources.Settings.verifications" href="#pytia_property_manager.resources.Settings.verifications">verifications</a></code></li>
 </ul>
 </li>
 <li>
@@ -2225,6 +2277,14 @@ def values(self) -&gt; List[str]:
 <h4><code><a title="pytia_property_manager.resources.SettingsUrls" href="#pytia_property_manager.resources.SettingsUrls">SettingsUrls</a></code></h4>
 <ul class="">
 <li><code><a title="pytia_property_manager.resources.SettingsUrls.help" href="#pytia_property_manager.resources.SettingsUrls.help">help</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="pytia_property_manager.resources.SettingsVerifications" href="#pytia_property_manager.resources.SettingsVerifications">SettingsVerifications</a></code></h4>
+<ul class="">
+<li><code><a title="pytia_property_manager.resources.SettingsVerifications.require_machine" href="#pytia_property_manager.resources.SettingsVerifications.require_machine">require_machine</a></code></li>
+<li><code><a title="pytia_property_manager.resources.SettingsVerifications.require_project" href="#pytia_property_manager.resources.SettingsVerifications.require_project">require_project</a></code></li>
+<li><code><a title="pytia_property_manager.resources.SettingsVerifications.require_revision" href="#pytia_property_manager.resources.SettingsVerifications.require_revision">require_revision</a></code></li>
 </ul>
 </li>
 <li>
