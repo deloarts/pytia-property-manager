@@ -3,7 +3,7 @@
 A visual tool for managing CATIA properties.
 
 ![state](https://img.shields.io/badge/State-Alpha-brown.svg?style=for-the-badge)
-![version](https://img.shields.io/badge/Version-0.1.4-orange.svg?style=for-the-badge)
+![version](https://img.shields.io/badge/Version-0.1.5-orange.svg?style=for-the-badge)
 
 [![python](https://img.shields.io/badge/Python-3.10-blue.svg?style=for-the-badge)](https://www.python.org/downloads/)
 ![catia](https://img.shields.io/badge/CATIA-V5%206R2017-blue.svg?style=for-the-badge)
@@ -257,6 +257,7 @@ The filename of the workspace file can be changed in the **settings.json** file,
 
 ## 6 changelog
 
+**v0.1.5**: Show warning for invalid verifications.  
 **v0.1.4**: Update text editor and revision handling.  
 **v0.1.3**: Update deps to fix workspace encoding.  
 **v0.1.2**: Add revision to main body, minor changes.  

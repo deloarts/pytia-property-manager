@@ -5,7 +5,7 @@
 import os
 from enum import Enum
 
-__version__ = "0.1.4"
+__version__ = "0.1.5"
 
 PYTIA = "pytia"
 PYTIA_PROPERTY_MANAGER = "pytia_property_manager"
