@@ -38,13 +38,15 @@ import re
 import time
 from dataclasses import asdict
 from pathlib import Path
-from tkinter import StringVar, ttk
+from tkinter import StringVar
+from tkinter import messagebox as tkmsg
+from tkinter import ttk
 from typing import List, Optional
 
 from app.vars import Variables
 from app.widgets.notes import NoteWidgets
 from app.widgets.processes import ProcessWidgets
-from const import LOGON, REVISION_FOLDER, Source
+from const import LOGON, PROP_DRAWING_PATH, REVISION_FOLDER, Source
 from pytia.exceptions import (
     PytiaDifferentDocumentError,
     PytiaDocumentNotSavedError,
@@ -128,6 +130,21 @@ class LazyDocumentHelper:
                 &#34;You opened a document from the revision folder. &#34;
                 &#34;It&#39;s not allowed to modify documents from this folder.&#34;
             )
+
+        if (
+            self.document.properties.exists(PROP_DRAWING_PATH)
+            and (prop := self.get_property(PROP_DRAWING_PATH))
+            and not os.path.exists(prop)
+        ):
+            tkmsg.showwarning(
+                title=resource.settings.title,
+                message=(
+                    &#34;This document has a drawing file attached to it, but the drawing cannot be found. &#34;
+                    &#34;The link to the drawing file will be removed.\n\n&#34;
+                    f&#34;Last known location: {prop!r}.&#34;
+                ),
+            )
+            self.document.properties.delete(PROP_DRAWING_PATH)
 
     @property
     def path(self) -&gt; Path:
@@ -656,6 +673,21 @@ document changes all operations will be made on the original document.</p>
                 &#34;You opened a document from the revision folder. &#34;
                 &#34;It&#39;s not allowed to modify documents from this folder.&#34;
             )
+
+        if (
+            self.document.properties.exists(PROP_DRAWING_PATH)
+            and (prop := self.get_property(PROP_DRAWING_PATH))
+            and not os.path.exists(prop)
+        ):
+            tkmsg.showwarning(
+                title=resource.settings.title,
+                message=(
+                    &#34;This document has a drawing file attached to it, but the drawing cannot be found. &#34;
+                    &#34;The link to the drawing file will be removed.\n\n&#34;
+                    f&#34;Last known location: {prop!r}.&#34;
+                ),
+            )
+            self.document.properties.delete(PROP_DRAWING_PATH)
 
     @property
     def path(self) -&gt; Path:

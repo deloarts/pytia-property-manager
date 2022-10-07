@@ -140,11 +140,25 @@ class Properties:
             )
 
         if not self.vars.project.get():
-            critical.append(&#34;The project number is not set.&#34;)
+            msg = &#34;The project number is not set.&#34;
+            if resource.settings.verifications.require_project:
+                critical.append(msg)
+            else:
+                warning.append(msg)
+
         if not self.vars.machine.get():
-            critical.append(&#34;The machine number is not set.&#34;)
+            msg = &#34;The machine number is not set.&#34;
+            if resource.settings.verifications.require_machine:
+                critical.append(msg)
+            else:
+                warning.append(msg)
+
         if not self.vars.revision.get():
-            critical.append(&#34;The revision is not set.&#34;)
+            msg = &#34;The revision number is not set.&#34;
+            if resource.settings.verifications.require_revision:
+                critical.append(msg)
+            else:
+                warning.append(msg)
 
         match self.vars.source.get():
             case Source.MADE.value:
@@ -375,11 +389,25 @@ class Properties:
             )
 
         if not self.vars.project.get():
-            critical.append(&#34;The project number is not set.&#34;)
+            msg = &#34;The project number is not set.&#34;
+            if resource.settings.verifications.require_project:
+                critical.append(msg)
+            else:
+                warning.append(msg)
+
         if not self.vars.machine.get():
-            critical.append(&#34;The machine number is not set.&#34;)
+            msg = &#34;The machine number is not set.&#34;
+            if resource.settings.verifications.require_machine:
+                critical.append(msg)
+            else:
+                warning.append(msg)
+
         if not self.vars.revision.get():
-            critical.append(&#34;The revision is not set.&#34;)
+            msg = &#34;The revision number is not set.&#34;
+            if resource.settings.verifications.require_revision:
+                critical.append(msg)
+            else:
+                warning.append(msg)
 
         match self.vars.source.get():
             case Source.MADE.value:
@@ -660,11 +688,25 @@ class Properties:
         )
 
     if not self.vars.project.get():
-        critical.append(&#34;The project number is not set.&#34;)
+        msg = &#34;The project number is not set.&#34;
+        if resource.settings.verifications.require_project:
+            critical.append(msg)
+        else:
+            warning.append(msg)
+
     if not self.vars.machine.get():
-        critical.append(&#34;The machine number is not set.&#34;)
+        msg = &#34;The machine number is not set.&#34;
+        if resource.settings.verifications.require_machine:
+            critical.append(msg)
+        else:
+            warning.append(msg)
+
     if not self.vars.revision.get():
-        critical.append(&#34;The revision is not set.&#34;)
+        msg = &#34;The revision number is not set.&#34;
+        if resource.settings.verifications.require_revision:
+            critical.append(msg)
+        else:
+            warning.append(msg)
 
     match self.vars.source.get():
         case Source.MADE.value:

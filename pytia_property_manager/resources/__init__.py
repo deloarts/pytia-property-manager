@@ -45,6 +45,15 @@ class SettingsRestrictions:
 
 
 @dataclass(slots=True, kw_only=True, frozen=True)
+class SettingsVerifications:
+    """Dataclass for property verification settings."""
+
+    require_project: bool
+    require_machine: bool
+    require_revision: bool
+
+
+@dataclass(slots=True, kw_only=True, frozen=True)
 class SettingsSeparators:
     """Dataclass for separators."""
 
@@ -113,6 +122,7 @@ class Settings:  # pylint: disable=R0902
     demo: bool
     revision: int | str
     restrictions: SettingsRestrictions
+    verifications: SettingsVerifications
     separators: SettingsSeparators
     nomenclature: SettingsNomenclature
     processes: SettingsProcesses
@@ -125,6 +135,7 @@ class Settings:  # pylint: disable=R0902
 
     def __post_init__(self) -> None:
         self.restrictions = SettingsRestrictions(**dict(self.restrictions))  # type: ignore
+        self.verifications = SettingsVerifications(**dict(self.verifications))  # type: ignore
         self.separators = SettingsSeparators(**dict(self.separators))  # type: ignore
         self.nomenclature = SettingsNomenclature(**dict(self.nomenclature))  # type: ignore
         self.processes = SettingsProcesses(**dict(self.processes))  # type: ignore

@@ -12,6 +12,11 @@
         "strict_machine": false,
         "enable_information": true
     },
+    "verifications": {
+        "require_project": true,
+        "require_machine": true,
+        "require_revision": true
+    },
     "separators": {
         "bought": " - ",
         "metadata": " -- "

@@ -5,7 +5,7 @@
 import os
 from enum import Enum
 
-__version__ = "0.1.4"
+__version__ = "0.1.5"
 
 PYTIA = "pytia"
 PYTIA_PROPERTY_MANAGER = "pytia_property_manager"
@@ -28,6 +28,8 @@ VENV_PYTHON = VENV + "\\Scripts\\python.exe"
 VENV_PYTHONW = VENV + "\\Scripts\\pythonw.exe"
 PY_VERSION = APPDATA + "\\pyversion.txt"
 REVISION_FOLDER = ".rev"
+
+PROP_DRAWING_PATH = "pytia.drawing_path"
 
 CONFIG_APPDATA = "config.json"
 CONFIG_SETTINGS = "settings.json"
