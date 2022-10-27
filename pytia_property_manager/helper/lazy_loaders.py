@@ -227,17 +227,23 @@ class LazyDocumentHelper:
 
             self.document.part.in_work_object = self.document.bodies.main_body
 
+            # The main body name depends on the source of the document.
             match variables.source.get():
                 case Source.MADE.value:
-                    self.document.bodies.main_body.name = (
-                        f"{variables.machine.get()}"
-                        " - "
-                        f"{variables.partnumber.get()}"
-                        " - Rev"
-                        f"{variables.revision.get()}"
-                    )
+                    if variables.machine.get() != "":
+                        main_body_name = (
+                            f"{variables.machine.get()}"
+                            " - "
+                            f"{variables.partnumber.get()}"
+                            " - Rev"
+                            f"{variables.revision.get()}"
+                        )
+                    else:
+                        main_body_name = variables.partnumber.get()
                 case Source.BOUGHT.value | _:
-                    self.document.bodies.main_body.name = variables.partnumber.get()
+                    main_body_name = variables.partnumber.get()
+
+            self.document.bodies.main_body.name = main_body_name
 
     @staticmethod
     def _ensure_doc_not_changed(func):
