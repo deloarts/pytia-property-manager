@@ -53,8 +53,9 @@ class LazyDocumentHelper:
         self.is_part = self.lazy_document.is_part
         self.is_document = self.lazy_document.is_product
 
-        self._lock_catia(True)
-        atexit.register(lambda: self._lock_catia(False))
+        # FIXME: Locking CATIA disables the change-detection.
+        # self._lock_catia(True)
+        # atexit.register(lambda: self._lock_catia(False))
 
         if not resource.settings.restrictions.allow_unsaved and not os.path.isabs(
             self.lazy_document.full_name
