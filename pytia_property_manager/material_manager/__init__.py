@@ -49,6 +49,7 @@ class MaterialManager(Toplevel):
 
         self.title("Material Manager")
         self.attributes("-topmost", True)
+        self.attributes("-toolwindow", True)
         self.resizable(False, False)
         self.configure(cursor="wait")
         self.default_font = font.nametofont("TkDefaultFont")
