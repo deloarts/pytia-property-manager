@@ -25,8 +25,6 @@ Table of contents:
 
 - [pytia property manager](#pytia-property-manager)
   - [1 installation](#1-installation)
-    - [1.1 user](#11-user)
-    - [1.2 developer](#12-developer)
   - [2 setup](#2-setup)
     - [2.1 resource files](#21-resource-files)
       - [2.1.1 default files](#211-default-files)
@@ -68,8 +66,6 @@ Table of contents:
 
 ## 1 installation
 
-### 1.1 user
-
 On the users machine you need to install the following:
 
 - CATIA
@@ -84,20 +80,6 @@ python-installer.exe /passive PrependPath=1 Include_doc=0 Include_test=0 SimpleI
 ```
 
 For convenience there is a powershell script that will install the required python version for you, see [assets/python_installer.ps1](assets/python_installer.ps1).
-
-### 1.2 developer
-
-On the developers machine (this is you) install the following:
-
-- CATIA
-- [Python](https://www.python.org/downloads/)
-- [Poetry](https://python-poetry.org/docs/master/)
-
-> ✏️ Use poetry to install all dependencies and dev-dependencies to work on this project.
->
-> 🔒 Some dependencies are from private repos. You need to have [ssh-access](https://docs.github.com/en/authentication/connecting-to-github-with-ssh) to those repositories. Test your ssh connection with `ssh -T git@github.com`
->
-> ❗️ Never develop new features and fixes in the main branch!
 
 ## 2 setup
 
