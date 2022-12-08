@@ -38,10 +38,16 @@ class Build:
             self.settings = json.load(f)
 
         self.dev_build = bool(
-            self.settings["debug"] or not re.match(r"^v\d+(\.\d+){2,3}$", branch_name)
+            self.settings["debug"]
+            or (
+                not re.match(r"^v\d+(\.\d+){2,3}$", branch_name)
+                and not branch_name.lower() in ["head", "main"]
+            )
         )
         if self.dev_build:
-            console.warning("App is built in development mode")
+            console.warning(
+                f"App is built in development mode from branch {branch_name!r}"
+            )
 
     def provide(self):
         console.info("Providing folders ...")
@@ -137,7 +143,7 @@ class Build:
             filter=None,
             compressed=False,
         )
-        console.info(f"Built app into {str(self.build_folder)!r}")
+        console.ok(f"Built app into {str(self.build_folder)!r}")
 
 
 if __name__ == "__main__":
