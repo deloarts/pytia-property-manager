@@ -8,7 +8,7 @@ version = "0.1.6"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-pytia = {git = "ssh://git@github.com/deloarts/pytia.git", tag = "v0.3.0"}
+pytia = {git = "ssh://git@github.com/deloarts/pytia.git", tag = "v0.3.1"}
 pytia-ui-tools = {git = "ssh://git@github.com/deloarts/pytia-ui-tools.git", tag = "v0.6.2"}
 
 [tool.poetry.dev-dependencies]
