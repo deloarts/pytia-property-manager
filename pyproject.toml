@@ -4,16 +4,16 @@ classifiers = ["Operating System :: Windows"]
 description = "A visual tool for managing CATIA V5 properties."
 name = "pytia-property-manager"
 readme = "README.md"
-version = "0.1.6"
+version = "0.1.7"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-pytia = {git = "ssh://git@github.com/deloarts/pytia.git", tag = "v0.1.1"}
-pytia-ui-tools = {git = "ssh://git@github.com/deloarts/pytia-ui-tools.git", tag = "v0.5.2"}
+pytia = {git = "ssh://git@github.com/deloarts/pytia.git", tag = "v0.3.1"}
+pytia-ui-tools = {git = "ssh://git@github.com/deloarts/pytia-ui-tools.git", tag = "v0.6.2"}
 
 [tool.poetry.dev-dependencies]
 Jinja2 = "^3.1.2"
-black = "^22.3.0"
+black = "22.10.0"
 packaging = "^21.3"
 pdoc3 = "^0.10.0"
 pre-commit = "^2.19.0"

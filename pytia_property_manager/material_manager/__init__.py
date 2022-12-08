@@ -8,16 +8,15 @@ from tkinter import Toplevel, font, ttk
 
 from app.state_setter import UISetter
 from decorators import timer
-from pytia.exceptions import PytiaMaterialNotFound
-from pytia.log import log
-from pytia_ui_tools.window_manager import WindowManager
-from resources import resource
-
 from material_manager.callbacks import Callbacks
 from material_manager.frames import Frames
 from material_manager.layout import Layout
 from material_manager.traces import Traces
 from material_manager.vars import Variables
+from pytia.exceptions import PytiaMaterialNotFound
+from pytia.log import log
+from pytia_ui_tools.window_manager import WindowManager
+from resources import resource
 
 
 class MaterialManager(Toplevel):
@@ -50,6 +49,7 @@ class MaterialManager(Toplevel):
 
         self.title("Material Manager")
         self.attributes("-topmost", True)
+        self.attributes("-toolwindow", True)
         self.resizable(False, False)
         self.configure(cursor="wait")
         self.default_font = font.nametofont("TkDefaultFont")
@@ -92,11 +92,9 @@ class MaterialManager(Toplevel):
         # pylint: enable=C0415
 
         self.vars.material_data = get_materials(
-            str(
-                Path(
-                    resource.settings.paths.material,
-                    resource.settings.files.material,
-                )
+            Path(
+                resource.settings.paths.material,
+                resource.settings.files.material,
             )
         )
         if self.vars.material_data:
