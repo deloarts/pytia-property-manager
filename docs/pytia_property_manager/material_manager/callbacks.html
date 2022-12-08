@@ -35,10 +35,9 @@ from pathlib import Path
 from tkinter import Toplevel
 
 from app.state_setter import UISetter
-from resources import resource
-
 from material_manager.layout import Layout
 from material_manager.vars import Variables
+from resources import resource
 
 
 class Callbacks:
@@ -105,11 +104,9 @@ class Callbacks:
 
             apply_material(
                 material=selected_material,
-                catalog_path=str(
-                    Path(
-                        resource.settings.paths.material,
-                        resource.settings.files.material,
-                    )
+                catalog_path=Path(
+                    resource.settings.paths.material,
+                    resource.settings.files.material,
                 ),
             )
 
@@ -226,11 +223,9 @@ on instantiation.</p>
 
             apply_material(
                 material=selected_material,
-                catalog_path=str(
-                    Path(
-                        resource.settings.paths.material,
-                        resource.settings.files.material,
-                    )
+                catalog_path=Path(
+                    resource.settings.paths.material,
+                    resource.settings.files.material,
                 ),
             )
 
@@ -302,11 +297,9 @@ Applies the material to the document.</p></div>
 
         apply_material(
             material=selected_material,
-            catalog_path=str(
-                Path(
-                    resource.settings.paths.material,
-                    resource.settings.files.material,
-                )
+            catalog_path=Path(
+                resource.settings.paths.material,
+                resource.settings.files.material,
             ),
         )
 

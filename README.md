@@ -3,7 +3,7 @@
 A visual tool for managing CATIA properties.
 
 ![state](https://img.shields.io/badge/State-Alpha-brown.svg?style=for-the-badge)
-![version](https://img.shields.io/badge/Version-0.1.6-orange.svg?style=for-the-badge)
+![version](https://img.shields.io/badge/Version-0.1.7-orange.svg?style=for-the-badge)
 
 [![python](https://img.shields.io/badge/Python-3.10-blue.svg?style=for-the-badge)](https://www.python.org/downloads/)
 ![catia](https://img.shields.io/badge/CATIA-V5%206R2017-blue.svg?style=for-the-badge)
@@ -369,6 +369,7 @@ On a new revision, do the following:
 
 ## 7 changelog
 
+**v0.1.7**: Allow same id with different logon. Better build process.  
 **v0.1.6**: Disable catia lock.  
 **v0.1.5**: Show warning for invalid verifications.  
 **v0.1.4**: Update text editor and revision handling.  
