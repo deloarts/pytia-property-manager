@@ -2,8 +2,8 @@
 
 A visual tool for managing CATIA properties.
 
-![state](https://img.shields.io/badge/State-Alpha-brown.svg?style=for-the-badge)
-![version](https://img.shields.io/badge/Version-0.1.7-orange.svg?style=for-the-badge)
+![state](https://img.shields.io/badge/State-beta-brown.svg?style=for-the-badge)
+![version](https://img.shields.io/badge/Version-0.2.0-orange.svg?style=for-the-badge)
 
 [![python](https://img.shields.io/badge/Python-3.10-blue.svg?style=for-the-badge)](https://www.python.org/downloads/)
 ![catia](https://img.shields.io/badge/CATIA-V5%206R2017-blue.svg?style=for-the-badge)
@@ -13,13 +13,13 @@ A visual tool for managing CATIA properties.
 
 Check out the pytia ecosystem:
 
-- [pytia](https://github.com/deloarts/pytia): The heart of this project.
-- [pytia-property-manager](https://github.com/deloarts/pytia-property-manager): An app to edit part and product properties.
-- [pytia-bounding-box](https://github.com/deloarts/pytia-bounding-box): For retrieving the bounding box of a part.
-- [pytia-bill-of-material](https://github.com/deloarts/pytia-bill-of-material): Exports the bill of material and data of a product.
-- [pytia-title-block](https://github.com/deloarts/pytia-title-block): An app to edit a drawing's title block.
-- [pytia-quick-export](https://github.com/deloarts/pytia-quick-export): Single file export with useful features.
-- [pytia-ui-tools](https://github.com/deloarts/pytia-ui-tools): A toolbox for all pytia apps.
+- **pytia** ([web](https://pytia.deloarts.com/), [repo](https://github.com/deloarts/pytia)): The heart of this project.
+- **pytia-property-manager** ([web](https://pytia.deloarts.com/property-manager/v0.html), [repo](https://github.com/deloarts/pytia-property-manager)) : An app to edit part and product properties.
+- **pytia-bounding-box** ([web](https://pytia.deloarts.com/bounding-box/v0.html), [repo](https://github.com/deloarts/pytia-bounding-box)): For retrieving the bounding box of a part.
+- **pytia-bill-of-material** ([web](https://pytia.deloarts.com/bill-of-material/v0.html), [repo](https://github.com/deloarts/pytia-bill-of-material)): Exports the bill of material and data of a product.
+- **pytia-title-block** ([web](https://pytia.deloarts.com/title-block/v0.html), [repo](https://github.com/deloarts/pytia-title-block)): An app to edit a drawing's title block.
+- **pytia-quick-export** ([web](https://pytia.deloarts.com/quick-export/v0.html), [repo](https://github.com/deloarts/pytia-quick-export)): Single file export with useful features.
+- **pytia-ui-tools** ([web](https://pytia.deloarts.com/), [repo](https://github.com/deloarts/pytia-ui-tools)): A toolbox for all pytia apps.
 
 Table of contents:
 
@@ -30,11 +30,10 @@ Table of contents:
       - [2.1.1 default files](#211-default-files)
       - [2.1.2 sample files](#212-sample-files)
       - [2.1.3 static files](#213-static-files)
-    - [2.2 provide local dependencies](#22-provide-local-dependencies)
-    - [2.3 provide a release folder](#23-provide-a-release-folder)
-    - [2.4 build](#24-build)
-    - [2.5 release](#25-release)
-    - [2.6 docs](#26-docs)
+    - [2.2 provide a release folder](#22-provide-a-release-folder)
+    - [2.3 build](#23-build)
+    - [2.4 release](#24-release)
+    - [2.5 docs](#25-docs)
   - [3 usage](#3-usage)
     - [3.1 buttons](#31-buttons)
       - [3.1.1 revision button](#311-revision-button)
@@ -69,6 +68,7 @@ On the users machine you need to install the following:
 
 - CATIA
 - [Python](https://www.python.org/downloads/)
+- [Git](https://gitforwindows.org/)
 
 When the user starts the app it will automatically install all its requirements. Further the app also updates outdated dependencies if needed. The apps environment will be created in the users appdata-folder: `C:\Users\User\AppData\Roaming\pytia\pytia_property_manager`
 
@@ -106,26 +106,13 @@ Example: Before you can build the app you have to copy the [settings.sample.json
 
 Files without 'default' or 'sample' in their names cannot be changed! Just leave them there, they are needed for the app to work.
 
-### 2.2 provide local dependencies
-
-Some dependencies are not publicly available on PyPi or GitHub (because they are private). Therefore it's necessary to provide the wheel-file locally for the app to auto-install it. The list below shows said local deps:
-
-Name | Link | Version
---- | --- | ---
-**pytia** | <https://github.com/deloarts/pytia> | [0.3.1](https://github.com/deloarts/pytia/releases/tag/v0.3.1)
-**pytia-ui-tools** | <https://github.com/deloarts/pytia-ui-tools> | [0.6.2](https://github.com/deloarts/pytia-ui-tools/releases/tag/v0.6.2)
-
-> ❗️ The folder where you provide the local dependencies must match the **paths.local_dependencies** entry of the **settings.json**. The user must have at least read access on this folder.
->
-> ✏️ Put the wheel file on a shared network drive if you have multiple users.
-
-### 2.3 provide a release folder
+### 2.2 provide a release folder
 
 To be able to launch the app from within CATIA you need to provide a release folder, where the app and a launcher file are stored. Both files (the app and the launcher) will be created with the [_build.py](_build.py) script, and released to the release-folder with the [_release.py](_release.py) script.
 
 > ❗️ Add this release folder to the **settings.json** file as value of the **paths.release** key.
 
-### 2.4 build
+### 2.3 build
 
 > ❗️ Do not build the app with poetry! This package is not not meant to be used as an import, it should be used as an app.
 
@@ -135,7 +122,7 @@ To build the app and make it executable for the user run the [_build.py](_build.
 >
 > ✏️ The reason this app isn't compiled to an exe is performance. It takes way too long to load the UI if the app isn't launched as python zipfile.
 
-### 2.5 release
+### 2.4 release
 
 To release the app into the provided release folder run the [_release.py](_release.py) script.
 
@@ -145,7 +132,7 @@ You can always change the path of the release folder by editing the value from t
 
 > ⚠️ Once you built and released the app you cannot move the python app nor the catvbs script to another location, because absolute paths will be written to those files. If you have to move the location of the files you have to change the paths in the **settings.json** config file, build the app again and release it to the new destination.
 
-### 2.6 docs
+### 2.5 docs
 
 You can find the documentation in the [docs folder](/docs).
 
@@ -369,6 +356,7 @@ On a new revision, do the following:
 
 ## 7 changelog
 
+**v0.2.0**: Remove local dependencies.  
 **v0.1.7**: Allow same id with different logon. Better build process.  
 **v0.1.6**: Disable catia lock.  
 **v0.1.5**: Show warning for invalid verifications.  
