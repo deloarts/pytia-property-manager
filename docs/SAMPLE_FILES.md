@@ -60,7 +60,6 @@ This file contains the basic settings for the app.
     "paths": {
         "catia": "C:\\CATIA\\V5-6R2017\\B27",
         "material": "C:\\pytia\\material",
-        "local_dependencies": "C:\\pytia\\local_deps",
         "release": "C:\\pytia\\release"
     },
     "files": {
@@ -108,7 +107,6 @@ tolerances | `List[str]` | A list of available tolerances.
 spare_part_level | `List[str]` | A list of available spare part levels.
 paths.catia | `str` | The absolute path to the CATIA executables.
 paths.material | `str` | The absolute path to the CATMaterial file.
-paths.local_dependencies | `str` | The folder where local local_dependencies (python wheel files) for the installer are stored.
 paths.release | `str` | The folder where the launcher and the app are released into.
 files.app | `str` | The name of the released python app file.
 files.launcher | `str` | The name of the release catvbs launcher file.
