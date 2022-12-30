@@ -4,6 +4,7 @@
 
 import os
 from enum import Enum
+from pathlib import Path
 
 __version__ = "0.2.0"
 
@@ -24,8 +25,8 @@ PID = os.getpid()
 PID_FILE = f"{TEMP}\\{PYTIA_PROPERTY_MANAGER}.pid"
 PID_FILE_BOUNDING_BOX = f"{TEMP}\\{PYTIA_BOUNDING_BOX}.pid"
 VENV = f"\\.env\\{APP_VERSION}"
-VENV_PYTHON = VENV + "\\Scripts\\python.exe"
-VENV_PYTHONW = VENV + "\\Scripts\\pythonw.exe"
+VENV_PYTHON = Path(VENV, "Scripts\\python.exe")
+VENV_PYTHONW = Path(VENV, "Scripts\\pythonw.exe")
 PY_VERSION = APPDATA + "\\pyversion.txt"
 REVISION_FOLDER = ".rev"
 

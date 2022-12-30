@@ -53,7 +53,7 @@ class Environment:
 
     @staticmethod
     def is_virtual() -> bool:
-        return VENV_PYTHON in sys.executable or VENV_PYTHONW in sys.executable
+        return str(VENV_PYTHON) in sys.executable or str(VENV_PYTHONW) in sys.executable
 
     @classmethod
     def warn_if_not_virtual(cls) -> None:
@@ -75,12 +75,8 @@ class Environment:
 class Dependencies:
     """Class for managing dependencies."""
 
-    __slots__ = ("_required_packages", "_missing_packages", "_runs_in_venv")
-
     def __init__(self) -> None:
-        self._runs_in_venv = (
-            VENV_PYTHON in sys.executable or VENV_PYTHONW in sys.executable
-        )
+        pass
 
     @staticmethod
     def read_dependencies_file() -> List[PackageInfo]:
@@ -240,8 +236,8 @@ class VisualInstaller(tk.Tk):
 
         for index, key in enumerate(pip_commands.keys()):
             python_exe = sys.executable
-            if VENV_PYTHONW in python_exe:
-                python_exe = python_exe.replace(VENV_PYTHONW, VENV_PYTHON)
+            if str(VENV_PYTHONW) in python_exe:
+                python_exe = python_exe.replace(str(VENV_PYTHONW), str(VENV_PYTHON))
             command = f"start /wait {python_exe} -m pip install {pip_commands[key]} --no-cache-dir"
             self.message.set(
                 f"Installing package {index+1} of {len(pip_commands)}: {key}"
