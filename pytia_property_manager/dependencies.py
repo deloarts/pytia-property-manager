@@ -13,8 +13,6 @@
 
 import importlib.resources
 import json
-import os
-import pathlib
 import subprocess
 import sys
 import tkinter as tk
