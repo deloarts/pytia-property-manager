@@ -28,14 +28,7 @@ from tkinter import ttk
 from typing import Dict, List
 from urllib.parse import urlparse
 
-from const import (
-    CNEXT,
-    CONFIG_DEPS,
-    CONFIG_DEPS_DEFAULT,
-    VENV_PYTHON,
-    VENV_PYTHONW,
-    WEB_PIP,
-)
+from const import CNEXT, CONFIG_DEPS, VENV_PYTHON, VENV_PYTHONW, WEB_PIP
 from resources import resource
 
 
@@ -97,12 +90,7 @@ class Dependencies:
         Returns:
             List[PackageInfo]: The dependencies as a list.
         """
-        deps_resource = (
-            CONFIG_DEPS
-            if importlib.resources.is_resource("resources", CONFIG_DEPS)
-            else CONFIG_DEPS_DEFAULT
-        )
-        with importlib.resources.open_binary("resources", deps_resource) as f:
+        with importlib.resources.open_binary("resources", CONFIG_DEPS) as f:
             return [PackageInfo(**i) for i in json.load(f)]
 
     def _remove_venv(self) -> None:
