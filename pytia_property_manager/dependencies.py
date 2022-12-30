@@ -173,10 +173,6 @@ class Dependencies:
                     sys.exit()
 
             if self._pip_available():
-                # subprocess.call(
-                #     f"start /wait python -m pip install {' '.join(pip)} --no-cache-dir",
-                #     shell=True,
-                # )
                 installer = VisualInstaller()
                 installer.install(pip)
                 if missing_packages := self.get_missing_packages():
