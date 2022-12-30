@@ -64,6 +64,8 @@ Table of contents:
 
 ## 1 installation
 
+> ✏️ For a guided installation visit [https://pytia.deloarts.com](https://pytia.deloarts.com/installation/v0.html)
+
 On the users machine you need to install the following:
 
 - CATIA
