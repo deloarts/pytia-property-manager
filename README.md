@@ -69,6 +69,7 @@ On the users machine you need to install the following:
 
 - CATIA
 - [Python](https://www.python.org/downloads/)
+- [Git](https://gitforwindows.org/)
 
 When the user starts the app it will automatically install all its requirements. Further the app also updates outdated dependencies if needed. The apps environment will be created in the users appdata-folder: `C:\Users\User\AppData\Roaming\pytia\pytia_property_manager`
 
