@@ -48,7 +48,6 @@ def test_settings():
 
     assert isinstance(resource.settings.paths.catia, str)
     assert isinstance(resource.settings.paths.material, str)
-    assert isinstance(resource.settings.paths.local_dependencies, str)
     assert isinstance(resource.settings.paths.release, str)
 
     assert isinstance(resource.settings.files.app, str)
@@ -101,12 +100,6 @@ def test_users():
         assert user.logon not in logon_list
 
         logon_list.append(user.logon)
-
-
-def test_local_dependencies_folder():
-    from pytia_property_manager.resources import resource
-
-    assert os.path.isdir(resource.settings.paths.local_dependencies)
 
 
 def test_release_folder():

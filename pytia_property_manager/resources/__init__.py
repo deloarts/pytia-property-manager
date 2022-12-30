@@ -84,7 +84,6 @@ class SettingsPaths:
 
     catia: Path
     material: Path
-    local_dependencies: Path
     release: Path
 
 
