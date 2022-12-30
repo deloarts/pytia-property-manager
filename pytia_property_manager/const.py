@@ -43,7 +43,7 @@ CONFIG_INFOS = "information.json"
 CONFIG_INFOS_DEFAULT = "information.default.json"
 CONFIG_USERS = "users.json"
 
-WEB_PIP = "www.pypi.org"
+WEB_PIP = "https://www.pypi.org"
 
 
 class Source(Enum):
