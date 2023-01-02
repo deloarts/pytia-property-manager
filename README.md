@@ -156,9 +156,7 @@ The usage itself is pretty straight forward, as long as all config files are set
 
 #### 3.1.1 revision button
 
-Increases the revision.
-
-> Later this will also create a backup of the current document, then increases the revision. This allows a nice revision handling.
+Increases the revision. Creates a backup of the part or product first. The backup is a copy of the file, located in a new `.rev` folder, where the original file is located.
 
 #### 3.1.2 reload button
 
