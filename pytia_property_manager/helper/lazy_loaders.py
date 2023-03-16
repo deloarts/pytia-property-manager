@@ -111,8 +111,11 @@ class LazyDocumentHelper:
             tkmsg.showwarning(
                 title=resource.settings.title,
                 message=(
-                    "This document has a drawing file attached to it, but the drawing cannot be found. "
-                    "The link to the drawing file will be removed.\n\n"
+                    "This document has a drawing file attached to it, "
+                    "but the drawing cannot be found. "
+                    "The link to the drawing file will be removed. "
+                    "To restore the link, open the drawing file and use the PYTIA "
+                    "Title Block app.\n\n"
                     f"Last known location: {prop!r}."
                 ),
             )
