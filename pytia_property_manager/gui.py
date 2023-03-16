@@ -8,6 +8,18 @@ from tkinter import font
 from tkinter import messagebox as tkmsg
 from tkinter import ttk
 
+from app.callbacks import Callbacks
+from app.frames import Frames
+from app.layout import Layout
+from app.state_setter import UISetter
+from app.tooltips import ToolTips
+from app.traces import Traces
+from app.vars import Variables
+from const import APP_VERSION, LOG, LOGON, LOGS
+from decorators import timer
+from handler.properties import Properties
+from helper.lazy_loaders import LazyDocumentHelper
+from helper.messages import show_help
 from pytia.exceptions import (
     PytiaBodyEmptyError,
     PytiaDifferentDocumentError,
@@ -21,19 +33,6 @@ from pytia_ui_tools.handlers.error_handler import ErrorHandler
 from pytia_ui_tools.handlers.mail_handler import MailHandler
 from pytia_ui_tools.handlers.workspace_handler import Workspace
 from pytia_ui_tools.window_manager import WindowManager
-
-from app.callbacks import Callbacks
-from app.frames import Frames
-from app.layout import Layout
-from app.state_setter import UISetter
-from app.tooltips import ToolTips
-from app.traces import Traces
-from app.vars import Variables
-from const import APP_VERSION, LOG, LOGON, LOGS
-from decorators import timer
-from handler.properties import Properties
-from helper.lazy_loaders import LazyDocumentHelper
-from helper.messages import show_help
 from resources import resource
 
 
@@ -41,7 +40,7 @@ class GUI(tk.Tk):
     """The user interface of the app."""
 
     WIDTH = 1100
-    HEIGHT = 640
+    HEIGHT = 660
 
     @timer
     def __init__(self) -> None:
@@ -227,7 +226,9 @@ class GUI(tk.Tk):
         """Instantiates the traces class."""
         Traces(
             variables=self.vars,
+            layout=self.layout,
             state_setter=self.set_ui,
+            doc_helper=self.doc_helper,
         )
 
     def tooltips(self) -> None:

@@ -103,24 +103,6 @@ class LazyDocumentHelper:
                 "It's not allowed to modify documents from this folder."
             )
 
-        if (
-            self.document.properties.exists(PROP_DRAWING_PATH)
-            and (prop := self.get_property(PROP_DRAWING_PATH))
-            and not os.path.exists(prop)
-        ):
-            tkmsg.showwarning(
-                title=resource.settings.title,
-                message=(
-                    "This document has a drawing file attached to it, "
-                    "but the drawing cannot be found. "
-                    "The link to the drawing file will be removed. "
-                    "To restore the link, open the drawing file and use the PYTIA "
-                    "Title Block app.\n\n"
-                    f"Last known location: {prop!r}."
-                ),
-            )
-            self.document.properties.delete(PROP_DRAWING_PATH)
-
     @property
     def path(self) -> Path:
         """Returns the documents absolute path with filename and file extension."""
@@ -211,6 +193,20 @@ class LazyDocumentHelper:
             f"The document has changed: {part_document.document.name} -> {self.name}"
         )
         return part_document.document.name != self.name
+
+    def get_all_open_documents(self) -> List[str]:
+        """Returns a list of all open documents (document.name)"""
+        open_documents: List[str] = []
+        for i in range(1, self.framework.catia.documents.count + 1):
+            open_documents.append(self.framework.catia.documents.item(i).name)
+        return open_documents
+
+    def get_all_open_windows(self) -> List[str]:
+        """Returns a list of all open windows"""
+        open_windows: List[str] = []
+        for i in range(1, self.framework.catia.windows.count + 1):
+            open_windows.append(self.framework.catia.windows.item(i).name)
+        return open_windows
 
     def setup_main_body(self, variables: Variables) -> None:
         """

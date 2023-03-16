@@ -45,6 +45,8 @@ CONFIG_USERS = "users.json"
 
 WEB_PIP = "https://www.pypi.org"
 
+SUFFIX_DRAWING = ".CATDrawing"
+
 
 class Source(Enum):
     UNKNOWN = "Unknown"
