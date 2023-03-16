@@ -3,14 +3,13 @@
 """
 from tkinter import DISABLED, WORD, Tk, ttk
 
-from const import Source
-from pytia_ui_tools.widgets.texts import ScrolledText
-from resources import resource
-
 from app.frames import Frames
 from app.vars import Variables
 from app.widgets.notes import NoteWidgets
 from app.widgets.processes import ProcessWidgets
+from const import Source
+from pytia_ui_tools.widgets.texts import ScrolledText
+from resources import resource
 
 
 class Layout:
@@ -432,7 +431,7 @@ class Layout:
             row=15,
             column=0,
             padx=(Layout.MARGIN_X, 5),
-            pady=(20, 2),
+            pady=(Layout.MARGIN_Y, 2),
             ipadx=2,
             ipady=2,
             sticky="new",
@@ -444,7 +443,7 @@ class Layout:
             row=15,
             column=1,
             padx=(5, Layout.MARGIN_X),
-            pady=(20, 2),
+            pady=(Layout.MARGIN_Y, 2),
             ipadx=2,
             ipady=2,
             sticky="nw",
@@ -458,7 +457,7 @@ class Layout:
             row=16,
             column=0,
             padx=(Layout.MARGIN_X, 5),
-            pady=(2, Layout.MARGIN_Y),
+            pady=(2, 2),
             ipadx=2,
             ipady=2,
             sticky="new",
@@ -468,6 +467,32 @@ class Layout:
         )
         self._lbl_modifier_value.grid(
             row=16,
+            column=1,
+            padx=(5, Layout.MARGIN_X),
+            pady=(2, 2),
+            ipadx=2,
+            ipady=2,
+            sticky="nw",
+            columnspan=2,
+        )
+        # endregion
+
+        # region linked doc
+        lbl_linked_doc = ttk.Label(frames.infrastructure, text="Linked Drawing")
+        lbl_linked_doc.grid(
+            row=17,
+            column=0,
+            padx=(Layout.MARGIN_X, 5),
+            pady=(2, Layout.MARGIN_Y),
+            ipadx=2,
+            ipady=2,
+            sticky="new",
+        )
+        self._lbl_linked_doc_value = ttk.Label(
+            frames.infrastructure, textvariable=variables.linked_doc_display
+        )
+        self._lbl_linked_doc_value.grid(
+            row=17,
             column=1,
             padx=(5, Layout.MARGIN_X),
             pady=(2, Layout.MARGIN_Y),
@@ -629,6 +654,11 @@ class Layout:
     def label_modifier(self) -> ttk.Label:
         """Returns the modifier label."""
         return self._lbl_modifier_value
+
+    @property
+    def label_linked_doc(self) -> ttk.Label:
+        """Returns the linked document label."""
+        return self._lbl_linked_doc_value
 
     @property
     def notes(self) -> NoteWidgets:

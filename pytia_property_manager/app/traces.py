@@ -2,30 +2,41 @@
     Traces submodule for the app.
 """
 
+from pathlib import Path
 from tkinter import messagebox as tkmsg
 
-from const import LOGON, Source
-from pytia.log import log
-from resources import resource
-
 from app.callbacks import on_source_bought
+from app.layout import Layout
 from app.state_setter import UISetter
 from app.vars import Variables
+from const import PROP_DRAWING_PATH, SUFFIX_DRAWING, Source
+from helper.lazy_loaders import LazyDocumentHelper
+from pytia.log import log
+from resources import resource
 
 
 class Traces:
     """The Traces class. Responsible for all variable traces in the main window."""
 
-    def __init__(self, variables: Variables, state_setter: UISetter) -> None:
+    def __init__(
+        self,
+        variables: Variables,
+        layout: Layout,
+        state_setter: UISetter,
+        doc_helper: LazyDocumentHelper,
+    ) -> None:
         """
         Inits the Traces class. Adds the main windows' variable traces.
 
         Args:
             vars (Variables): The main window's variables.
             state_setter (UISetter): The state setter of the main window.
+            doc_helper(LazyDocumentHelper): The lazy doc loader instance.
         """
         self.vars = variables
+        self.layout = layout
         self.set_ui = state_setter
+        self.doc_helper = doc_helper
 
         self._add_traces()
         log.info("Traces initialized.")
@@ -38,6 +49,7 @@ class Traces:
         self.vars.base_size.trace_add("write", self.trace_base_size)
         self.vars.creator.trace_add("write", self.trace_creator)
         self.vars.modifier.trace_add("write", self.trace_modifier)
+        self.vars.linked_doc.trace_add("write", self.trace_linked_doc)
 
     def trace_mass(self, *_) -> None:
         """Trace callback for the `mass` StringVar"""
@@ -47,6 +59,24 @@ class Traces:
     def trace_project(self, *_) -> None:
         """Trace callback for the `project` StringVar"""
         ...
+
+    def trace_linked_doc(self, *_) -> None:
+        """Trace callback for the `linked_doc` StringVar"""
+        linked_doc = Path(self.vars.linked_doc.get())
+        if linked_doc.is_file() and linked_doc.suffix == SUFFIX_DRAWING:
+            self.layout.label_linked_doc.configure(cursor="hand2", foreground="blue")
+        else:
+            tkmsg.showwarning(
+                title=resource.settings.title,
+                message=(
+                    "This document has a drawing file attached to it, "
+                    "but the drawing cannot be found. The link to the drawing file "
+                    "will be removed. To restore the link, open the drawing file and "
+                    "use the PYTIA Title Block app.\n\n"
+                    f"Last known location: {str(linked_doc)!r}."
+                ),
+            )
+            self.doc_helper.document.properties.delete(PROP_DRAWING_PATH)
 
     def trace_base_size(self, *_) -> None:
         """Trace callback for the `base_size` StringVar"""

@@ -5,13 +5,17 @@
 import os
 import re
 import shutil
+import sys
 from pathlib import Path
 from stat import S_IREAD, S_IRGRP, S_IROTH, S_IWUSR
 from tkinter import StringVar, Tk
 from tkinter import messagebox as tkmsg
 from tkinter import simpledialog
 
-from const import PROP_DRAWING_PATH, REVISION_FOLDER, Source
+from app.layout import Layout
+from app.state_setter import UISetter
+from app.vars import Variables
+from const import PROP_DRAWING_PATH, REVISION_FOLDER, SUFFIX_DRAWING, Source
 from handler.properties import Properties
 from helper.launcher import launch_bounding_box_app
 from helper.lazy_loaders import LazyDocumentHelper
@@ -24,10 +28,6 @@ from pytia_ui_tools.helper.values import add_current_value_to_combobox_list
 from resources import resource
 from win32api import SetFileAttributes
 from win32con import FILE_ATTRIBUTE_HIDDEN
-
-from app.layout import Layout
-from app.state_setter import UISetter
-from app.vars import Variables
 
 
 def on_source_bought(
@@ -139,6 +139,9 @@ class Callbacks:
         self.layout.input_tolerance.bind(
             "<FocusOut>",
             lambda _: add_current_value_to_combobox_list(self.layout.input_tolerance),
+        )
+        self.layout.label_linked_doc.bind(
+            "<Button-1>", lambda _: self.on_lbl_linked_doc()
         )
 
     def on_btn_save(self) -> None:
@@ -285,3 +288,17 @@ class Callbacks:
         self.set_ui.loading()
         self.doc_helper.setvar_mass(self.vars.mass, force=True)
         self.set_ui.reset()
+
+    def on_lbl_linked_doc(self) -> None:
+        """Opens the linked document, if there is one and closes the app."""
+        linked_doc = Path(self.vars.linked_doc.get())
+        # We have to check if the document is available in a window, otherwise a
+        # prompt with "do you want to open the document again" would appear.
+        if linked_doc.name in self.doc_helper.get_all_open_windows():
+            self.doc_helper.framework.catia.windows.item(linked_doc.name).activate()
+            log.info(f"User opened linked document (window).")
+            sys.exit()
+        if linked_doc.is_file() and linked_doc.suffix == SUFFIX_DRAWING:
+            self.doc_helper.framework.catia.documents.open(str(linked_doc))
+            log.info(f"User opened linked document (file).")
+            sys.exit()
