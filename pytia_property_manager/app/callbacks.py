@@ -202,7 +202,7 @@ class Callbacks:
             title=resource.settings.title,
             prompt=(
                 "Enter a brief description of the changes you're about to make "
-                f"between revision {current_revision} and {new_revision}. "
+                f"between revision {current_revision} and {new_revision}.\n"
                 "Creating a new revision must be done before changing anything "
                 "in the document.\n"
             ),
