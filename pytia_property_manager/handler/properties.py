@@ -212,11 +212,6 @@ class Properties:
         self.doc_helper.setvar_user(self.vars.modifier, resource.props.infra.modifier)
 
         self.doc_helper.setvar_property(self.vars.linked_doc, PROP_DRAWING_PATH)
-        self.doc_helper.setvar(
-            self.vars.linked_doc_display,
-            str(Path(self.vars.linked_doc.get()).stem),
-            default="No document linked",
-        )
 
         self.doc_helper.setvar_notes(self.layout.notes)
 

@@ -63,23 +63,29 @@ class Traces:
     def trace_linked_doc(self, *_) -> None:
         """Trace callback for the `linked_doc` StringVar"""
         linked_doc = Path(self.vars.linked_doc.get())
-        if linked_doc.is_file() and linked_doc.suffix == SUFFIX_DRAWING:
-            self.layout.label_linked_doc.configure(cursor="hand2", foreground="blue")
-        elif self.vars.linked_doc.get() == "":
+
+        if self.vars.linked_doc.get() == "":
+            self.vars.linked_doc_display.set("-")
             self.layout.label_linked_doc.configure(cursor="", foreground="black")
-            self.vars.linked_doc_display.set("No document linked")
-        else:
-            tkmsg.showwarning(
-                title=resource.settings.title,
-                message=(
-                    "This document has a drawing file attached to it, "
-                    "but the drawing cannot be found. The link to the drawing file "
-                    "will be removed. To restore the link, open the drawing file and "
-                    "use the PYTIA Title Block app.\n\n"
-                    f"Last known location: {str(linked_doc)!r}."
-                ),
-            )
+
+        elif linked_doc.is_file() and linked_doc.suffix == SUFFIX_DRAWING:
+            self.vars.linked_doc_display.set(linked_doc.stem)
+            self.layout.label_linked_doc.configure(cursor="hand2", foreground="blue")
+
+        elif tkmsg.askyesno(
+            title=resource.settings.title,
+            message=(
+                "This document has a drawing file attached to it, but the drawing "
+                "cannot be found.\n\nDo you want to remove the linked drawing file "
+                f"from this document?\n\nLast known location: {str(linked_doc)!r}."
+            ),
+        ):
             self.doc_helper.document.properties.delete(PROP_DRAWING_PATH)
+            self.vars.linked_doc_display.set("Link removed")
+            self.layout.label_linked_doc.configure(cursor="", foreground="gray")
+        else:
+            self.vars.linked_doc_display.set("Document not found")
+            self.layout.label_linked_doc.configure(cursor="", foreground="gray")
 
     def trace_base_size(self, *_) -> None:
         """Trace callback for the `base_size` StringVar"""
