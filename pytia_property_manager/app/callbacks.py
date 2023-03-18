@@ -178,13 +178,15 @@ class Callbacks:
         log.info("Callback for button 'Revision'.")
 
         if self.doc_helper.document.properties.exists(PROP_DRAWING_PATH):
+            d_path = self.doc_helper.document.properties.get_by_name(
+                PROP_DRAWING_PATH
+            ).value
             if not tkmsg.askyesno(
                 title=resource.settings.title,
                 message=(
-                    "This document has a drawing file attached to it.\n\n"
-                    "Creating a new revision will remove the link to the attached drawing "
-                    "document.\n\n"
-                    "Do you want to continue?"
+                    f"This document has a drawing file attached to it at {d_path}.\n\n"
+                    "Creating a new revision will remove the link to the attached "
+                    "document.\n\nDo you want to continue?"
                 ),
             ):
                 return
@@ -199,8 +201,10 @@ class Callbacks:
             parent=self.root,
             title=resource.settings.title,
             prompt=(
-                "Enter a brief description of the changes you're about to make between revision "
-                f"{current_revision} and {new_revision}.\n\n"
+                "Enter a brief description of the changes you're about to make "
+                f"between revision {current_revision} and {new_revision}.\n"
+                "Creating a new revision must be done before changing anything "
+                "in the document.\n"
             ),
         )
 
@@ -231,6 +235,7 @@ class Callbacks:
                 )
                 if self.doc_helper.document.properties.exists(PROP_DRAWING_PATH):
                     self.doc_helper.document.properties.delete(PROP_DRAWING_PATH)
+                    self.vars.linked_doc.set("")
                     log.info(f"Removed property {PROP_DRAWING_PATH!r} from document.")
 
             except PermissionError as e:
