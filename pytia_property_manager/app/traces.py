@@ -65,6 +65,9 @@ class Traces:
         linked_doc = Path(self.vars.linked_doc.get())
         if linked_doc.is_file() and linked_doc.suffix == SUFFIX_DRAWING:
             self.layout.label_linked_doc.configure(cursor="hand2", foreground="blue")
+        elif self.vars.linked_doc.get() == "":
+            self.layout.label_linked_doc.configure(cursor="", foreground="black")
+            self.vars.linked_doc_display.set("No document linked")
         else:
             tkmsg.showwarning(
                 title=resource.settings.title,
