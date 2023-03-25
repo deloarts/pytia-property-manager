@@ -3,6 +3,7 @@
 """
 
 import os
+from pathlib import Path
 
 import validators
 
@@ -46,9 +47,9 @@ def test_settings():
     assert isinstance(resource.settings.spare_part_level, list)
     assert isinstance(resource.settings.spare_part_level[0], str)
 
-    assert isinstance(resource.settings.paths.catia, str)
-    assert isinstance(resource.settings.paths.material, str)
-    assert isinstance(resource.settings.paths.release, str)
+    assert isinstance(resource.settings.paths.catia, Path)
+    assert isinstance(resource.settings.paths.material, Path)
+    assert isinstance(resource.settings.paths.release, Path)
 
     assert isinstance(resource.settings.files.app, str)
     assert isinstance(resource.settings.files.launcher, str)
