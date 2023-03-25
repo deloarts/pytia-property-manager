@@ -31,30 +31,41 @@
     Traces submodule for the app.
 &#34;&#34;&#34;
 
+from pathlib import Path
 from tkinter import messagebox as tkmsg
 
-from const import LOGON, Source
-from pytia.log import log
-from resources import resource
-
 from app.callbacks import on_source_bought
+from app.layout import Layout
 from app.state_setter import UISetter
 from app.vars import Variables
+from const import PROP_DRAWING_PATH, SUFFIX_DRAWING, Source
+from helper.lazy_loaders import LazyDocumentHelper
+from pytia.log import log
+from resources import resource
 
 
 class Traces:
     &#34;&#34;&#34;The Traces class. Responsible for all variable traces in the main window.&#34;&#34;&#34;
 
-    def __init__(self, variables: Variables, state_setter: UISetter) -&gt; None:
+    def __init__(
+        self,
+        variables: Variables,
+        layout: Layout,
+        state_setter: UISetter,
+        doc_helper: LazyDocumentHelper,
+    ) -&gt; None:
         &#34;&#34;&#34;
         Inits the Traces class. Adds the main windows&#39; variable traces.
 
         Args:
             vars (Variables): The main window&#39;s variables.
             state_setter (UISetter): The state setter of the main window.
+            doc_helper(LazyDocumentHelper): The lazy doc loader instance.
         &#34;&#34;&#34;
         self.vars = variables
+        self.layout = layout
         self.set_ui = state_setter
+        self.doc_helper = doc_helper
 
         self._add_traces()
         log.info(&#34;Traces initialized.&#34;)
@@ -67,6 +78,7 @@ class Traces:
         self.vars.base_size.trace_add(&#34;write&#34;, self.trace_base_size)
         self.vars.creator.trace_add(&#34;write&#34;, self.trace_creator)
         self.vars.modifier.trace_add(&#34;write&#34;, self.trace_modifier)
+        self.vars.linked_doc.trace_add(&#34;write&#34;, self.trace_linked_doc)
 
     def trace_mass(self, *_) -&gt; None:
         &#34;&#34;&#34;Trace callback for the `mass` StringVar&#34;&#34;&#34;
@@ -76,6 +88,33 @@ class Traces:
     def trace_project(self, *_) -&gt; None:
         &#34;&#34;&#34;Trace callback for the `project` StringVar&#34;&#34;&#34;
         ...
+
+    def trace_linked_doc(self, *_) -&gt; None:
+        &#34;&#34;&#34;Trace callback for the `linked_doc` StringVar&#34;&#34;&#34;
+        linked_doc = Path(self.vars.linked_doc.get())
+
+        if self.vars.linked_doc.get() == &#34;&#34;:
+            self.vars.linked_doc_display.set(&#34;-&#34;)
+            self.layout.label_linked_doc.configure(cursor=&#34;&#34;, foreground=&#34;black&#34;)
+
+        elif linked_doc.is_file() and linked_doc.suffix == SUFFIX_DRAWING:
+            self.vars.linked_doc_display.set(linked_doc.stem)
+            self.layout.label_linked_doc.configure(cursor=&#34;hand2&#34;, foreground=&#34;blue&#34;)
+
+        elif tkmsg.askyesno(
+            title=resource.settings.title,
+            message=(
+                &#34;This document has a drawing file attached to it, but the drawing &#34;
+                &#34;cannot be found.\n\nDo you want to remove the linked drawing file &#34;
+                f&#34;from this document?\n\nLast known location: {str(linked_doc)!r}.&#34;
+            ),
+        ):
+            self.doc_helper.document.properties.delete(PROP_DRAWING_PATH)
+            self.vars.linked_doc_display.set(&#34;Link removed&#34;)
+            self.layout.label_linked_doc.configure(cursor=&#34;&#34;, foreground=&#34;gray&#34;)
+        else:
+            self.vars.linked_doc_display.set(&#34;Document not found&#34;)
+            self.layout.label_linked_doc.configure(cursor=&#34;&#34;, foreground=&#34;gray&#34;)
 
     def trace_base_size(self, *_) -&gt; None:
         &#34;&#34;&#34;Trace callback for the `base_size` StringVar&#34;&#34;&#34;
@@ -153,7 +192,7 @@ class Traces:
 <dl>
 <dt id="pytia_property_manager.app.traces.Traces"><code class="flex name class">
 <span>class <span class="ident">Traces</span></span>
-<span>(</span><span>variables: app.vars.Variables, state_setter: app.state_setter.UISetter)</span>
+<span>(</span><span>variables: app.vars.Variables, layout: app.layout.Layout, state_setter: app.state_setter.UISetter, doc_helper: helper.lazy_loaders.LazyDocumentHelper)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>The Traces class. Responsible for all variable traces in the main window.</p>
@@ -164,7 +203,8 @@ class Traces:
 <dd>The main window's variables.</dd>
 <dt><strong><code>state_setter</code></strong> :&ensp;<code>UISetter</code></dt>
 <dd>The state setter of the main window.</dd>
-</dl></div>
+</dl>
+<p>doc_helper(LazyDocumentHelper): The lazy doc loader instance.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -172,16 +212,25 @@ class Traces:
 <pre><code class="python">class Traces:
     &#34;&#34;&#34;The Traces class. Responsible for all variable traces in the main window.&#34;&#34;&#34;
 
-    def __init__(self, variables: Variables, state_setter: UISetter) -&gt; None:
+    def __init__(
+        self,
+        variables: Variables,
+        layout: Layout,
+        state_setter: UISetter,
+        doc_helper: LazyDocumentHelper,
+    ) -&gt; None:
         &#34;&#34;&#34;
         Inits the Traces class. Adds the main windows&#39; variable traces.
 
         Args:
             vars (Variables): The main window&#39;s variables.
             state_setter (UISetter): The state setter of the main window.
+            doc_helper(LazyDocumentHelper): The lazy doc loader instance.
         &#34;&#34;&#34;
         self.vars = variables
+        self.layout = layout
         self.set_ui = state_setter
+        self.doc_helper = doc_helper
 
         self._add_traces()
         log.info(&#34;Traces initialized.&#34;)
@@ -194,6 +243,7 @@ class Traces:
         self.vars.base_size.trace_add(&#34;write&#34;, self.trace_base_size)
         self.vars.creator.trace_add(&#34;write&#34;, self.trace_creator)
         self.vars.modifier.trace_add(&#34;write&#34;, self.trace_modifier)
+        self.vars.linked_doc.trace_add(&#34;write&#34;, self.trace_linked_doc)
 
     def trace_mass(self, *_) -&gt; None:
         &#34;&#34;&#34;Trace callback for the `mass` StringVar&#34;&#34;&#34;
@@ -203,6 +253,33 @@ class Traces:
     def trace_project(self, *_) -&gt; None:
         &#34;&#34;&#34;Trace callback for the `project` StringVar&#34;&#34;&#34;
         ...
+
+    def trace_linked_doc(self, *_) -&gt; None:
+        &#34;&#34;&#34;Trace callback for the `linked_doc` StringVar&#34;&#34;&#34;
+        linked_doc = Path(self.vars.linked_doc.get())
+
+        if self.vars.linked_doc.get() == &#34;&#34;:
+            self.vars.linked_doc_display.set(&#34;-&#34;)
+            self.layout.label_linked_doc.configure(cursor=&#34;&#34;, foreground=&#34;black&#34;)
+
+        elif linked_doc.is_file() and linked_doc.suffix == SUFFIX_DRAWING:
+            self.vars.linked_doc_display.set(linked_doc.stem)
+            self.layout.label_linked_doc.configure(cursor=&#34;hand2&#34;, foreground=&#34;blue&#34;)
+
+        elif tkmsg.askyesno(
+            title=resource.settings.title,
+            message=(
+                &#34;This document has a drawing file attached to it, but the drawing &#34;
+                &#34;cannot be found.\n\nDo you want to remove the linked drawing file &#34;
+                f&#34;from this document?\n\nLast known location: {str(linked_doc)!r}.&#34;
+            ),
+        ):
+            self.doc_helper.document.properties.delete(PROP_DRAWING_PATH)
+            self.vars.linked_doc_display.set(&#34;Link removed&#34;)
+            self.layout.label_linked_doc.configure(cursor=&#34;&#34;, foreground=&#34;gray&#34;)
+        else:
+            self.vars.linked_doc_display.set(&#34;Document not found&#34;)
+            self.layout.label_linked_doc.configure(cursor=&#34;&#34;, foreground=&#34;gray&#34;)
 
     def trace_base_size(self, *_) -&gt; None:
         &#34;&#34;&#34;Trace callback for the `base_size` StringVar&#34;&#34;&#34;
@@ -303,6 +380,43 @@ class Traces:
         self.vars.creator_display.set(resource.get_user_by_logon(creator).name)
     else:
         self.vars.creator_display.set(f&#34;Unknown user ({creator})&#34;)</code></pre>
+</details>
+</dd>
+<dt id="pytia_property_manager.app.traces.Traces.trace_linked_doc"><code class="name flex">
+<span>def <span class="ident">trace_linked_doc</span></span>(<span>self, *_) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Trace callback for the <code>linked_doc</code> StringVar</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def trace_linked_doc(self, *_) -&gt; None:
+    &#34;&#34;&#34;Trace callback for the `linked_doc` StringVar&#34;&#34;&#34;
+    linked_doc = Path(self.vars.linked_doc.get())
+
+    if self.vars.linked_doc.get() == &#34;&#34;:
+        self.vars.linked_doc_display.set(&#34;-&#34;)
+        self.layout.label_linked_doc.configure(cursor=&#34;&#34;, foreground=&#34;black&#34;)
+
+    elif linked_doc.is_file() and linked_doc.suffix == SUFFIX_DRAWING:
+        self.vars.linked_doc_display.set(linked_doc.stem)
+        self.layout.label_linked_doc.configure(cursor=&#34;hand2&#34;, foreground=&#34;blue&#34;)
+
+    elif tkmsg.askyesno(
+        title=resource.settings.title,
+        message=(
+            &#34;This document has a drawing file attached to it, but the drawing &#34;
+            &#34;cannot be found.\n\nDo you want to remove the linked drawing file &#34;
+            f&#34;from this document?\n\nLast known location: {str(linked_doc)!r}.&#34;
+        ),
+    ):
+        self.doc_helper.document.properties.delete(PROP_DRAWING_PATH)
+        self.vars.linked_doc_display.set(&#34;Link removed&#34;)
+        self.layout.label_linked_doc.configure(cursor=&#34;&#34;, foreground=&#34;gray&#34;)
+    else:
+        self.vars.linked_doc_display.set(&#34;Document not found&#34;)
+        self.layout.label_linked_doc.configure(cursor=&#34;&#34;, foreground=&#34;gray&#34;)</code></pre>
 </details>
 </dd>
 <dt id="pytia_property_manager.app.traces.Traces.trace_mass"><code class="name flex">
@@ -426,6 +540,7 @@ class Traces:
 <ul class="two-column">
 <li><code><a title="pytia_property_manager.app.traces.Traces.trace_base_size" href="#pytia_property_manager.app.traces.Traces.trace_base_size">trace_base_size</a></code></li>
 <li><code><a title="pytia_property_manager.app.traces.Traces.trace_creator" href="#pytia_property_manager.app.traces.Traces.trace_creator">trace_creator</a></code></li>
+<li><code><a title="pytia_property_manager.app.traces.Traces.trace_linked_doc" href="#pytia_property_manager.app.traces.Traces.trace_linked_doc">trace_linked_doc</a></code></li>
 <li><code><a title="pytia_property_manager.app.traces.Traces.trace_mass" href="#pytia_property_manager.app.traces.Traces.trace_mass">trace_mass</a></code></li>
 <li><code><a title="pytia_property_manager.app.traces.Traces.trace_modifier" href="#pytia_property_manager.app.traces.Traces.trace_modifier">trace_modifier</a></code></li>
 <li><code><a title="pytia_property_manager.app.traces.Traces.trace_project" href="#pytia_property_manager.app.traces.Traces.trace_project">trace_project</a></code></li>

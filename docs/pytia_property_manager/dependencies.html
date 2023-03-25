@@ -68,14 +68,7 @@ from tkinter import ttk
 from typing import Dict, List
 from urllib.parse import urlparse
 
-from const import (
-    CNEXT,
-    CONFIG_DEPS,
-    CONFIG_DEPS_DEFAULT,
-    VENV_PYTHON,
-    VENV_PYTHONW,
-    WEB_PIP,
-)
+from const import CNEXT, CONFIG_DEPS, VENV_PYTHON, VENV_PYTHONW, WEB_PIP
 from resources import resource
 
 
@@ -100,7 +93,7 @@ class Environment:
 
     @staticmethod
     def is_virtual() -&gt; bool:
-        return VENV_PYTHON in sys.executable or VENV_PYTHONW in sys.executable
+        return str(VENV_PYTHON) in sys.executable or str(VENV_PYTHONW) in sys.executable
 
     @classmethod
     def warn_if_not_virtual(cls) -&gt; None:
@@ -122,12 +115,8 @@ class Environment:
 class Dependencies:
     &#34;&#34;&#34;Class for managing dependencies.&#34;&#34;&#34;
 
-    __slots__ = (&#34;_required_packages&#34;, &#34;_missing_packages&#34;, &#34;_runs_in_venv&#34;)
-
     def __init__(self) -&gt; None:
-        self._runs_in_venv = (
-            VENV_PYTHON in sys.executable or VENV_PYTHONW in sys.executable
-        )
+        pass
 
     @staticmethod
     def read_dependencies_file() -&gt; List[PackageInfo]:
@@ -137,12 +126,7 @@ class Dependencies:
         Returns:
             List[PackageInfo]: The dependencies as a list.
         &#34;&#34;&#34;
-        deps_resource = (
-            CONFIG_DEPS
-            if importlib.resources.is_resource(&#34;resources&#34;, CONFIG_DEPS)
-            else CONFIG_DEPS_DEFAULT
-        )
-        with importlib.resources.open_binary(&#34;resources&#34;, deps_resource) as f:
+        with importlib.resources.open_binary(&#34;resources&#34;, CONFIG_DEPS) as f:
             return [PackageInfo(**i) for i in json.load(f)]
 
     def _remove_venv(self) -&gt; None:
@@ -292,8 +276,8 @@ class VisualInstaller(tk.Tk):
 
         for index, key in enumerate(pip_commands.keys()):
             python_exe = sys.executable
-            if VENV_PYTHONW in python_exe:
-                python_exe = python_exe.replace(VENV_PYTHONW, VENV_PYTHON)
+            if str(VENV_PYTHONW) in python_exe:
+                python_exe = python_exe.replace(str(VENV_PYTHONW), str(VENV_PYTHON))
             command = f&#34;start /wait {python_exe} -m pip install {pip_commands[key]} --no-cache-dir&#34;
             self.message.set(
                 f&#34;Installing package {index+1} of {len(pip_commands)}: {key}&#34;
@@ -336,12 +320,8 @@ deps = Dependencies()</code></pre>
 <pre><code class="python">class Dependencies:
     &#34;&#34;&#34;Class for managing dependencies.&#34;&#34;&#34;
 
-    __slots__ = (&#34;_required_packages&#34;, &#34;_missing_packages&#34;, &#34;_runs_in_venv&#34;)
-
     def __init__(self) -&gt; None:
-        self._runs_in_venv = (
-            VENV_PYTHON in sys.executable or VENV_PYTHONW in sys.executable
-        )
+        pass
 
     @staticmethod
     def read_dependencies_file() -&gt; List[PackageInfo]:
@@ -351,12 +331,7 @@ deps = Dependencies()</code></pre>
         Returns:
             List[PackageInfo]: The dependencies as a list.
         &#34;&#34;&#34;
-        deps_resource = (
-            CONFIG_DEPS
-            if importlib.resources.is_resource(&#34;resources&#34;, CONFIG_DEPS)
-            else CONFIG_DEPS_DEFAULT
-        )
-        with importlib.resources.open_binary(&#34;resources&#34;, deps_resource) as f:
+        with importlib.resources.open_binary(&#34;resources&#34;, CONFIG_DEPS) as f:
             return [PackageInfo(**i) for i in json.load(f)]
 
     def _remove_venv(self) -&gt; None:
@@ -537,12 +512,7 @@ def read_dependencies_file() -&gt; List[PackageInfo]:
     Returns:
         List[PackageInfo]: The dependencies as a list.
     &#34;&#34;&#34;
-    deps_resource = (
-        CONFIG_DEPS
-        if importlib.resources.is_resource(&#34;resources&#34;, CONFIG_DEPS)
-        else CONFIG_DEPS_DEFAULT
-    )
-    with importlib.resources.open_binary(&#34;resources&#34;, deps_resource) as f:
+    with importlib.resources.open_binary(&#34;resources&#34;, CONFIG_DEPS) as f:
         return [PackageInfo(**i) for i in json.load(f)]</code></pre>
 </details>
 </dd>
@@ -645,7 +615,7 @@ def web_resource_available(address: str) -&gt; bool:
 
     @staticmethod
     def is_virtual() -&gt; bool:
-        return VENV_PYTHON in sys.executable or VENV_PYTHONW in sys.executable
+        return str(VENV_PYTHON) in sys.executable or str(VENV_PYTHONW) in sys.executable
 
     @classmethod
     def warn_if_not_virtual(cls) -&gt; None:
@@ -676,7 +646,7 @@ def web_resource_available(address: str) -&gt; bool:
 </summary>
 <pre><code class="python">@staticmethod
 def is_virtual() -&gt; bool:
-    return VENV_PYTHON in sys.executable or VENV_PYTHONW in sys.executable</code></pre>
+    return str(VENV_PYTHON) in sys.executable or str(VENV_PYTHONW) in sys.executable</code></pre>
 </details>
 </dd>
 <dt id="pytia_property_manager.dependencies.Environment.warn_if_not_virtual"><code class="name flex">
@@ -814,8 +784,8 @@ is the name of the widget class.</p></div>
 
         for index, key in enumerate(pip_commands.keys()):
             python_exe = sys.executable
-            if VENV_PYTHONW in python_exe:
-                python_exe = python_exe.replace(VENV_PYTHONW, VENV_PYTHON)
+            if str(VENV_PYTHONW) in python_exe:
+                python_exe = python_exe.replace(str(VENV_PYTHONW), str(VENV_PYTHON))
             command = f&#34;start /wait {python_exe} -m pip install {pip_commands[key]} --no-cache-dir&#34;
             self.message.set(
                 f&#34;Installing package {index+1} of {len(pip_commands)}: {key}&#34;

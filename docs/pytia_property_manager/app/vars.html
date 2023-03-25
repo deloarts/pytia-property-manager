@@ -63,6 +63,9 @@ class Variables:
     modifier: StringVar
     modifier_display: StringVar
 
+    linked_doc: StringVar
+    linked_doc_display: StringVar
+
     def __init__(self, root: Tk) -&gt; None:
         &#34;&#34;&#34;
         Inits the variables.
@@ -90,9 +93,16 @@ class Variables:
         self.spare_part_level = StringVar(master=root, name=&#34;spare_part_level&#34;)
 
         self.creator = StringVar(master=root, name=&#34;creator&#34;)
-        self.creator_display = StringVar(master=root, name=&#34;creator_display&#34;)
+        self.creator_display = StringVar(master=root, name=&#34;creator_display&#34;, value=&#34;-&#34;)
         self.modifier = StringVar(master=root, name=&#34;modifier&#34;)
-        self.modifier_display = StringVar(master=root, name=&#34;modifier_display&#34;)</code></pre>
+        self.modifier_display = StringVar(
+            master=root, name=&#34;modifier_display&#34;, value=&#34;-&#34;
+        )
+
+        self.linked_doc = StringVar(master=root, name=&#34;linked_doc&#34;)
+        self.linked_doc_display = StringVar(
+            master=root, name=&#34;linked_doc_display&#34;, value=&#34;-&#34;
+        )</code></pre>
 </details>
 </section>
 <section>
@@ -148,6 +158,9 @@ class Variables:
     modifier: StringVar
     modifier_display: StringVar
 
+    linked_doc: StringVar
+    linked_doc_display: StringVar
+
     def __init__(self, root: Tk) -&gt; None:
         &#34;&#34;&#34;
         Inits the variables.
@@ -175,9 +188,16 @@ class Variables:
         self.spare_part_level = StringVar(master=root, name=&#34;spare_part_level&#34;)
 
         self.creator = StringVar(master=root, name=&#34;creator&#34;)
-        self.creator_display = StringVar(master=root, name=&#34;creator_display&#34;)
+        self.creator_display = StringVar(master=root, name=&#34;creator_display&#34;, value=&#34;-&#34;)
         self.modifier = StringVar(master=root, name=&#34;modifier&#34;)
-        self.modifier_display = StringVar(master=root, name=&#34;modifier_display&#34;)</code></pre>
+        self.modifier_display = StringVar(
+            master=root, name=&#34;modifier_display&#34;, value=&#34;-&#34;
+        )
+
+        self.linked_doc = StringVar(master=root, name=&#34;linked_doc&#34;)
+        self.linked_doc_display = StringVar(
+            master=root, name=&#34;linked_doc_display&#34;, value=&#34;-&#34;
+        )</code></pre>
 </details>
 <h3>Instance variables</h3>
 <dl>
@@ -202,6 +222,14 @@ class Variables:
 <div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
 </dd>
 <dt id="pytia_property_manager.app.vars.Variables.description"><code class="name">var <span class="ident">description</span> : tkinter.StringVar</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.app.vars.Variables.linked_doc"><code class="name">var <span class="ident">linked_doc</span> : tkinter.StringVar</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.app.vars.Variables.linked_doc_display"><code class="name">var <span class="ident">linked_doc_display</span> : tkinter.StringVar</code></dt>
 <dd>
 <div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
 </dd>
@@ -292,6 +320,8 @@ class Variables:
 <li><code><a title="pytia_property_manager.app.vars.Variables.creator_display" href="#pytia_property_manager.app.vars.Variables.creator_display">creator_display</a></code></li>
 <li><code><a title="pytia_property_manager.app.vars.Variables.definition" href="#pytia_property_manager.app.vars.Variables.definition">definition</a></code></li>
 <li><code><a title="pytia_property_manager.app.vars.Variables.description" href="#pytia_property_manager.app.vars.Variables.description">description</a></code></li>
+<li><code><a title="pytia_property_manager.app.vars.Variables.linked_doc" href="#pytia_property_manager.app.vars.Variables.linked_doc">linked_doc</a></code></li>
+<li><code><a title="pytia_property_manager.app.vars.Variables.linked_doc_display" href="#pytia_property_manager.app.vars.Variables.linked_doc_display">linked_doc_display</a></code></li>
 <li><code><a title="pytia_property_manager.app.vars.Variables.machine" href="#pytia_property_manager.app.vars.Variables.machine">machine</a></code></li>
 <li><code><a title="pytia_property_manager.app.vars.Variables.manufacturer" href="#pytia_property_manager.app.vars.Variables.manufacturer">manufacturer</a></code></li>
 <li><code><a title="pytia_property_manager.app.vars.Variables.mass" href="#pytia_property_manager.app.vars.Variables.mass">mass</a></code></li>
