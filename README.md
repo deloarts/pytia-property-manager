@@ -322,13 +322,13 @@ Documentation is done with [pdoc3](https://pdoc3.github.io/pdoc/).
 To update the documentation run:
 
 ```powershell
-python -m pdoc --html --output-dir docs pytia_bill_of_material
+python -m pdoc --html --output-dir docs pytia_property_manager
 ```
 
 For preview run:
 
 ```powershell
-python -m pdoc --http : pytia_bill_of_material
+python -m pdoc --http : pytia_property_manager
 ```
 
 ### 5.5 new revision checklist
