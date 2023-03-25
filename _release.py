@@ -51,14 +51,11 @@ class Release:
         ).resolve()
         console.info(f"Launcher build source is {str(self.source_launcher)!r}")
 
-        self.target_app = (
-            f"{self.settings['paths']['release']}/{self.settings['files']['app']}"
-        )
+        release_folder = expand_env_vars(self.settings["paths"]["release"])
+        self.target_app = f"{release_folder}/{self.settings['files']['app']}"
         console.info(f"App release path is {str(self.target_app)!r}")
 
-        self.target_launcher = (
-            f"{self.settings['paths']['release']}/{self.settings['files']['launcher']}"
-        )
+        self.target_launcher = f"{release_folder}/{self.settings['files']['launcher']}"
         console.info(f"Launcher release path is {str(self.target_launcher)!r}")
 
     def move_files(self):
