@@ -13,6 +13,7 @@ from pygit2 import Repository
 from pytia.console import Console
 
 from pytia_property_manager.const import APP_NAME, APP_VERSION
+from pytia_property_manager.resources.utils import expand_env_vars
 
 console = Console()
 settings_path = Path("./pytia_property_manager/resources/settings.json").resolve()
