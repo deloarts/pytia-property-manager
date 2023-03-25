@@ -29,6 +29,7 @@ from const import (
     CONFIG_USERS,
     LOGON,
 )
+from resources.utils import expand_env_vars
 
 
 @dataclass(slots=True, kw_only=True, frozen=True)
@@ -78,13 +79,18 @@ class SettingsProcesses:
     max: int
 
 
-@dataclass(slots=True, kw_only=True, frozen=True)
+@dataclass(slots=True, kw_only=True)
 class SettingsPaths:
     """Dataclass for paths (settings.json)."""
 
     catia: Path
     material: Path
     release: Path
+
+    def __post_init__(self) -> None:
+        self.catia = Path(expand_env_vars(str(self.catia)))
+        self.material = Path(expand_env_vars(str(self.material)))
+        self.release = Path(expand_env_vars(str(self.release)))
 
 
 @dataclass(slots=True, kw_only=True, frozen=True)
