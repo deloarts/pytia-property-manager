@@ -34,6 +34,9 @@ class Variables:
     modifier: StringVar
     modifier_display: StringVar
 
+    linked_doc: StringVar
+    linked_doc_display: StringVar
+
     def __init__(self, root: Tk) -> None:
         """
         Inits the variables.
@@ -61,6 +64,13 @@ class Variables:
         self.spare_part_level = StringVar(master=root, name="spare_part_level")
 
         self.creator = StringVar(master=root, name="creator")
-        self.creator_display = StringVar(master=root, name="creator_display")
+        self.creator_display = StringVar(master=root, name="creator_display", value="-")
         self.modifier = StringVar(master=root, name="modifier")
-        self.modifier_display = StringVar(master=root, name="modifier_display")
+        self.modifier_display = StringVar(
+            master=root, name="modifier_display", value="-"
+        )
+
+        self.linked_doc = StringVar(master=root, name="linked_doc")
+        self.linked_doc_display = StringVar(
+            master=root, name="linked_doc_display", value="-"
+        )

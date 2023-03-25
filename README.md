@@ -3,7 +3,7 @@
 A visual tool for managing CATIA properties.
 
 ![state](https://img.shields.io/badge/State-beta-brown.svg?style=for-the-badge)
-![version](https://img.shields.io/badge/Version-0.2.0-orange.svg?style=for-the-badge)
+![version](https://img.shields.io/badge/Version-0.2.1-orange.svg?style=for-the-badge)
 
 [![python](https://img.shields.io/badge/Python-3.10-blue.svg?style=for-the-badge)](https://www.python.org/downloads/)
 ![catia](https://img.shields.io/badge/CATIA-V5%206R2017-blue.svg?style=for-the-badge)
@@ -63,6 +63,8 @@ Table of contents:
   - [8 to dos](#8-to-dos)
 
 ## 1 installation
+
+> ✏️ For a guided installation visit [https://pytia.deloarts.com](https://pytia.deloarts.com/installation/v0.html)
 
 On the users machine you need to install the following:
 
@@ -154,9 +156,7 @@ The usage itself is pretty straight forward, as long as all config files are set
 
 #### 3.1.1 revision button
 
-Increases the revision.
-
-> Later this will also create a backup of the current document, then increases the revision. This allows a nice revision handling.
+Increases the revision. Creates a backup of the part or product first. The backup is a copy of the file, located in a new `.rev` folder, where the original file is located.
 
 #### 3.1.2 reload button
 
@@ -322,13 +322,13 @@ Documentation is done with [pdoc3](https://pdoc3.github.io/pdoc/).
 To update the documentation run:
 
 ```powershell
-python -m pdoc --html --output-dir docs pytia_bill_of_material
+python -m pdoc --html --output-dir docs pytia_property_manager
 ```
 
 For preview run:
 
 ```powershell
-python -m pdoc --http : pytia_bill_of_material
+python -m pdoc --http : pytia_property_manager
 ```
 
 ### 5.5 new revision checklist
@@ -356,6 +356,7 @@ On a new revision, do the following:
 
 ## 7 changelog
 
+**v0.2.1**: Expand environment variables in settings paths.  
 **v0.2.0**: Remove local dependencies.  
 **v0.1.7**: Allow same id with different logon. Better build process.  
 **v0.1.6**: Disable catia lock.  

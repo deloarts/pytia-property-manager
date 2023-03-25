@@ -34,13 +34,17 @@
 import os
 import re
 import shutil
+import sys
 from pathlib import Path
 from stat import S_IREAD, S_IRGRP, S_IROTH, S_IWUSR
 from tkinter import StringVar, Tk
 from tkinter import messagebox as tkmsg
 from tkinter import simpledialog
 
-from const import PROP_DRAWING_PATH, REVISION_FOLDER, Source
+from app.layout import Layout
+from app.state_setter import UISetter
+from app.vars import Variables
+from const import PROP_DRAWING_PATH, REVISION_FOLDER, SUFFIX_DRAWING, Source
 from handler.properties import Properties
 from helper.launcher import launch_bounding_box_app
 from helper.lazy_loaders import LazyDocumentHelper
@@ -53,10 +57,6 @@ from pytia_ui_tools.helper.values import add_current_value_to_combobox_list
 from resources import resource
 from win32api import SetFileAttributes
 from win32con import FILE_ATTRIBUTE_HIDDEN
-
-from app.layout import Layout
-from app.state_setter import UISetter
-from app.vars import Variables
 
 
 def on_source_bought(
@@ -169,6 +169,9 @@ class Callbacks:
             &#34;&lt;FocusOut&gt;&#34;,
             lambda _: add_current_value_to_combobox_list(self.layout.input_tolerance),
         )
+        self.layout.label_linked_doc.bind(
+            &#34;&lt;Button-1&gt;&#34;, lambda _: self.on_lbl_linked_doc()
+        )
 
     def on_btn_save(self) -&gt; None:
         &#34;&#34;&#34;
@@ -204,13 +207,15 @@ class Callbacks:
         log.info(&#34;Callback for button &#39;Revision&#39;.&#34;)
 
         if self.doc_helper.document.properties.exists(PROP_DRAWING_PATH):
+            d_path = self.doc_helper.document.properties.get_by_name(
+                PROP_DRAWING_PATH
+            ).value
             if not tkmsg.askyesno(
                 title=resource.settings.title,
                 message=(
-                    &#34;This document has a drawing file attached to it.\n\n&#34;
-                    &#34;Creating a new revision will remove the link to the attached drawing &#34;
-                    &#34;document.\n\n&#34;
-                    &#34;Do you want to continue?&#34;
+                    f&#34;This document has a drawing file attached to it at {d_path}.\n\n&#34;
+                    &#34;Creating a new revision will remove the link to the attached &#34;
+                    &#34;document.\n\nDo you want to continue?&#34;
                 ),
             ):
                 return
@@ -225,8 +230,10 @@ class Callbacks:
             parent=self.root,
             title=resource.settings.title,
             prompt=(
-                &#34;Enter a brief description of the changes you&#39;re about to make between revision &#34;
-                f&#34;{current_revision} and {new_revision}.\n\n&#34;
+                &#34;Enter a brief description of the changes you&#39;re about to make &#34;
+                f&#34;between revision {current_revision} and {new_revision}.\n&#34;
+                &#34;Creating a new revision must be done before changing anything &#34;
+                &#34;in the document.\n&#34;
             ),
         )
 
@@ -257,6 +264,7 @@ class Callbacks:
                 )
                 if self.doc_helper.document.properties.exists(PROP_DRAWING_PATH):
                     self.doc_helper.document.properties.delete(PROP_DRAWING_PATH)
+                    self.vars.linked_doc.set(&#34;&#34;)
                     log.info(f&#34;Removed property {PROP_DRAWING_PATH!r} from document.&#34;)
 
             except PermissionError as e:
@@ -313,7 +321,21 @@ class Callbacks:
         log.info(&#34;Callback for button &#39;Mass&#39;.&#34;)
         self.set_ui.loading()
         self.doc_helper.setvar_mass(self.vars.mass, force=True)
-        self.set_ui.reset()</code></pre>
+        self.set_ui.reset()
+
+    def on_lbl_linked_doc(self) -&gt; None:
+        &#34;&#34;&#34;Opens the linked document, if there is one and closes the app.&#34;&#34;&#34;
+        linked_doc = Path(self.vars.linked_doc.get())
+        # We have to check if the document is available in a window, otherwise a
+        # prompt with &#34;do you want to open the document again&#34; would appear.
+        if linked_doc.name in self.doc_helper.get_all_open_windows():
+            self.doc_helper.framework.catia.windows.item(linked_doc.name).activate()
+            log.info(f&#34;User opened linked document (window).&#34;)
+            sys.exit()
+        if linked_doc.is_file() and linked_doc.suffix == SUFFIX_DRAWING:
+            self.doc_helper.framework.catia.documents.open(str(linked_doc))
+            log.info(f&#34;User opened linked document (file).&#34;)
+            sys.exit()</code></pre>
 </details>
 </section>
 <section>
@@ -490,6 +512,9 @@ result of the nomenclature check. Defaults to False.</dd>
             &#34;&lt;FocusOut&gt;&#34;,
             lambda _: add_current_value_to_combobox_list(self.layout.input_tolerance),
         )
+        self.layout.label_linked_doc.bind(
+            &#34;&lt;Button-1&gt;&#34;, lambda _: self.on_lbl_linked_doc()
+        )
 
     def on_btn_save(self) -&gt; None:
         &#34;&#34;&#34;
@@ -525,13 +550,15 @@ result of the nomenclature check. Defaults to False.</dd>
         log.info(&#34;Callback for button &#39;Revision&#39;.&#34;)
 
         if self.doc_helper.document.properties.exists(PROP_DRAWING_PATH):
+            d_path = self.doc_helper.document.properties.get_by_name(
+                PROP_DRAWING_PATH
+            ).value
             if not tkmsg.askyesno(
                 title=resource.settings.title,
                 message=(
-                    &#34;This document has a drawing file attached to it.\n\n&#34;
-                    &#34;Creating a new revision will remove the link to the attached drawing &#34;
-                    &#34;document.\n\n&#34;
-                    &#34;Do you want to continue?&#34;
+                    f&#34;This document has a drawing file attached to it at {d_path}.\n\n&#34;
+                    &#34;Creating a new revision will remove the link to the attached &#34;
+                    &#34;document.\n\nDo you want to continue?&#34;
                 ),
             ):
                 return
@@ -546,8 +573,10 @@ result of the nomenclature check. Defaults to False.</dd>
             parent=self.root,
             title=resource.settings.title,
             prompt=(
-                &#34;Enter a brief description of the changes you&#39;re about to make between revision &#34;
-                f&#34;{current_revision} and {new_revision}.\n\n&#34;
+                &#34;Enter a brief description of the changes you&#39;re about to make &#34;
+                f&#34;between revision {current_revision} and {new_revision}.\n&#34;
+                &#34;Creating a new revision must be done before changing anything &#34;
+                &#34;in the document.\n&#34;
             ),
         )
 
@@ -578,6 +607,7 @@ result of the nomenclature check. Defaults to False.</dd>
                 )
                 if self.doc_helper.document.properties.exists(PROP_DRAWING_PATH):
                     self.doc_helper.document.properties.delete(PROP_DRAWING_PATH)
+                    self.vars.linked_doc.set(&#34;&#34;)
                     log.info(f&#34;Removed property {PROP_DRAWING_PATH!r} from document.&#34;)
 
             except PermissionError as e:
@@ -634,7 +664,21 @@ result of the nomenclature check. Defaults to False.</dd>
         log.info(&#34;Callback for button &#39;Mass&#39;.&#34;)
         self.set_ui.loading()
         self.doc_helper.setvar_mass(self.vars.mass, force=True)
-        self.set_ui.reset()</code></pre>
+        self.set_ui.reset()
+
+    def on_lbl_linked_doc(self) -&gt; None:
+        &#34;&#34;&#34;Opens the linked document, if there is one and closes the app.&#34;&#34;&#34;
+        linked_doc = Path(self.vars.linked_doc.get())
+        # We have to check if the document is available in a window, otherwise a
+        # prompt with &#34;do you want to open the document again&#34; would appear.
+        if linked_doc.name in self.doc_helper.get_all_open_windows():
+            self.doc_helper.framework.catia.windows.item(linked_doc.name).activate()
+            log.info(f&#34;User opened linked document (window).&#34;)
+            sys.exit()
+        if linked_doc.is_file() and linked_doc.suffix == SUFFIX_DRAWING:
+            self.doc_helper.framework.catia.documents.open(str(linked_doc))
+            log.info(f&#34;User opened linked document (file).&#34;)
+            sys.exit()</code></pre>
 </details>
 <h3>Methods</h3>
 <dl>
@@ -750,13 +794,15 @@ result of the nomenclature check. Defaults to False.</dd>
     log.info(&#34;Callback for button &#39;Revision&#39;.&#34;)
 
     if self.doc_helper.document.properties.exists(PROP_DRAWING_PATH):
+        d_path = self.doc_helper.document.properties.get_by_name(
+            PROP_DRAWING_PATH
+        ).value
         if not tkmsg.askyesno(
             title=resource.settings.title,
             message=(
-                &#34;This document has a drawing file attached to it.\n\n&#34;
-                &#34;Creating a new revision will remove the link to the attached drawing &#34;
-                &#34;document.\n\n&#34;
-                &#34;Do you want to continue?&#34;
+                f&#34;This document has a drawing file attached to it at {d_path}.\n\n&#34;
+                &#34;Creating a new revision will remove the link to the attached &#34;
+                &#34;document.\n\nDo you want to continue?&#34;
             ),
         ):
             return
@@ -771,8 +817,10 @@ result of the nomenclature check. Defaults to False.</dd>
         parent=self.root,
         title=resource.settings.title,
         prompt=(
-            &#34;Enter a brief description of the changes you&#39;re about to make between revision &#34;
-            f&#34;{current_revision} and {new_revision}.\n\n&#34;
+            &#34;Enter a brief description of the changes you&#39;re about to make &#34;
+            f&#34;between revision {current_revision} and {new_revision}.\n&#34;
+            &#34;Creating a new revision must be done before changing anything &#34;
+            &#34;in the document.\n&#34;
         ),
     )
 
@@ -803,6 +851,7 @@ result of the nomenclature check. Defaults to False.</dd>
             )
             if self.doc_helper.document.properties.exists(PROP_DRAWING_PATH):
                 self.doc_helper.document.properties.delete(PROP_DRAWING_PATH)
+                self.vars.linked_doc.set(&#34;&#34;)
                 log.info(f&#34;Removed property {PROP_DRAWING_PATH!r} from document.&#34;)
 
         except PermissionError as e:
@@ -854,6 +903,30 @@ documents properties.</p></div>
         self.set_ui.reset()</code></pre>
 </details>
 </dd>
+<dt id="pytia_property_manager.app.callbacks.Callbacks.on_lbl_linked_doc"><code class="name flex">
+<span>def <span class="ident">on_lbl_linked_doc</span></span>(<span>self) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Opens the linked document, if there is one and closes the app.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def on_lbl_linked_doc(self) -&gt; None:
+    &#34;&#34;&#34;Opens the linked document, if there is one and closes the app.&#34;&#34;&#34;
+    linked_doc = Path(self.vars.linked_doc.get())
+    # We have to check if the document is available in a window, otherwise a
+    # prompt with &#34;do you want to open the document again&#34; would appear.
+    if linked_doc.name in self.doc_helper.get_all_open_windows():
+        self.doc_helper.framework.catia.windows.item(linked_doc.name).activate()
+        log.info(f&#34;User opened linked document (window).&#34;)
+        sys.exit()
+    if linked_doc.is_file() and linked_doc.suffix == SUFFIX_DRAWING:
+        self.doc_helper.framework.catia.documents.open(str(linked_doc))
+        log.info(f&#34;User opened linked document (file).&#34;)
+        sys.exit()</code></pre>
+</details>
+</dd>
 </dl>
 </dd>
 </dl>
@@ -887,6 +960,7 @@ documents properties.</p></div>
 <li><code><a title="pytia_property_manager.app.callbacks.Callbacks.on_btn_reload_source" href="#pytia_property_manager.app.callbacks.Callbacks.on_btn_reload_source">on_btn_reload_source</a></code></li>
 <li><code><a title="pytia_property_manager.app.callbacks.Callbacks.on_btn_revision" href="#pytia_property_manager.app.callbacks.Callbacks.on_btn_revision">on_btn_revision</a></code></li>
 <li><code><a title="pytia_property_manager.app.callbacks.Callbacks.on_btn_save" href="#pytia_property_manager.app.callbacks.Callbacks.on_btn_save">on_btn_save</a></code></li>
+<li><code><a title="pytia_property_manager.app.callbacks.Callbacks.on_lbl_linked_doc" href="#pytia_property_manager.app.callbacks.Callbacks.on_lbl_linked_doc">on_lbl_linked_doc</a></code></li>
 </ul>
 </li>
 </ul>

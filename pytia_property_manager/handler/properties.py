@@ -3,9 +3,11 @@
     Handles the documents properties: Loading, writing, and verifying.
 """
 
+from pathlib import Path
+
 from app.layout import Layout
 from app.vars import Variables
-from const import Source
+from const import PROP_DRAWING_PATH, Source
 from helper.lazy_loaders import LazyDocumentHelper
 from helper.messages import datafield_message
 from helper.translators import translate_nomenclature, translate_source
@@ -208,6 +210,8 @@ class Properties:
         )
         self.doc_helper.setvar_user(self.vars.creator, resource.props.infra.creator)
         self.doc_helper.setvar_user(self.vars.modifier, resource.props.infra.modifier)
+
+        self.doc_helper.setvar_property(self.vars.linked_doc, PROP_DRAWING_PATH)
 
         self.doc_helper.setvar_notes(self.layout.notes)
 

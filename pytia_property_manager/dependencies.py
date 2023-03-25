@@ -28,14 +28,7 @@ from tkinter import ttk
 from typing import Dict, List
 from urllib.parse import urlparse
 
-from const import (
-    CNEXT,
-    CONFIG_DEPS,
-    CONFIG_DEPS_DEFAULT,
-    VENV_PYTHON,
-    VENV_PYTHONW,
-    WEB_PIP,
-)
+from const import CNEXT, CONFIG_DEPS, VENV_PYTHON, VENV_PYTHONW, WEB_PIP
 from resources import resource
 
 
@@ -60,7 +53,7 @@ class Environment:
 
     @staticmethod
     def is_virtual() -> bool:
-        return VENV_PYTHON in sys.executable or VENV_PYTHONW in sys.executable
+        return str(VENV_PYTHON) in sys.executable or str(VENV_PYTHONW) in sys.executable
 
     @classmethod
     def warn_if_not_virtual(cls) -> None:
@@ -82,12 +75,8 @@ class Environment:
 class Dependencies:
     """Class for managing dependencies."""
 
-    __slots__ = ("_required_packages", "_missing_packages", "_runs_in_venv")
-
     def __init__(self) -> None:
-        self._runs_in_venv = (
-            VENV_PYTHON in sys.executable or VENV_PYTHONW in sys.executable
-        )
+        pass
 
     @staticmethod
     def read_dependencies_file() -> List[PackageInfo]:
@@ -97,12 +86,7 @@ class Dependencies:
         Returns:
             List[PackageInfo]: The dependencies as a list.
         """
-        deps_resource = (
-            CONFIG_DEPS
-            if importlib.resources.is_resource("resources", CONFIG_DEPS)
-            else CONFIG_DEPS_DEFAULT
-        )
-        with importlib.resources.open_binary("resources", deps_resource) as f:
+        with importlib.resources.open_binary("resources", CONFIG_DEPS) as f:
             return [PackageInfo(**i) for i in json.load(f)]
 
     def _remove_venv(self) -> None:
@@ -252,8 +236,8 @@ class VisualInstaller(tk.Tk):
 
         for index, key in enumerate(pip_commands.keys()):
             python_exe = sys.executable
-            if VENV_PYTHONW in python_exe:
-                python_exe = python_exe.replace(VENV_PYTHONW, VENV_PYTHON)
+            if str(VENV_PYTHONW) in python_exe:
+                python_exe = python_exe.replace(str(VENV_PYTHONW), str(VENV_PYTHON))
             command = f"start /wait {python_exe} -m pip install {pip_commands[key]} --no-cache-dir"
             self.message.set(
                 f"Installing package {index+1} of {len(pip_commands)}: {key}"

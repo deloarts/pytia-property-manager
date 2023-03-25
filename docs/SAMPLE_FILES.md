@@ -105,9 +105,9 @@ processes.min | `int` | The minimum amount of processes to display in the UI.
 processes.max | `int` | The maximum amount of processes to display in the UI.
 tolerances | `List[str]` | A list of available tolerances.
 spare_part_level | `List[str]` | A list of available spare part levels.
-paths.catia | `str` | The absolute path to the CATIA executables.
-paths.material | `str` | The absolute path to the CATMaterial file.
-paths.release | `str` | The folder where the launcher and the app are released into.
+paths.catia | `str` | The absolute path to the CATIA executables. Environment variables will be expanded to their respective values. E.g: `%ONEDRIVE%\\CATIA\\Apps` will be resolved to `C:\\Users\\...\\OneDrive\\CATIA\\Apps`.
+paths.material | `str` | The absolute path to the CATMaterial file. Environment variables will be expanded to their respective values. E.g: `%ONEDRIVE%\\CATIA\\Apps` will be resolved to `C:\\Users\\...\\OneDrive\\CATIA\\Apps`.
+paths.release | `str` | The folder where the launcher and the app are released into. Environment variables will be expanded to their respective values. E.g: `%ONEDRIVE%\\CATIA\\Apps` will be resolved to `C:\\Users\\...\\OneDrive\\CATIA\\Apps`.
 files.app | `str` | The name of the released python app file.
 files.launcher | `str` | The name of the release catvbs launcher file.
 files.bounding_box_launcher | `str` | The filename of the launcher for the bounding box app (must be stored in the `paths.release` folder).

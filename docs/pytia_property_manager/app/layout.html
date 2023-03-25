@@ -32,14 +32,13 @@
 &#34;&#34;&#34;
 from tkinter import DISABLED, WORD, Tk, ttk
 
-from const import Source
-from pytia_ui_tools.widgets.texts import ScrolledText
-from resources import resource
-
 from app.frames import Frames
 from app.vars import Variables
 from app.widgets.notes import NoteWidgets
 from app.widgets.processes import ProcessWidgets
+from const import Source
+from pytia_ui_tools.widgets.texts import ScrolledText
+from resources import resource
 
 
 class Layout:
@@ -461,7 +460,7 @@ class Layout:
             row=15,
             column=0,
             padx=(Layout.MARGIN_X, 5),
-            pady=(20, 2),
+            pady=(Layout.MARGIN_Y, 2),
             ipadx=2,
             ipady=2,
             sticky=&#34;new&#34;,
@@ -473,7 +472,7 @@ class Layout:
             row=15,
             column=1,
             padx=(5, Layout.MARGIN_X),
-            pady=(20, 2),
+            pady=(Layout.MARGIN_Y, 2),
             ipadx=2,
             ipady=2,
             sticky=&#34;nw&#34;,
@@ -487,7 +486,7 @@ class Layout:
             row=16,
             column=0,
             padx=(Layout.MARGIN_X, 5),
-            pady=(2, Layout.MARGIN_Y),
+            pady=(2, 2),
             ipadx=2,
             ipady=2,
             sticky=&#34;new&#34;,
@@ -497,6 +496,32 @@ class Layout:
         )
         self._lbl_modifier_value.grid(
             row=16,
+            column=1,
+            padx=(5, Layout.MARGIN_X),
+            pady=(2, 2),
+            ipadx=2,
+            ipady=2,
+            sticky=&#34;nw&#34;,
+            columnspan=2,
+        )
+        # endregion
+
+        # region linked doc
+        lbl_linked_doc = ttk.Label(frames.infrastructure, text=&#34;Linked Drawing&#34;)
+        lbl_linked_doc.grid(
+            row=17,
+            column=0,
+            padx=(Layout.MARGIN_X, 5),
+            pady=(2, Layout.MARGIN_Y),
+            ipadx=2,
+            ipady=2,
+            sticky=&#34;new&#34;,
+        )
+        self._lbl_linked_doc_value = ttk.Label(
+            frames.infrastructure, textvariable=variables.linked_doc_display
+        )
+        self._lbl_linked_doc_value.grid(
+            row=17,
             column=1,
             padx=(5, Layout.MARGIN_X),
             pady=(2, Layout.MARGIN_Y),
@@ -658,6 +683,11 @@ class Layout:
     def label_modifier(self) -&gt; ttk.Label:
         &#34;&#34;&#34;Returns the modifier label.&#34;&#34;&#34;
         return self._lbl_modifier_value
+
+    @property
+    def label_linked_doc(self) -&gt; ttk.Label:
+        &#34;&#34;&#34;Returns the linked document label.&#34;&#34;&#34;
+        return self._lbl_linked_doc_value
 
     @property
     def notes(self) -&gt; NoteWidgets:
@@ -1128,7 +1158,7 @@ class Layout:
             row=15,
             column=0,
             padx=(Layout.MARGIN_X, 5),
-            pady=(20, 2),
+            pady=(Layout.MARGIN_Y, 2),
             ipadx=2,
             ipady=2,
             sticky=&#34;new&#34;,
@@ -1140,7 +1170,7 @@ class Layout:
             row=15,
             column=1,
             padx=(5, Layout.MARGIN_X),
-            pady=(20, 2),
+            pady=(Layout.MARGIN_Y, 2),
             ipadx=2,
             ipady=2,
             sticky=&#34;nw&#34;,
@@ -1154,7 +1184,7 @@ class Layout:
             row=16,
             column=0,
             padx=(Layout.MARGIN_X, 5),
-            pady=(2, Layout.MARGIN_Y),
+            pady=(2, 2),
             ipadx=2,
             ipady=2,
             sticky=&#34;new&#34;,
@@ -1164,6 +1194,32 @@ class Layout:
         )
         self._lbl_modifier_value.grid(
             row=16,
+            column=1,
+            padx=(5, Layout.MARGIN_X),
+            pady=(2, 2),
+            ipadx=2,
+            ipady=2,
+            sticky=&#34;nw&#34;,
+            columnspan=2,
+        )
+        # endregion
+
+        # region linked doc
+        lbl_linked_doc = ttk.Label(frames.infrastructure, text=&#34;Linked Drawing&#34;)
+        lbl_linked_doc.grid(
+            row=17,
+            column=0,
+            padx=(Layout.MARGIN_X, 5),
+            pady=(2, Layout.MARGIN_Y),
+            ipadx=2,
+            ipady=2,
+            sticky=&#34;new&#34;,
+        )
+        self._lbl_linked_doc_value = ttk.Label(
+            frames.infrastructure, textvariable=variables.linked_doc_display
+        )
+        self._lbl_linked_doc_value.grid(
+            row=17,
             column=1,
             padx=(5, Layout.MARGIN_X),
             pady=(2, Layout.MARGIN_Y),
@@ -1325,6 +1381,11 @@ class Layout:
     def label_modifier(self) -&gt; ttk.Label:
         &#34;&#34;&#34;Returns the modifier label.&#34;&#34;&#34;
         return self._lbl_modifier_value
+
+    @property
+    def label_linked_doc(self) -&gt; ttk.Label:
+        &#34;&#34;&#34;Returns the linked document label.&#34;&#34;&#34;
+        return self._lbl_linked_doc_value
 
     @property
     def notes(self) -&gt; NoteWidgets:
@@ -1658,6 +1719,19 @@ def label_creator(self) -&gt; ttk.Label:
     return self._lbl_creator_value</code></pre>
 </details>
 </dd>
+<dt id="pytia_property_manager.app.layout.Layout.label_linked_doc"><code class="name">var <span class="ident">label_linked_doc</span> : tkinter.ttk.Label</code></dt>
+<dd>
+<div class="desc"><p>Returns the linked document label.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def label_linked_doc(self) -&gt; ttk.Label:
+    &#34;&#34;&#34;Returns the linked document label.&#34;&#34;&#34;
+    return self._lbl_linked_doc_value</code></pre>
+</details>
+</dd>
 <dt id="pytia_property_manager.app.layout.Layout.label_modifier"><code class="name">var <span class="ident">label_modifier</span> : tkinter.ttk.Label</code></dt>
 <dd>
 <div class="desc"><p>Returns the modifier label.</p></div>
@@ -1743,6 +1817,7 @@ def processes(self) -&gt; ProcessWidgets:
 <li><code><a title="pytia_property_manager.app.layout.Layout.input_supplier" href="#pytia_property_manager.app.layout.Layout.input_supplier">input_supplier</a></code></li>
 <li><code><a title="pytia_property_manager.app.layout.Layout.input_tolerance" href="#pytia_property_manager.app.layout.Layout.input_tolerance">input_tolerance</a></code></li>
 <li><code><a title="pytia_property_manager.app.layout.Layout.label_creator" href="#pytia_property_manager.app.layout.Layout.label_creator">label_creator</a></code></li>
+<li><code><a title="pytia_property_manager.app.layout.Layout.label_linked_doc" href="#pytia_property_manager.app.layout.Layout.label_linked_doc">label_linked_doc</a></code></li>
 <li><code><a title="pytia_property_manager.app.layout.Layout.label_modifier" href="#pytia_property_manager.app.layout.Layout.label_modifier">label_modifier</a></code></li>
 <li><code><a title="pytia_property_manager.app.layout.Layout.notes" href="#pytia_property_manager.app.layout.Layout.notes">notes</a></code></li>
 <li><code><a title="pytia_property_manager.app.layout.Layout.processes" href="#pytia_property_manager.app.layout.Layout.processes">processes</a></code></li>
