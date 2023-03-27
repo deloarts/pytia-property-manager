@@ -4,7 +4,7 @@ classifiers = ["Operating System :: Windows"]
 description = "A visual tool for managing CATIA V5 properties."
 name = "pytia-property-manager"
 readme = "README.md"
-version = "0.2.1"
+version = "0.2.2"
 
 [tool.poetry.dependencies]
 python = "^3.10"
