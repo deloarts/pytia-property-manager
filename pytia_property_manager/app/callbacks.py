@@ -21,7 +21,6 @@ from helper.launcher import launch_bounding_box_app
 from helper.lazy_loaders import LazyDocumentHelper
 from helper.values import get_new_revision
 from material_manager import MaterialManager
-from pytia.exceptions import PytiaDocumentOperationError
 from pytia.log import log
 from pytia_ui_tools.handlers.workspace_handler import Workspace
 from pytia_ui_tools.helper.values import add_current_value_to_combobox_list
@@ -256,7 +255,7 @@ class Callbacks:
         """Callback function for the material button. Opens the material manager window."""
         log.info("Callback for button 'Material'.")
         MaterialManager(
-            is_part=self.doc_helper.is_part,  # type: ignore
+            doc_helper=self.doc_helper,
             ui_setter=self.set_ui,
         )
 

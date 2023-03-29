@@ -39,6 +39,7 @@ from tkinter import Toplevel, font, ttk
 
 from app.state_setter import UISetter
 from decorators import timer
+from helper.lazy_loaders import LazyDocumentHelper
 from material_manager.callbacks import Callbacks
 from material_manager.frames import Frames
 from material_manager.layout import Layout
@@ -59,19 +60,19 @@ class MaterialManager(Toplevel):
     @timer
     def __init__(
         self,
-        is_part: bool,
+        doc_helper: LazyDocumentHelper,
         ui_setter: UISetter,
     ) -&gt; None:
         &#34;&#34;&#34;
         Inits the material manager window.
 
         Args:
-            is_part (bool): The doc type. True for part, False for product.
+            doc_helper (LazyDocumentHelper): The doc helper.
             ui_setter (UISetter): The main apps state setter.
         &#34;&#34;&#34;
         Toplevel.__init__(self)
 
-        self.is_part = is_part
+        self.doc_helper = doc_helper
         self.window_manager = WindowManager(self)
         self.vars = Variables(root=self)
         self.frames = Frames(root=self)
@@ -146,7 +147,7 @@ class MaterialManager(Toplevel):
             variables=self.vars,
             layout=self.layout,
             ui_setter=self.set_parent_ui,
-            is_part=self.is_part,
+            doc_helper=self.doc_helper,
         )
 
     def traces(self) -&gt; None:
@@ -188,15 +189,15 @@ class MaterialManager(Toplevel):
 <dl>
 <dt id="pytia_property_manager.material_manager.MaterialManager"><code class="flex name class">
 <span>class <span class="ident">MaterialManager</span></span>
-<span>(</span><span>is_part: bool, ui_setter: app.state_setter.UISetter)</span>
+<span>(</span><span>doc_helper: helper.lazy_loaders.LazyDocumentHelper, ui_setter: app.state_setter.UISetter)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>The user interface of the material manager window.</p>
 <p>Inits the material manager window.</p>
 <h2 id="args">Args</h2>
 <dl>
-<dt><strong><code>is_part</code></strong> :&ensp;<code>bool</code></dt>
-<dd>The doc type. True for part, False for product.</dd>
+<dt><strong><code>doc_helper</code></strong> :&ensp;<code>LazyDocumentHelper</code></dt>
+<dd>The doc helper.</dd>
 <dt><strong><code>ui_setter</code></strong> :&ensp;<code>UISetter</code></dt>
 <dd>The main apps state setter.</dd>
 </dl></div>
@@ -213,19 +214,19 @@ class MaterialManager(Toplevel):
     @timer
     def __init__(
         self,
-        is_part: bool,
+        doc_helper: LazyDocumentHelper,
         ui_setter: UISetter,
     ) -&gt; None:
         &#34;&#34;&#34;
         Inits the material manager window.
 
         Args:
-            is_part (bool): The doc type. True for part, False for product.
+            doc_helper (LazyDocumentHelper): The doc helper.
             ui_setter (UISetter): The main apps state setter.
         &#34;&#34;&#34;
         Toplevel.__init__(self)
 
-        self.is_part = is_part
+        self.doc_helper = doc_helper
         self.window_manager = WindowManager(self)
         self.vars = Variables(root=self)
         self.frames = Frames(root=self)
@@ -300,7 +301,7 @@ class MaterialManager(Toplevel):
             variables=self.vars,
             layout=self.layout,
             ui_setter=self.set_parent_ui,
-            is_part=self.is_part,
+            doc_helper=self.doc_helper,
         )
 
     def traces(self) -&gt; None:
@@ -343,7 +344,7 @@ class MaterialManager(Toplevel):
         variables=self.vars,
         layout=self.layout,
         ui_setter=self.set_parent_ui,
-        is_part=self.is_part,
+        doc_helper=self.doc_helper,
     )</code></pre>
 </details>
 </dd>

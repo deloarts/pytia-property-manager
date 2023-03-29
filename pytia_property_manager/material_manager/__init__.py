@@ -8,6 +8,7 @@ from tkinter import Toplevel, font, ttk
 
 from app.state_setter import UISetter
 from decorators import timer
+from helper.lazy_loaders import LazyDocumentHelper
 from material_manager.callbacks import Callbacks
 from material_manager.frames import Frames
 from material_manager.layout import Layout
@@ -28,19 +29,19 @@ class MaterialManager(Toplevel):
     @timer
     def __init__(
         self,
-        is_part: bool,
+        doc_helper: LazyDocumentHelper,
         ui_setter: UISetter,
     ) -> None:
         """
         Inits the material manager window.
 
         Args:
-            is_part (bool): The doc type. True for part, False for product.
+            doc_helper (LazyDocumentHelper): The doc helper.
             ui_setter (UISetter): The main apps state setter.
         """
         Toplevel.__init__(self)
 
-        self.is_part = is_part
+        self.doc_helper = doc_helper
         self.window_manager = WindowManager(self)
         self.vars = Variables(root=self)
         self.frames = Frames(root=self)
@@ -115,7 +116,7 @@ class MaterialManager(Toplevel):
             variables=self.vars,
             layout=self.layout,
             ui_setter=self.set_parent_ui,
-            is_part=self.is_part,
+            doc_helper=self.doc_helper,
         )
 
     def traces(self) -> None:
