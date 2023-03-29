@@ -156,6 +156,7 @@ class Settings:  # pylint: disable=R0902
     title: str
     debug: bool
     demo: bool
+    link_material: bool
     revision: int | str
     restrictions: SettingsRestrictions
     verifications: SettingsVerifications
@@ -578,7 +579,7 @@ resource = Resources()</code></pre>
 <dl>
 <dt id="pytia_property_manager.resources.AppData"><code class="flex name class">
 <span>class <span class="ident">AppData</span></span>
-<span>(</span><span>*, version: str = '0.2.2', counter: int = 0, save_on_apply: bool = True)</span>
+<span>(</span><span>*, version: str = '0.2.3', counter: int = 0, save_on_apply: bool = True)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Dataclass for appdata settings.</p></div>
@@ -1606,7 +1607,7 @@ current session if logon is omitted.</p>
 </dd>
 <dt id="pytia_property_manager.resources.Settings"><code class="flex name class">
 <span>class <span class="ident">Settings</span></span>
-<span>(</span><span>*, title: str, debug: bool, demo: bool, revision: int | str, restrictions: <a title="pytia_property_manager.resources.SettingsRestrictions" href="#pytia_property_manager.resources.SettingsRestrictions">SettingsRestrictions</a>, verifications: <a title="pytia_property_manager.resources.SettingsVerifications" href="#pytia_property_manager.resources.SettingsVerifications">SettingsVerifications</a>, separators: <a title="pytia_property_manager.resources.SettingsSeparators" href="#pytia_property_manager.resources.SettingsSeparators">SettingsSeparators</a>, nomenclature: <a title="pytia_property_manager.resources.SettingsNomenclature" href="#pytia_property_manager.resources.SettingsNomenclature">SettingsNomenclature</a>, processes: <a title="pytia_property_manager.resources.SettingsProcesses" href="#pytia_property_manager.resources.SettingsProcesses">SettingsProcesses</a>, tolerances: List[str], spare_part_level: List[str], files: <a title="pytia_property_manager.resources.SettingsFiles" href="#pytia_property_manager.resources.SettingsFiles">SettingsFiles</a>, paths: <a title="pytia_property_manager.resources.SettingsPaths" href="#pytia_property_manager.resources.SettingsPaths">SettingsPaths</a>, urls: <a title="pytia_property_manager.resources.SettingsUrls" href="#pytia_property_manager.resources.SettingsUrls">SettingsUrls</a>, mails: <a title="pytia_property_manager.resources.SettingsMails" href="#pytia_property_manager.resources.SettingsMails">SettingsMails</a>)</span>
+<span>(</span><span>*, title: str, debug: bool, demo: bool, link_material: bool, revision: int | str, restrictions: <a title="pytia_property_manager.resources.SettingsRestrictions" href="#pytia_property_manager.resources.SettingsRestrictions">SettingsRestrictions</a>, verifications: <a title="pytia_property_manager.resources.SettingsVerifications" href="#pytia_property_manager.resources.SettingsVerifications">SettingsVerifications</a>, separators: <a title="pytia_property_manager.resources.SettingsSeparators" href="#pytia_property_manager.resources.SettingsSeparators">SettingsSeparators</a>, nomenclature: <a title="pytia_property_manager.resources.SettingsNomenclature" href="#pytia_property_manager.resources.SettingsNomenclature">SettingsNomenclature</a>, processes: <a title="pytia_property_manager.resources.SettingsProcesses" href="#pytia_property_manager.resources.SettingsProcesses">SettingsProcesses</a>, tolerances: List[str], spare_part_level: List[str], files: <a title="pytia_property_manager.resources.SettingsFiles" href="#pytia_property_manager.resources.SettingsFiles">SettingsFiles</a>, paths: <a title="pytia_property_manager.resources.SettingsPaths" href="#pytia_property_manager.resources.SettingsPaths">SettingsPaths</a>, urls: <a title="pytia_property_manager.resources.SettingsUrls" href="#pytia_property_manager.resources.SettingsUrls">SettingsUrls</a>, mails: <a title="pytia_property_manager.resources.SettingsMails" href="#pytia_property_manager.resources.SettingsMails">SettingsMails</a>)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Dataclass for settings (settings.json).</p></div>
@@ -1621,6 +1622,7 @@ class Settings:  # pylint: disable=R0902
     title: str
     debug: bool
     demo: bool
+    link_material: bool
     revision: int | str
     restrictions: SettingsRestrictions
     verifications: SettingsVerifications
@@ -1656,6 +1658,10 @@ class Settings:  # pylint: disable=R0902
 <div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
 </dd>
 <dt id="pytia_property_manager.resources.Settings.files"><code class="name">var <span class="ident">files</span> : <a title="pytia_property_manager.resources.SettingsFiles" href="#pytia_property_manager.resources.SettingsFiles">SettingsFiles</a></code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.Settings.link_material"><code class="name">var <span class="ident">link_material</span> : bool</code></dt>
 <dd>
 <div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
 </dd>
@@ -2217,6 +2223,7 @@ def values(self) -&gt; List[str]:
 <li><code><a title="pytia_property_manager.resources.Settings.debug" href="#pytia_property_manager.resources.Settings.debug">debug</a></code></li>
 <li><code><a title="pytia_property_manager.resources.Settings.demo" href="#pytia_property_manager.resources.Settings.demo">demo</a></code></li>
 <li><code><a title="pytia_property_manager.resources.Settings.files" href="#pytia_property_manager.resources.Settings.files">files</a></code></li>
+<li><code><a title="pytia_property_manager.resources.Settings.link_material" href="#pytia_property_manager.resources.Settings.link_material">link_material</a></code></li>
 <li><code><a title="pytia_property_manager.resources.Settings.mails" href="#pytia_property_manager.resources.Settings.mails">mails</a></code></li>
 <li><code><a title="pytia_property_manager.resources.Settings.nomenclature" href="#pytia_property_manager.resources.Settings.nomenclature">nomenclature</a></code></li>
 <li><code><a title="pytia_property_manager.resources.Settings.paths" href="#pytia_property_manager.resources.Settings.paths">paths</a></code></li>
