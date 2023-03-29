@@ -125,6 +125,7 @@ class Settings:  # pylint: disable=R0902
     title: str
     debug: bool
     demo: bool
+    link_material: bool
     revision: int | str
     restrictions: SettingsRestrictions
     verifications: SettingsVerifications

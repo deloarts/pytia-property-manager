@@ -256,7 +256,7 @@ class Callbacks:
         """Callback function for the material button. Opens the material manager window."""
         log.info("Callback for button 'Material'.")
         MaterialManager(
-            is_part=self.doc_helper.is_part,  # type: ignore
+            doc_helper=self.doc_helper,
             ui_setter=self.set_ui,
         )
 
