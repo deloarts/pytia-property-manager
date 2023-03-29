@@ -6,8 +6,11 @@ from pathlib import Path
 from tkinter import Toplevel
 
 from app.state_setter import UISetter
+from helper.lazy_loaders import LazyDocumentHelper
 from material_manager.layout import Layout
 from material_manager.vars import Variables
+from pytia.wrapper.documents.part_documents import PyPartDocument
+from pytia.wrapper.documents.product_documents import PyProductDocument
 from resources import resource
 
 
@@ -23,7 +26,7 @@ class Callbacks:
         variables: Variables,
         layout: Layout,
         ui_setter: UISetter,
-        is_part: bool,
+        doc_helper: LazyDocumentHelper,
     ) -> None:
         """
         Inits the material manager callbacks object.
@@ -33,13 +36,13 @@ class Callbacks:
             variables (Variables): The material manager variables.
             layout (Layout): The material manager layout.
             ui_setter (UISetter): The main window's ui setter.
-            is_part (bool): True if the doc is a part, False otherwise.
+            doc_helper (LazyDocumentHelper): Document helper instance.
         """
         self.root = root
         self.vars = variables
         self.layout = layout
         self.set_parent_ui = ui_setter
-        self.is_part = is_part
+        self.doc_helper = doc_helper
 
         self._bind_button_callbacks()
 
@@ -55,16 +58,6 @@ class Callbacks:
         Applies the material to the document.
         """
         if selected_material := self.layout.input_material.get():
-            # pylint: disable=C0415
-            if self.is_part:
-                from pytia.utilities.material import (
-                    apply_material_on_part as apply_material,
-                )
-            else:
-                from pytia.utilities.material import (
-                    apply_material_on_product as apply_material,
-                )
-            # pylint: enable=C0415
 
             self.vars.material.set(selected_material)
             if selected_metadata := self.layout.input_metadata.get():
@@ -73,13 +66,32 @@ class Callbacks:
             else:
                 self.vars.metadata.set("")
 
-            apply_material(
-                material=selected_material,
-                catalog_path=Path(
-                    resource.settings.paths.material,
-                    resource.settings.files.material,
-                ),
-            )
+            # pylint: disable=C0415
+            if self.doc_helper.is_part:
+                from pytia.utilities.material import apply_material_on_part
+
+                assert isinstance(self.doc_helper.document, PyPartDocument)
+                apply_material_on_part(
+                    material=selected_material,
+                    catalog_path=Path(
+                        resource.settings.paths.material,
+                        resource.settings.files.material,
+                    ),
+                    part_document=self.doc_helper.document,
+                )
+            else:
+                from pytia.utilities.material import apply_material_on_product
+
+                assert isinstance(self.doc_helper.document, PyProductDocument)
+                apply_material_on_product(
+                    material=selected_material,
+                    catalog_path=Path(
+                        resource.settings.paths.material,
+                        resource.settings.files.material,
+                    ),
+                    product_document=self.doc_helper.document,
+                )
+            # pylint: enable=C0415
 
         self.set_parent_ui.reset()
         # FIXME: This also writes the material to the main UI.
