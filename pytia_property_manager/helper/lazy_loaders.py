@@ -71,7 +71,9 @@ class LazyDocumentHelper:
 
             # pylint: enable=C0415
 
-            self.document = PyPartDocument(strict_naming=False)
+            self.document = PyPartDocument(
+                strict_naming=False, material_link=resource.settings.link_material
+            )
             log.debug("Current document is a CATPart.")
 
         elif self.lazy_document.is_product:
@@ -80,7 +82,9 @@ class LazyDocumentHelper:
 
             # pylint: enable=C0415
 
-            self.document = PyProductDocument(strict_naming=False)
+            self.document = PyProductDocument(
+                strict_naming=False, material_link=resource.settings.link_material
+            )
             log.debug("Current document is a CATProduct.")
 
         else:
