@@ -12,14 +12,13 @@
 
 import tkinter as tk
 
+from app.layout import Layout
+from app.vars import Variables
 from const import Source
 from helper.lazy_loaders import LazyDocumentHelper
 from pytia.log import log
 from pytia_ui_tools.handlers.workspace_handler import Workspace
 from resources import resource
-
-from app.layout import Layout
-from app.vars import Variables
 
 
 class UISetter:
@@ -118,6 +117,9 @@ class UISetter:
         self.vars.supplier.set("")
         self.layout.input_supplier.config(state=tk.DISABLED)
 
+        self.vars.group.set("")
+        self.layout.input_group.config(state=tk.DISABLED)
+
         self.vars.tolerance.set("")
         self.layout.input_tolerance.config(state=tk.DISABLED)
 
@@ -184,6 +186,8 @@ class UISetter:
 
         self.layout.input_supplier.config(state=tk.NORMAL)
 
+        self.layout.input_group.config(state=tk.NORMAL)
+
         self.layout.input_tolerance.config(state=tk.NORMAL)
         if not self.vars.tolerance.get():
             self.layout.input_tolerance.current(0)
@@ -249,6 +253,8 @@ class UISetter:
 
         self.layout.input_supplier.config(state=tk.NORMAL)
 
+        self.layout.input_group.config(state=tk.NORMAL)
+
         self.vars.tolerance.set("")
         self.layout.input_tolerance.config(state=tk.DISABLED)
 
@@ -311,6 +317,8 @@ class UISetter:
         self.layout.input_manufacturer.config(state=tk.DISABLED)
 
         self.layout.input_supplier.config(state=tk.DISABLED)
+
+        self.layout.input_group.config(state=tk.DISABLED)
 
         self.layout.input_tolerance.config(state=tk.DISABLED)
 

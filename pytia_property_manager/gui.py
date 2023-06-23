@@ -40,7 +40,7 @@ class GUI(tk.Tk):
     """The user interface of the app."""
 
     WIDTH = 1100
-    HEIGHT = 660
+    HEIGHT = 680
 
     @timer
     def __init__(self) -> None:

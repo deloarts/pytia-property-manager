@@ -90,6 +90,7 @@ This file contains all part properties, which are required for this app.
         "mass": "pytia.mass",
         "manufacturer": "pytia.manufacturer",
         "supplier": "pytia.supplier",
+        "group": "pytia.group",
         "tolerance": "pytia.tolerance",
         "spare_part_level": "pytia.spare_part_level",
         "creator": "pytia.creator",

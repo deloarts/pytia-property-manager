@@ -163,6 +163,7 @@ class PropsInfra:
     mass: str
     manufacturer: str
     supplier: str
+    group: str
     tolerance: str
     spare_part_level: str
     creator: str
