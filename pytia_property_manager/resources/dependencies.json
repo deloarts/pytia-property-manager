@@ -7,6 +7,6 @@
     {
         "name": "pytia_ui_tools",
         "version": "0.6.5",
-        "wheel": "https://github.com/deloarts/pytia-ui-tools/releases/download/v0.6.3/pytia_ui_tools-0.6.3-py3-none-any.whl"
+        "wheel": "https://github.com/deloarts/pytia-ui-tools/releases/download/v0.6.5/pytia_ui_tools-0.6.5-py3-none-any.whl"
     }
 ]
