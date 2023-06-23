@@ -14,6 +14,10 @@ projects:
   - "P12345"
   - "P23456"
   - "P34567"
+groups:
+  - "Made Parts"
+  - "Bought Parts (Mechanical)"
+  - "Bought Parts (Electrical)"
 responsible: "Dr. Awkward"
 delegate: "Mr. Alarm"
 editors:
@@ -24,6 +28,7 @@ bom_folder: ./export/bom
 docket_folder: ./export/dockets
 stp_folder: ./export/stp
 stl_folder: ./export/stl
+image_folder: "./export/images"
 ```
 
 ## 2 description
@@ -38,6 +43,7 @@ customer | `str` | The name of the customer of the project.
 description | `str` | The description of the project.
 machine | `str` | The machine number, in which the part is assembled.
 projects | `List[str]` or `str` | The list of projects associated with this machine/workspace.
+groups | `List[str]` or `str` | A list of default groups for sorting the graph tree and the bill of material.
 responsible | `str` | The name of the person that is responsible for the project.
 delegate | `str` | The name of the person that is representative for the responsible person.
 editors | `List[str]` or `str` | The list of editors that are allowed to make changes to the part properties. If the value of the **settings.json** key `restrictions.allow_all_editors` is set to `false`, only those editors are allowed to make changes to the part properties. If set to `true`, the editors list will be ignored.
@@ -46,6 +52,7 @@ bom_folder | `str` | The standard path for the bill of material. Can be absolute
 docket_folder | `str` | The standard path for dockets. Used with [pytia bill of material](https://github.com/deloarts/pytia-bill-of-material).
 stp_folder | `str` | The standard path for step files. Used with [pytia bill of material](https://github.com/deloarts/pytia-bill-of-material).
 stl_folder | `str` | The standard path for stl files. Used with [pytia bill of material](https://github.com/deloarts/pytia-bill-of-material).
+image_folder | `str` | The standard path for png files. Used with [pytia bill of material](https://github.com/deloarts/pytia-bill-of-material).
 
 ## 3 example file
 
@@ -83,6 +90,12 @@ projects:
   - "P23456"
   - "P34567"
 
+# The available groups. Use groups to sort the graph tree an the bill of material.
+groups:
+  - "Made Parts"
+  - "Bought Parts (Mechanical)"
+  - "Bought Parts (Electrical)"
+
 # The responsible person for this machine.
 responsible: "Dr. Awkward"
 
@@ -112,4 +125,7 @@ stp_folder: ./export/stp
 
 # The stp folder is the pre-defined location of the stl files. It will be used if the set folder exists. Can be absolute or relative, use a dot and a slash `./` to mark the root folder. The root folder is the folder in which the workspace file is stored.
 stl_folder: ./export/stl
+
+# The image folder is the pre-defined location of the png files. It will be used if the set folder exists. Can be absolute or relative, use a dot and a slash `./` to mark the root folder. The root folder is the folder in which the workspace file is stored.
+image_folder: ./export/image
 ```
