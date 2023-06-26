@@ -369,10 +369,35 @@ class Layout:
         )
         # endregion
 
+        # region group
+        lbl_group = ttk.Label(frames.infrastructure, text=&#34;Group&#34;)
+        lbl_group.grid(
+            row=12, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky=&#34;nsew&#34;
+        )
+
+        self._combo_group = ttk.Combobox(
+            frames.infrastructure,
+            values=[],
+            textvariable=variables.group,
+            width=27,
+            state=DISABLED,
+        )
+        self._combo_group.grid(
+            row=12,
+            column=1,
+            padx=(5, Layout.MARGIN_X),
+            pady=(1, 2),
+            ipadx=2,
+            ipady=2,
+            sticky=&#34;nsew&#34;,
+            columnspan=2,
+        )
+        # endregion
+
         # region tolerance
         lbl_tolerance = ttk.Label(frames.infrastructure, text=&#34;Tolerance&#34;)
         lbl_tolerance.grid(
-            row=12, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky=&#34;nsew&#34;
+            row=13, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky=&#34;nsew&#34;
         )
 
         self._combo_tolerance = ttk.Combobox(
@@ -383,7 +408,7 @@ class Layout:
             state=DISABLED,
         )
         self._combo_tolerance.grid(
-            row=12,
+            row=13,
             column=1,
             padx=(5, Layout.MARGIN_X),
             pady=2,
@@ -399,7 +424,7 @@ class Layout:
             frames.infrastructure, text=&#34;Spare Part Level&#34;, state=&#34;readonly&#34;
         )
         lbl_spare_part.grid(
-            row=13, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky=&#34;nsew&#34;
+            row=14, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky=&#34;nsew&#34;
         )
 
         self._combo_spare_part = ttk.Combobox(
@@ -410,7 +435,7 @@ class Layout:
             width=27,
         )
         self._combo_spare_part.grid(
-            row=13,
+            row=14,
             column=1,
             padx=(5, Layout.MARGIN_X),
             pady=2,
@@ -424,7 +449,7 @@ class Layout:
         # region description
         lbl_description = ttk.Label(frames.infrastructure, text=&#34;Description&#34;)
         lbl_description.grid(
-            row=14,
+            row=15,
             column=0,
             padx=(Layout.MARGIN_X, 5),
             pady=2,
@@ -445,7 +470,7 @@ class Layout:
             font=(&#34;Segoe UI&#34;, 9),
         )
         self._text_description.grid(
-            row=14,
+            row=15,
             column=1,
             padx=(5, Layout.MARGIN_X + 1),
             pady=2,
@@ -457,7 +482,7 @@ class Layout:
         # region creator
         lbl_creator = ttk.Label(frames.infrastructure, text=&#34;Creator&#34;)
         lbl_creator.grid(
-            row=15,
+            row=16,
             column=0,
             padx=(Layout.MARGIN_X, 5),
             pady=(Layout.MARGIN_Y, 2),
@@ -469,7 +494,7 @@ class Layout:
             frames.infrastructure, textvariable=variables.creator_display
         )
         self._lbl_creator_value.grid(
-            row=15,
+            row=16,
             column=1,
             padx=(5, Layout.MARGIN_X),
             pady=(Layout.MARGIN_Y, 2),
@@ -483,7 +508,7 @@ class Layout:
         # region creator
         lbl_modifier = ttk.Label(frames.infrastructure, text=&#34;Modifier&#34;)
         lbl_modifier.grid(
-            row=16,
+            row=17,
             column=0,
             padx=(Layout.MARGIN_X, 5),
             pady=(2, 2),
@@ -495,7 +520,7 @@ class Layout:
             frames.infrastructure, textvariable=variables.modifier_display
         )
         self._lbl_modifier_value.grid(
-            row=16,
+            row=17,
             column=1,
             padx=(5, Layout.MARGIN_X),
             pady=(2, 2),
@@ -509,7 +534,7 @@ class Layout:
         # region linked doc
         lbl_linked_doc = ttk.Label(frames.infrastructure, text=&#34;Linked Drawing&#34;)
         lbl_linked_doc.grid(
-            row=17,
+            row=18,
             column=0,
             padx=(Layout.MARGIN_X, 5),
             pady=(2, Layout.MARGIN_Y),
@@ -521,7 +546,7 @@ class Layout:
             frames.infrastructure, textvariable=variables.linked_doc_display
         )
         self._lbl_linked_doc_value.grid(
-            row=17,
+            row=18,
             column=1,
             padx=(5, Layout.MARGIN_X),
             pady=(2, Layout.MARGIN_Y),
@@ -658,6 +683,11 @@ class Layout:
     def input_supplier(self) -&gt; ttk.Entry:
         &#34;&#34;&#34;Returns the supplier entry.&#34;&#34;&#34;
         return self._entry_supplier
+
+    @property
+    def input_group(self) -&gt; ttk.Combobox:
+        &#34;&#34;&#34;Returns the group combobox.&#34;&#34;&#34;
+        return self._combo_group
 
     @property
     def input_tolerance(self) -&gt; ttk.Combobox:
@@ -1067,10 +1097,35 @@ class Layout:
         )
         # endregion
 
+        # region group
+        lbl_group = ttk.Label(frames.infrastructure, text=&#34;Group&#34;)
+        lbl_group.grid(
+            row=12, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky=&#34;nsew&#34;
+        )
+
+        self._combo_group = ttk.Combobox(
+            frames.infrastructure,
+            values=[],
+            textvariable=variables.group,
+            width=27,
+            state=DISABLED,
+        )
+        self._combo_group.grid(
+            row=12,
+            column=1,
+            padx=(5, Layout.MARGIN_X),
+            pady=(1, 2),
+            ipadx=2,
+            ipady=2,
+            sticky=&#34;nsew&#34;,
+            columnspan=2,
+        )
+        # endregion
+
         # region tolerance
         lbl_tolerance = ttk.Label(frames.infrastructure, text=&#34;Tolerance&#34;)
         lbl_tolerance.grid(
-            row=12, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky=&#34;nsew&#34;
+            row=13, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky=&#34;nsew&#34;
         )
 
         self._combo_tolerance = ttk.Combobox(
@@ -1081,7 +1136,7 @@ class Layout:
             state=DISABLED,
         )
         self._combo_tolerance.grid(
-            row=12,
+            row=13,
             column=1,
             padx=(5, Layout.MARGIN_X),
             pady=2,
@@ -1097,7 +1152,7 @@ class Layout:
             frames.infrastructure, text=&#34;Spare Part Level&#34;, state=&#34;readonly&#34;
         )
         lbl_spare_part.grid(
-            row=13, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky=&#34;nsew&#34;
+            row=14, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky=&#34;nsew&#34;
         )
 
         self._combo_spare_part = ttk.Combobox(
@@ -1108,7 +1163,7 @@ class Layout:
             width=27,
         )
         self._combo_spare_part.grid(
-            row=13,
+            row=14,
             column=1,
             padx=(5, Layout.MARGIN_X),
             pady=2,
@@ -1122,7 +1177,7 @@ class Layout:
         # region description
         lbl_description = ttk.Label(frames.infrastructure, text=&#34;Description&#34;)
         lbl_description.grid(
-            row=14,
+            row=15,
             column=0,
             padx=(Layout.MARGIN_X, 5),
             pady=2,
@@ -1143,7 +1198,7 @@ class Layout:
             font=(&#34;Segoe UI&#34;, 9),
         )
         self._text_description.grid(
-            row=14,
+            row=15,
             column=1,
             padx=(5, Layout.MARGIN_X + 1),
             pady=2,
@@ -1155,7 +1210,7 @@ class Layout:
         # region creator
         lbl_creator = ttk.Label(frames.infrastructure, text=&#34;Creator&#34;)
         lbl_creator.grid(
-            row=15,
+            row=16,
             column=0,
             padx=(Layout.MARGIN_X, 5),
             pady=(Layout.MARGIN_Y, 2),
@@ -1167,7 +1222,7 @@ class Layout:
             frames.infrastructure, textvariable=variables.creator_display
         )
         self._lbl_creator_value.grid(
-            row=15,
+            row=16,
             column=1,
             padx=(5, Layout.MARGIN_X),
             pady=(Layout.MARGIN_Y, 2),
@@ -1181,7 +1236,7 @@ class Layout:
         # region creator
         lbl_modifier = ttk.Label(frames.infrastructure, text=&#34;Modifier&#34;)
         lbl_modifier.grid(
-            row=16,
+            row=17,
             column=0,
             padx=(Layout.MARGIN_X, 5),
             pady=(2, 2),
@@ -1193,7 +1248,7 @@ class Layout:
             frames.infrastructure, textvariable=variables.modifier_display
         )
         self._lbl_modifier_value.grid(
-            row=16,
+            row=17,
             column=1,
             padx=(5, Layout.MARGIN_X),
             pady=(2, 2),
@@ -1207,7 +1262,7 @@ class Layout:
         # region linked doc
         lbl_linked_doc = ttk.Label(frames.infrastructure, text=&#34;Linked Drawing&#34;)
         lbl_linked_doc.grid(
-            row=17,
+            row=18,
             column=0,
             padx=(Layout.MARGIN_X, 5),
             pady=(2, Layout.MARGIN_Y),
@@ -1219,7 +1274,7 @@ class Layout:
             frames.infrastructure, textvariable=variables.linked_doc_display
         )
         self._lbl_linked_doc_value.grid(
-            row=17,
+            row=18,
             column=1,
             padx=(5, Layout.MARGIN_X),
             pady=(2, Layout.MARGIN_Y),
@@ -1356,6 +1411,11 @@ class Layout:
     def input_supplier(self) -&gt; ttk.Entry:
         &#34;&#34;&#34;Returns the supplier entry.&#34;&#34;&#34;
         return self._entry_supplier
+
+    @property
+    def input_group(self) -&gt; ttk.Combobox:
+        &#34;&#34;&#34;Returns the group combobox.&#34;&#34;&#34;
+        return self._combo_group
 
     @property
     def input_tolerance(self) -&gt; ttk.Combobox:
@@ -1561,6 +1621,19 @@ def input_definition(self) -&gt; ttk.Entry:
 def input_description(self) -&gt; ScrolledText:
     &#34;&#34;&#34;Returns the description text widget.&#34;&#34;&#34;
     return self._text_description</code></pre>
+</details>
+</dd>
+<dt id="pytia_property_manager.app.layout.Layout.input_group"><code class="name">var <span class="ident">input_group</span> : tkinter.ttk.Combobox</code></dt>
+<dd>
+<div class="desc"><p>Returns the group combobox.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def input_group(self) -&gt; ttk.Combobox:
+    &#34;&#34;&#34;Returns the group combobox.&#34;&#34;&#34;
+    return self._combo_group</code></pre>
 </details>
 </dd>
 <dt id="pytia_property_manager.app.layout.Layout.input_machine"><code class="name">var <span class="ident">input_machine</span> : tkinter.ttk.Entry</code></dt>
@@ -1805,6 +1878,7 @@ def processes(self) -&gt; ProcessWidgets:
 <li><code><a title="pytia_property_manager.app.layout.Layout.input_base_size_preset" href="#pytia_property_manager.app.layout.Layout.input_base_size_preset">input_base_size_preset</a></code></li>
 <li><code><a title="pytia_property_manager.app.layout.Layout.input_definition" href="#pytia_property_manager.app.layout.Layout.input_definition">input_definition</a></code></li>
 <li><code><a title="pytia_property_manager.app.layout.Layout.input_description" href="#pytia_property_manager.app.layout.Layout.input_description">input_description</a></code></li>
+<li><code><a title="pytia_property_manager.app.layout.Layout.input_group" href="#pytia_property_manager.app.layout.Layout.input_group">input_group</a></code></li>
 <li><code><a title="pytia_property_manager.app.layout.Layout.input_machine" href="#pytia_property_manager.app.layout.Layout.input_machine">input_machine</a></code></li>
 <li><code><a title="pytia_property_manager.app.layout.Layout.input_manufacturer" href="#pytia_property_manager.app.layout.Layout.input_manufacturer">input_manufacturer</a></code></li>
 <li><code><a title="pytia_property_manager.app.layout.Layout.input_mass" href="#pytia_property_manager.app.layout.Layout.input_mass">input_mass</a></code></li>

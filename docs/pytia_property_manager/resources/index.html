@@ -194,6 +194,7 @@ class PropsInfra:
     mass: str
     manufacturer: str
     supplier: str
+    group: str
     tolerance: str
     spare_part_level: str
     creator: str
@@ -579,7 +580,7 @@ resource = Resources()</code></pre>
 <dl>
 <dt id="pytia_property_manager.resources.AppData"><code class="flex name class">
 <span>class <span class="ident">AppData</span></span>
-<span>(</span><span>*, version: str = '0.2.3', counter: int = 0, save_on_apply: bool = True)</span>
+<span>(</span><span>*, version: str = '0.2.4', counter: int = 0, save_on_apply: bool = True)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Dataclass for appdata settings.</p></div>
@@ -807,7 +808,7 @@ def values(self) -&gt; List[str]:
 </dd>
 <dt id="pytia_property_manager.resources.PropsInfra"><code class="flex name class">
 <span>class <span class="ident">PropsInfra</span></span>
-<span>(</span><span>*, project: str, machine: str, material: str, base_size: str, base_size_preset: str, mass: str, manufacturer: str, supplier: str, tolerance: str, spare_part_level: str, creator: str, modifier: str)</span>
+<span>(</span><span>*, project: str, machine: str, material: str, base_size: str, base_size_preset: str, mass: str, manufacturer: str, supplier: str, group: str, tolerance: str, spare_part_level: str, creator: str, modifier: str)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Dataclass for infrastructure properties on the document (properties.json).</p></div>
@@ -827,6 +828,7 @@ class PropsInfra:
     mass: str
     manufacturer: str
     supplier: str
+    group: str
     tolerance: str
     spare_part_level: str
     creator: str
@@ -853,6 +855,10 @@ class PropsInfra:
 <div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
 </dd>
 <dt id="pytia_property_manager.resources.PropsInfra.creator"><code class="name">var <span class="ident">creator</span> : str</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.PropsInfra.group"><code class="name">var <span class="ident">group</span> : str</code></dt>
 <dd>
 <div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
 </dd>
@@ -2166,6 +2172,7 @@ def values(self) -&gt; List[str]:
 <li><code><a title="pytia_property_manager.resources.PropsInfra.base_size" href="#pytia_property_manager.resources.PropsInfra.base_size">base_size</a></code></li>
 <li><code><a title="pytia_property_manager.resources.PropsInfra.base_size_preset" href="#pytia_property_manager.resources.PropsInfra.base_size_preset">base_size_preset</a></code></li>
 <li><code><a title="pytia_property_manager.resources.PropsInfra.creator" href="#pytia_property_manager.resources.PropsInfra.creator">creator</a></code></li>
+<li><code><a title="pytia_property_manager.resources.PropsInfra.group" href="#pytia_property_manager.resources.PropsInfra.group">group</a></code></li>
 <li><code><a title="pytia_property_manager.resources.PropsInfra.keys" href="#pytia_property_manager.resources.PropsInfra.keys">keys</a></code></li>
 <li><code><a title="pytia_property_manager.resources.PropsInfra.machine" href="#pytia_property_manager.resources.PropsInfra.machine">machine</a></code></li>
 <li><code><a title="pytia_property_manager.resources.PropsInfra.manufacturer" href="#pytia_property_manager.resources.PropsInfra.manufacturer">manufacturer</a></code></li>
