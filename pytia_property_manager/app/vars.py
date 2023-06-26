@@ -26,6 +26,7 @@ class Variables:
     mass: StringVar
     manufacturer: StringVar
     supplier: StringVar
+    group: StringVar
     tolerance: StringVar
     spare_part_level: StringVar
 
@@ -60,6 +61,7 @@ class Variables:
         self.mass = StringVar(master=root, name="mass")
         self.manufacturer = StringVar(master=root, name="manufacturer")
         self.supplier = StringVar(master=root, name="supplier")
+        self.group = StringVar(master=root, name="group")
         self.tolerance = StringVar(master=root, name="tolerance")
         self.spare_part_level = StringVar(master=root, name="spare_part_level")
 

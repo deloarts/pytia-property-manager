@@ -78,6 +78,9 @@ class Properties:
             resource.props.infra.supplier, self.vars.supplier.get()
         )
         self.doc_helper.write_property(
+            resource.props.infra.group, self.vars.group.get()
+        )
+        self.doc_helper.write_property(
             resource.props.infra.tolerance, self.vars.tolerance.get()
         )
         self.doc_helper.write_property(
@@ -199,6 +202,12 @@ class Properties:
         )
         self.doc_helper.setvar_property(
             self.vars.supplier, resource.props.infra.supplier
+        )
+        self.doc_helper.setvar_combo_property(
+            variable=self.vars.group,
+            property_name=resource.props.infra.group,
+            widget=self.layout.input_group,
+            items=self.workspace.elements.groups,
         )
         self.doc_helper.setvar_combo_property(
             variable=self.vars.tolerance,
