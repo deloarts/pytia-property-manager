@@ -3,7 +3,7 @@
 A visual tool for managing CATIA properties.
 
 ![state](https://img.shields.io/badge/State-beta-brown.svg?style=for-the-badge)
-![version](https://img.shields.io/badge/Version-0.2.3-orange.svg?style=for-the-badge)
+![version](https://img.shields.io/badge/Version-0.2.4-orange.svg?style=for-the-badge)
 
 [![python](https://img.shields.io/badge/Python-3.10-blue.svg?style=for-the-badge)](https://www.python.org/downloads/)
 ![catia](https://img.shields.io/badge/CATIA-V5%206R2017-blue.svg?style=for-the-badge)
@@ -356,6 +356,7 @@ On a new revision, do the following:
 
 ## 7 changelog
 
+**v0.2.4**: Add group property.  
 **v0.2.3**: Add material link.  
 **v0.2.2**: Fix launcher path.  
 **v0.2.1**: Expand environment variables in settings paths.  
