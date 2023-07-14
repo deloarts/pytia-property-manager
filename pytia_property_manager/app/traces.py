@@ -8,11 +8,13 @@ from tkinter import messagebox as tkmsg
 from app.callbacks import on_source_bought
 from app.layout import Layout
 from app.state_setter import UISetter
+from app.tooltips import ToolTip
 from app.vars import Variables
 from const import PROP_DRAWING_PATH, SUFFIX_DRAWING, Source
 from helper.lazy_loaders import LazyDocumentHelper
 from pytia.log import log
 from resources import resource
+from resources.utils import expand_env_vars
 
 
 class Traces:
@@ -62,15 +64,25 @@ class Traces:
 
     def trace_linked_doc(self, *_) -> None:
         """Trace callback for the `linked_doc` StringVar"""
-        linked_doc = Path(self.vars.linked_doc.get())
+        linked_doc = Path(
+            expand_env_vars(self.vars.linked_doc.get(), ignore_not_found=True)
+        )
 
         if self.vars.linked_doc.get() == "":
             self.vars.linked_doc_display.set("-")
             self.layout.label_linked_doc.configure(cursor="", foreground="black")
+            ToolTip(
+                widget=self.layout.label_linked_doc,
+                text="There's no drawing document linked to this file.",
+            )
 
         elif linked_doc.is_file() and linked_doc.suffix == SUFFIX_DRAWING:
             self.vars.linked_doc_display.set(linked_doc.stem)
             self.layout.label_linked_doc.configure(cursor="hand2", foreground="blue")
+            ToolTip(
+                widget=self.layout.label_linked_doc,
+                text=str(linked_doc),
+            )
 
         elif tkmsg.askyesno(
             title=resource.settings.title,
@@ -83,9 +95,17 @@ class Traces:
             self.doc_helper.document.properties.delete(PROP_DRAWING_PATH)
             self.vars.linked_doc_display.set("Link removed")
             self.layout.label_linked_doc.configure(cursor="", foreground="gray")
+            ToolTip(
+                widget=self.layout.label_linked_doc,
+                text=f"{str(linked_doc)} (link removed)",
+            )
         else:
             self.vars.linked_doc_display.set("Document not found")
             self.layout.label_linked_doc.configure(cursor="", foreground="gray")
+            ToolTip(
+                widget=self.layout.label_linked_doc,
+                text=f"{str(linked_doc)} (not found)",
+            )
 
     def trace_base_size(self, *_) -> None:
         """Trace callback for the `base_size` StringVar"""
