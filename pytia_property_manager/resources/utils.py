@@ -11,7 +11,7 @@ import sys
 from tkinter import messagebox as tkmsg
 
 
-def expand_env_vars(value: str) -> str:
+def expand_env_vars(value: str, ignore_not_found: bool = False) -> str:
     """
     Expands windows environment variables.
     E.g.: Expands %ONEDRIVE%/foo/bar to "C:/Users/.../OneDrive/foo/bar
@@ -19,13 +19,16 @@ def expand_env_vars(value: str) -> str:
     The variable to replace must be between two percentage symbols.
 
     Terminates the app if the given value has a variable, that
-    cannot be found in the system variables.
+    cannot be found in the system variables (and ignore_not_found is False),
+    return the original value otherwise.
     """
     output = value
     filter_result = re.findall(r"\%(.*?)\%", value)
     for key in filter_result:
         if key in os.environ:
             output = value.replace(f"%{key}%", os.environ[key])  # type: ignore
+        elif ignore_not_found:
+            return value
         else:
             tkmsg.showerror(
                 title="Environment Variables",

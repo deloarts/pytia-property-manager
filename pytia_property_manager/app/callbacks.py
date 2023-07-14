@@ -15,6 +15,7 @@ from tkinter import simpledialog
 from app.layout import Layout
 from app.state_setter import UISetter
 from app.vars import Variables
+from resources.utils import expand_env_vars
 from const import PROP_DRAWING_PATH, REVISION_FOLDER, SUFFIX_DRAWING, Source
 from handler.properties import Properties
 from helper.launcher import launch_bounding_box_app
@@ -295,7 +296,9 @@ class Callbacks:
 
     def on_lbl_linked_doc(self) -> None:
         """Opens the linked document, if there is one and closes the app."""
-        linked_doc = Path(self.vars.linked_doc.get())
+        linked_doc = Path(
+            expand_env_vars(self.vars.linked_doc.get(), ignore_not_found=True)
+        )
         # We have to check if the document is available in a window, otherwise a
         # prompt with "do you want to open the document again" would appear.
         if linked_doc.name in self.doc_helper.get_all_open_windows():
