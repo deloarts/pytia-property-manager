@@ -42,7 +42,7 @@ import sys
 from tkinter import messagebox as tkmsg
 
 
-def expand_env_vars(value: str) -&gt; str:
+def expand_env_vars(value: str, ignore_not_found: bool = False) -&gt; str:
     &#34;&#34;&#34;
     Expands windows environment variables.
     E.g.: Expands %ONEDRIVE%/foo/bar to &#34;C:/Users/.../OneDrive/foo/bar
@@ -50,13 +50,16 @@ def expand_env_vars(value: str) -&gt; str:
     The variable to replace must be between two percentage symbols.
 
     Terminates the app if the given value has a variable, that
-    cannot be found in the system variables.
+    cannot be found in the system variables (and ignore_not_found is False),
+    return the original value otherwise.
     &#34;&#34;&#34;
     output = value
     filter_result = re.findall(r&#34;\%(.*?)\%&#34;, value)
     for key in filter_result:
         if key in os.environ:
             output = value.replace(f&#34;%{key}%&#34;, os.environ[key])  # type: ignore
+        elif ignore_not_found:
+            return value
         else:
             tkmsg.showerror(
                 title=&#34;Environment Variables&#34;,
@@ -79,19 +82,20 @@ def expand_env_vars(value: str) -&gt; str:
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
 <dt id="pytia_property_manager.resources.utils.expand_env_vars"><code class="name flex">
-<span>def <span class="ident">expand_env_vars</span></span>(<span>value: str) ‑> str</span>
+<span>def <span class="ident">expand_env_vars</span></span>(<span>value: str, ignore_not_found: bool = False) ‑> str</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Expands windows environment variables.
 E.g.: Expands %ONEDRIVE%/foo/bar to "C:/Users/&hellip;/OneDrive/foo/bar</p>
 <p>The variable to replace must be between two percentage symbols.</p>
 <p>Terminates the app if the given value has a variable, that
-cannot be found in the system variables.</p></div>
+cannot be found in the system variables (and ignore_not_found is False),
+return the original value otherwise.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def expand_env_vars(value: str) -&gt; str:
+<pre><code class="python">def expand_env_vars(value: str, ignore_not_found: bool = False) -&gt; str:
     &#34;&#34;&#34;
     Expands windows environment variables.
     E.g.: Expands %ONEDRIVE%/foo/bar to &#34;C:/Users/.../OneDrive/foo/bar
@@ -99,13 +103,16 @@ cannot be found in the system variables.</p></div>
     The variable to replace must be between two percentage symbols.
 
     Terminates the app if the given value has a variable, that
-    cannot be found in the system variables.
+    cannot be found in the system variables (and ignore_not_found is False),
+    return the original value otherwise.
     &#34;&#34;&#34;
     output = value
     filter_result = re.findall(r&#34;\%(.*?)\%&#34;, value)
     for key in filter_result:
         if key in os.environ:
             output = value.replace(f&#34;%{key}%&#34;, os.environ[key])  # type: ignore
+        elif ignore_not_found:
+            return value
         else:
             tkmsg.showerror(
                 title=&#34;Environment Variables&#34;,

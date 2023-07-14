@@ -37,11 +37,13 @@ from tkinter import messagebox as tkmsg
 from app.callbacks import on_source_bought
 from app.layout import Layout
 from app.state_setter import UISetter
+from app.tooltips import ToolTip
 from app.vars import Variables
 from const import PROP_DRAWING_PATH, SUFFIX_DRAWING, Source
 from helper.lazy_loaders import LazyDocumentHelper
 from pytia.log import log
 from resources import resource
+from resources.utils import expand_env_vars
 
 
 class Traces:
@@ -91,15 +93,25 @@ class Traces:
 
     def trace_linked_doc(self, *_) -&gt; None:
         &#34;&#34;&#34;Trace callback for the `linked_doc` StringVar&#34;&#34;&#34;
-        linked_doc = Path(self.vars.linked_doc.get())
+        linked_doc = Path(
+            expand_env_vars(self.vars.linked_doc.get(), ignore_not_found=True)
+        )
 
         if self.vars.linked_doc.get() == &#34;&#34;:
             self.vars.linked_doc_display.set(&#34;-&#34;)
             self.layout.label_linked_doc.configure(cursor=&#34;&#34;, foreground=&#34;black&#34;)
+            ToolTip(
+                widget=self.layout.label_linked_doc,
+                text=&#34;There&#39;s no drawing document linked to this file.&#34;,
+            )
 
         elif linked_doc.is_file() and linked_doc.suffix == SUFFIX_DRAWING:
             self.vars.linked_doc_display.set(linked_doc.stem)
             self.layout.label_linked_doc.configure(cursor=&#34;hand2&#34;, foreground=&#34;blue&#34;)
+            ToolTip(
+                widget=self.layout.label_linked_doc,
+                text=str(linked_doc),
+            )
 
         elif tkmsg.askyesno(
             title=resource.settings.title,
@@ -112,9 +124,17 @@ class Traces:
             self.doc_helper.document.properties.delete(PROP_DRAWING_PATH)
             self.vars.linked_doc_display.set(&#34;Link removed&#34;)
             self.layout.label_linked_doc.configure(cursor=&#34;&#34;, foreground=&#34;gray&#34;)
+            ToolTip(
+                widget=self.layout.label_linked_doc,
+                text=f&#34;{str(linked_doc)} (link removed)&#34;,
+            )
         else:
             self.vars.linked_doc_display.set(&#34;Document not found&#34;)
             self.layout.label_linked_doc.configure(cursor=&#34;&#34;, foreground=&#34;gray&#34;)
+            ToolTip(
+                widget=self.layout.label_linked_doc,
+                text=f&#34;{str(linked_doc)} (not found)&#34;,
+            )
 
     def trace_base_size(self, *_) -&gt; None:
         &#34;&#34;&#34;Trace callback for the `base_size` StringVar&#34;&#34;&#34;
@@ -256,15 +276,25 @@ class Traces:
 
     def trace_linked_doc(self, *_) -&gt; None:
         &#34;&#34;&#34;Trace callback for the `linked_doc` StringVar&#34;&#34;&#34;
-        linked_doc = Path(self.vars.linked_doc.get())
+        linked_doc = Path(
+            expand_env_vars(self.vars.linked_doc.get(), ignore_not_found=True)
+        )
 
         if self.vars.linked_doc.get() == &#34;&#34;:
             self.vars.linked_doc_display.set(&#34;-&#34;)
             self.layout.label_linked_doc.configure(cursor=&#34;&#34;, foreground=&#34;black&#34;)
+            ToolTip(
+                widget=self.layout.label_linked_doc,
+                text=&#34;There&#39;s no drawing document linked to this file.&#34;,
+            )
 
         elif linked_doc.is_file() and linked_doc.suffix == SUFFIX_DRAWING:
             self.vars.linked_doc_display.set(linked_doc.stem)
             self.layout.label_linked_doc.configure(cursor=&#34;hand2&#34;, foreground=&#34;blue&#34;)
+            ToolTip(
+                widget=self.layout.label_linked_doc,
+                text=str(linked_doc),
+            )
 
         elif tkmsg.askyesno(
             title=resource.settings.title,
@@ -277,9 +307,17 @@ class Traces:
             self.doc_helper.document.properties.delete(PROP_DRAWING_PATH)
             self.vars.linked_doc_display.set(&#34;Link removed&#34;)
             self.layout.label_linked_doc.configure(cursor=&#34;&#34;, foreground=&#34;gray&#34;)
+            ToolTip(
+                widget=self.layout.label_linked_doc,
+                text=f&#34;{str(linked_doc)} (link removed)&#34;,
+            )
         else:
             self.vars.linked_doc_display.set(&#34;Document not found&#34;)
             self.layout.label_linked_doc.configure(cursor=&#34;&#34;, foreground=&#34;gray&#34;)
+            ToolTip(
+                widget=self.layout.label_linked_doc,
+                text=f&#34;{str(linked_doc)} (not found)&#34;,
+            )
 
     def trace_base_size(self, *_) -&gt; None:
         &#34;&#34;&#34;Trace callback for the `base_size` StringVar&#34;&#34;&#34;
@@ -393,15 +431,25 @@ class Traces:
 </summary>
 <pre><code class="python">def trace_linked_doc(self, *_) -&gt; None:
     &#34;&#34;&#34;Trace callback for the `linked_doc` StringVar&#34;&#34;&#34;
-    linked_doc = Path(self.vars.linked_doc.get())
+    linked_doc = Path(
+        expand_env_vars(self.vars.linked_doc.get(), ignore_not_found=True)
+    )
 
     if self.vars.linked_doc.get() == &#34;&#34;:
         self.vars.linked_doc_display.set(&#34;-&#34;)
         self.layout.label_linked_doc.configure(cursor=&#34;&#34;, foreground=&#34;black&#34;)
+        ToolTip(
+            widget=self.layout.label_linked_doc,
+            text=&#34;There&#39;s no drawing document linked to this file.&#34;,
+        )
 
     elif linked_doc.is_file() and linked_doc.suffix == SUFFIX_DRAWING:
         self.vars.linked_doc_display.set(linked_doc.stem)
         self.layout.label_linked_doc.configure(cursor=&#34;hand2&#34;, foreground=&#34;blue&#34;)
+        ToolTip(
+            widget=self.layout.label_linked_doc,
+            text=str(linked_doc),
+        )
 
     elif tkmsg.askyesno(
         title=resource.settings.title,
@@ -414,9 +462,17 @@ class Traces:
         self.doc_helper.document.properties.delete(PROP_DRAWING_PATH)
         self.vars.linked_doc_display.set(&#34;Link removed&#34;)
         self.layout.label_linked_doc.configure(cursor=&#34;&#34;, foreground=&#34;gray&#34;)
+        ToolTip(
+            widget=self.layout.label_linked_doc,
+            text=f&#34;{str(linked_doc)} (link removed)&#34;,
+        )
     else:
         self.vars.linked_doc_display.set(&#34;Document not found&#34;)
-        self.layout.label_linked_doc.configure(cursor=&#34;&#34;, foreground=&#34;gray&#34;)</code></pre>
+        self.layout.label_linked_doc.configure(cursor=&#34;&#34;, foreground=&#34;gray&#34;)
+        ToolTip(
+            widget=self.layout.label_linked_doc,
+            text=f&#34;{str(linked_doc)} (not found)&#34;,
+        )</code></pre>
 </details>
 </dd>
 <dt id="pytia_property_manager.app.traces.Traces.trace_mass"><code class="name flex">
