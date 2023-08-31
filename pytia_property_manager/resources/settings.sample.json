@@ -31,6 +31,10 @@
         "min": 3,
         "max": 6
     },
+    "auto_group": {
+        "made": "Made Parts",
+        "bought": null
+    },
     "tolerances": [
         "ISO 2768 1-m 2-K",
         "ISO 2768 1-f 2-K",

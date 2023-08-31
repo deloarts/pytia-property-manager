@@ -46,6 +46,11 @@ This file contains the basic settings for the app.
         "min": 3,
         "max": 6
     },
+    "auto_group": {
+        "unknown": null,
+        "made": "Made Parts",
+        "bought": ""
+    },
     "tolerances": [
         "ISO 2768 1-m 2-K",
         "ISO 2768 1-f 2-K",
@@ -104,6 +109,8 @@ nomenclature.bought | `str` | The nomenclature for bought parts or products.
 processes.first | `int` | The index of the first process. Can be 0 or 1.
 processes.min | `int` | The minimum amount of processes to display in the UI.
 processes.max | `int` | The maximum amount of processes to display in the UI.
+auto_group.made | `str` or `null` | The value of the group that will be automatically assigned if the source is changed to `made`. If this value is set to `null` the group won't be changed. If you want the group to be empty on change of source, the value must be an empty string `""`.
+auto_group.bought | `str` or `null` | The value of the group that will be automatically assigned if the source is changed to `bought`. If this value is set to `null` the group won't be changed. If you want the group to be empty on change of source, the value must be an empty string `""`.
 tolerances | `List[str]` | A list of available tolerances.
 spare_part_level | `List[str]` | A list of available spare part levels.
 paths.catia | `str` | The absolute path to the CATIA executables. Environment variables will be expanded to their respective values. E.g: `%ONEDRIVE%\\CATIA\\Apps` will be resolved to `C:\\Users\\...\\OneDrive\\CATIA\\Apps`.

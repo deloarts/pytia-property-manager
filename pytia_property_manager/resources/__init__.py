@@ -79,6 +79,16 @@ class SettingsProcesses:
     max: int
 
 
+@dataclass(slots=True, kw_only=True, frozen=True)
+class SettingsAutoGroup:
+    """Dataclass for conditional groups."""
+
+    # TODO: Move this to the workspace file.
+
+    made: str | None
+    bought: str | None
+
+
 @dataclass(slots=True, kw_only=True)
 class SettingsPaths:
     """Dataclass for paths (settings.json)."""
@@ -132,6 +142,7 @@ class Settings:  # pylint: disable=R0902
     separators: SettingsSeparators
     nomenclature: SettingsNomenclature
     processes: SettingsProcesses
+    auto_group: SettingsAutoGroup
     tolerances: List[str]
     spare_part_level: List[str]
     files: SettingsFiles
@@ -145,6 +156,7 @@ class Settings:  # pylint: disable=R0902
         self.separators = SettingsSeparators(**dict(self.separators))  # type: ignore
         self.nomenclature = SettingsNomenclature(**dict(self.nomenclature))  # type: ignore
         self.processes = SettingsProcesses(**dict(self.processes))  # type: ignore
+        self.auto_group = SettingsAutoGroup(**dict(self.auto_group))  # type: ignore
         self.files = SettingsFiles(**dict(self.files))  # type: ignore
         self.paths = SettingsPaths(**dict(self.paths))  # type: ignore
         self.urls = SettingsUrls(**dict(self.urls))  # type: ignore
