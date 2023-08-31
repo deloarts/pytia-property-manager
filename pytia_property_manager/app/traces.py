@@ -148,8 +148,14 @@ class Traces:
                         definition=self.vars.definition,
                         manufacturer=self.vars.manufacturer,
                     )
+                    if resource.settings.auto_group.bought is not None:
+                        self.vars.group.set(resource.settings.auto_group.bought)
+
                 case Source.MADE.value:
                     self.set_ui.made()
+                    if resource.settings.auto_group.made is not None:
+                        self.vars.group.set(resource.settings.auto_group.made)
+
                 case _:
                     self.set_ui.unknown()
         else:
