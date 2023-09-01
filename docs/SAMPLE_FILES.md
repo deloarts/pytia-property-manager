@@ -29,9 +29,22 @@ This file contains the basic settings for the app.
         "enable_information": true
     },
     "verification": {
-        "require_project": true,
-        "require_machine": true,
-        "require_revision": true
+        "basic": {
+            "project": "critical",
+            "machine": "critical",
+            "revision": "critical",
+            "group": "warning"
+        },
+        "made": {
+            "definition": null,
+            "material": "warning",
+            "process_1": "warning"
+        },
+        "bought": {
+            "definition": "critical",
+            "manufacturer": "critical",
+            "supplier": null
+        }
     },
     "separators": {
         "bought": " - ",
@@ -45,6 +58,11 @@ This file contains the basic settings for the app.
         "first": 1,
         "min": 3,
         "max": 6
+    },
+    "auto_group": {
+        "unknown": null,
+        "made": "Made Parts",
+        "bought": ""
     },
     "tolerances": [
         "ISO 2768 1-m 2-K",
@@ -94,9 +112,16 @@ restrictions.allow_outside_workspace | `bool` | If set to `false` a **workspace*
 restrictions.strict_project | `bool` | If set to `true` the project number must be present in the **workspace** file, otherwise the changes to the properties cannot be saved. If no workspace file is found, or no **projects** list-item is inside the workspace file, then this is omitted, and any project number can be written to the documents properties.
 restrictions.strict_machine | `bool` | If set to `true` the machine number must be present in the **workspace** file, otherwise the changes to the properties cannot be saved. If no workspace file is found, or no **machine** item is inside the workspace file, then this is omitted, and any machine number can be written to the documents properties. Further, if set to `true`, an existing machine number (a value that is already present in the documents properties) will be overwritten with the value from the workspace file.
 restrictions.enable_information | `bool` | If set to `true` the user will see the notifications from the **information.json** file.
-verifications.require_project | `bool` | If set to `true` the user can't save changes, if the project number is unset.
-verifications.require_machine | `bool` | If set to `true` the user can't save changes, if the machine number is unset.
-verifications.require_revision | `bool` | If set to `true` the user can't save changes, if the revision number is unset.
+verifications.basic.project | `str` (`critical` or `warning`) or `null` | Sets the verification level for the **project number**. If set to `critical` the property must have a value. If set to `warning` the user receives a warning that the value is empty. If set to `null` the property won't be verified.
+verifications.basic.machine | `str` (`critical` or `warning`) or `null` | Sets the verification level for the **machine number**. If set to `critical` the property must have a value. If set to `warning` the user receives a warning that the value is empty. If set to `null` the property won't be verified.
+verifications.basic.revision | `str` (`critical` or `warning`) or `null` | Sets the verification level for the **revision number**. If set to `critical` the property must have a value. If set to `warning` the user receives a warning that the value is empty. If set to `null` the property won't be verified.
+verifications.basic.group | `str` (`critical` or `warning`) or `null` | Sets the verification level for the **group**. If set to `critical` the property must have a value. If set to `warning` the user receives a warning that the value is empty. If set to `null` the property won't be verified.
+verifications.made.definition | `str` (`critical` or `warning`) or `null` | Sets the verification level for the **definition** for `made` parts. If set to `critical` the property must have a value. If set to `warning` the user receives a warning that the value is empty. If set to `null` the property won't be verified.
+verifications.made.material | `str` (`critical` or `warning`) or `null` | Sets the verification level for the **material** for `made` parts. If set to `critical` the property must have a value. If set to `warning` the user receives a warning that the value is empty. If set to `null` the property won't be verified.
+verifications.made.process_1 | `str` (`critical` or `warning`) or `null` | Sets the verification level for the **first process** for `made` parts. If set to `critical` the property must have a value. If set to `warning` the user receives a warning that the value is empty. If set to `null` the property won't be verified.
+verifications.bought.definition | `str` (`critical` or `warning`) or `null` | Sets the verification level for the **definition** for `bought` parts. If set to `critical` the property must have a value. If set to `warning` the user receives a warning that the value is empty. If set to `null` the property won't be verified.
+verifications.bought.manufacturer | `str` (`critical` or `warning`) or `null` | Sets the verification level for the **manufacturer** for `bought` parts. If set to `critical` the property must have a value. If set to `warning` the user receives a warning that the value is empty. If set to `null` the property won't be verified.
+verifications.bought.supplier | `str` (`critical` or `warning`) or `null` | Sets the verification level for the **supplier** for `bought` parts. If set to `critical` the property must have a value. If set to `warning` the user receives a warning that the value is empty. If set to `null` the property won't be verified.
 separators.bought | `str` | The separator that is used for the bought nomenclature.
 separators.metadata | `str` | The separator that is used to distinguish the metadata from the name of a material.
 nomenclature.made | `str` | The nomenclature for made parts or products.
@@ -104,6 +129,8 @@ nomenclature.bought | `str` | The nomenclature for bought parts or products.
 processes.first | `int` | The index of the first process. Can be 0 or 1.
 processes.min | `int` | The minimum amount of processes to display in the UI.
 processes.max | `int` | The maximum amount of processes to display in the UI.
+auto_group.made | `str` or `null` | The value of the group that will be automatically assigned if the source is changed to `made`. If this value is set to `null` the group won't be changed. If you want the group to be empty on change of source, the value must be an empty string `""`.
+auto_group.bought | `str` or `null` | The value of the group that will be automatically assigned if the source is changed to `bought`. If this value is set to `null` the group won't be changed. If you want the group to be empty on change of source, the value must be an empty string `""`.
 tolerances | `List[str]` | A list of available tolerances.
 spare_part_level | `List[str]` | A list of available spare part levels.
 paths.catia | `str` | The absolute path to the CATIA executables. Environment variables will be expanded to their respective values. E.g: `%ONEDRIVE%\\CATIA\\Apps` will be resolved to `C:\\Users\\...\\OneDrive\\CATIA\\Apps`.

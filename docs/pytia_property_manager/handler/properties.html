@@ -38,10 +38,11 @@ from pathlib import Path
 
 from app.layout import Layout
 from app.vars import Variables
-from const import PROP_DRAWING_PATH, Source
+from const import PROP_DRAWING_PATH, VERIFY_CRITICAL, VERIFY_WARNING, Source
 from helper.lazy_loaders import LazyDocumentHelper
 from helper.messages import datafield_message
 from helper.translators import translate_nomenclature, translate_source
+from helper.verifications import verify_process, verify_variable
 from pytia.log import log
 from pytia_ui_tools.handlers.workspace_handler import Workspace
 from resources import resource
@@ -144,40 +145,93 @@ class Properties:
                 &#34;Please select a project number from the dropdown menu.&#34;
             )
 
-        if not self.vars.project.get():
-            msg = &#34;The project number is not set.&#34;
-            if resource.settings.verifications.require_project:
-                critical.append(msg)
-            else:
-                warning.append(msg)
-
-        if not self.vars.machine.get():
-            msg = &#34;The machine number is not set.&#34;
-            if resource.settings.verifications.require_machine:
-                critical.append(msg)
-            else:
-                warning.append(msg)
-
-        if not self.vars.revision.get():
-            msg = &#34;The revision number is not set.&#34;
-            if resource.settings.verifications.require_revision:
-                critical.append(msg)
-            else:
-                warning.append(msg)
+        # Verify project number
+        verify_variable(
+            critical=critical,
+            warning=warning,
+            variable=self.vars.project,
+            settings_verification=resource.settings.verifications.basic.project,
+            msg=&#34;The project number is not set.&#34;,
+        )
+        # Verify machine number
+        verify_variable(
+            critical=critical,
+            warning=warning,
+            variable=self.vars.machine,
+            settings_verification=resource.settings.verifications.basic.machine,
+            msg=&#34;The machine number is not set.&#34;,
+        )
+        # Verify revision number
+        verify_variable(
+            critical=critical,
+            warning=warning,
+            variable=self.vars.revision,
+            settings_verification=resource.settings.verifications.basic.revision,
+            msg=&#34;The revision is not set.&#34;,
+        )
+        # Verify group
+        verify_variable(
+            critical=critical,
+            warning=warning,
+            variable=self.vars.group,
+            settings_verification=resource.settings.verifications.basic.group,
+            msg=&#34;The group is not set.&#34;,
+        )
 
         match self.vars.source.get():
             case Source.MADE.value:
-                if not self.vars.material.get() and self.doc_helper.is_part:
-                    warning.append(&#34;No material was applied to the part.&#34;)
-                if not self.layout.processes.get(
-                    resource.settings.processes.first
-                ).process_var.get():
-                    warning.append(&#34;No process is selected.&#34;)
+                # Verify definition
+                verify_variable(
+                    critical=critical,
+                    warning=warning,
+                    variable=self.vars.definition,
+                    settings_verification=resource.settings.verifications.made.definition,
+                    msg=&#34;The definition is not set.&#34;,
+                )
+                # Verify material
+                if self.doc_helper.is_part:
+                    verify_variable(
+                        critical=critical,
+                        warning=warning,
+                        variable=self.vars.material,
+                        settings_verification=resource.settings.verifications.made.material,
+                        msg=&#34;No material is applied to the part.&#34;,
+                    )
+                # Verify process
+                verify_process(
+                    critical=critical,
+                    warning=warning,
+                    process_id=resource.settings.processes.first,
+                    settings_verification=resource.settings.verifications.made.process_1,
+                    layout=self.layout,
+                    msg=&#34;No process is selected.&#34;,
+                )
+
             case Source.BOUGHT.value:
-                if not self.vars.definition.get():
-                    critical.append(&#34;The definition is not set.&#34;)
-                if not self.vars.manufacturer.get():
-                    critical.append(&#34;The manufacturer is not set.&#34;)
+                # Verify definition
+                verify_variable(
+                    critical=critical,
+                    warning=warning,
+                    variable=self.vars.definition,
+                    settings_verification=resource.settings.verifications.bought.definition,
+                    msg=&#34;The definition is not set.&#34;,
+                )
+                # Verify manufacturer
+                verify_variable(
+                    critical=critical,
+                    warning=warning,
+                    variable=self.vars.manufacturer,
+                    settings_verification=resource.settings.verifications.bought.manufacturer,
+                    msg=&#34;The manufacturer is not set.&#34;,
+                )
+                # Verify supplier
+                verify_variable(
+                    critical=critical,
+                    warning=warning,
+                    variable=self.vars.supplier,
+                    settings_verification=resource.settings.verifications.bought.supplier,
+                    msg=&#34;The supplier is not set.&#34;,
+                )
 
         if any(critical):
             datafield_message(critical, critical=True)
@@ -404,40 +458,93 @@ class Properties:
                 &#34;Please select a project number from the dropdown menu.&#34;
             )
 
-        if not self.vars.project.get():
-            msg = &#34;The project number is not set.&#34;
-            if resource.settings.verifications.require_project:
-                critical.append(msg)
-            else:
-                warning.append(msg)
-
-        if not self.vars.machine.get():
-            msg = &#34;The machine number is not set.&#34;
-            if resource.settings.verifications.require_machine:
-                critical.append(msg)
-            else:
-                warning.append(msg)
-
-        if not self.vars.revision.get():
-            msg = &#34;The revision number is not set.&#34;
-            if resource.settings.verifications.require_revision:
-                critical.append(msg)
-            else:
-                warning.append(msg)
+        # Verify project number
+        verify_variable(
+            critical=critical,
+            warning=warning,
+            variable=self.vars.project,
+            settings_verification=resource.settings.verifications.basic.project,
+            msg=&#34;The project number is not set.&#34;,
+        )
+        # Verify machine number
+        verify_variable(
+            critical=critical,
+            warning=warning,
+            variable=self.vars.machine,
+            settings_verification=resource.settings.verifications.basic.machine,
+            msg=&#34;The machine number is not set.&#34;,
+        )
+        # Verify revision number
+        verify_variable(
+            critical=critical,
+            warning=warning,
+            variable=self.vars.revision,
+            settings_verification=resource.settings.verifications.basic.revision,
+            msg=&#34;The revision is not set.&#34;,
+        )
+        # Verify group
+        verify_variable(
+            critical=critical,
+            warning=warning,
+            variable=self.vars.group,
+            settings_verification=resource.settings.verifications.basic.group,
+            msg=&#34;The group is not set.&#34;,
+        )
 
         match self.vars.source.get():
             case Source.MADE.value:
-                if not self.vars.material.get() and self.doc_helper.is_part:
-                    warning.append(&#34;No material was applied to the part.&#34;)
-                if not self.layout.processes.get(
-                    resource.settings.processes.first
-                ).process_var.get():
-                    warning.append(&#34;No process is selected.&#34;)
+                # Verify definition
+                verify_variable(
+                    critical=critical,
+                    warning=warning,
+                    variable=self.vars.definition,
+                    settings_verification=resource.settings.verifications.made.definition,
+                    msg=&#34;The definition is not set.&#34;,
+                )
+                # Verify material
+                if self.doc_helper.is_part:
+                    verify_variable(
+                        critical=critical,
+                        warning=warning,
+                        variable=self.vars.material,
+                        settings_verification=resource.settings.verifications.made.material,
+                        msg=&#34;No material is applied to the part.&#34;,
+                    )
+                # Verify process
+                verify_process(
+                    critical=critical,
+                    warning=warning,
+                    process_id=resource.settings.processes.first,
+                    settings_verification=resource.settings.verifications.made.process_1,
+                    layout=self.layout,
+                    msg=&#34;No process is selected.&#34;,
+                )
+
             case Source.BOUGHT.value:
-                if not self.vars.definition.get():
-                    critical.append(&#34;The definition is not set.&#34;)
-                if not self.vars.manufacturer.get():
-                    critical.append(&#34;The manufacturer is not set.&#34;)
+                # Verify definition
+                verify_variable(
+                    critical=critical,
+                    warning=warning,
+                    variable=self.vars.definition,
+                    settings_verification=resource.settings.verifications.bought.definition,
+                    msg=&#34;The definition is not set.&#34;,
+                )
+                # Verify manufacturer
+                verify_variable(
+                    critical=critical,
+                    warning=warning,
+                    variable=self.vars.manufacturer,
+                    settings_verification=resource.settings.verifications.bought.manufacturer,
+                    msg=&#34;The manufacturer is not set.&#34;,
+                )
+                # Verify supplier
+                verify_variable(
+                    critical=critical,
+                    warning=warning,
+                    variable=self.vars.supplier,
+                    settings_verification=resource.settings.verifications.bought.supplier,
+                    msg=&#34;The supplier is not set.&#34;,
+                )
 
         if any(critical):
             datafield_message(critical, critical=True)
@@ -722,40 +829,93 @@ class Properties:
             &#34;Please select a project number from the dropdown menu.&#34;
         )
 
-    if not self.vars.project.get():
-        msg = &#34;The project number is not set.&#34;
-        if resource.settings.verifications.require_project:
-            critical.append(msg)
-        else:
-            warning.append(msg)
-
-    if not self.vars.machine.get():
-        msg = &#34;The machine number is not set.&#34;
-        if resource.settings.verifications.require_machine:
-            critical.append(msg)
-        else:
-            warning.append(msg)
-
-    if not self.vars.revision.get():
-        msg = &#34;The revision number is not set.&#34;
-        if resource.settings.verifications.require_revision:
-            critical.append(msg)
-        else:
-            warning.append(msg)
+    # Verify project number
+    verify_variable(
+        critical=critical,
+        warning=warning,
+        variable=self.vars.project,
+        settings_verification=resource.settings.verifications.basic.project,
+        msg=&#34;The project number is not set.&#34;,
+    )
+    # Verify machine number
+    verify_variable(
+        critical=critical,
+        warning=warning,
+        variable=self.vars.machine,
+        settings_verification=resource.settings.verifications.basic.machine,
+        msg=&#34;The machine number is not set.&#34;,
+    )
+    # Verify revision number
+    verify_variable(
+        critical=critical,
+        warning=warning,
+        variable=self.vars.revision,
+        settings_verification=resource.settings.verifications.basic.revision,
+        msg=&#34;The revision is not set.&#34;,
+    )
+    # Verify group
+    verify_variable(
+        critical=critical,
+        warning=warning,
+        variable=self.vars.group,
+        settings_verification=resource.settings.verifications.basic.group,
+        msg=&#34;The group is not set.&#34;,
+    )
 
     match self.vars.source.get():
         case Source.MADE.value:
-            if not self.vars.material.get() and self.doc_helper.is_part:
-                warning.append(&#34;No material was applied to the part.&#34;)
-            if not self.layout.processes.get(
-                resource.settings.processes.first
-            ).process_var.get():
-                warning.append(&#34;No process is selected.&#34;)
+            # Verify definition
+            verify_variable(
+                critical=critical,
+                warning=warning,
+                variable=self.vars.definition,
+                settings_verification=resource.settings.verifications.made.definition,
+                msg=&#34;The definition is not set.&#34;,
+            )
+            # Verify material
+            if self.doc_helper.is_part:
+                verify_variable(
+                    critical=critical,
+                    warning=warning,
+                    variable=self.vars.material,
+                    settings_verification=resource.settings.verifications.made.material,
+                    msg=&#34;No material is applied to the part.&#34;,
+                )
+            # Verify process
+            verify_process(
+                critical=critical,
+                warning=warning,
+                process_id=resource.settings.processes.first,
+                settings_verification=resource.settings.verifications.made.process_1,
+                layout=self.layout,
+                msg=&#34;No process is selected.&#34;,
+            )
+
         case Source.BOUGHT.value:
-            if not self.vars.definition.get():
-                critical.append(&#34;The definition is not set.&#34;)
-            if not self.vars.manufacturer.get():
-                critical.append(&#34;The manufacturer is not set.&#34;)
+            # Verify definition
+            verify_variable(
+                critical=critical,
+                warning=warning,
+                variable=self.vars.definition,
+                settings_verification=resource.settings.verifications.bought.definition,
+                msg=&#34;The definition is not set.&#34;,
+            )
+            # Verify manufacturer
+            verify_variable(
+                critical=critical,
+                warning=warning,
+                variable=self.vars.manufacturer,
+                settings_verification=resource.settings.verifications.bought.manufacturer,
+                msg=&#34;The manufacturer is not set.&#34;,
+            )
+            # Verify supplier
+            verify_variable(
+                critical=critical,
+                warning=warning,
+                variable=self.vars.supplier,
+                settings_verification=resource.settings.verifications.bought.supplier,
+                msg=&#34;The supplier is not set.&#34;,
+            )
 
     if any(critical):
         datafield_message(critical, critical=True)

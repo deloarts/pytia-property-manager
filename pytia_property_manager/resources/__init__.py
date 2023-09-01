@@ -13,7 +13,7 @@ import tkinter.messagebox as tkmsg
 from dataclasses import asdict, dataclass, field, fields
 from json.decoder import JSONDecodeError
 from pathlib import Path
-from typing import List, Optional
+from typing import List, Literal, Optional
 
 from const import (
     APP_VERSION,
@@ -46,12 +46,45 @@ class SettingsRestrictions:
 
 
 @dataclass(slots=True, kw_only=True, frozen=True)
+class SettingsVerificationsBasic:
+    """Dataclass for basic property verification settings."""
+
+    project: Literal["critical", "warning"] | None
+    machine: Literal["critical", "warning"] | None
+    revision: Literal["critical", "warning"] | None
+    group: Literal["critical", "warning"] | None
+
+
+@dataclass(slots=True, kw_only=True, frozen=True)
+class SettingsVerificationsMade:
+    """Dataclass for made property verification settings."""
+
+    definition: Literal["critical", "warning"] | None
+    material: Literal["critical", "warning"] | None
+    process_1: Literal["critical", "warning"] | None
+
+
+@dataclass(slots=True, kw_only=True, frozen=True)
+class SettingsVerificationsBought:
+    """Dataclass for bought property verification settings."""
+
+    definition: Literal["critical", "warning"] | None
+    manufacturer: Literal["critical", "warning"] | None
+    supplier: Literal["critical", "warning"] | None
+
+
+@dataclass(slots=True, kw_only=True)
 class SettingsVerifications:
     """Dataclass for property verification settings."""
 
-    require_project: bool
-    require_machine: bool
-    require_revision: bool
+    basic: SettingsVerificationsBasic
+    made: SettingsVerificationsMade
+    bought: SettingsVerificationsBought
+
+    def __post_init__(self) -> None:
+        self.basic = SettingsVerificationsBasic(**dict(self.basic))  # type: ignore
+        self.made = SettingsVerificationsMade(**dict(self.made))  # type: ignore
+        self.bought = SettingsVerificationsBought(**dict(self.bought))  # type: ignore
 
 
 @dataclass(slots=True, kw_only=True, frozen=True)
@@ -77,6 +110,16 @@ class SettingsProcesses:
     first: int
     min: int
     max: int
+
+
+@dataclass(slots=True, kw_only=True, frozen=True)
+class SettingsAutoGroup:
+    """Dataclass for conditional groups."""
+
+    # TODO: Move this to the workspace file.
+
+    made: str | None
+    bought: str | None
 
 
 @dataclass(slots=True, kw_only=True)
@@ -132,6 +175,7 @@ class Settings:  # pylint: disable=R0902
     separators: SettingsSeparators
     nomenclature: SettingsNomenclature
     processes: SettingsProcesses
+    auto_group: SettingsAutoGroup
     tolerances: List[str]
     spare_part_level: List[str]
     files: SettingsFiles
@@ -145,6 +189,7 @@ class Settings:  # pylint: disable=R0902
         self.separators = SettingsSeparators(**dict(self.separators))  # type: ignore
         self.nomenclature = SettingsNomenclature(**dict(self.nomenclature))  # type: ignore
         self.processes = SettingsProcesses(**dict(self.processes))  # type: ignore
+        self.auto_group = SettingsAutoGroup(**dict(self.auto_group))  # type: ignore
         self.files = SettingsFiles(**dict(self.files))  # type: ignore
         self.paths = SettingsPaths(**dict(self.paths))  # type: ignore
         self.urls = SettingsUrls(**dict(self.urls))  # type: ignore

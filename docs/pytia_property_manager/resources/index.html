@@ -44,7 +44,7 @@ import tkinter.messagebox as tkmsg
 from dataclasses import asdict, dataclass, field, fields
 from json.decoder import JSONDecodeError
 from pathlib import Path
-from typing import List, Optional
+from typing import List, Literal, Optional
 
 from const import (
     APP_VERSION,
@@ -77,12 +77,45 @@ class SettingsRestrictions:
 
 
 @dataclass(slots=True, kw_only=True, frozen=True)
+class SettingsVerificationsBasic:
+    &#34;&#34;&#34;Dataclass for basic property verification settings.&#34;&#34;&#34;
+
+    project: Literal[&#34;critical&#34;, &#34;warning&#34;] | None
+    machine: Literal[&#34;critical&#34;, &#34;warning&#34;] | None
+    revision: Literal[&#34;critical&#34;, &#34;warning&#34;] | None
+    group: Literal[&#34;critical&#34;, &#34;warning&#34;] | None
+
+
+@dataclass(slots=True, kw_only=True, frozen=True)
+class SettingsVerificationsMade:
+    &#34;&#34;&#34;Dataclass for made property verification settings.&#34;&#34;&#34;
+
+    definition: Literal[&#34;critical&#34;, &#34;warning&#34;] | None
+    material: Literal[&#34;critical&#34;, &#34;warning&#34;] | None
+    process_1: Literal[&#34;critical&#34;, &#34;warning&#34;] | None
+
+
+@dataclass(slots=True, kw_only=True, frozen=True)
+class SettingsVerificationsBought:
+    &#34;&#34;&#34;Dataclass for bought property verification settings.&#34;&#34;&#34;
+
+    definition: Literal[&#34;critical&#34;, &#34;warning&#34;] | None
+    manufacturer: Literal[&#34;critical&#34;, &#34;warning&#34;] | None
+    supplier: Literal[&#34;critical&#34;, &#34;warning&#34;] | None
+
+
+@dataclass(slots=True, kw_only=True)
 class SettingsVerifications:
     &#34;&#34;&#34;Dataclass for property verification settings.&#34;&#34;&#34;
 
-    require_project: bool
-    require_machine: bool
-    require_revision: bool
+    basic: SettingsVerificationsBasic
+    made: SettingsVerificationsMade
+    bought: SettingsVerificationsBought
+
+    def __post_init__(self) -&gt; None:
+        self.basic = SettingsVerificationsBasic(**dict(self.basic))  # type: ignore
+        self.made = SettingsVerificationsMade(**dict(self.made))  # type: ignore
+        self.bought = SettingsVerificationsBought(**dict(self.bought))  # type: ignore
 
 
 @dataclass(slots=True, kw_only=True, frozen=True)
@@ -108,6 +141,16 @@ class SettingsProcesses:
     first: int
     min: int
     max: int
+
+
+@dataclass(slots=True, kw_only=True, frozen=True)
+class SettingsAutoGroup:
+    &#34;&#34;&#34;Dataclass for conditional groups.&#34;&#34;&#34;
+
+    # TODO: Move this to the workspace file.
+
+    made: str | None
+    bought: str | None
 
 
 @dataclass(slots=True, kw_only=True)
@@ -163,6 +206,7 @@ class Settings:  # pylint: disable=R0902
     separators: SettingsSeparators
     nomenclature: SettingsNomenclature
     processes: SettingsProcesses
+    auto_group: SettingsAutoGroup
     tolerances: List[str]
     spare_part_level: List[str]
     files: SettingsFiles
@@ -176,6 +220,7 @@ class Settings:  # pylint: disable=R0902
         self.separators = SettingsSeparators(**dict(self.separators))  # type: ignore
         self.nomenclature = SettingsNomenclature(**dict(self.nomenclature))  # type: ignore
         self.processes = SettingsProcesses(**dict(self.processes))  # type: ignore
+        self.auto_group = SettingsAutoGroup(**dict(self.auto_group))  # type: ignore
         self.files = SettingsFiles(**dict(self.files))  # type: ignore
         self.paths = SettingsPaths(**dict(self.paths))  # type: ignore
         self.urls = SettingsUrls(**dict(self.urls))  # type: ignore
@@ -580,7 +625,7 @@ resource = Resources()</code></pre>
 <dl>
 <dt id="pytia_property_manager.resources.AppData"><code class="flex name class">
 <span>class <span class="ident">AppData</span></span>
-<span>(</span><span>*, version: str = '0.2.5', counter: int = 0, save_on_apply: bool = True)</span>
+<span>(</span><span>*, version: str = '0.3.0', counter: int = 0, save_on_apply: bool = True)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Dataclass for appdata settings.</p></div>
@@ -1613,7 +1658,7 @@ current session if logon is omitted.</p>
 </dd>
 <dt id="pytia_property_manager.resources.Settings"><code class="flex name class">
 <span>class <span class="ident">Settings</span></span>
-<span>(</span><span>*, title: str, debug: bool, demo: bool, link_material: bool, revision: int | str, restrictions: <a title="pytia_property_manager.resources.SettingsRestrictions" href="#pytia_property_manager.resources.SettingsRestrictions">SettingsRestrictions</a>, verifications: <a title="pytia_property_manager.resources.SettingsVerifications" href="#pytia_property_manager.resources.SettingsVerifications">SettingsVerifications</a>, separators: <a title="pytia_property_manager.resources.SettingsSeparators" href="#pytia_property_manager.resources.SettingsSeparators">SettingsSeparators</a>, nomenclature: <a title="pytia_property_manager.resources.SettingsNomenclature" href="#pytia_property_manager.resources.SettingsNomenclature">SettingsNomenclature</a>, processes: <a title="pytia_property_manager.resources.SettingsProcesses" href="#pytia_property_manager.resources.SettingsProcesses">SettingsProcesses</a>, tolerances: List[str], spare_part_level: List[str], files: <a title="pytia_property_manager.resources.SettingsFiles" href="#pytia_property_manager.resources.SettingsFiles">SettingsFiles</a>, paths: <a title="pytia_property_manager.resources.SettingsPaths" href="#pytia_property_manager.resources.SettingsPaths">SettingsPaths</a>, urls: <a title="pytia_property_manager.resources.SettingsUrls" href="#pytia_property_manager.resources.SettingsUrls">SettingsUrls</a>, mails: <a title="pytia_property_manager.resources.SettingsMails" href="#pytia_property_manager.resources.SettingsMails">SettingsMails</a>)</span>
+<span>(</span><span>*, title: str, debug: bool, demo: bool, link_material: bool, revision: int | str, restrictions: <a title="pytia_property_manager.resources.SettingsRestrictions" href="#pytia_property_manager.resources.SettingsRestrictions">SettingsRestrictions</a>, verifications: <a title="pytia_property_manager.resources.SettingsVerifications" href="#pytia_property_manager.resources.SettingsVerifications">SettingsVerifications</a>, separators: <a title="pytia_property_manager.resources.SettingsSeparators" href="#pytia_property_manager.resources.SettingsSeparators">SettingsSeparators</a>, nomenclature: <a title="pytia_property_manager.resources.SettingsNomenclature" href="#pytia_property_manager.resources.SettingsNomenclature">SettingsNomenclature</a>, processes: <a title="pytia_property_manager.resources.SettingsProcesses" href="#pytia_property_manager.resources.SettingsProcesses">SettingsProcesses</a>, auto_group: <a title="pytia_property_manager.resources.SettingsAutoGroup" href="#pytia_property_manager.resources.SettingsAutoGroup">SettingsAutoGroup</a>, tolerances: List[str], spare_part_level: List[str], files: <a title="pytia_property_manager.resources.SettingsFiles" href="#pytia_property_manager.resources.SettingsFiles">SettingsFiles</a>, paths: <a title="pytia_property_manager.resources.SettingsPaths" href="#pytia_property_manager.resources.SettingsPaths">SettingsPaths</a>, urls: <a title="pytia_property_manager.resources.SettingsUrls" href="#pytia_property_manager.resources.SettingsUrls">SettingsUrls</a>, mails: <a title="pytia_property_manager.resources.SettingsMails" href="#pytia_property_manager.resources.SettingsMails">SettingsMails</a>)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Dataclass for settings (settings.json).</p></div>
@@ -1635,6 +1680,7 @@ class Settings:  # pylint: disable=R0902
     separators: SettingsSeparators
     nomenclature: SettingsNomenclature
     processes: SettingsProcesses
+    auto_group: SettingsAutoGroup
     tolerances: List[str]
     spare_part_level: List[str]
     files: SettingsFiles
@@ -1648,6 +1694,7 @@ class Settings:  # pylint: disable=R0902
         self.separators = SettingsSeparators(**dict(self.separators))  # type: ignore
         self.nomenclature = SettingsNomenclature(**dict(self.nomenclature))  # type: ignore
         self.processes = SettingsProcesses(**dict(self.processes))  # type: ignore
+        self.auto_group = SettingsAutoGroup(**dict(self.auto_group))  # type: ignore
         self.files = SettingsFiles(**dict(self.files))  # type: ignore
         self.paths = SettingsPaths(**dict(self.paths))  # type: ignore
         self.urls = SettingsUrls(**dict(self.urls))  # type: ignore
@@ -1655,6 +1702,10 @@ class Settings:  # pylint: disable=R0902
 </details>
 <h3>Instance variables</h3>
 <dl>
+<dt id="pytia_property_manager.resources.Settings.auto_group"><code class="name">var <span class="ident">auto_group</span> : <a title="pytia_property_manager.resources.SettingsAutoGroup" href="#pytia_property_manager.resources.SettingsAutoGroup">SettingsAutoGroup</a></code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
 <dt id="pytia_property_manager.resources.Settings.debug"><code class="name">var <span class="ident">debug</span> : bool</code></dt>
 <dd>
 <div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
@@ -1716,6 +1767,37 @@ class Settings:  # pylint: disable=R0902
 <div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
 </dd>
 <dt id="pytia_property_manager.resources.Settings.verifications"><code class="name">var <span class="ident">verifications</span> : <a title="pytia_property_manager.resources.SettingsVerifications" href="#pytia_property_manager.resources.SettingsVerifications">SettingsVerifications</a></code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="pytia_property_manager.resources.SettingsAutoGroup"><code class="flex name class">
+<span>class <span class="ident">SettingsAutoGroup</span></span>
+<span>(</span><span>*, made: Optional[str], bought: Optional[str])</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Dataclass for conditional groups.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass(slots=True, kw_only=True, frozen=True)
+class SettingsAutoGroup:
+    &#34;&#34;&#34;Dataclass for conditional groups.&#34;&#34;&#34;
+
+    # TODO: Move this to the workspace file.
+
+    made: str | None
+    bought: str | None</code></pre>
+</details>
+<h3>Instance variables</h3>
+<dl>
+<dt id="pytia_property_manager.resources.SettingsAutoGroup.bought"><code class="name">var <span class="ident">bought</span> : Optional[str]</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.SettingsAutoGroup.made"><code class="name">var <span class="ident">made</span> : Optional[str]</code></dt>
 <dd>
 <div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
 </dd>
@@ -2000,7 +2082,7 @@ class SettingsUrls:
 </dd>
 <dt id="pytia_property_manager.resources.SettingsVerifications"><code class="flex name class">
 <span>class <span class="ident">SettingsVerifications</span></span>
-<span>(</span><span>*, require_project: bool, require_machine: bool, require_revision: bool)</span>
+<span>(</span><span>*, basic: <a title="pytia_property_manager.resources.SettingsVerificationsBasic" href="#pytia_property_manager.resources.SettingsVerificationsBasic">SettingsVerificationsBasic</a>, made: <a title="pytia_property_manager.resources.SettingsVerificationsMade" href="#pytia_property_manager.resources.SettingsVerificationsMade">SettingsVerificationsMade</a>, bought: <a title="pytia_property_manager.resources.SettingsVerificationsBought" href="#pytia_property_manager.resources.SettingsVerificationsBought">SettingsVerificationsBought</a>)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Dataclass for property verification settings.</p></div>
@@ -2008,25 +2090,137 @@ class SettingsUrls:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">@dataclass(slots=True, kw_only=True, frozen=True)
+<pre><code class="python">@dataclass(slots=True, kw_only=True)
 class SettingsVerifications:
     &#34;&#34;&#34;Dataclass for property verification settings.&#34;&#34;&#34;
 
-    require_project: bool
-    require_machine: bool
-    require_revision: bool</code></pre>
+    basic: SettingsVerificationsBasic
+    made: SettingsVerificationsMade
+    bought: SettingsVerificationsBought
+
+    def __post_init__(self) -&gt; None:
+        self.basic = SettingsVerificationsBasic(**dict(self.basic))  # type: ignore
+        self.made = SettingsVerificationsMade(**dict(self.made))  # type: ignore
+        self.bought = SettingsVerificationsBought(**dict(self.bought))  # type: ignore</code></pre>
 </details>
 <h3>Instance variables</h3>
 <dl>
-<dt id="pytia_property_manager.resources.SettingsVerifications.require_machine"><code class="name">var <span class="ident">require_machine</span> : bool</code></dt>
+<dt id="pytia_property_manager.resources.SettingsVerifications.basic"><code class="name">var <span class="ident">basic</span> : <a title="pytia_property_manager.resources.SettingsVerificationsBasic" href="#pytia_property_manager.resources.SettingsVerificationsBasic">SettingsVerificationsBasic</a></code></dt>
 <dd>
 <div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
 </dd>
-<dt id="pytia_property_manager.resources.SettingsVerifications.require_project"><code class="name">var <span class="ident">require_project</span> : bool</code></dt>
+<dt id="pytia_property_manager.resources.SettingsVerifications.bought"><code class="name">var <span class="ident">bought</span> : <a title="pytia_property_manager.resources.SettingsVerificationsBought" href="#pytia_property_manager.resources.SettingsVerificationsBought">SettingsVerificationsBought</a></code></dt>
 <dd>
 <div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
 </dd>
-<dt id="pytia_property_manager.resources.SettingsVerifications.require_revision"><code class="name">var <span class="ident">require_revision</span> : bool</code></dt>
+<dt id="pytia_property_manager.resources.SettingsVerifications.made"><code class="name">var <span class="ident">made</span> : <a title="pytia_property_manager.resources.SettingsVerificationsMade" href="#pytia_property_manager.resources.SettingsVerificationsMade">SettingsVerificationsMade</a></code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="pytia_property_manager.resources.SettingsVerificationsBasic"><code class="flex name class">
+<span>class <span class="ident">SettingsVerificationsBasic</span></span>
+<span>(</span><span>*, project: Optional[Literal['critical', 'warning']], machine: Optional[Literal['critical', 'warning']], revision: Optional[Literal['critical', 'warning']], group: Optional[Literal['critical', 'warning']])</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Dataclass for basic property verification settings.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass(slots=True, kw_only=True, frozen=True)
+class SettingsVerificationsBasic:
+    &#34;&#34;&#34;Dataclass for basic property verification settings.&#34;&#34;&#34;
+
+    project: Literal[&#34;critical&#34;, &#34;warning&#34;] | None
+    machine: Literal[&#34;critical&#34;, &#34;warning&#34;] | None
+    revision: Literal[&#34;critical&#34;, &#34;warning&#34;] | None
+    group: Literal[&#34;critical&#34;, &#34;warning&#34;] | None</code></pre>
+</details>
+<h3>Instance variables</h3>
+<dl>
+<dt id="pytia_property_manager.resources.SettingsVerificationsBasic.group"><code class="name">var <span class="ident">group</span> : Optional[Literal['critical', 'warning']]</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.SettingsVerificationsBasic.machine"><code class="name">var <span class="ident">machine</span> : Optional[Literal['critical', 'warning']]</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.SettingsVerificationsBasic.project"><code class="name">var <span class="ident">project</span> : Optional[Literal['critical', 'warning']]</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.SettingsVerificationsBasic.revision"><code class="name">var <span class="ident">revision</span> : Optional[Literal['critical', 'warning']]</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="pytia_property_manager.resources.SettingsVerificationsBought"><code class="flex name class">
+<span>class <span class="ident">SettingsVerificationsBought</span></span>
+<span>(</span><span>*, definition: Optional[Literal['critical', 'warning']], manufacturer: Optional[Literal['critical', 'warning']], supplier: Optional[Literal['critical', 'warning']])</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Dataclass for bought property verification settings.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass(slots=True, kw_only=True, frozen=True)
+class SettingsVerificationsBought:
+    &#34;&#34;&#34;Dataclass for bought property verification settings.&#34;&#34;&#34;
+
+    definition: Literal[&#34;critical&#34;, &#34;warning&#34;] | None
+    manufacturer: Literal[&#34;critical&#34;, &#34;warning&#34;] | None
+    supplier: Literal[&#34;critical&#34;, &#34;warning&#34;] | None</code></pre>
+</details>
+<h3>Instance variables</h3>
+<dl>
+<dt id="pytia_property_manager.resources.SettingsVerificationsBought.definition"><code class="name">var <span class="ident">definition</span> : Optional[Literal['critical', 'warning']]</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.SettingsVerificationsBought.manufacturer"><code class="name">var <span class="ident">manufacturer</span> : Optional[Literal['critical', 'warning']]</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.SettingsVerificationsBought.supplier"><code class="name">var <span class="ident">supplier</span> : Optional[Literal['critical', 'warning']]</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="pytia_property_manager.resources.SettingsVerificationsMade"><code class="flex name class">
+<span>class <span class="ident">SettingsVerificationsMade</span></span>
+<span>(</span><span>*, definition: Optional[Literal['critical', 'warning']], material: Optional[Literal['critical', 'warning']], process_1: Optional[Literal['critical', 'warning']])</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Dataclass for made property verification settings.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass(slots=True, kw_only=True, frozen=True)
+class SettingsVerificationsMade:
+    &#34;&#34;&#34;Dataclass for made property verification settings.&#34;&#34;&#34;
+
+    definition: Literal[&#34;critical&#34;, &#34;warning&#34;] | None
+    material: Literal[&#34;critical&#34;, &#34;warning&#34;] | None
+    process_1: Literal[&#34;critical&#34;, &#34;warning&#34;] | None</code></pre>
+</details>
+<h3>Instance variables</h3>
+<dl>
+<dt id="pytia_property_manager.resources.SettingsVerificationsMade.definition"><code class="name">var <span class="ident">definition</span> : Optional[Literal['critical', 'warning']]</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.SettingsVerificationsMade.material"><code class="name">var <span class="ident">material</span> : Optional[Literal['critical', 'warning']]</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.SettingsVerificationsMade.process_1"><code class="name">var <span class="ident">process_1</span> : Optional[Literal['critical', 'warning']]</code></dt>
 <dd>
 <div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
 </dd>
@@ -2227,6 +2421,7 @@ def values(self) -&gt; List[str]:
 <li>
 <h4><code><a title="pytia_property_manager.resources.Settings" href="#pytia_property_manager.resources.Settings">Settings</a></code></h4>
 <ul class="two-column">
+<li><code><a title="pytia_property_manager.resources.Settings.auto_group" href="#pytia_property_manager.resources.Settings.auto_group">auto_group</a></code></li>
 <li><code><a title="pytia_property_manager.resources.Settings.debug" href="#pytia_property_manager.resources.Settings.debug">debug</a></code></li>
 <li><code><a title="pytia_property_manager.resources.Settings.demo" href="#pytia_property_manager.resources.Settings.demo">demo</a></code></li>
 <li><code><a title="pytia_property_manager.resources.Settings.files" href="#pytia_property_manager.resources.Settings.files">files</a></code></li>
@@ -2243,6 +2438,13 @@ def values(self) -&gt; List[str]:
 <li><code><a title="pytia_property_manager.resources.Settings.tolerances" href="#pytia_property_manager.resources.Settings.tolerances">tolerances</a></code></li>
 <li><code><a title="pytia_property_manager.resources.Settings.urls" href="#pytia_property_manager.resources.Settings.urls">urls</a></code></li>
 <li><code><a title="pytia_property_manager.resources.Settings.verifications" href="#pytia_property_manager.resources.Settings.verifications">verifications</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="pytia_property_manager.resources.SettingsAutoGroup" href="#pytia_property_manager.resources.SettingsAutoGroup">SettingsAutoGroup</a></code></h4>
+<ul class="">
+<li><code><a title="pytia_property_manager.resources.SettingsAutoGroup.bought" href="#pytia_property_manager.resources.SettingsAutoGroup.bought">bought</a></code></li>
+<li><code><a title="pytia_property_manager.resources.SettingsAutoGroup.made" href="#pytia_property_manager.resources.SettingsAutoGroup.made">made</a></code></li>
 </ul>
 </li>
 <li>
@@ -2312,9 +2514,34 @@ def values(self) -&gt; List[str]:
 <li>
 <h4><code><a title="pytia_property_manager.resources.SettingsVerifications" href="#pytia_property_manager.resources.SettingsVerifications">SettingsVerifications</a></code></h4>
 <ul class="">
-<li><code><a title="pytia_property_manager.resources.SettingsVerifications.require_machine" href="#pytia_property_manager.resources.SettingsVerifications.require_machine">require_machine</a></code></li>
-<li><code><a title="pytia_property_manager.resources.SettingsVerifications.require_project" href="#pytia_property_manager.resources.SettingsVerifications.require_project">require_project</a></code></li>
-<li><code><a title="pytia_property_manager.resources.SettingsVerifications.require_revision" href="#pytia_property_manager.resources.SettingsVerifications.require_revision">require_revision</a></code></li>
+<li><code><a title="pytia_property_manager.resources.SettingsVerifications.basic" href="#pytia_property_manager.resources.SettingsVerifications.basic">basic</a></code></li>
+<li><code><a title="pytia_property_manager.resources.SettingsVerifications.bought" href="#pytia_property_manager.resources.SettingsVerifications.bought">bought</a></code></li>
+<li><code><a title="pytia_property_manager.resources.SettingsVerifications.made" href="#pytia_property_manager.resources.SettingsVerifications.made">made</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="pytia_property_manager.resources.SettingsVerificationsBasic" href="#pytia_property_manager.resources.SettingsVerificationsBasic">SettingsVerificationsBasic</a></code></h4>
+<ul class="">
+<li><code><a title="pytia_property_manager.resources.SettingsVerificationsBasic.group" href="#pytia_property_manager.resources.SettingsVerificationsBasic.group">group</a></code></li>
+<li><code><a title="pytia_property_manager.resources.SettingsVerificationsBasic.machine" href="#pytia_property_manager.resources.SettingsVerificationsBasic.machine">machine</a></code></li>
+<li><code><a title="pytia_property_manager.resources.SettingsVerificationsBasic.project" href="#pytia_property_manager.resources.SettingsVerificationsBasic.project">project</a></code></li>
+<li><code><a title="pytia_property_manager.resources.SettingsVerificationsBasic.revision" href="#pytia_property_manager.resources.SettingsVerificationsBasic.revision">revision</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="pytia_property_manager.resources.SettingsVerificationsBought" href="#pytia_property_manager.resources.SettingsVerificationsBought">SettingsVerificationsBought</a></code></h4>
+<ul class="">
+<li><code><a title="pytia_property_manager.resources.SettingsVerificationsBought.definition" href="#pytia_property_manager.resources.SettingsVerificationsBought.definition">definition</a></code></li>
+<li><code><a title="pytia_property_manager.resources.SettingsVerificationsBought.manufacturer" href="#pytia_property_manager.resources.SettingsVerificationsBought.manufacturer">manufacturer</a></code></li>
+<li><code><a title="pytia_property_manager.resources.SettingsVerificationsBought.supplier" href="#pytia_property_manager.resources.SettingsVerificationsBought.supplier">supplier</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="pytia_property_manager.resources.SettingsVerificationsMade" href="#pytia_property_manager.resources.SettingsVerificationsMade">SettingsVerificationsMade</a></code></h4>
+<ul class="">
+<li><code><a title="pytia_property_manager.resources.SettingsVerificationsMade.definition" href="#pytia_property_manager.resources.SettingsVerificationsMade.definition">definition</a></code></li>
+<li><code><a title="pytia_property_manager.resources.SettingsVerificationsMade.material" href="#pytia_property_manager.resources.SettingsVerificationsMade.material">material</a></code></li>
+<li><code><a title="pytia_property_manager.resources.SettingsVerificationsMade.process_1" href="#pytia_property_manager.resources.SettingsVerificationsMade.process_1">process_1</a></code></li>
 </ul>
 </li>
 <li>
