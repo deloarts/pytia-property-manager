@@ -14,9 +14,22 @@
         "enable_information": true
     },
     "verifications": {
-        "require_project": true,
-        "require_machine": true,
-        "require_revision": true
+        "basic": {
+            "project": "critical",
+            "machine": "critical",
+            "revision": "critical",
+            "group": "warning"
+        },
+        "made": {
+            "definition": null,
+            "material": "warning",
+            "process_1": "warning"
+        },
+        "bought": {
+            "definition": "critical",
+            "manufacturer": "critical",
+            "supplier": null
+        }
     },
     "separators": {
         "bought": " - ",
