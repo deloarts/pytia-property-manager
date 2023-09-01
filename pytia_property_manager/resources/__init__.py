@@ -13,7 +13,7 @@ import tkinter.messagebox as tkmsg
 from dataclasses import asdict, dataclass, field, fields
 from json.decoder import JSONDecodeError
 from pathlib import Path
-from typing import List, Optional
+from typing import List, Literal, Optional
 
 from const import (
     APP_VERSION,
@@ -46,12 +46,45 @@ class SettingsRestrictions:
 
 
 @dataclass(slots=True, kw_only=True, frozen=True)
+class SettingsVerificationsBasic:
+    """Dataclass for basic property verification settings."""
+
+    project: Literal["critical", "warning"] | None
+    machine: Literal["critical", "warning"] | None
+    revision: Literal["critical", "warning"] | None
+    group: Literal["critical", "warning"] | None
+
+
+@dataclass(slots=True, kw_only=True, frozen=True)
+class SettingsVerificationsMade:
+    """Dataclass for made property verification settings."""
+
+    definition: Literal["critical", "warning"] | None
+    material: Literal["critical", "warning"] | None
+    process_1: Literal["critical", "warning"] | None
+
+
+@dataclass(slots=True, kw_only=True, frozen=True)
+class SettingsVerificationsBought:
+    """Dataclass for bought property verification settings."""
+
+    definition: Literal["critical", "warning"] | None
+    manufacturer: Literal["critical", "warning"] | None
+    supplier: Literal["critical", "warning"] | None
+
+
+@dataclass(slots=True, kw_only=True)
 class SettingsVerifications:
     """Dataclass for property verification settings."""
 
-    require_project: bool
-    require_machine: bool
-    require_revision: bool
+    basic: SettingsVerificationsBasic
+    made: SettingsVerificationsMade
+    bought: SettingsVerificationsBought
+
+    def __post_init__(self) -> None:
+        self.basic = SettingsVerificationsBasic(**dict(self.basic))  # type: ignore
+        self.made = SettingsVerificationsMade(**dict(self.made))  # type: ignore
+        self.bought = SettingsVerificationsBought(**dict(self.bought))  # type: ignore
 
 
 @dataclass(slots=True, kw_only=True, frozen=True)

@@ -43,6 +43,9 @@ CONFIG_INFOS = "information.json"
 CONFIG_INFOS_DEFAULT = "information.default.json"
 CONFIG_USERS = "users.json"
 
+VERIFY_CRITICAL = "critical"
+VERIFY_WARNING = "warning"
+
 WEB_PIP = "https://www.pypi.org"
 
 SUFFIX_DRAWING = ".CATDrawing"
