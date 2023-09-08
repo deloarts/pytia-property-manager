@@ -1,8 +1,8 @@
 [
     {
         "name": "pytia",
-        "version": "0.3.2",
-        "wheel": "https://github.com/deloarts/pytia/releases/download/v0.3.2/pytia-0.3.2-py3-none-any.whl"
+        "version": "0.3.4",
+        "wheel": "https://github.com/deloarts/pytia/releases/download/v0.3.4/pytia-0.3.4-py3-none-any.whl"
     },
     {
         "name": "pytia_ui_tools",
