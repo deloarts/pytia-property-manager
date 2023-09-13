@@ -4,6 +4,7 @@
         "CATIA",
         "CATP",
         "catvbs",
+        "cerculean",
         "CNEXT",
         "columnspan",
         "datafield",
@@ -13,6 +14,7 @@
         "getpid",
         "ipadx",
         "ipady",
+        "litera",
         "ONEDRIVE",
         "padx",
         "pady",
@@ -32,9 +34,11 @@
         "relx",
         "rowspan",
         "Segoe",
+        "tearoff",
         "textvariable",
         "tkmsg",
         "toolwindow",
+        "ttkbootstrap",
         "zipfile"
     ],
     "python.testing.pytestArgs": [

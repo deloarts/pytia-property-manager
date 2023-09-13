@@ -50,6 +50,27 @@ WEB_PIP = "https://www.pypi.org"
 
 SUFFIX_DRAWING = ".CATDrawing"
 
+STYLES = [
+    "cosmo",
+    "litera",
+    "flatly",
+    "journal",
+    "lumen",
+    "minty",
+    "pulse",
+    "sandstone",
+    "united",
+    "yeti",
+    "morph",
+    "simplex",
+    "cerculean",
+    "solar",
+    "superhero",
+    "darkly",
+    "cyborg",
+    "vapor",
+]
+
 
 class Source(Enum):
     UNKNOWN = "Unknown"
