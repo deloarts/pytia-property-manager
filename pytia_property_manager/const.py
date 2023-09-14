@@ -50,6 +50,8 @@ WEB_PIP = "https://www.pypi.org"
 
 SUFFIX_DRAWING = ".CATDrawing"
 
+ISO_VIEW = "* iso"
+
 STYLES = [
     "cosmo",
     "litera",
