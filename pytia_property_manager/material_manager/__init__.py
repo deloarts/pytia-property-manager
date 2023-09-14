@@ -4,7 +4,7 @@
 """
 
 from pathlib import Path
-from tkinter import Toplevel, font, ttk
+from tkinter import font
 
 from app.state_setter import UISetter
 from decorators import timer
@@ -18,13 +18,14 @@ from pytia.exceptions import PytiaMaterialNotFound
 from pytia.log import log
 from pytia_ui_tools.window_manager import WindowManager
 from resources import resource
+from ttkbootstrap import Style, Toplevel
 
 
 class MaterialManager(Toplevel):
     """The user interface of the material manager window."""
 
-    WIDTH = 300
-    HEIGHT = 150
+    WIDTH = 320
+    HEIGHT = 160
 
     @timer
     def __init__(
@@ -40,6 +41,7 @@ class MaterialManager(Toplevel):
             ui_setter (UISetter): The main apps state setter.
         """
         Toplevel.__init__(self)
+        Style()
 
         self.doc_helper = doc_helper
         self.window_manager = WindowManager(self)
@@ -65,14 +67,11 @@ class MaterialManager(Toplevel):
             f"{MaterialManager.WIDTH}x{MaterialManager.HEIGHT}+{x_coordinate}+{y_coordinate}"
         )
 
-        style = ttk.Style(self)
-        style.configure("Footer.TButton", width=14)
-
         self.set_parent_ui.loading()
         self.update()
         self.grab_set()
         self.window_manager.remove_window_buttons()
-        self.after(100, self.run_controller)
+        self.after(200, self.run_controller)
         self.mainloop()
 
     def run_controller(self) -> None:
