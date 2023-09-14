@@ -2,7 +2,6 @@
     Lazy loader for the UI.
 """
 
-import atexit
 import functools
 import os
 import re
@@ -17,7 +16,7 @@ from typing import List, Optional
 from app.vars import Variables
 from app.widgets.notes import NoteWidgets
 from app.widgets.processes import ProcessWidgets
-from const import LOGON, PROP_DRAWING_PATH, REVISION_FOLDER, Source
+from const import ISO_VIEW, LOGON, REVISION_FOLDER, Source
 from pytia.exceptions import (
     PytiaDifferentDocumentError,
     PytiaDocumentNotSavedError,
@@ -248,6 +247,22 @@ class LazyDocumentHelper:
                     main_body_name = variables.partnumber.get()
 
             self.document.bodies.main_body.name = main_body_name
+
+    def set_view(self) -> None:
+        """Sets the view for the document and fits it."""
+        try:
+            viewer = self.framework.catia.active_window.active_viewer
+            camera = self.framework.catia.active_document.cameras.item(ISO_VIEW)
+
+            # FIXME: pytia v0.3.4 has no type for Viewpoint3D.
+            viewer.viewer.Viewpoint3D = camera.camera.Viewpoint3D
+
+            viewer.update()
+            viewer.reframe()
+        except Exception as e:
+            msg = "Failed to set ISO view."
+            tkmsg.showwarning(title=resource.settings.title, message=msg)
+            log.error(f"{msg} {e}")
 
     @staticmethod
     def _ensure_doc_not_changed(func):

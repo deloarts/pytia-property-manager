@@ -3,7 +3,9 @@
 """
 
 from dataclasses import dataclass
-from tkinter import StringVar, Tk
+from tkinter import BooleanVar, StringVar, Tk
+
+from resources import resource
 
 
 @dataclass(slots=True, kw_only=True)
@@ -37,6 +39,8 @@ class Variables:
 
     linked_doc: StringVar
     linked_doc_display: StringVar
+
+    set_view: BooleanVar
 
     def __init__(self, root: Tk) -> None:
         """
@@ -75,4 +79,8 @@ class Variables:
         self.linked_doc = StringVar(master=root, name="linked_doc")
         self.linked_doc_display = StringVar(
             master=root, name="linked_doc_display", value="-"
+        )
+
+        self.set_view = BooleanVar(
+            master=root, name="set_view", value=resource.appdata.set_view
         )

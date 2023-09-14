@@ -12,7 +12,7 @@ from helper.appearance import set_appearance_menu
 from helper.messages import show_help
 from pytia_ui_tools.widgets.texts import ScrolledText
 from resources import resource
-from ttkbootstrap import Button, Combobox, Entry, Label, Menu
+from ttkbootstrap import Button, Checkbutton, Combobox, Entry, Label, Menu
 
 
 class Layout:
@@ -520,6 +520,15 @@ class Layout:
         # endregion
 
         # region FRAME Footer ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        self._iso_view_toggle = Checkbutton(
+            master=frames.footer,
+            bootstyle="round-toggle",  # type:ignore
+            text="Set ISO view",
+            variable=variables.set_view,
+            onvalue=True,
+            offvalue=False,
+        )
+        self._iso_view_toggle.grid(row=0, column=0, padx=(8, 2), pady=0, sticky="w")
 
         # region button save
         self._btn_save = Button(
@@ -678,3 +687,8 @@ class Layout:
     def button_abort(self) -> Button:
         """Returns the abort button."""
         return self._btn_abort
+
+    @property
+    def toggle_iso_view(self) -> Checkbutton:
+        """Returns the iso view checkbutton."""
+        return self._iso_view_toggle

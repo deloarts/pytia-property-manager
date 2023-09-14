@@ -347,6 +347,7 @@ class AppData:
     version: str = field(default=APP_VERSION)
     counter: int = 0
     theme: str = STYLES[0]
+    set_view: bool = True
 
     def __post_init__(self) -> None:
         self.version = (

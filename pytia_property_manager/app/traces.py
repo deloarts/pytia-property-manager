@@ -55,6 +55,7 @@ class Traces:
         self.vars.creator.trace_add("write", self.trace_creator)
         self.vars.modifier.trace_add("write", self.trace_modifier)
         self.vars.linked_doc.trace_add("write", self.trace_linked_doc)
+        self.vars.set_view.trace_add("write", self.trace_set_view)
 
     def trace_mass(self, *_) -> None:
         """Trace callback for the `mass` StringVar"""
@@ -187,3 +188,7 @@ class Traces:
             self.vars.modifier_display.set(resource.get_user_by_logon(modifier).name)
         else:
             self.vars.modifier_display.set(f"Unknown user ({modifier})")
+
+    def trace_set_view(self, *_) -> None:
+        """Trace callback for the `set iso view` StringVar"""
+        resource.appdata.set_view = self.vars.set_view.get()
