@@ -31,7 +31,6 @@
     Lazy loader for the UI.
 &#34;&#34;&#34;
 
-import atexit
 import functools
 import os
 import re
@@ -46,7 +45,7 @@ from typing import List, Optional
 from app.vars import Variables
 from app.widgets.notes import NoteWidgets
 from app.widgets.processes import ProcessWidgets
-from const import LOGON, PROP_DRAWING_PATH, REVISION_FOLDER, Source
+from const import ISO_VIEW, LOGON, REVISION_FOLDER, Source
 from pytia.exceptions import (
     PytiaDifferentDocumentError,
     PytiaDocumentNotSavedError,
@@ -277,6 +276,22 @@ class LazyDocumentHelper:
                     main_body_name = variables.partnumber.get()
 
             self.document.bodies.main_body.name = main_body_name
+
+    def set_view(self) -&gt; None:
+        &#34;&#34;&#34;Sets the view for the document and fits it.&#34;&#34;&#34;
+        try:
+            viewer = self.framework.catia.active_window.active_viewer
+            camera = self.framework.catia.active_document.cameras.item(ISO_VIEW)
+
+            # FIXME: pytia v0.3.4 has no type for Viewpoint3D.
+            viewer.viewer.Viewpoint3D = camera.camera.Viewpoint3D
+
+            viewer.update()
+            viewer.reframe()
+        except Exception as e:
+            msg = &#34;Failed to set ISO view.&#34;
+            tkmsg.showwarning(title=resource.settings.title, message=msg)
+            log.error(f&#34;{msg} {e}&#34;)
 
     @staticmethod
     def _ensure_doc_not_changed(func):
@@ -831,6 +846,22 @@ document changes all operations will be made on the original document.</p>
 
             self.document.bodies.main_body.name = main_body_name
 
+    def set_view(self) -&gt; None:
+        &#34;&#34;&#34;Sets the view for the document and fits it.&#34;&#34;&#34;
+        try:
+            viewer = self.framework.catia.active_window.active_viewer
+            camera = self.framework.catia.active_document.cameras.item(ISO_VIEW)
+
+            # FIXME: pytia v0.3.4 has no type for Viewpoint3D.
+            viewer.viewer.Viewpoint3D = camera.camera.Viewpoint3D
+
+            viewer.update()
+            viewer.reframe()
+        except Exception as e:
+            msg = &#34;Failed to set ISO view.&#34;
+            tkmsg.showwarning(title=resource.settings.title, message=msg)
+            log.error(f&#34;{msg} {e}&#34;)
+
     @staticmethod
     def _ensure_doc_not_changed(func):
         &#34;&#34;&#34;
@@ -1360,6 +1391,32 @@ doesn't exists.</dd>
         return param
     log.info(f&#34;Couldn&#39;t retrieve property {name} from part: Doesn&#39;t exists.&#34;)
     return None</code></pre>
+</details>
+</dd>
+<dt id="pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.set_view"><code class="name flex">
+<span>def <span class="ident">set_view</span></span>(<span>self) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Sets the view for the document and fits it.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def set_view(self) -&gt; None:
+    &#34;&#34;&#34;Sets the view for the document and fits it.&#34;&#34;&#34;
+    try:
+        viewer = self.framework.catia.active_window.active_viewer
+        camera = self.framework.catia.active_document.cameras.item(ISO_VIEW)
+
+        # FIXME: pytia v0.3.4 has no type for Viewpoint3D.
+        viewer.viewer.Viewpoint3D = camera.camera.Viewpoint3D
+
+        viewer.update()
+        viewer.reframe()
+    except Exception as e:
+        msg = &#34;Failed to set ISO view.&#34;
+        tkmsg.showwarning(title=resource.settings.title, message=msg)
+        log.error(f&#34;{msg} {e}&#34;)</code></pre>
 </details>
 </dd>
 <dt id="pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.setup_main_body"><code class="name flex">
@@ -1905,6 +1962,7 @@ which name matches the given property_name. Only use this for User-variables.</p
 <li><code><a title="pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.partnumber" href="#pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.partnumber">partnumber</a></code></li>
 <li><code><a title="pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.path" href="#pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.path">path</a></code></li>
 <li><code><a title="pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.revision" href="#pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.revision">revision</a></code></li>
+<li><code><a title="pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.set_view" href="#pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.set_view">set_view</a></code></li>
 <li><code><a title="pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.setup_main_body" href="#pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.setup_main_body">setup_main_body</a></code></li>
 <li><code><a title="pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.setvar" href="#pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.setvar">setvar</a></code></li>
 <li><code><a title="pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.setvar_combo_property" href="#pytia_property_manager.helper.lazy_loaders.LazyDocumentHelper.setvar_combo_property">setvar_combo_property</a></code></li>

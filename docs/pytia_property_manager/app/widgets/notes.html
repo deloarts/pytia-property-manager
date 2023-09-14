@@ -47,12 +47,13 @@ or delete.</li>
 &#34;&#34;&#34;
 
 import tkinter as tk
-from tkinter import StringVar, ttk
+from tkinter import StringVar
 from typing import Dict, List, Literal, Optional
 
 from pytia.exceptions import PytiaValueError
 from pytia_ui_tools.widgets.texts import ScrolledText
 from resources import resource
+from ttkbootstrap import Frame, Label, Labelframe
 
 
 class NoteWidget:
@@ -63,7 +64,7 @@ class NoteWidget:
 
     def __init__(
         self,
-        root: tk.Tk | tk.Frame | ttk.Frame | ttk.Labelframe,
+        root: Frame | Labelframe,
         title: str,
         row: int,
     ) -&gt; None:
@@ -71,7 +72,7 @@ class NoteWidget:
         Inits the NoteWidget class. Holds all widgets for one note (label, text input).
 
         Args:
-            root (tk.Tk | tk.Frame | ttk.Frame | ttk.Labelframe): The parent of all widgets (the \
+            root ttk.Frame | ttk.Labelframe): The parent of all widgets (the \
                 tkinter parent frame).
             title (str): The name of the note element.
             row (int): The place of the note element.
@@ -81,18 +82,16 @@ class NoteWidget:
         self._state = tk.NORMAL
         self._bottom_space = False
 
-        self.lbl_note = ttk.Label(
+        self.lbl_note = Label(
             self._root,
             text=f&#34;{title} Note&#34;,
-            width=14,
+            width=15,
         )
         self.lbl_note.grid(
             row=row,
             column=0,
             padx=(NoteWidget.MARGIN_X, 5),
             pady=(NoteWidget.MARGIN_Y if row == 0 else 2, 2),
-            ipadx=2,
-            ipady=2,
             sticky=&#34;new&#34;,
         )
 
@@ -101,7 +100,6 @@ class NoteWidget:
             textvariable=self._textvariable,
             height=4,
             width=30,
-            font=(&#34;Segoe UI&#34;, 9),
             state=tk.DISABLED,
             wrap=tk.WORD,
         )
@@ -119,7 +117,7 @@ class NoteWidget:
         self._root.grid_rowconfigure(row, weight=1)
 
     @property
-    def parent(self) -&gt; tk.Tk | tk.Frame | ttk.Frame | ttk.Labelframe:
+    def parent(self) -&gt; Frame | Labelframe:
         &#34;&#34;&#34;Returns the parent of this instance.&#34;&#34;&#34;
         return self._root
 
@@ -148,12 +146,12 @@ class NoteWidget:
 class NoteWidgets:
     &#34;&#34;&#34;Note widgets class. Holds all note widgets.&#34;&#34;&#34;
 
-    def __init__(self, root: ttk.Labelframe) -&gt; None:
+    def __init__(self, root: Frame | Labelframe) -&gt; None:
         &#34;&#34;&#34;
         Inits the NoteWidgets class. This class manages the NoteWidget instances.
 
         Args:
-            root (tk.Tk | tk.Frame | ttk.Frame | ttk.Labelframe): The parent of the widgets.
+            root (Labelframe): The parent of the widgets.
         &#34;&#34;&#34;
         self._root = root
         self._note_widgets: Dict[str, NoteWidget] = {}
@@ -244,14 +242,14 @@ class NoteWidgets:
 <dl>
 <dt id="pytia_property_manager.app.widgets.notes.NoteWidget"><code class="flex name class">
 <span>class <span class="ident">NoteWidget</span></span>
-<span>(</span><span>root: tkinter.Tk | tkinter.Frame | tkinter.ttk.Frame | tkinter.ttk.Labelframe, title: str, row: int)</span>
+<span>(</span><span>root: tkinter.ttk.Frame | tkinter.ttk.Labelframe, title: str, row: int)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Note widget class. Holds all elements related to one note set.</p>
 <p>Inits the NoteWidget class. Holds all widgets for one note (label, text input).</p>
 <h2 id="args">Args</h2>
 <dl>
-<dt>root (tk.Tk | tk.Frame | ttk.Frame | ttk.Labelframe): The parent of all widgets (the
+<dt>root ttk.Frame | ttk.Labelframe): The parent of all widgets (the
 tkinter parent frame).</dt>
 <dt><strong><code>title</code></strong> :&ensp;<code>str</code></dt>
 <dd>The name of the note element.</dd>
@@ -270,7 +268,7 @@ tkinter parent frame).</dt>
 
     def __init__(
         self,
-        root: tk.Tk | tk.Frame | ttk.Frame | ttk.Labelframe,
+        root: Frame | Labelframe,
         title: str,
         row: int,
     ) -&gt; None:
@@ -278,7 +276,7 @@ tkinter parent frame).</dt>
         Inits the NoteWidget class. Holds all widgets for one note (label, text input).
 
         Args:
-            root (tk.Tk | tk.Frame | ttk.Frame | ttk.Labelframe): The parent of all widgets (the \
+            root ttk.Frame | ttk.Labelframe): The parent of all widgets (the \
                 tkinter parent frame).
             title (str): The name of the note element.
             row (int): The place of the note element.
@@ -288,18 +286,16 @@ tkinter parent frame).</dt>
         self._state = tk.NORMAL
         self._bottom_space = False
 
-        self.lbl_note = ttk.Label(
+        self.lbl_note = Label(
             self._root,
             text=f&#34;{title} Note&#34;,
-            width=14,
+            width=15,
         )
         self.lbl_note.grid(
             row=row,
             column=0,
             padx=(NoteWidget.MARGIN_X, 5),
             pady=(NoteWidget.MARGIN_Y if row == 0 else 2, 2),
-            ipadx=2,
-            ipady=2,
             sticky=&#34;new&#34;,
         )
 
@@ -308,7 +304,6 @@ tkinter parent frame).</dt>
             textvariable=self._textvariable,
             height=4,
             width=30,
-            font=(&#34;Segoe UI&#34;, 9),
             state=tk.DISABLED,
             wrap=tk.WORD,
         )
@@ -326,7 +321,7 @@ tkinter parent frame).</dt>
         self._root.grid_rowconfigure(row, weight=1)
 
     @property
-    def parent(self) -&gt; tk.Tk | tk.Frame | ttk.Frame | ttk.Labelframe:
+    def parent(self) -&gt; Frame | Labelframe:
         &#34;&#34;&#34;Returns the parent of this instance.&#34;&#34;&#34;
         return self._root
 
@@ -377,7 +372,7 @@ def note_var(self) -&gt; StringVar:
     return self._textvariable</code></pre>
 </details>
 </dd>
-<dt id="pytia_property_manager.app.widgets.notes.NoteWidget.parent"><code class="name">var <span class="ident">parent</span> : tkinter.Tk | tkinter.Frame | tkinter.ttk.Frame | tkinter.ttk.Labelframe</code></dt>
+<dt id="pytia_property_manager.app.widgets.notes.NoteWidget.parent"><code class="name">var <span class="ident">parent</span> : tkinter.ttk.Frame | tkinter.ttk.Labelframe</code></dt>
 <dd>
 <div class="desc"><p>Returns the parent of this instance.</p></div>
 <details class="source">
@@ -385,7 +380,7 @@ def note_var(self) -&gt; StringVar:
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">@property
-def parent(self) -&gt; tk.Tk | tk.Frame | ttk.Frame | ttk.Labelframe:
+def parent(self) -&gt; Frame | Labelframe:
     &#34;&#34;&#34;Returns the parent of this instance.&#34;&#34;&#34;
     return self._root</code></pre>
 </details>
@@ -407,13 +402,16 @@ def state(self) -&gt; str:
 </dd>
 <dt id="pytia_property_manager.app.widgets.notes.NoteWidgets"><code class="flex name class">
 <span>class <span class="ident">NoteWidgets</span></span>
-<span>(</span><span>root: tkinter.ttk.Labelframe)</span>
+<span>(</span><span>root: tkinter.ttk.Frame | tkinter.ttk.Labelframe)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Note widgets class. Holds all note widgets.</p>
 <p>Inits the NoteWidgets class. This class manages the NoteWidget instances.</p>
 <h2 id="args">Args</h2>
-<p>root (tk.Tk | tk.Frame | ttk.Frame | ttk.Labelframe): The parent of the widgets.</p></div>
+<dl>
+<dt><strong><code>root</code></strong> :&ensp;<code>Labelframe</code></dt>
+<dd>The parent of the widgets.</dd>
+</dl></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -421,12 +419,12 @@ def state(self) -&gt; str:
 <pre><code class="python">class NoteWidgets:
     &#34;&#34;&#34;Note widgets class. Holds all note widgets.&#34;&#34;&#34;
 
-    def __init__(self, root: ttk.Labelframe) -&gt; None:
+    def __init__(self, root: Frame | Labelframe) -&gt; None:
         &#34;&#34;&#34;
         Inits the NoteWidgets class. This class manages the NoteWidget instances.
 
         Args:
-            root (tk.Tk | tk.Frame | ttk.Frame | ttk.Labelframe): The parent of the widgets.
+            root (Labelframe): The parent of the widgets.
         &#34;&#34;&#34;
         self._root = root
         self._note_widgets: Dict[str, NoteWidget] = {}

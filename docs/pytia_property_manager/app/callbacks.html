@@ -44,7 +44,6 @@ from tkinter import simpledialog
 from app.layout import Layout
 from app.state_setter import UISetter
 from app.vars import Variables
-from resources.utils import expand_env_vars
 from const import PROP_DRAWING_PATH, REVISION_FOLDER, SUFFIX_DRAWING, Source
 from handler.properties import Properties
 from helper.launcher import launch_bounding_box_app
@@ -55,6 +54,7 @@ from pytia.log import log
 from pytia_ui_tools.handlers.workspace_handler import Workspace
 from pytia_ui_tools.helper.values import add_current_value_to_combobox_list
 from resources import resource
+from resources.utils import expand_env_vars
 from win32api import SetFileAttributes
 from win32con import FILE_ATTRIBUTE_HIDDEN
 
@@ -190,6 +190,8 @@ class Callbacks:
         if self.properties.verify():
             self.properties.checkout()
             self.doc_helper.setup_main_body(variables=self.vars)
+            if resource.appdata.set_view:
+                self.doc_helper.set_view()
 
             self.root.withdraw()
             self.root.destroy()
@@ -535,6 +537,8 @@ result of the nomenclature check. Defaults to False.</dd>
         if self.properties.verify():
             self.properties.checkout()
             self.doc_helper.setup_main_body(variables=self.vars)
+            if resource.appdata.set_view:
+                self.doc_helper.set_view()
 
             self.root.withdraw()
             self.root.destroy()
@@ -900,6 +904,8 @@ documents properties.</p></div>
     if self.properties.verify():
         self.properties.checkout()
         self.doc_helper.setup_main_body(variables=self.vars)
+        if resource.appdata.set_view:
+            self.doc_helper.set_view()
 
         self.root.withdraw()
         self.root.destroy()
