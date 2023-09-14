@@ -32,7 +32,7 @@
 &#34;&#34;&#34;
 
 import tkinter as tk
-from tkinter import Toplevel, ttk
+from ttkbootstrap import Button, Combobox, Entry, Label, Menu, Toplevel
 
 from material_manager.frames import Frames
 from material_manager.vars import Variables
@@ -50,82 +50,82 @@ class Layout:
             frames (Frames): The material manager frames.
             variables (Variables): The material manager variables.
         &#34;&#34;&#34; &#34;&#34;&#34;&#34;&#34;&#34;
-        lbl_family = ttk.Label(frames.data, text=&#34;Family&#34;)
+        lbl_family = Label(frames.data, text=&#34;Family&#34;)
         lbl_family.grid(row=0, column=0, padx=(0, 15), pady=(0, 2), sticky=&#34;nsew&#34;)
 
-        self._combo_family = ttk.Combobox(
+        self._combo_family = Combobox(
             frames.data,
             values=[],
             textvariable=variables.sel_family,
             state=tk.DISABLED,
         )
         self._combo_family.grid(
-            row=0, column=1, padx=(5, 0), pady=(1, 2), ipadx=2, ipady=2, sticky=&#34;nsew&#34;
+            row=0, column=1, padx=(5, 0), pady=(0, 2), sticky=&#34;nsew&#34;
         )
 
-        lbl_material = ttk.Label(frames.data, text=&#34;Material&#34;)
-        lbl_material.grid(row=1, column=0, padx=(0, 15), pady=(0, 2), sticky=&#34;nsew&#34;)
+        lbl_material = Label(frames.data, text=&#34;Material&#34;)
+        lbl_material.grid(row=1, column=0, padx=(0, 15), pady=(2, 2), sticky=&#34;nsew&#34;)
 
-        self._combo_material = ttk.Combobox(
+        self._combo_material = Combobox(
             frames.data,
             values=[],
             textvariable=variables.sel_material,
             state=tk.DISABLED,
         )
         self._combo_material.grid(
-            row=1, column=1, padx=(5, 0), pady=(1, 2), ipadx=2, ipady=2, sticky=&#34;nsew&#34;
+            row=1, column=1, padx=(5, 0), pady=(2, 2), sticky=&#34;nsew&#34;
         )
 
-        lbl_color = ttk.Label(frames.data, text=&#34;Metadata&#34;)
-        lbl_color.grid(row=2, column=0, padx=(0, 15), pady=(0, 2), sticky=&#34;nsew&#34;)
+        lbl_color = Label(frames.data, text=&#34;Metadata&#34;)
+        lbl_color.grid(row=2, column=0, padx=(0, 15), pady=(2, 2), sticky=&#34;nsew&#34;)
 
-        self._combo_color = ttk.Combobox(
+        self._combo_color = Combobox(
             frames.data,
             values=[],
             textvariable=variables.sel_color,
             state=tk.DISABLED,
         )
-        self._combo_color.grid(
-            row=2, column=1, padx=(5, 0), pady=(1, 2), ipadx=2, ipady=2, sticky=&#34;nsew&#34;
-        )
+        self._combo_color.grid(row=2, column=1, padx=(5, 0), pady=(2, 2), sticky=&#34;nsew&#34;)
 
-        self._btn_save = ttk.Button(
+        self._btn_save = Button(
             frames.footer,
             text=&#34;Apply&#34;,
+            style=&#34;outline&#34;,
+            width=10,
             state=tk.DISABLED,
-            style=&#34;Footer.TButton&#34;,
         )
         self._btn_save.grid(row=0, column=0, padx=(5, 2), pady=0, sticky=&#34;e&#34;)
 
-        self._btn_abort = ttk.Button(
+        self._btn_abort = Button(
             frames.footer,
             text=&#34;Abort&#34;,
-            style=&#34;Footer.TButton&#34;,
+            style=&#34;outline&#34;,
+            width=10,
         )
         self._btn_abort.grid(row=0, column=1, padx=(2, 0), pady=0, sticky=&#34;e&#34;)
 
     @property
-    def input_family(self) -&gt; ttk.Combobox:
+    def input_family(self) -&gt; Combobox:
         &#34;&#34;&#34;Returns the input widget for the material family.&#34;&#34;&#34;
         return self._combo_family
 
     @property
-    def input_material(self) -&gt; ttk.Combobox:
+    def input_material(self) -&gt; Combobox:
         &#34;&#34;&#34;Returns the input widget for the material.&#34;&#34;&#34;
         return self._combo_material
 
     @property
-    def input_metadata(self) -&gt; ttk.Combobox:
+    def input_metadata(self) -&gt; Combobox:
         &#34;&#34;&#34;Returns the input widget for the metadata.&#34;&#34;&#34;
         return self._combo_color
 
     @property
-    def button_save(self) -&gt; ttk.Button:
+    def button_save(self) -&gt; Button:
         &#34;&#34;&#34;Returns the save button.&#34;&#34;&#34;
         return self._btn_save
 
     @property
-    def button_abort(self) -&gt; ttk.Button:
+    def button_abort(self) -&gt; Button:
         &#34;&#34;&#34;Returns the abort button.&#34;&#34;&#34;
         return self._btn_abort</code></pre>
 </details>
@@ -141,7 +141,7 @@ class Layout:
 <dl>
 <dt id="pytia_property_manager.material_manager.layout.Layout"><code class="flex name class">
 <span>class <span class="ident">Layout</span></span>
-<span>(</span><span>root: tkinter.Toplevel, frames: material_manager.frames.Frames, variables: material_manager.vars.Variables)</span>
+<span>(</span><span>root: ttkbootstrap.window.Toplevel, frames: material_manager.frames.Frames, variables: material_manager.vars.Variables)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Layout class for the material manager: The main layout of the app.</p>
@@ -171,82 +171,82 @@ class Layout:
             frames (Frames): The material manager frames.
             variables (Variables): The material manager variables.
         &#34;&#34;&#34; &#34;&#34;&#34;&#34;&#34;&#34;
-        lbl_family = ttk.Label(frames.data, text=&#34;Family&#34;)
+        lbl_family = Label(frames.data, text=&#34;Family&#34;)
         lbl_family.grid(row=0, column=0, padx=(0, 15), pady=(0, 2), sticky=&#34;nsew&#34;)
 
-        self._combo_family = ttk.Combobox(
+        self._combo_family = Combobox(
             frames.data,
             values=[],
             textvariable=variables.sel_family,
             state=tk.DISABLED,
         )
         self._combo_family.grid(
-            row=0, column=1, padx=(5, 0), pady=(1, 2), ipadx=2, ipady=2, sticky=&#34;nsew&#34;
+            row=0, column=1, padx=(5, 0), pady=(0, 2), sticky=&#34;nsew&#34;
         )
 
-        lbl_material = ttk.Label(frames.data, text=&#34;Material&#34;)
-        lbl_material.grid(row=1, column=0, padx=(0, 15), pady=(0, 2), sticky=&#34;nsew&#34;)
+        lbl_material = Label(frames.data, text=&#34;Material&#34;)
+        lbl_material.grid(row=1, column=0, padx=(0, 15), pady=(2, 2), sticky=&#34;nsew&#34;)
 
-        self._combo_material = ttk.Combobox(
+        self._combo_material = Combobox(
             frames.data,
             values=[],
             textvariable=variables.sel_material,
             state=tk.DISABLED,
         )
         self._combo_material.grid(
-            row=1, column=1, padx=(5, 0), pady=(1, 2), ipadx=2, ipady=2, sticky=&#34;nsew&#34;
+            row=1, column=1, padx=(5, 0), pady=(2, 2), sticky=&#34;nsew&#34;
         )
 
-        lbl_color = ttk.Label(frames.data, text=&#34;Metadata&#34;)
-        lbl_color.grid(row=2, column=0, padx=(0, 15), pady=(0, 2), sticky=&#34;nsew&#34;)
+        lbl_color = Label(frames.data, text=&#34;Metadata&#34;)
+        lbl_color.grid(row=2, column=0, padx=(0, 15), pady=(2, 2), sticky=&#34;nsew&#34;)
 
-        self._combo_color = ttk.Combobox(
+        self._combo_color = Combobox(
             frames.data,
             values=[],
             textvariable=variables.sel_color,
             state=tk.DISABLED,
         )
-        self._combo_color.grid(
-            row=2, column=1, padx=(5, 0), pady=(1, 2), ipadx=2, ipady=2, sticky=&#34;nsew&#34;
-        )
+        self._combo_color.grid(row=2, column=1, padx=(5, 0), pady=(2, 2), sticky=&#34;nsew&#34;)
 
-        self._btn_save = ttk.Button(
+        self._btn_save = Button(
             frames.footer,
             text=&#34;Apply&#34;,
+            style=&#34;outline&#34;,
+            width=10,
             state=tk.DISABLED,
-            style=&#34;Footer.TButton&#34;,
         )
         self._btn_save.grid(row=0, column=0, padx=(5, 2), pady=0, sticky=&#34;e&#34;)
 
-        self._btn_abort = ttk.Button(
+        self._btn_abort = Button(
             frames.footer,
             text=&#34;Abort&#34;,
-            style=&#34;Footer.TButton&#34;,
+            style=&#34;outline&#34;,
+            width=10,
         )
         self._btn_abort.grid(row=0, column=1, padx=(2, 0), pady=0, sticky=&#34;e&#34;)
 
     @property
-    def input_family(self) -&gt; ttk.Combobox:
+    def input_family(self) -&gt; Combobox:
         &#34;&#34;&#34;Returns the input widget for the material family.&#34;&#34;&#34;
         return self._combo_family
 
     @property
-    def input_material(self) -&gt; ttk.Combobox:
+    def input_material(self) -&gt; Combobox:
         &#34;&#34;&#34;Returns the input widget for the material.&#34;&#34;&#34;
         return self._combo_material
 
     @property
-    def input_metadata(self) -&gt; ttk.Combobox:
+    def input_metadata(self) -&gt; Combobox:
         &#34;&#34;&#34;Returns the input widget for the metadata.&#34;&#34;&#34;
         return self._combo_color
 
     @property
-    def button_save(self) -&gt; ttk.Button:
+    def button_save(self) -&gt; Button:
         &#34;&#34;&#34;Returns the save button.&#34;&#34;&#34;
         return self._btn_save
 
     @property
-    def button_abort(self) -&gt; ttk.Button:
+    def button_abort(self) -&gt; Button:
         &#34;&#34;&#34;Returns the abort button.&#34;&#34;&#34;
         return self._btn_abort</code></pre>
 </details>
@@ -260,7 +260,7 @@ class Layout:
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">@property
-def button_abort(self) -&gt; ttk.Button:
+def button_abort(self) -&gt; Button:
     &#34;&#34;&#34;Returns the abort button.&#34;&#34;&#34;
     return self._btn_abort</code></pre>
 </details>
@@ -273,7 +273,7 @@ def button_abort(self) -&gt; ttk.Button:
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">@property
-def button_save(self) -&gt; ttk.Button:
+def button_save(self) -&gt; Button:
     &#34;&#34;&#34;Returns the save button.&#34;&#34;&#34;
     return self._btn_save</code></pre>
 </details>
@@ -286,7 +286,7 @@ def button_save(self) -&gt; ttk.Button:
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">@property
-def input_family(self) -&gt; ttk.Combobox:
+def input_family(self) -&gt; Combobox:
     &#34;&#34;&#34;Returns the input widget for the material family.&#34;&#34;&#34;
     return self._combo_family</code></pre>
 </details>
@@ -299,7 +299,7 @@ def input_family(self) -&gt; ttk.Combobox:
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">@property
-def input_material(self) -&gt; ttk.Combobox:
+def input_material(self) -&gt; Combobox:
     &#34;&#34;&#34;Returns the input widget for the material.&#34;&#34;&#34;
     return self._combo_material</code></pre>
 </details>
@@ -312,7 +312,7 @@ def input_material(self) -&gt; ttk.Combobox:
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">@property
-def input_metadata(self) -&gt; ttk.Combobox:
+def input_metadata(self) -&gt; Combobox:
     &#34;&#34;&#34;Returns the input widget for the metadata.&#34;&#34;&#34;
     return self._combo_color</code></pre>
 </details>

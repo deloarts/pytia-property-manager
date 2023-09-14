@@ -1,15 +1,18 @@
 """
     The layout of the app.
 """
-from tkinter import DISABLED, WORD, Tk, ttk
+from tkinter import DISABLED, WORD, Tk
 
 from app.frames import Frames
 from app.vars import Variables
 from app.widgets.notes import NoteWidgets
 from app.widgets.processes import ProcessWidgets
-from const import Source
+from const import STYLES, Source
+from helper.appearance import set_appearance_menu
+from helper.messages import show_help
 from pytia_ui_tools.widgets.texts import ScrolledText
 from resources import resource
+from ttkbootstrap import Button, Checkbutton, Combobox, Entry, Label, Menu
 
 
 class Layout:
@@ -26,15 +29,28 @@ class Layout:
             root (Tk): The main window.
             frames (Frames): The frames of the main window.
             variables (Variables): The variables of the main window.
-        """ """"""
+        """
+        # region MENU
+        menubar = Menu(root)
+
+        self._appearance_menu = Menu(menubar, tearoff=False)
+        for style in STYLES:
+            self._appearance_menu.add_command(label=style)
+
+        menubar.add_cascade(label="Help", command=show_help)
+        menubar.add_cascade(label="Appearance", menu=self._appearance_menu)
+
+        set_appearance_menu(self._appearance_menu)
+        root.configure(menu=menubar)
+        # endregion
+
         # region FRAME Infra ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
         # region partnumber
-        lbl_partnumber = ttk.Label(
+        lbl_partnumber = Label(
             frames.infrastructure,
             text="Partnumber",
-            width=12,
-            font=("Segoe UI", 9, "bold"),
+            width=15,
         )
         lbl_partnumber.grid(
             row=0,
@@ -44,7 +60,7 @@ class Layout:
             sticky="nsew",
         )
 
-        self._entry_partnumber = ttk.Entry(
+        self._entry_partnumber = Entry(
             frames.infrastructure,
             textvariable=variables.partnumber,
             width=30,
@@ -56,20 +72,18 @@ class Layout:
             column=1,
             padx=(5, Layout.MARGIN_X),
             pady=(Layout.MARGIN_Y, 2),
-            ipadx=2,
-            ipady=2,
             sticky="nsew",
             columnspan=2,
         )
         # endregion
 
         # region project
-        lbl_project = ttk.Label(frames.infrastructure, text="Project")
+        lbl_project = Label(frames.infrastructure, text="Project")
         lbl_project.grid(
             row=1, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky="nsew"
         )
 
-        self._combo_project = ttk.Combobox(
+        self._combo_project = Combobox(
             frames.infrastructure,
             values=[],
             textvariable=variables.project,
@@ -81,20 +95,18 @@ class Layout:
             column=1,
             padx=(5, Layout.MARGIN_X),
             pady=(1, 2),
-            ipadx=2,
-            ipady=2,
             sticky="nsew",
             columnspan=2,
         )
         # endregion
 
         # region machine
-        lbl_project = ttk.Label(frames.infrastructure, text="Machine")
+        lbl_project = Label(frames.infrastructure, text="Machine")
         lbl_project.grid(
             row=2, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky="nsew"
         )
 
-        self._entry_machine = ttk.Entry(
+        self._entry_machine = Entry(
             frames.infrastructure,
             textvariable=variables.machine,
             state=DISABLED,
@@ -104,20 +116,18 @@ class Layout:
             column=1,
             padx=(5, Layout.MARGIN_X),
             pady=2,
-            ipadx=2,
-            ipady=2,
             sticky="nsew",
             columnspan=2,
         )
         # endregion
 
         # region definition
-        lbl_definition = ttk.Label(frames.infrastructure, text="Definition")
+        lbl_definition = Label(frames.infrastructure, text="Definition")
         lbl_definition.grid(
             row=3, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky="nsew"
         )
 
-        self._entry_definition = ttk.Entry(
+        self._entry_definition = Entry(
             frames.infrastructure,
             textvariable=variables.definition,
             state=DISABLED,
@@ -127,43 +137,40 @@ class Layout:
             column=1,
             padx=(5, Layout.MARGIN_X),
             pady=2,
-            ipadx=2,
-            ipady=2,
             sticky="nsew",
             columnspan=2,
         )
         # endregion
 
         # region revision
-        lbl_revision = ttk.Label(frames.infrastructure, text="Revision")
+        lbl_revision = Label(frames.infrastructure, text="Revision")
         lbl_revision.grid(
             row=4, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky="nsew"
         )
 
-        self._entry_revision = ttk.Entry(
+        self._entry_revision = Entry(
             frames.infrastructure,
             textvariable=variables.revision,
             width=18,
             state=DISABLED,
             cursor="arrow",
         )
-        self._entry_revision.grid(
-            row=4, column=1, padx=5, pady=2, ipadx=2, ipady=2, sticky="nsew"
-        )
+        self._entry_revision.grid(row=4, column=1, padx=5, pady=2, sticky="nsew")
 
-        self._btn_revision = ttk.Button(
+        self._btn_revision = Button(
             frames.infrastructure,
             text="New Revision",
-            width=12,
+            style="outline",
+            width=15,
             state=DISABLED,
         )
         self._btn_revision.grid(
-            row=4, column=2, padx=(5, Layout.MARGIN_X), pady=1, sticky="nsew"
+            row=4, column=2, padx=(0, Layout.MARGIN_X), pady=2, sticky="nsew"
         )
         # endregion
 
         # region source
-        lbl_source = ttk.Label(
+        lbl_source = Label(
             frames.infrastructure,
             text="Source",
         )
@@ -171,92 +178,88 @@ class Layout:
             row=5, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky="nsew"
         )
 
-        self._combo_source = ttk.Combobox(
+        self._combo_source = Combobox(
             frames.infrastructure,
             values=[s.value for s in Source],
             textvariable=variables.source,
             width=15,
             state=DISABLED,
         )
-        self._combo_source.grid(
-            row=5, column=1, padx=5, pady=2, ipadx=2, ipady=2, sticky="nsew"
-        )
+        self._combo_source.grid(row=5, column=1, padx=5, pady=2, sticky="nsew")
 
-        self._btn_reload_source = ttk.Button(
+        self._btn_reload_source = Button(
             frames.infrastructure,
             text="Reload",
+            style="outline",
             state=DISABLED,
-            # command=root.on_btn_reload_source,
         )
         self._btn_reload_source.grid(
-            row=5, column=2, padx=(5, Layout.MARGIN_X), pady=1, sticky="nsew"
+            row=5, column=2, padx=(0, Layout.MARGIN_X), pady=2, sticky="nsew"
         )
         # endregion
 
         # region material
-        lbl_material = ttk.Label(frames.infrastructure, text="Material")
+        lbl_material = Label(frames.infrastructure, text="Material")
         lbl_material.grid(
             row=6, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky="nsew"
         )
 
-        self._entry_material = ttk.Entry(
+        self._entry_material = Entry(
             frames.infrastructure,
             textvariable=variables.material,
             width=18,
             state=DISABLED,
             cursor="arrow",
         )
-        self._entry_material.grid(
-            row=6, column=1, padx=5, pady=2, ipadx=2, ipady=2, sticky="nsew"
-        )
+        self._entry_material.grid(row=6, column=1, padx=5, pady=2, sticky="nsew")
 
-        self._btn_material = ttk.Button(
+        self._btn_material = Button(
             frames.infrastructure,
             text="Select",
+            style="outline",
             state=DISABLED,
         )
         self._btn_material.grid(
-            row=6, column=2, padx=(5, Layout.MARGIN_X), pady=1, sticky="nsew"
+            row=6, column=2, padx=(0, Layout.MARGIN_X), pady=2, sticky="nsew"
         )
         # endregion
 
         # region base size
-        lbl_base_size = ttk.Label(frames.infrastructure, text="Base Size")
+        lbl_base_size = Label(frames.infrastructure, text="Base Size")
         lbl_base_size.grid(
             row=7, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky="nsew"
         )
 
-        self._entry_base_size = ttk.Entry(
+        self._entry_base_size = Entry(
             frames.infrastructure,
             textvariable=variables.base_size,
             width=18,
             state=DISABLED,
             cursor="arrow",
         )
-        self._entry_base_size.grid(
-            row=7, column=1, padx=5, pady=2, ipadx=2, ipady=2, sticky="nsew"
-        )
+        self._entry_base_size.grid(row=7, column=1, padx=5, pady=2, sticky="nsew")
 
-        self._btn_base_size = ttk.Button(
+        self._btn_base_size = Button(
             frames.infrastructure,
             text="Calculate",
+            style="outline",
             state=DISABLED,
         )
         self._btn_base_size.grid(
             row=7,
             column=2,
-            padx=(5, Layout.MARGIN_X),
-            pady=1,
+            padx=(0, Layout.MARGIN_X),
+            pady=2,
             sticky="nsew",
             rowspan=2,
         )
 
-        lbl_base_size_preset = ttk.Label(frames.infrastructure, text="Base Size Preset")
+        lbl_base_size_preset = Label(frames.infrastructure, text="Base Size Preset")
         lbl_base_size_preset.grid(
             row=8, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky="nsew"
         )
 
-        self._entry_base_size_preset = ttk.Entry(
+        self._entry_base_size_preset = Entry(
             frames.infrastructure,
             textvariable=variables.base_size_preset,
             width=18,
@@ -264,42 +267,41 @@ class Layout:
             cursor="arrow",
         )
         self._entry_base_size_preset.grid(
-            row=8, column=1, padx=5, pady=2, ipadx=2, ipady=2, sticky="nsew"
+            row=8, column=1, padx=5, pady=2, sticky="nsew"
         )
         # endregion
 
         # region mass
-        lbl_mass = ttk.Label(frames.infrastructure, text="Mass")
+        lbl_mass = Label(frames.infrastructure, text="Mass")
         lbl_mass.grid(row=9, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky="nsew")
 
-        self._entry_mass = ttk.Entry(
+        self._entry_mass = Entry(
             frames.infrastructure,
             textvariable=variables.mass,
             width=18,
             state=DISABLED,
             cursor="arrow",
         )
-        self._entry_mass.grid(
-            row=9, column=1, padx=5, pady=2, ipadx=2, ipady=2, sticky="nsew"
-        )
+        self._entry_mass.grid(row=9, column=1, padx=5, pady=2, sticky="nsew")
 
-        self._btn_mass = ttk.Button(
+        self._btn_mass = Button(
             frames.infrastructure,
             text="Calculate",
+            style="outline",
             state=DISABLED,
         )
         self._btn_mass.grid(
-            row=9, column=2, padx=(5, Layout.MARGIN_X), pady=1, sticky="nsew"
+            row=9, column=2, padx=(0, Layout.MARGIN_X), pady=2, sticky="nsew"
         )
         # endregion
 
         # region manufacturer
-        lbl_manufacturer = ttk.Label(frames.infrastructure, text="Manufacturer")
+        lbl_manufacturer = Label(frames.infrastructure, text="Manufacturer")
         lbl_manufacturer.grid(
             row=10, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky="nsew"
         )
 
-        self._entry_manufacturer = ttk.Entry(
+        self._entry_manufacturer = Entry(
             frames.infrastructure,
             textvariable=variables.manufacturer,
             width=30,
@@ -310,20 +312,18 @@ class Layout:
             column=1,
             padx=(5, Layout.MARGIN_X),
             pady=2,
-            ipadx=2,
-            ipady=2,
             sticky="nsew",
             columnspan=2,
         )
         # endregion
 
         # region supplier
-        lbl_supplier = ttk.Label(frames.infrastructure, text="Supplier")
+        lbl_supplier = Label(frames.infrastructure, text="Supplier")
         lbl_supplier.grid(
             row=11, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky="nsew"
         )
 
-        self._entry_supplier = ttk.Entry(
+        self._entry_supplier = Entry(
             frames.infrastructure,
             textvariable=variables.supplier,
             state=DISABLED,
@@ -333,20 +333,18 @@ class Layout:
             column=1,
             padx=(5, Layout.MARGIN_X),
             pady=2,
-            ipadx=2,
-            ipady=2,
             sticky="nsew",
             columnspan=2,
         )
         # endregion
 
         # region group
-        lbl_group = ttk.Label(frames.infrastructure, text="Group")
+        lbl_group = Label(frames.infrastructure, text="Group")
         lbl_group.grid(
             row=12, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky="nsew"
         )
 
-        self._combo_group = ttk.Combobox(
+        self._combo_group = Combobox(
             frames.infrastructure,
             values=[],
             textvariable=variables.group,
@@ -358,20 +356,18 @@ class Layout:
             column=1,
             padx=(5, Layout.MARGIN_X),
             pady=(1, 2),
-            ipadx=2,
-            ipady=2,
             sticky="nsew",
             columnspan=2,
         )
         # endregion
 
         # region tolerance
-        lbl_tolerance = ttk.Label(frames.infrastructure, text="Tolerance")
+        lbl_tolerance = Label(frames.infrastructure, text="Tolerance")
         lbl_tolerance.grid(
             row=13, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky="nsew"
         )
 
-        self._combo_tolerance = ttk.Combobox(
+        self._combo_tolerance = Combobox(
             frames.infrastructure,
             values=resource.settings.tolerances,
             textvariable=variables.tolerance,
@@ -383,22 +379,18 @@ class Layout:
             column=1,
             padx=(5, Layout.MARGIN_X),
             pady=2,
-            ipadx=2,
-            ipady=2,
             sticky="new",
             columnspan=2,
         )
         # endregion
 
         # region spare part level
-        lbl_spare_part = ttk.Label(
-            frames.infrastructure, text="Spare Part Level", state="readonly"
-        )
+        lbl_spare_part = Label(frames.infrastructure, text="Spare Part Level")
         lbl_spare_part.grid(
             row=14, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky="nsew"
         )
 
-        self._combo_spare_part = ttk.Combobox(
+        self._combo_spare_part = Combobox(
             frames.infrastructure,
             values=resource.settings.spare_part_level,
             textvariable=variables.spare_part_level,
@@ -410,22 +402,18 @@ class Layout:
             column=1,
             padx=(5, Layout.MARGIN_X),
             pady=2,
-            ipadx=2,
-            ipady=2,
             sticky="new",
             columnspan=2,
         )
         # endregion
 
         # region description
-        lbl_description = ttk.Label(frames.infrastructure, text="Description")
+        lbl_description = Label(frames.infrastructure, text="Description")
         lbl_description.grid(
             row=15,
             column=0,
             padx=(Layout.MARGIN_X, 5),
             pady=2,
-            ipadx=2,
-            ipady=2,
             sticky="new",
         )
 
@@ -443,7 +431,7 @@ class Layout:
         self._text_description.grid(
             row=15,
             column=1,
-            padx=(5, Layout.MARGIN_X + 1),
+            padx=(3, Layout.MARGIN_X - 1),
             pady=2,
             sticky="nsew",
             columnspan=2,
@@ -451,17 +439,15 @@ class Layout:
         # endregion
 
         # region creator
-        lbl_creator = ttk.Label(frames.infrastructure, text="Creator")
+        lbl_creator = Label(frames.infrastructure, text="Creator")
         lbl_creator.grid(
             row=16,
             column=0,
             padx=(Layout.MARGIN_X, 5),
             pady=(Layout.MARGIN_Y, 2),
-            ipadx=2,
-            ipady=2,
             sticky="new",
         )
-        self._lbl_creator_value = ttk.Label(
+        self._lbl_creator_value = Label(
             frames.infrastructure, textvariable=variables.creator_display
         )
         self._lbl_creator_value.grid(
@@ -469,25 +455,21 @@ class Layout:
             column=1,
             padx=(5, Layout.MARGIN_X),
             pady=(Layout.MARGIN_Y, 2),
-            ipadx=2,
-            ipady=2,
             sticky="nw",
             columnspan=2,
         )
         # endregion
 
         # region creator
-        lbl_modifier = ttk.Label(frames.infrastructure, text="Modifier")
+        lbl_modifier = Label(frames.infrastructure, text="Modifier")
         lbl_modifier.grid(
             row=17,
             column=0,
             padx=(Layout.MARGIN_X, 5),
             pady=(2, 2),
-            ipadx=2,
-            ipady=2,
             sticky="new",
         )
-        self._lbl_modifier_value = ttk.Label(
+        self._lbl_modifier_value = Label(
             frames.infrastructure, textvariable=variables.modifier_display
         )
         self._lbl_modifier_value.grid(
@@ -495,25 +477,21 @@ class Layout:
             column=1,
             padx=(5, Layout.MARGIN_X),
             pady=(2, 2),
-            ipadx=2,
-            ipady=2,
             sticky="nw",
             columnspan=2,
         )
         # endregion
 
         # region linked doc
-        lbl_linked_doc = ttk.Label(frames.infrastructure, text="Linked Drawing")
+        lbl_linked_doc = Label(frames.infrastructure, text="Linked Drawing")
         lbl_linked_doc.grid(
             row=18,
             column=0,
             padx=(Layout.MARGIN_X, 5),
             pady=(2, Layout.MARGIN_Y),
-            ipadx=2,
-            ipady=2,
             sticky="new",
         )
-        self._lbl_linked_doc_value = ttk.Label(
+        self._lbl_linked_doc_value = Label(
             frames.infrastructure, textvariable=variables.linked_doc_display
         )
         self._lbl_linked_doc_value.grid(
@@ -521,8 +499,6 @@ class Layout:
             column=1,
             padx=(5, Layout.MARGIN_X),
             pady=(2, Layout.MARGIN_Y),
-            ipadx=2,
-            ipady=2,
             sticky="nw",
             columnspan=2,
         )
@@ -544,129 +520,131 @@ class Layout:
         # endregion
 
         # region FRAME Footer ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-        # region info
-        lbl_info = ttk.Label(
-            frames.footer,
-            text="",
+        self._iso_view_toggle = Checkbutton(
+            master=frames.footer,
+            bootstyle="round-toggle",  # type:ignore
+            text="Set ISO view",
+            variable=variables.set_view,
+            onvalue=True,
+            offvalue=False,
         )
-        lbl_info.grid(
-            row=0, column=0, padx=(0, 5), pady=0, ipadx=2, ipady=2, sticky="nsew"
-        )
-        # endregion
+        self._iso_view_toggle.grid(row=0, column=0, padx=(8, 2), pady=0, sticky="w")
 
         # region button save
-        self._btn_save = ttk.Button(
-            frames.footer, text="Save", style="Footer.TButton", state=DISABLED
+        self._btn_save = Button(
+            frames.footer, text="Save", style="outline", width=10, state=DISABLED
         )
         self._btn_save.grid(row=0, column=1, padx=(5, 2), pady=0, sticky="e")
         # endregion
 
         # region button abort
-        self._btn_abort = ttk.Button(
-            frames.footer, text="Abort", style="Footer.TButton"
+        self._btn_abort = Button(
+            frames.footer,
+            text="Abort",
+            style="outline",
+            width=10,
         )
         self._btn_abort.grid(row=0, column=2, padx=(2, 0), pady=0, sticky="e")
         # endregion
         # endregion
 
     @property
-    def input_partnumber(self) -> ttk.Entry:
+    def input_partnumber(self) -> Entry:
         """Returns the part number entry."""
         return self._entry_partnumber
 
     @property
-    def input_project(self) -> ttk.Combobox:
+    def input_project(self) -> Combobox:
         """Returns the project combobox."""
         return self._combo_project
 
     @property
-    def input_machine(self) -> ttk.Entry:
+    def input_machine(self) -> Entry:
         """Returns the machine entry."""
         return self._entry_machine
 
     @property
-    def input_definition(self) -> ttk.Entry:
+    def input_definition(self) -> Entry:
         """Returns the definition entry."""
         return self._entry_definition
 
     @property
-    def input_revision(self) -> ttk.Entry:
+    def input_revision(self) -> Entry:
         """Returns the revision entry."""
         return self._entry_revision
 
     @property
-    def button_revision(self) -> ttk.Button:
+    def button_revision(self) -> Button:
         """Returns the revision button."""
         return self._btn_revision
 
     @property
-    def input_source(self) -> ttk.Entry:
+    def input_source(self) -> Entry:
         """Returns the source entry."""
         return self._combo_source
 
     @property
-    def button_source(self) -> ttk.Button:
+    def button_source(self) -> Button:
         """Returns the source button."""
         return self._btn_reload_source
 
     @property
-    def input_material(self) -> ttk.Entry:
+    def input_material(self) -> Entry:
         """Returns the material entry."""
         return self._entry_material
 
     @property
-    def button_material(self) -> ttk.Button:
+    def button_material(self) -> Button:
         """Returns the material button."""
         return self._btn_material
 
     @property
-    def input_base_size(self) -> ttk.Entry:
+    def input_base_size(self) -> Entry:
         """Returns the base size entry."""
         return self._entry_base_size
 
     @property
-    def input_base_size_preset(self) -> ttk.Entry:
+    def input_base_size_preset(self) -> Entry:
         """Returns the base size preset entry."""
         return self._entry_base_size_preset
 
     @property
-    def button_base_size(self) -> ttk.Button:
+    def button_base_size(self) -> Button:
         """Returns the base size button."""
         return self._btn_base_size
 
     @property
-    def input_mass(self) -> ttk.Entry:
+    def input_mass(self) -> Entry:
         """Returns the mass entry."""
         return self._entry_mass
 
     @property
-    def button_mass(self) -> ttk.Button:
+    def button_mass(self) -> Button:
         """Returns the mass button."""
         return self._btn_mass
 
     @property
-    def input_manufacturer(self) -> ttk.Entry:
+    def input_manufacturer(self) -> Entry:
         """Returns the manufacturer entry."""
         return self._entry_manufacturer
 
     @property
-    def input_supplier(self) -> ttk.Entry:
+    def input_supplier(self) -> Entry:
         """Returns the supplier entry."""
         return self._entry_supplier
 
     @property
-    def input_group(self) -> ttk.Combobox:
+    def input_group(self) -> Combobox:
         """Returns the group combobox."""
         return self._combo_group
 
     @property
-    def input_tolerance(self) -> ttk.Combobox:
+    def input_tolerance(self) -> Combobox:
         """Returns the tolerance combobox."""
         return self._combo_tolerance
 
     @property
-    def input_spare_part(self) -> ttk.Combobox:
+    def input_spare_part(self) -> Combobox:
         """Returns the spare part combobox."""
         return self._combo_spare_part
 
@@ -676,17 +654,17 @@ class Layout:
         return self._text_description
 
     @property
-    def label_creator(self) -> ttk.Label:
+    def label_creator(self) -> Label:
         """Returns the creator label."""
         return self._lbl_creator_value
 
     @property
-    def label_modifier(self) -> ttk.Label:
+    def label_modifier(self) -> Label:
         """Returns the modifier label."""
         return self._lbl_modifier_value
 
     @property
-    def label_linked_doc(self) -> ttk.Label:
+    def label_linked_doc(self) -> Label:
         """Returns the linked document label."""
         return self._lbl_linked_doc_value
 
@@ -701,11 +679,16 @@ class Layout:
         return self._processes
 
     @property
-    def button_save(self) -> ttk.Button:
+    def button_save(self) -> Button:
         """Returns the save button."""
         return self._btn_save
 
     @property
-    def button_abort(self) -> ttk.Button:
+    def button_abort(self) -> Button:
         """Returns the abort button."""
         return self._btn_abort
+
+    @property
+    def toggle_iso_view(self) -> Checkbutton:
+        """Returns the iso view checkbutton."""
+        return self._iso_view_toggle

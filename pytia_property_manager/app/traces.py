@@ -15,6 +15,7 @@ from helper.lazy_loaders import LazyDocumentHelper
 from pytia.log import log
 from resources import resource
 from resources.utils import expand_env_vars
+from ttkbootstrap import Style
 
 
 class Traces:
@@ -24,6 +25,7 @@ class Traces:
         self,
         variables: Variables,
         layout: Layout,
+        style: Style,
         state_setter: UISetter,
         doc_helper: LazyDocumentHelper,
     ) -> None:
@@ -37,6 +39,7 @@ class Traces:
         """
         self.vars = variables
         self.layout = layout
+        self.style = style
         self.set_ui = state_setter
         self.doc_helper = doc_helper
 
@@ -52,6 +55,7 @@ class Traces:
         self.vars.creator.trace_add("write", self.trace_creator)
         self.vars.modifier.trace_add("write", self.trace_modifier)
         self.vars.linked_doc.trace_add("write", self.trace_linked_doc)
+        self.vars.set_view.trace_add("write", self.trace_set_view)
 
     def trace_mass(self, *_) -> None:
         """Trace callback for the `mass` StringVar"""
@@ -70,7 +74,9 @@ class Traces:
 
         if self.vars.linked_doc.get() == "":
             self.vars.linked_doc_display.set("-")
-            self.layout.label_linked_doc.configure(cursor="", foreground="black")
+            self.layout.label_linked_doc.configure(
+                cursor="", foreground=self.style.colors.fg  # type:ignore
+            )
             ToolTip(
                 widget=self.layout.label_linked_doc,
                 text="There's no drawing document linked to this file.",
@@ -78,7 +84,9 @@ class Traces:
 
         elif linked_doc.is_file() and linked_doc.suffix == SUFFIX_DRAWING:
             self.vars.linked_doc_display.set(linked_doc.stem)
-            self.layout.label_linked_doc.configure(cursor="hand2", foreground="blue")
+            self.layout.label_linked_doc.configure(
+                cursor="hand2", foreground=self.style.colors.info  # type:ignore
+            )
             ToolTip(
                 widget=self.layout.label_linked_doc,
                 text=str(linked_doc),
@@ -94,14 +102,18 @@ class Traces:
         ):
             self.doc_helper.document.properties.delete(PROP_DRAWING_PATH)
             self.vars.linked_doc_display.set("Link removed")
-            self.layout.label_linked_doc.configure(cursor="", foreground="gray")
+            self.layout.label_linked_doc.configure(
+                cursor="", foreground=self.style.colors.warning  # type:ignore
+            )
             ToolTip(
                 widget=self.layout.label_linked_doc,
                 text=f"{str(linked_doc)} (link removed)",
             )
         else:
             self.vars.linked_doc_display.set("Document not found")
-            self.layout.label_linked_doc.configure(cursor="", foreground="gray")
+            self.layout.label_linked_doc.configure(
+                cursor="", foreground=self.style.colors.warning  # type:ignore
+            )
             ToolTip(
                 widget=self.layout.label_linked_doc,
                 text=f"{str(linked_doc)} (not found)",
@@ -176,3 +188,7 @@ class Traces:
             self.vars.modifier_display.set(resource.get_user_by_logon(modifier).name)
         else:
             self.vars.modifier_display.set(f"Unknown user ({modifier})")
+
+    def trace_set_view(self, *_) -> None:
+        """Trace callback for the `set iso view` StringVar"""
+        resource.appdata.set_view = self.vars.set_view.get()

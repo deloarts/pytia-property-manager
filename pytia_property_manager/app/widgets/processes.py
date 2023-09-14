@@ -13,12 +13,12 @@
 import tkinter as tk
 from tkinter import StringVar
 from tkinter import messagebox as tkmsg
-from tkinter import ttk
 from typing import Callable, Dict, List, Literal, Optional
 
 from pytia.log import log
 from pytia_ui_tools.widgets.texts import ScrolledText
 from resources import resource
+from ttkbootstrap import Combobox, Frame, Label, Labelframe
 
 
 class ProcessWidget:
@@ -29,7 +29,7 @@ class ProcessWidget:
 
     def __init__(
         self,
-        root: tk.Tk | tk.Frame | ttk.Frame | ttk.Labelframe,
+        root: Frame | Labelframe,
         pid: int,
         callback_combo: Callable,
         callback_process: Callable,
@@ -56,10 +56,10 @@ class ProcessWidget:
         self._state = tk.NORMAL
         self._bottom_space = False
 
-        self.lbl_process = ttk.Label(
+        self.lbl_process = Label(
             self._root,
             text=f"Process {self._pid}",
-            width=12,
+            width=15,
         )
         self.lbl_process.grid(
             row=(self._pid - resource.settings.processes.first) * 2,
@@ -71,14 +71,12 @@ class ProcessWidget:
                 else 2,
                 2,
             ),
-            ipadx=2,
-            ipady=2,
             sticky="nsew",
         )
 
         combo_process_values = [""]
         combo_process_values.extend([p.name for p in resource.processes])
-        self.combo_process = ttk.Combobox(
+        self.combo_process = Combobox(
             self._root,
             values=combo_process_values,
             textvariable=self._process_var,
@@ -94,8 +92,6 @@ class ProcessWidget:
                 else 2,
                 2,
             ),
-            ipadx=2,
-            ipady=2,
             sticky="new",
         )
         self.combo_process.bind("<<ComboboxSelected>>", self._callback_combo)
@@ -105,14 +101,13 @@ class ProcessWidget:
             textvariable=self._note_var,
             height=4,
             width=30,
-            font=("Segoe UI", 9),
             state=tk.DISABLED,
             wrap=tk.WORD,
         )
         self.text_note_process.grid(
             row=(self._pid - resource.settings.processes.first) * 2 + 1,
             column=1,
-            padx=(5, ProcessWidget.MARGIN_X + 1),
+            padx=(3, ProcessWidget.MARGIN_X - 1),
             pady=2,
             sticky="nsew",
         )
@@ -122,7 +117,7 @@ class ProcessWidget:
         )
 
     @property
-    def parent(self) -> tk.Tk | tk.Frame | ttk.Frame | ttk.Labelframe:
+    def parent(self) -> Frame | Labelframe:
         """Returns the parent of this instance."""
         return self._root
 
@@ -207,7 +202,7 @@ class ProcessWidgets:
 
     def __init__(
         self,
-        root: tk.Tk | tk.Frame | ttk.Frame | ttk.Labelframe,
+        root: Frame | Labelframe,
         material_metadata: StringVar,
     ) -> None:
         """

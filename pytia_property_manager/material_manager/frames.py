@@ -2,7 +2,8 @@
     Frames submodule for the material manager interface.
 """
 
-from tkinter import Toplevel, ttk
+
+from ttkbootstrap import Toplevel, Frame
 
 
 class Frames:
@@ -15,11 +16,11 @@ class Frames:
         Args:
             root (Toplevel): The material manager interface.
         """ """"""
-        self._frame_data = ttk.Frame(master=root, style="Data.TFrame")
+        self._frame_data = Frame(master=root)
         self._frame_data.grid(row=0, column=0, sticky="nsew", padx=10, pady=(10, 5))
         self._frame_data.grid_columnconfigure(1, weight=1)
 
-        self._frame_footer = ttk.Frame(master=root, height=30, style="Footer.TFrame")
+        self._frame_footer = Frame(master=root, height=30)
         self._frame_footer.grid(row=1, column=0, sticky="swe", padx=10, pady=(5, 10))
         self._frame_footer.grid_columnconfigure(0, weight=1)
 
@@ -27,11 +28,11 @@ class Frames:
         root.grid_rowconfigure(0, weight=1)
 
     @property
-    def data(self) -> ttk.Frame:
+    def data(self) -> Frame:
         """Returns the data frame of the material manager."""
         return self._frame_data
 
     @property
-    def footer(self) -> ttk.Frame:
+    def footer(self) -> Frame:
         """Returns the footer frame of the material manager."""
         return self._frame_footer

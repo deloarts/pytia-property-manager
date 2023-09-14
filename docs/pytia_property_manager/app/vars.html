@@ -32,7 +32,9 @@
 &#34;&#34;&#34;
 
 from dataclasses import dataclass
-from tkinter import StringVar, Tk
+from tkinter import BooleanVar, StringVar, Tk
+
+from resources import resource
 
 
 @dataclass(slots=True, kw_only=True)
@@ -66,6 +68,8 @@ class Variables:
 
     linked_doc: StringVar
     linked_doc_display: StringVar
+
+    set_view: BooleanVar
 
     def __init__(self, root: Tk) -&gt; None:
         &#34;&#34;&#34;
@@ -104,6 +108,10 @@ class Variables:
         self.linked_doc = StringVar(master=root, name=&#34;linked_doc&#34;)
         self.linked_doc_display = StringVar(
             master=root, name=&#34;linked_doc_display&#34;, value=&#34;-&#34;
+        )
+
+        self.set_view = BooleanVar(
+            master=root, name=&#34;set_view&#34;, value=resource.appdata.set_view
         )</code></pre>
 </details>
 </section>
@@ -164,6 +172,8 @@ class Variables:
     linked_doc: StringVar
     linked_doc_display: StringVar
 
+    set_view: BooleanVar
+
     def __init__(self, root: Tk) -&gt; None:
         &#34;&#34;&#34;
         Inits the variables.
@@ -201,6 +211,10 @@ class Variables:
         self.linked_doc = StringVar(master=root, name=&#34;linked_doc&#34;)
         self.linked_doc_display = StringVar(
             master=root, name=&#34;linked_doc_display&#34;, value=&#34;-&#34;
+        )
+
+        self.set_view = BooleanVar(
+            master=root, name=&#34;set_view&#34;, value=resource.appdata.set_view
         )</code></pre>
 </details>
 <h3>Instance variables</h3>
@@ -285,6 +299,10 @@ class Variables:
 <dd>
 <div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
 </dd>
+<dt id="pytia_property_manager.app.vars.Variables.set_view"><code class="name">var <span class="ident">set_view</span> : tkinter.BooleanVar</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
 <dt id="pytia_property_manager.app.vars.Variables.source"><code class="name">var <span class="ident">source</span> : tkinter.StringVar</code></dt>
 <dd>
 <div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
@@ -342,6 +360,7 @@ class Variables:
 <li><code><a title="pytia_property_manager.app.vars.Variables.previous_source" href="#pytia_property_manager.app.vars.Variables.previous_source">previous_source</a></code></li>
 <li><code><a title="pytia_property_manager.app.vars.Variables.project" href="#pytia_property_manager.app.vars.Variables.project">project</a></code></li>
 <li><code><a title="pytia_property_manager.app.vars.Variables.revision" href="#pytia_property_manager.app.vars.Variables.revision">revision</a></code></li>
+<li><code><a title="pytia_property_manager.app.vars.Variables.set_view" href="#pytia_property_manager.app.vars.Variables.set_view">set_view</a></code></li>
 <li><code><a title="pytia_property_manager.app.vars.Variables.source" href="#pytia_property_manager.app.vars.Variables.source">source</a></code></li>
 <li><code><a title="pytia_property_manager.app.vars.Variables.spare_part_level" href="#pytia_property_manager.app.vars.Variables.spare_part_level">spare_part_level</a></code></li>
 <li><code><a title="pytia_property_manager.app.vars.Variables.supplier" href="#pytia_property_manager.app.vars.Variables.supplier">supplier</a></code></li>

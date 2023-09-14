@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.10.0" />
-<title>pytia_property_manager.material_manager.frames API documentation</title>
-<meta name="description" content="Frames submodule for the material manager interface." />
+<title>pytia_property_manager.helper.appearance API documentation</title>
+<meta name="description" content="Helper functions for messages." />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
 <link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
@@ -19,52 +19,40 @@
 <main>
 <article id="content">
 <header>
-<h1 class="title">Module <code>pytia_property_manager.material_manager.frames</code></h1>
+<h1 class="title">Module <code>pytia_property_manager.helper.appearance</code></h1>
 </header>
 <section id="section-intro">
-<p>Frames submodule for the material manager interface.</p>
+<p>Helper functions for messages.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">&#34;&#34;&#34;
-    Frames submodule for the material manager interface.
+    Helper functions for messages.
 &#34;&#34;&#34;
 
+from const import STYLES
+from pytia.log import log
+from resources import resource
+from ttkbootstrap import Menu, Style
 
-from ttkbootstrap import Toplevel, Frame
+
+def set_appearance_menu(appearance_menu: Menu) -&gt; None:
+    &#34;&#34;&#34;Binds all callbacks to the appearance menubar.&#34;&#34;&#34;
+    for index, _ in enumerate(STYLES):
+        appearance_menu.entryconfig(index, command=lambda x=index: change_theme(x))
 
 
-class Frames:
-    &#34;&#34;&#34;Frames class: Holds all frames for the material manager.&#34;&#34;&#34;
+def change_theme(index: int) -&gt; None:
+    &#34;&#34;&#34;Changes the apps theme.
 
-    def __init__(self, root: Toplevel) -&gt; None:
-        &#34;&#34;&#34;
-        Inits the frames for the material manager.
-
-        Args:
-            root (Toplevel): The material manager interface.
-        &#34;&#34;&#34; &#34;&#34;&#34;&#34;&#34;&#34;
-        self._frame_data = Frame(master=root)
-        self._frame_data.grid(row=0, column=0, sticky=&#34;nsew&#34;, padx=10, pady=(10, 5))
-        self._frame_data.grid_columnconfigure(1, weight=1)
-
-        self._frame_footer = Frame(master=root, height=30)
-        self._frame_footer.grid(row=1, column=0, sticky=&#34;swe&#34;, padx=10, pady=(5, 10))
-        self._frame_footer.grid_columnconfigure(0, weight=1)
-
-        root.grid_columnconfigure(0, weight=1)
-        root.grid_rowconfigure(0, weight=1)
-
-    @property
-    def data(self) -&gt; Frame:
-        &#34;&#34;&#34;Returns the data frame of the material manager.&#34;&#34;&#34;
-        return self._frame_data
-
-    @property
-    def footer(self) -&gt; Frame:
-        &#34;&#34;&#34;Returns the footer frame of the material manager.&#34;&#34;&#34;
-        return self._frame_footer</code></pre>
+    Args:
+        index (int): The index of the theme from the STYLES list.
+    &#34;&#34;&#34;
+    theme_name = STYLES[index]
+    Style(theme=theme_name)
+    resource.appdata.theme = theme_name
+    log.info(f&#34;Changed theme to {theme_name} ({index}).&#34;)</code></pre>
 </details>
 </section>
 <section>
@@ -72,88 +60,52 @@ class Frames:
 <section>
 </section>
 <section>
-</section>
-<section>
-<h2 class="section-title" id="header-classes">Classes</h2>
+<h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
-<dt id="pytia_property_manager.material_manager.frames.Frames"><code class="flex name class">
-<span>class <span class="ident">Frames</span></span>
-<span>(</span><span>root: ttkbootstrap.window.Toplevel)</span>
+<dt id="pytia_property_manager.helper.appearance.change_theme"><code class="name flex">
+<span>def <span class="ident">change_theme</span></span>(<span>index: int) ‑> None</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Frames class: Holds all frames for the material manager.</p>
-<p>Inits the frames for the material manager.</p>
+<div class="desc"><p>Changes the apps theme.</p>
 <h2 id="args">Args</h2>
 <dl>
-<dt><strong><code>root</code></strong> :&ensp;<code>Toplevel</code></dt>
-<dd>The material manager interface.</dd>
+<dt><strong><code>index</code></strong> :&ensp;<code>int</code></dt>
+<dd>The index of the theme from the STYLES list.</dd>
 </dl></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">class Frames:
-    &#34;&#34;&#34;Frames class: Holds all frames for the material manager.&#34;&#34;&#34;
+<pre><code class="python">def change_theme(index: int) -&gt; None:
+    &#34;&#34;&#34;Changes the apps theme.
 
-    def __init__(self, root: Toplevel) -&gt; None:
-        &#34;&#34;&#34;
-        Inits the frames for the material manager.
-
-        Args:
-            root (Toplevel): The material manager interface.
-        &#34;&#34;&#34; &#34;&#34;&#34;&#34;&#34;&#34;
-        self._frame_data = Frame(master=root)
-        self._frame_data.grid(row=0, column=0, sticky=&#34;nsew&#34;, padx=10, pady=(10, 5))
-        self._frame_data.grid_columnconfigure(1, weight=1)
-
-        self._frame_footer = Frame(master=root, height=30)
-        self._frame_footer.grid(row=1, column=0, sticky=&#34;swe&#34;, padx=10, pady=(5, 10))
-        self._frame_footer.grid_columnconfigure(0, weight=1)
-
-        root.grid_columnconfigure(0, weight=1)
-        root.grid_rowconfigure(0, weight=1)
-
-    @property
-    def data(self) -&gt; Frame:
-        &#34;&#34;&#34;Returns the data frame of the material manager.&#34;&#34;&#34;
-        return self._frame_data
-
-    @property
-    def footer(self) -&gt; Frame:
-        &#34;&#34;&#34;Returns the footer frame of the material manager.&#34;&#34;&#34;
-        return self._frame_footer</code></pre>
+    Args:
+        index (int): The index of the theme from the STYLES list.
+    &#34;&#34;&#34;
+    theme_name = STYLES[index]
+    Style(theme=theme_name)
+    resource.appdata.theme = theme_name
+    log.info(f&#34;Changed theme to {theme_name} ({index}).&#34;)</code></pre>
 </details>
-<h3>Instance variables</h3>
-<dl>
-<dt id="pytia_property_manager.material_manager.frames.Frames.data"><code class="name">var <span class="ident">data</span> : tkinter.ttk.Frame</code></dt>
+</dd>
+<dt id="pytia_property_manager.helper.appearance.set_appearance_menu"><code class="name flex">
+<span>def <span class="ident">set_appearance_menu</span></span>(<span>appearance_menu: tkinter.Menu) ‑> None</span>
+</code></dt>
 <dd>
-<div class="desc"><p>Returns the data frame of the material manager.</p></div>
+<div class="desc"><p>Binds all callbacks to the appearance menubar.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">@property
-def data(self) -&gt; Frame:
-    &#34;&#34;&#34;Returns the data frame of the material manager.&#34;&#34;&#34;
-    return self._frame_data</code></pre>
-</details>
-</dd>
-<dt id="pytia_property_manager.material_manager.frames.Frames.footer"><code class="name">var <span class="ident">footer</span> : tkinter.ttk.Frame</code></dt>
-<dd>
-<div class="desc"><p>Returns the footer frame of the material manager.</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">@property
-def footer(self) -&gt; Frame:
-    &#34;&#34;&#34;Returns the footer frame of the material manager.&#34;&#34;&#34;
-    return self._frame_footer</code></pre>
+<pre><code class="python">def set_appearance_menu(appearance_menu: Menu) -&gt; None:
+    &#34;&#34;&#34;Binds all callbacks to the appearance menubar.&#34;&#34;&#34;
+    for index, _ in enumerate(STYLES):
+        appearance_menu.entryconfig(index, command=lambda x=index: change_theme(x))</code></pre>
 </details>
 </dd>
 </dl>
-</dd>
-</dl>
+</section>
+<section>
 </section>
 </article>
 <nav id="sidebar">
@@ -164,18 +116,13 @@ def footer(self) -&gt; Frame:
 <ul id="index">
 <li><h3>Super-module</h3>
 <ul>
-<li><code><a title="pytia_property_manager.material_manager" href="index.html">pytia_property_manager.material_manager</a></code></li>
+<li><code><a title="pytia_property_manager.helper" href="index.html">pytia_property_manager.helper</a></code></li>
 </ul>
 </li>
-<li><h3><a href="#header-classes">Classes</a></h3>
-<ul>
-<li>
-<h4><code><a title="pytia_property_manager.material_manager.frames.Frames" href="#pytia_property_manager.material_manager.frames.Frames">Frames</a></code></h4>
+<li><h3><a href="#header-functions">Functions</a></h3>
 <ul class="">
-<li><code><a title="pytia_property_manager.material_manager.frames.Frames.data" href="#pytia_property_manager.material_manager.frames.Frames.data">data</a></code></li>
-<li><code><a title="pytia_property_manager.material_manager.frames.Frames.footer" href="#pytia_property_manager.material_manager.frames.Frames.footer">footer</a></code></li>
-</ul>
-</li>
+<li><code><a title="pytia_property_manager.helper.appearance.change_theme" href="#pytia_property_manager.helper.appearance.change_theme">change_theme</a></code></li>
+<li><code><a title="pytia_property_manager.helper.appearance.set_appearance_menu" href="#pytia_property_manager.helper.appearance.set_appearance_menu">set_appearance_menu</a></code></li>
 </ul>
 </li>
 </ul>

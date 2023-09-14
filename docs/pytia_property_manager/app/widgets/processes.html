@@ -51,12 +51,12 @@ or delete.</li>
 import tkinter as tk
 from tkinter import StringVar
 from tkinter import messagebox as tkmsg
-from tkinter import ttk
 from typing import Callable, Dict, List, Literal, Optional
 
 from pytia.log import log
 from pytia_ui_tools.widgets.texts import ScrolledText
 from resources import resource
+from ttkbootstrap import Combobox, Frame, Label, Labelframe
 
 
 class ProcessWidget:
@@ -67,7 +67,7 @@ class ProcessWidget:
 
     def __init__(
         self,
-        root: tk.Tk | tk.Frame | ttk.Frame | ttk.Labelframe,
+        root: Frame | Labelframe,
         pid: int,
         callback_combo: Callable,
         callback_process: Callable,
@@ -94,10 +94,10 @@ class ProcessWidget:
         self._state = tk.NORMAL
         self._bottom_space = False
 
-        self.lbl_process = ttk.Label(
+        self.lbl_process = Label(
             self._root,
             text=f&#34;Process {self._pid}&#34;,
-            width=12,
+            width=15,
         )
         self.lbl_process.grid(
             row=(self._pid - resource.settings.processes.first) * 2,
@@ -109,14 +109,12 @@ class ProcessWidget:
                 else 2,
                 2,
             ),
-            ipadx=2,
-            ipady=2,
             sticky=&#34;nsew&#34;,
         )
 
         combo_process_values = [&#34;&#34;]
         combo_process_values.extend([p.name for p in resource.processes])
-        self.combo_process = ttk.Combobox(
+        self.combo_process = Combobox(
             self._root,
             values=combo_process_values,
             textvariable=self._process_var,
@@ -132,8 +130,6 @@ class ProcessWidget:
                 else 2,
                 2,
             ),
-            ipadx=2,
-            ipady=2,
             sticky=&#34;new&#34;,
         )
         self.combo_process.bind(&#34;&lt;&lt;ComboboxSelected&gt;&gt;&#34;, self._callback_combo)
@@ -143,14 +139,13 @@ class ProcessWidget:
             textvariable=self._note_var,
             height=4,
             width=30,
-            font=(&#34;Segoe UI&#34;, 9),
             state=tk.DISABLED,
             wrap=tk.WORD,
         )
         self.text_note_process.grid(
             row=(self._pid - resource.settings.processes.first) * 2 + 1,
             column=1,
-            padx=(5, ProcessWidget.MARGIN_X + 1),
+            padx=(3, ProcessWidget.MARGIN_X - 1),
             pady=2,
             sticky=&#34;nsew&#34;,
         )
@@ -160,7 +155,7 @@ class ProcessWidget:
         )
 
     @property
-    def parent(self) -&gt; tk.Tk | tk.Frame | ttk.Frame | ttk.Labelframe:
+    def parent(self) -&gt; Frame | Labelframe:
         &#34;&#34;&#34;Returns the parent of this instance.&#34;&#34;&#34;
         return self._root
 
@@ -245,7 +240,7 @@ class ProcessWidgets:
 
     def __init__(
         self,
-        root: tk.Tk | tk.Frame | ttk.Frame | ttk.Labelframe,
+        root: Frame | Labelframe,
         material_metadata: StringVar,
     ) -&gt; None:
         &#34;&#34;&#34;
@@ -547,7 +542,7 @@ class ProcessWidgets:
 <dl>
 <dt id="pytia_property_manager.app.widgets.processes.ProcessWidget"><code class="flex name class">
 <span>class <span class="ident">ProcessWidget</span></span>
-<span>(</span><span>root: tkinter.Tk | tkinter.Frame | tkinter.ttk.Frame | tkinter.ttk.Labelframe, pid: int, callback_combo: Callable, callback_process: Callable)</span>
+<span>(</span><span>root: tkinter.ttk.Frame | tkinter.ttk.Labelframe, pid: int, callback_combo: Callable, callback_process: Callable)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>The process widget class. Holds all widgets related to one process.</p>
@@ -575,7 +570,7 @@ tkinter parent frame).</dt>
 
     def __init__(
         self,
-        root: tk.Tk | tk.Frame | ttk.Frame | ttk.Labelframe,
+        root: Frame | Labelframe,
         pid: int,
         callback_combo: Callable,
         callback_process: Callable,
@@ -602,10 +597,10 @@ tkinter parent frame).</dt>
         self._state = tk.NORMAL
         self._bottom_space = False
 
-        self.lbl_process = ttk.Label(
+        self.lbl_process = Label(
             self._root,
             text=f&#34;Process {self._pid}&#34;,
-            width=12,
+            width=15,
         )
         self.lbl_process.grid(
             row=(self._pid - resource.settings.processes.first) * 2,
@@ -617,14 +612,12 @@ tkinter parent frame).</dt>
                 else 2,
                 2,
             ),
-            ipadx=2,
-            ipady=2,
             sticky=&#34;nsew&#34;,
         )
 
         combo_process_values = [&#34;&#34;]
         combo_process_values.extend([p.name for p in resource.processes])
-        self.combo_process = ttk.Combobox(
+        self.combo_process = Combobox(
             self._root,
             values=combo_process_values,
             textvariable=self._process_var,
@@ -640,8 +633,6 @@ tkinter parent frame).</dt>
                 else 2,
                 2,
             ),
-            ipadx=2,
-            ipady=2,
             sticky=&#34;new&#34;,
         )
         self.combo_process.bind(&#34;&lt;&lt;ComboboxSelected&gt;&gt;&#34;, self._callback_combo)
@@ -651,14 +642,13 @@ tkinter parent frame).</dt>
             textvariable=self._note_var,
             height=4,
             width=30,
-            font=(&#34;Segoe UI&#34;, 9),
             state=tk.DISABLED,
             wrap=tk.WORD,
         )
         self.text_note_process.grid(
             row=(self._pid - resource.settings.processes.first) * 2 + 1,
             column=1,
-            padx=(5, ProcessWidget.MARGIN_X + 1),
+            padx=(3, ProcessWidget.MARGIN_X - 1),
             pady=2,
             sticky=&#34;nsew&#34;,
         )
@@ -668,7 +658,7 @@ tkinter parent frame).</dt>
         )
 
     @property
-    def parent(self) -&gt; tk.Tk | tk.Frame | ttk.Frame | ttk.Labelframe:
+    def parent(self) -&gt; Frame | Labelframe:
         &#34;&#34;&#34;Returns the parent of this instance.&#34;&#34;&#34;
         return self._root
 
@@ -790,7 +780,7 @@ def note_var(self) -&gt; StringVar:
     return self._note_var</code></pre>
 </details>
 </dd>
-<dt id="pytia_property_manager.app.widgets.processes.ProcessWidget.parent"><code class="name">var <span class="ident">parent</span> : tkinter.Tk | tkinter.Frame | tkinter.ttk.Frame | tkinter.ttk.Labelframe</code></dt>
+<dt id="pytia_property_manager.app.widgets.processes.ProcessWidget.parent"><code class="name">var <span class="ident">parent</span> : tkinter.ttk.Frame | tkinter.ttk.Labelframe</code></dt>
 <dd>
 <div class="desc"><p>Returns the parent of this instance.</p></div>
 <details class="source">
@@ -798,7 +788,7 @@ def note_var(self) -&gt; StringVar:
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">@property
-def parent(self) -&gt; tk.Tk | tk.Frame | ttk.Frame | ttk.Labelframe:
+def parent(self) -&gt; Frame | Labelframe:
     &#34;&#34;&#34;Returns the parent of this instance.&#34;&#34;&#34;
     return self._root</code></pre>
 </details>
@@ -846,7 +836,7 @@ def state(self) -&gt; str:
 </dd>
 <dt id="pytia_property_manager.app.widgets.processes.ProcessWidgets"><code class="flex name class">
 <span>class <span class="ident">ProcessWidgets</span></span>
-<span>(</span><span>root: tkinter.Tk | tkinter.Frame | tkinter.ttk.Frame | tkinter.ttk.Labelframe, material_metadata: tkinter.StringVar)</span>
+<span>(</span><span>root: tkinter.ttk.Frame | tkinter.ttk.Labelframe, material_metadata: tkinter.StringVar)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>The process widgets class. Holds all process widgets.</p>
@@ -866,7 +856,7 @@ def state(self) -&gt; str:
 
     def __init__(
         self,
-        root: tk.Tk | tk.Frame | ttk.Frame | ttk.Labelframe,
+        root: Frame | Labelframe,
         material_metadata: StringVar,
     ) -&gt; None:
         &#34;&#34;&#34;

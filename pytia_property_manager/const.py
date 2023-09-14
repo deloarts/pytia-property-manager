@@ -6,7 +6,7 @@ import os
 from enum import Enum
 from pathlib import Path
 
-__version__ = "0.3.1"
+__version__ = "0.4.0"
 
 PYTIA = "pytia"
 PYTIA_PROPERTY_MANAGER = "pytia_property_manager"
@@ -49,6 +49,29 @@ VERIFY_WARNING = "warning"
 WEB_PIP = "https://www.pypi.org"
 
 SUFFIX_DRAWING = ".CATDrawing"
+
+ISO_VIEW = "* iso"
+
+STYLES = [
+    "cosmo",
+    "litera",
+    "flatly",
+    "journal",
+    "lumen",
+    "minty",
+    "pulse",
+    "sandstone",
+    "united",
+    "yeti",
+    "morph",
+    "simplex",
+    "cerculean",
+    "solar",
+    "superhero",
+    "darkly",
+    "cyborg",
+    "vapor",
+]
 
 
 class Source(Enum):

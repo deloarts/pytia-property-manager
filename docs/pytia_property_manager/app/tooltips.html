@@ -31,12 +31,11 @@
     Tooltips submodule for the app.
 &#34;&#34;&#34;
 
+from app.layout import Layout
+from app.vars import Variables
 from pytia_ui_tools.handlers.workspace_handler import Workspace
 from pytia_ui_tools.widgets.tooltips import ToolTip
 from resources import resource
-
-from app.layout import Layout
-from app.vars import Variables
 
 
 class ToolTips:
@@ -178,6 +177,13 @@ class ToolTips:
                     f&#34;Mail: {modifier.mail}&#34;
                 ),
             )
+        # endregion
+
+        # region ISO VIEW
+        ToolTip(
+            layout.toggle_iso_view,
+            &#34;Sets the view to ISO and fits in the visible item on save.&#34;,
+        )
         # endregion</code></pre>
 </details>
 </section>
@@ -349,6 +355,13 @@ class ToolTips:
                     f&#34;Mail: {modifier.mail}&#34;
                 ),
             )
+        # endregion
+
+        # region ISO VIEW
+        ToolTip(
+            layout.toggle_iso_view,
+            &#34;Sets the view to ISO and fits in the visible item on save.&#34;,
+        )
         # endregion</code></pre>
 </details>
 </dd>

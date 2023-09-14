@@ -1,9 +1,11 @@
 {
     "cSpell.words": [
         "appdata",
+        "bootstyle",
         "CATIA",
         "CATP",
         "catvbs",
+        "cerculean",
         "CNEXT",
         "columnspan",
         "datafield",
@@ -13,7 +15,10 @@
         "getpid",
         "ipadx",
         "ipady",
+        "litera",
+        "offvalue",
         "ONEDRIVE",
+        "onvalue",
         "padx",
         "pady",
         "partnumber",
@@ -32,9 +37,11 @@
         "relx",
         "rowspan",
         "Segoe",
+        "tearoff",
         "textvariable",
         "tkmsg",
         "toolwindow",
+        "ttkbootstrap",
         "zipfile"
     ],
     "python.testing.pytestArgs": [
