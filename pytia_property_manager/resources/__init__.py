@@ -11,7 +11,6 @@ import json
 import os
 import tkinter.messagebox as tkmsg
 from dataclasses import asdict, dataclass, field, fields
-from json.decoder import JSONDecodeError
 from pathlib import Path
 from typing import List, Literal, Optional
 
