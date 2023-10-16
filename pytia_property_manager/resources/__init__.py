@@ -348,6 +348,7 @@ class AppData:
     counter: int = 0
     theme: str = STYLES[0]
     set_view: bool = True
+    sync_color: bool = True
 
     def __post_init__(self) -> None:
         self.version = (

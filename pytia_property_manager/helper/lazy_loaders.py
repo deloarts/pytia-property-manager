@@ -233,6 +233,7 @@ class LazyDocumentHelper:
             # The main body name depends on the source of the document.
             match variables.source.get():
                 case Source.MADE.value:
+                    # Set the main body name
                     if variables.machine.get() != "":
                         main_body_name = (
                             f"{variables.machine.get()}"
@@ -243,6 +244,24 @@ class LazyDocumentHelper:
                         )
                     else:
                         main_body_name = variables.partnumber.get()
+
+                    # Set the main body color
+                    if resource.appdata.sync_color:
+                        try:
+                            rgb = (
+                                self.document.material.rendering_material.get_ambient_color()
+                            )
+                        except AttributeError:
+                            rgb = (210, 210, 255)
+
+                        selection = self.document.document.selection
+                        selection.clear()
+                        selection.add(self.document.bodies.main_body)
+                        selection.vis_properties.set_real_color(
+                            rgb[0], rgb[1], rgb[2], 1
+                        )
+                        selection.clear()
+
                 case Source.BOUGHT.value | _:
                     main_body_name = variables.partnumber.get()
 
@@ -254,7 +273,7 @@ class LazyDocumentHelper:
             viewer = self.framework.catia.active_window.active_viewer
             camera = self.framework.catia.active_document.cameras.item(ISO_VIEW)
 
-            # FIXME: pytia v0.3.4 has no type for Viewpoint3D.
+            # FIXME: pytia v0.3.5 has no type for Viewpoint3D.
             viewer.viewer.Viewpoint3D = camera.camera.Viewpoint3D
 
             viewer.update()

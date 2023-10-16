@@ -41,6 +41,7 @@ class Variables:
     linked_doc_display: StringVar
 
     set_view: BooleanVar
+    sync_color: BooleanVar
 
     def __init__(self, root: Tk) -> None:
         """
@@ -83,4 +84,7 @@ class Variables:
 
         self.set_view = BooleanVar(
             master=root, name="set_view", value=resource.appdata.set_view
+        )
+        self.sync_color = BooleanVar(
+            master=root, name="sync_color", value=resource.appdata.sync_color
         )
