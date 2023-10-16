@@ -169,6 +169,7 @@ class Settings:  # pylint: disable=R0902
     debug: bool
     demo: bool
     link_material: bool
+    min_brightness: int | None
     revision: int | str
     restrictions: SettingsRestrictions
     verifications: SettingsVerifications
@@ -348,6 +349,7 @@ class AppData:
     counter: int = 0
     theme: str = STYLES[0]
     set_view: bool = True
+    sync_color: bool = True
 
     def __post_init__(self) -> None:
         self.version = (

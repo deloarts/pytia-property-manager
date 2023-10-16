@@ -56,6 +56,7 @@ class Traces:
         self.vars.modifier.trace_add("write", self.trace_modifier)
         self.vars.linked_doc.trace_add("write", self.trace_linked_doc)
         self.vars.set_view.trace_add("write", self.trace_set_view)
+        self.vars.sync_color.trace_add("write", self.trace_sync_color)
 
     def trace_mass(self, *_) -> None:
         """Trace callback for the `mass` StringVar"""
@@ -192,3 +193,7 @@ class Traces:
     def trace_set_view(self, *_) -> None:
         """Trace callback for the `set iso view` StringVar"""
         resource.appdata.set_view = self.vars.set_view.get()
+
+    def trace_sync_color(self, *_) -> None:
+        """Trace callback for the `sync color` StringVar"""
+        resource.appdata.sync_color = self.vars.sync_color.get()

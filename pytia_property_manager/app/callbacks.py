@@ -2,6 +2,8 @@
     The callbacks submodule for the main window.
 """
 
+# pylint: disable=E0611
+
 import os
 import re
 import shutil
@@ -99,7 +101,7 @@ class Callbacks:
             properties (Properties): The properties of the main window.
             workspace (Workspace): The workspace instance.
             ui_setter (UISetter): The ui setter instance of the main window.
-        """ """"""
+        """
         self.root = root
         self.vars = variables
         self.doc_helper = lazy_document_helper
@@ -161,6 +163,7 @@ class Callbacks:
         if self.properties.verify():
             self.properties.checkout()
             self.doc_helper.setup_main_body(variables=self.vars)
+
             if resource.appdata.set_view:
                 self.doc_helper.set_view()
 
@@ -305,9 +308,9 @@ class Callbacks:
         # prompt with "do you want to open the document again" would appear.
         if linked_doc.name in self.doc_helper.get_all_open_windows():
             self.doc_helper.framework.catia.windows.item(linked_doc.name).activate()
-            log.info(f"User opened linked document (window).")
+            log.info("User opened linked document (window).")
             sys.exit()
         if linked_doc.is_file() and linked_doc.suffix == SUFFIX_DRAWING:
             self.doc_helper.framework.catia.documents.open(str(linked_doc))
-            log.info(f"User opened linked document (file).")
+            log.info("User opened linked document (file).")
             sys.exit()
