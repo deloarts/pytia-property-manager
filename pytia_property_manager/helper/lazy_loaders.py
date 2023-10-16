@@ -17,6 +17,7 @@ from app.vars import Variables
 from app.widgets.notes import NoteWidgets
 from app.widgets.processes import ProcessWidgets
 from const import ISO_VIEW, LOGON, REVISION_FOLDER, Source
+from helper.values import set_perceived_brightness
 from pytia.exceptions import (
     PytiaDifferentDocumentError,
     PytiaDocumentNotSavedError,
@@ -248,8 +249,9 @@ class LazyDocumentHelper:
                     # Set the main body color
                     if resource.appdata.sync_color:
                         try:
-                            rgb = (
-                                self.document.material.rendering_material.get_ambient_color()
+                            rgb = set_perceived_brightness(
+                                self.document.material.rendering_material.get_ambient_color(),
+                                resource.settings.min_brightness or 0,
                             )
                         except AttributeError:
                             rgb = (210, 210, 255)
@@ -261,6 +263,7 @@ class LazyDocumentHelper:
                             rgb[0], rgb[1], rgb[2], 1
                         )
                         selection.clear()
+                        log.info(f"Set main body color to RGB {rgb}.")
 
                 case Source.BOUGHT.value | _:
                     main_body_name = variables.partnumber.get()

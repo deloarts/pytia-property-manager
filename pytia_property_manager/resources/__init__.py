@@ -169,6 +169,7 @@ class Settings:  # pylint: disable=R0902
     debug: bool
     demo: bool
     link_material: bool
+    min_brightness: int | None
     revision: int | str
     restrictions: SettingsRestrictions
     verifications: SettingsVerifications

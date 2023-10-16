@@ -4,6 +4,7 @@
     "demo": false,
     "revision": 0,
     "link_material": false,
+    "min_brightness": 65,
     "restrictions": {
         "allow_all_users": true,
         "allow_all_editors": true,
