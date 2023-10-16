@@ -39,7 +39,9 @@ from app.layout import Layout
 from app.state_setter import UISetter
 from app.tooltips import ToolTip
 from app.vars import Variables
-from const import PROP_DRAWING_PATH, SUFFIX_DRAWING, Source
+from const import PROP_DRAWING_PATH
+from const import SUFFIX_DRAWING
+from const import Source
 from helper.lazy_loaders import LazyDocumentHelper
 from pytia.log import log
 from resources import resource
@@ -85,6 +87,7 @@ class Traces:
         self.vars.modifier.trace_add(&#34;write&#34;, self.trace_modifier)
         self.vars.linked_doc.trace_add(&#34;write&#34;, self.trace_linked_doc)
         self.vars.set_view.trace_add(&#34;write&#34;, self.trace_set_view)
+        self.vars.sync_color.trace_add(&#34;write&#34;, self.trace_sync_color)
 
     def trace_mass(self, *_) -&gt; None:
         &#34;&#34;&#34;Trace callback for the `mass` StringVar&#34;&#34;&#34;
@@ -220,7 +223,11 @@ class Traces:
 
     def trace_set_view(self, *_) -&gt; None:
         &#34;&#34;&#34;Trace callback for the `set iso view` StringVar&#34;&#34;&#34;
-        resource.appdata.set_view = self.vars.set_view.get()</code></pre>
+        resource.appdata.set_view = self.vars.set_view.get()
+
+    def trace_sync_color(self, *_) -&gt; None:
+        &#34;&#34;&#34;Trace callback for the `sync color` StringVar&#34;&#34;&#34;
+        resource.appdata.sync_color = self.vars.sync_color.get()</code></pre>
 </details>
 </section>
 <section>
@@ -289,6 +296,7 @@ class Traces:
         self.vars.modifier.trace_add(&#34;write&#34;, self.trace_modifier)
         self.vars.linked_doc.trace_add(&#34;write&#34;, self.trace_linked_doc)
         self.vars.set_view.trace_add(&#34;write&#34;, self.trace_set_view)
+        self.vars.sync_color.trace_add(&#34;write&#34;, self.trace_sync_color)
 
     def trace_mass(self, *_) -&gt; None:
         &#34;&#34;&#34;Trace callback for the `mass` StringVar&#34;&#34;&#34;
@@ -424,7 +432,11 @@ class Traces:
 
     def trace_set_view(self, *_) -&gt; None:
         &#34;&#34;&#34;Trace callback for the `set iso view` StringVar&#34;&#34;&#34;
-        resource.appdata.set_view = self.vars.set_view.get()</code></pre>
+        resource.appdata.set_view = self.vars.set_view.get()
+
+    def trace_sync_color(self, *_) -&gt; None:
+        &#34;&#34;&#34;Trace callback for the `sync color` StringVar&#34;&#34;&#34;
+        resource.appdata.sync_color = self.vars.sync_color.get()</code></pre>
 </details>
 <h3>Methods</h3>
 <dl>
@@ -644,6 +656,20 @@ class Traces:
         self.vars.source.set(self.vars.previous_source.get())</code></pre>
 </details>
 </dd>
+<dt id="pytia_property_manager.app.traces.Traces.trace_sync_color"><code class="name flex">
+<span>def <span class="ident">trace_sync_color</span></span>(<span>self, *_) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Trace callback for the <code>sync color</code> StringVar</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def trace_sync_color(self, *_) -&gt; None:
+    &#34;&#34;&#34;Trace callback for the `sync color` StringVar&#34;&#34;&#34;
+    resource.appdata.sync_color = self.vars.sync_color.get()</code></pre>
+</details>
+</dd>
 </dl>
 </dd>
 </dl>
@@ -673,6 +699,7 @@ class Traces:
 <li><code><a title="pytia_property_manager.app.traces.Traces.trace_project" href="#pytia_property_manager.app.traces.Traces.trace_project">trace_project</a></code></li>
 <li><code><a title="pytia_property_manager.app.traces.Traces.trace_set_view" href="#pytia_property_manager.app.traces.Traces.trace_set_view">trace_set_view</a></code></li>
 <li><code><a title="pytia_property_manager.app.traces.Traces.trace_source" href="#pytia_property_manager.app.traces.Traces.trace_source">trace_source</a></code></li>
+<li><code><a title="pytia_property_manager.app.traces.Traces.trace_sync_color" href="#pytia_property_manager.app.traces.Traces.trace_sync_color">trace_sync_color</a></code></li>
 </ul>
 </li>
 </ul>

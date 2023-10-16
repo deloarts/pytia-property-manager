@@ -32,7 +32,9 @@
 &#34;&#34;&#34;
 
 from dataclasses import dataclass
-from tkinter import BooleanVar, StringVar, Tk
+from tkinter import BooleanVar
+from tkinter import StringVar
+from tkinter import Tk
 
 from resources import resource
 
@@ -70,6 +72,7 @@ class Variables:
     linked_doc_display: StringVar
 
     set_view: BooleanVar
+    sync_color: BooleanVar
 
     def __init__(self, root: Tk) -&gt; None:
         &#34;&#34;&#34;
@@ -112,6 +115,9 @@ class Variables:
 
         self.set_view = BooleanVar(
             master=root, name=&#34;set_view&#34;, value=resource.appdata.set_view
+        )
+        self.sync_color = BooleanVar(
+            master=root, name=&#34;sync_color&#34;, value=resource.appdata.sync_color
         )</code></pre>
 </details>
 </section>
@@ -173,6 +179,7 @@ class Variables:
     linked_doc_display: StringVar
 
     set_view: BooleanVar
+    sync_color: BooleanVar
 
     def __init__(self, root: Tk) -&gt; None:
         &#34;&#34;&#34;
@@ -215,6 +222,9 @@ class Variables:
 
         self.set_view = BooleanVar(
             master=root, name=&#34;set_view&#34;, value=resource.appdata.set_view
+        )
+        self.sync_color = BooleanVar(
+            master=root, name=&#34;sync_color&#34;, value=resource.appdata.sync_color
         )</code></pre>
 </details>
 <h3>Instance variables</h3>
@@ -315,6 +325,10 @@ class Variables:
 <dd>
 <div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
 </dd>
+<dt id="pytia_property_manager.app.vars.Variables.sync_color"><code class="name">var <span class="ident">sync_color</span> : tkinter.BooleanVar</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
 <dt id="pytia_property_manager.app.vars.Variables.tolerance"><code class="name">var <span class="ident">tolerance</span> : tkinter.StringVar</code></dt>
 <dd>
 <div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
@@ -364,6 +378,7 @@ class Variables:
 <li><code><a title="pytia_property_manager.app.vars.Variables.source" href="#pytia_property_manager.app.vars.Variables.source">source</a></code></li>
 <li><code><a title="pytia_property_manager.app.vars.Variables.spare_part_level" href="#pytia_property_manager.app.vars.Variables.spare_part_level">spare_part_level</a></code></li>
 <li><code><a title="pytia_property_manager.app.vars.Variables.supplier" href="#pytia_property_manager.app.vars.Variables.supplier">supplier</a></code></li>
+<li><code><a title="pytia_property_manager.app.vars.Variables.sync_color" href="#pytia_property_manager.app.vars.Variables.sync_color">sync_color</a></code></li>
 <li><code><a title="pytia_property_manager.app.vars.Variables.tolerance" href="#pytia_property_manager.app.vars.Variables.tolerance">tolerance</a></code></li>
 </ul>
 </li>

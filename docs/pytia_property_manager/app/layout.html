@@ -30,18 +30,26 @@
 <pre><code class="python">&#34;&#34;&#34;
     The layout of the app.
 &#34;&#34;&#34;
-from tkinter import DISABLED, WORD, Tk
+from tkinter import DISABLED
+from tkinter import WORD
+from tkinter import Tk
 
 from app.frames import Frames
 from app.vars import Variables
 from app.widgets.notes import NoteWidgets
 from app.widgets.processes import ProcessWidgets
-from const import STYLES, Source
+from const import STYLES
+from const import Source
 from helper.appearance import set_appearance_menu
 from helper.messages import show_help
 from pytia_ui_tools.widgets.texts import ScrolledText
 from resources import resource
-from ttkbootstrap import Button, Checkbutton, Combobox, Entry, Label, Menu
+from ttkbootstrap import Button
+from ttkbootstrap import Checkbutton
+from ttkbootstrap import Combobox
+from ttkbootstrap import Entry
+from ttkbootstrap import Label
+from ttkbootstrap import Menu
 
 
 class Layout:
@@ -559,11 +567,21 @@ class Layout:
         )
         self._iso_view_toggle.grid(row=0, column=0, padx=(8, 2), pady=0, sticky=&#34;w&#34;)
 
+        self._sync_color_toggle = Checkbutton(
+            master=frames.footer,
+            bootstyle=&#34;round-toggle&#34;,  # type:ignore
+            text=&#34;Synchronize color&#34;,
+            variable=variables.sync_color,
+            onvalue=True,
+            offvalue=False,
+        )
+        self._sync_color_toggle.grid(row=0, column=1, padx=(8, 2), pady=0, sticky=&#34;w&#34;)
+
         # region button save
         self._btn_save = Button(
             frames.footer, text=&#34;Save&#34;, style=&#34;outline&#34;, width=10, state=DISABLED
         )
-        self._btn_save.grid(row=0, column=1, padx=(5, 2), pady=0, sticky=&#34;e&#34;)
+        self._btn_save.grid(row=0, column=2, padx=(5, 2), pady=0, sticky=&#34;e&#34;)
         # endregion
 
         # region button abort
@@ -573,7 +591,7 @@ class Layout:
             style=&#34;outline&#34;,
             width=10,
         )
-        self._btn_abort.grid(row=0, column=2, padx=(2, 0), pady=0, sticky=&#34;e&#34;)
+        self._btn_abort.grid(row=0, column=3, padx=(2, 0), pady=0, sticky=&#34;e&#34;)
         # endregion
         # endregion
 
@@ -720,7 +738,12 @@ class Layout:
     @property
     def toggle_iso_view(self) -&gt; Checkbutton:
         &#34;&#34;&#34;Returns the iso view checkbutton.&#34;&#34;&#34;
-        return self._iso_view_toggle</code></pre>
+        return self._iso_view_toggle
+
+    @property
+    def toggle_sync_color(self) -&gt; Checkbutton:
+        &#34;&#34;&#34;Returns the color sync checkbutton.&#34;&#34;&#34;
+        return self._sync_color_toggle</code></pre>
 </details>
 </section>
 <section>
@@ -1267,11 +1290,21 @@ class Layout:
         )
         self._iso_view_toggle.grid(row=0, column=0, padx=(8, 2), pady=0, sticky=&#34;w&#34;)
 
+        self._sync_color_toggle = Checkbutton(
+            master=frames.footer,
+            bootstyle=&#34;round-toggle&#34;,  # type:ignore
+            text=&#34;Synchronize color&#34;,
+            variable=variables.sync_color,
+            onvalue=True,
+            offvalue=False,
+        )
+        self._sync_color_toggle.grid(row=0, column=1, padx=(8, 2), pady=0, sticky=&#34;w&#34;)
+
         # region button save
         self._btn_save = Button(
             frames.footer, text=&#34;Save&#34;, style=&#34;outline&#34;, width=10, state=DISABLED
         )
-        self._btn_save.grid(row=0, column=1, padx=(5, 2), pady=0, sticky=&#34;e&#34;)
+        self._btn_save.grid(row=0, column=2, padx=(5, 2), pady=0, sticky=&#34;e&#34;)
         # endregion
 
         # region button abort
@@ -1281,7 +1314,7 @@ class Layout:
             style=&#34;outline&#34;,
             width=10,
         )
-        self._btn_abort.grid(row=0, column=2, padx=(2, 0), pady=0, sticky=&#34;e&#34;)
+        self._btn_abort.grid(row=0, column=3, padx=(2, 0), pady=0, sticky=&#34;e&#34;)
         # endregion
         # endregion
 
@@ -1428,7 +1461,12 @@ class Layout:
     @property
     def toggle_iso_view(self) -&gt; Checkbutton:
         &#34;&#34;&#34;Returns the iso view checkbutton.&#34;&#34;&#34;
-        return self._iso_view_toggle</code></pre>
+        return self._iso_view_toggle
+
+    @property
+    def toggle_sync_color(self) -&gt; Checkbutton:
+        &#34;&#34;&#34;Returns the color sync checkbutton.&#34;&#34;&#34;
+        return self._sync_color_toggle</code></pre>
 </details>
 <h3>Class variables</h3>
 <dl>
@@ -1820,6 +1858,19 @@ def toggle_iso_view(self) -&gt; Checkbutton:
     return self._iso_view_toggle</code></pre>
 </details>
 </dd>
+<dt id="pytia_property_manager.app.layout.Layout.toggle_sync_color"><code class="name">var <span class="ident">toggle_sync_color</span> : tkinter.ttk.Checkbutton</code></dt>
+<dd>
+<div class="desc"><p>Returns the color sync checkbutton.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def toggle_sync_color(self) -&gt; Checkbutton:
+    &#34;&#34;&#34;Returns the color sync checkbutton.&#34;&#34;&#34;
+    return self._sync_color_toggle</code></pre>
+</details>
+</dd>
 </dl>
 </dd>
 </dl>
@@ -1872,6 +1923,7 @@ def toggle_iso_view(self) -&gt; Checkbutton:
 <li><code><a title="pytia_property_manager.app.layout.Layout.notes" href="#pytia_property_manager.app.layout.Layout.notes">notes</a></code></li>
 <li><code><a title="pytia_property_manager.app.layout.Layout.processes" href="#pytia_property_manager.app.layout.Layout.processes">processes</a></code></li>
 <li><code><a title="pytia_property_manager.app.layout.Layout.toggle_iso_view" href="#pytia_property_manager.app.layout.Layout.toggle_iso_view">toggle_iso_view</a></code></li>
+<li><code><a title="pytia_property_manager.app.layout.Layout.toggle_sync_color" href="#pytia_property_manager.app.layout.Layout.toggle_sync_color">toggle_sync_color</a></code></li>
 </ul>
 </li>
 </ul>
