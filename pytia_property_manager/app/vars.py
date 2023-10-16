@@ -3,7 +3,9 @@
 """
 
 from dataclasses import dataclass
-from tkinter import BooleanVar, StringVar, Tk
+from tkinter import BooleanVar
+from tkinter import StringVar
+from tkinter import Tk
 
 from resources import resource
 

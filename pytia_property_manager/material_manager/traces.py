@@ -5,10 +5,9 @@
 import tkinter as tk
 from typing import List
 
-from resources import resource
-
 from material_manager.layout import Layout
 from material_manager.vars import Variables
+from resources import resource
 
 
 class Traces:

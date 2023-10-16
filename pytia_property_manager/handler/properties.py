@@ -7,11 +7,16 @@ from pathlib import Path
 
 from app.layout import Layout
 from app.vars import Variables
-from const import PROP_DRAWING_PATH, VERIFY_CRITICAL, VERIFY_WARNING, Source
+from const import PROP_DRAWING_PATH
+from const import VERIFY_CRITICAL
+from const import VERIFY_WARNING
+from const import Source
 from helper.lazy_loaders import LazyDocumentHelper
 from helper.messages import datafield_message
-from helper.translators import translate_nomenclature, translate_source
-from helper.verifications import verify_process, verify_variable
+from helper.translators import translate_nomenclature
+from helper.translators import translate_source
+from helper.verifications import verify_process
+from helper.verifications import verify_variable
 from pytia.log import log
 from pytia_ui_tools.handlers.workspace_handler import Workspace
 from resources import resource

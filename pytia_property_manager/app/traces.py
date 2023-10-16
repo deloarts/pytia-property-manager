@@ -10,7 +10,9 @@ from app.layout import Layout
 from app.state_setter import UISetter
 from app.tooltips import ToolTip
 from app.vars import Variables
-from const import PROP_DRAWING_PATH, SUFFIX_DRAWING, Source
+from const import PROP_DRAWING_PATH
+from const import SUFFIX_DRAWING
+from const import Source
 from helper.lazy_loaders import LazyDocumentHelper
 from pytia.log import log
 from resources import resource

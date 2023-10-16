@@ -1,18 +1,26 @@
 """
     The layout of the app.
 """
-from tkinter import DISABLED, WORD, Tk
+from tkinter import DISABLED
+from tkinter import WORD
+from tkinter import Tk
 
 from app.frames import Frames
 from app.vars import Variables
 from app.widgets.notes import NoteWidgets
 from app.widgets.processes import ProcessWidgets
-from const import STYLES, Source
+from const import STYLES
+from const import Source
 from helper.appearance import set_appearance_menu
 from helper.messages import show_help
 from pytia_ui_tools.widgets.texts import ScrolledText
 from resources import resource
-from ttkbootstrap import Button, Checkbutton, Combobox, Entry, Label, Menu
+from ttkbootstrap import Button
+from ttkbootstrap import Checkbutton
+from ttkbootstrap import Combobox
+from ttkbootstrap import Entry
+from ttkbootstrap import Label
+from ttkbootstrap import Menu
 
 
 class Layout:

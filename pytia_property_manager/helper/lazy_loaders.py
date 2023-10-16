@@ -11,18 +11,20 @@ from pathlib import Path
 from tkinter import StringVar
 from tkinter import messagebox as tkmsg
 from tkinter import ttk
-from typing import List, Optional
+from typing import List
+from typing import Optional
 
 from app.vars import Variables
 from app.widgets.notes import NoteWidgets
 from app.widgets.processes import ProcessWidgets
-from const import ISO_VIEW, LOGON, REVISION_FOLDER, Source
+from const import ISO_VIEW
+from const import LOGON
+from const import REVISION_FOLDER
+from const import Source
 from helper.values import set_perceived_brightness
-from pytia.exceptions import (
-    PytiaDifferentDocumentError,
-    PytiaDocumentNotSavedError,
-    PytiaWrongDocumentTypeError,
-)
+from pytia.exceptions import PytiaDifferentDocumentError
+from pytia.exceptions import PytiaDocumentNotSavedError
+from pytia.exceptions import PytiaWrongDocumentTypeError
 from pytia.log import log
 from resources import resource
 

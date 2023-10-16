@@ -4,7 +4,8 @@
 
 import webbrowser
 from tkinter import messagebox as tkmsg
-from typing import List, Optional
+from typing import List
+from typing import Optional
 
 from resources import resource
 

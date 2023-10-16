@@ -4,10 +4,11 @@
 
 from tkinter import StringVar
 from typing import Literal
-from app.widgets.processes import ProcessWidgets
-from app.layout import Layout
 
-from const import VERIFY_CRITICAL, VERIFY_WARNING
+from app.layout import Layout
+from app.widgets.processes import ProcessWidgets
+from const import VERIFY_CRITICAL
+from const import VERIFY_WARNING
 
 
 def verify_variable(

@@ -9,15 +9,22 @@ import re
 import shutil
 import sys
 from pathlib import Path
-from stat import S_IREAD, S_IRGRP, S_IROTH, S_IWUSR
-from tkinter import StringVar, Tk
+from stat import S_IREAD
+from stat import S_IRGRP
+from stat import S_IROTH
+from stat import S_IWUSR
+from tkinter import StringVar
+from tkinter import Tk
 from tkinter import messagebox as tkmsg
 from tkinter import simpledialog
 
 from app.layout import Layout
 from app.state_setter import UISetter
 from app.vars import Variables
-from const import PROP_DRAWING_PATH, REVISION_FOLDER, SUFFIX_DRAWING, Source
+from const import PROP_DRAWING_PATH
+from const import REVISION_FOLDER
+from const import SUFFIX_DRAWING
+from const import Source
 from handler.properties import Properties
 from helper.launcher import launch_bounding_box_app
 from helper.lazy_loaders import LazyDocumentHelper

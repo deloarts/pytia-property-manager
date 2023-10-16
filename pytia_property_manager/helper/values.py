@@ -3,7 +3,8 @@
 """
 
 from copy import deepcopy
-from string import ascii_lowercase, ascii_uppercase
+from string import ascii_lowercase
+from string import ascii_uppercase
 from tkinter import StringVar
 
 from pytia.exceptions import PytiaValueError
