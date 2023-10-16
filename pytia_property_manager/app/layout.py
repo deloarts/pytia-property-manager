@@ -1,18 +1,26 @@
 """
     The layout of the app.
 """
-from tkinter import DISABLED, WORD, Tk
+from tkinter import DISABLED
+from tkinter import WORD
+from tkinter import Tk
 
 from app.frames import Frames
 from app.vars import Variables
 from app.widgets.notes import NoteWidgets
 from app.widgets.processes import ProcessWidgets
-from const import STYLES, Source
+from const import STYLES
+from const import Source
 from helper.appearance import set_appearance_menu
 from helper.messages import show_help
 from pytia_ui_tools.widgets.texts import ScrolledText
 from resources import resource
-from ttkbootstrap import Button, Checkbutton, Combobox, Entry, Label, Menu
+from ttkbootstrap import Button
+from ttkbootstrap import Checkbutton
+from ttkbootstrap import Combobox
+from ttkbootstrap import Entry
+from ttkbootstrap import Label
+from ttkbootstrap import Menu
 
 
 class Layout:
@@ -530,11 +538,21 @@ class Layout:
         )
         self._iso_view_toggle.grid(row=0, column=0, padx=(8, 2), pady=0, sticky="w")
 
+        self._sync_color_toggle = Checkbutton(
+            master=frames.footer,
+            bootstyle="round-toggle",  # type:ignore
+            text="Synchronize color",
+            variable=variables.sync_color,
+            onvalue=True,
+            offvalue=False,
+        )
+        self._sync_color_toggle.grid(row=0, column=1, padx=(8, 2), pady=0, sticky="w")
+
         # region button save
         self._btn_save = Button(
             frames.footer, text="Save", style="outline", width=10, state=DISABLED
         )
-        self._btn_save.grid(row=0, column=1, padx=(5, 2), pady=0, sticky="e")
+        self._btn_save.grid(row=0, column=2, padx=(5, 2), pady=0, sticky="e")
         # endregion
 
         # region button abort
@@ -544,7 +562,7 @@ class Layout:
             style="outline",
             width=10,
         )
-        self._btn_abort.grid(row=0, column=2, padx=(2, 0), pady=0, sticky="e")
+        self._btn_abort.grid(row=0, column=3, padx=(2, 0), pady=0, sticky="e")
         # endregion
         # endregion
 
@@ -692,3 +710,8 @@ class Layout:
     def toggle_iso_view(self) -> Checkbutton:
         """Returns the iso view checkbutton."""
         return self._iso_view_toggle
+
+    @property
+    def toggle_sync_color(self) -> Checkbutton:
+        """Returns the color sync checkbutton."""
+        return self._sync_color_toggle

@@ -58,7 +58,6 @@ class Callbacks:
         Applies the material to the document.
         """
         if selected_material := self.layout.input_material.get():
-
             self.vars.material.set(selected_material)
             if selected_metadata := self.layout.input_metadata.get():
                 self.vars.metadata.set(selected_metadata)

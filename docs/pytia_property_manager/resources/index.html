@@ -41,25 +41,28 @@ import importlib.resources
 import json
 import os
 import tkinter.messagebox as tkmsg
-from dataclasses import asdict, dataclass, field, fields
+from dataclasses import asdict
+from dataclasses import dataclass
+from dataclasses import field
+from dataclasses import fields
 from pathlib import Path
-from typing import List, Literal, Optional
+from typing import List
+from typing import Literal
+from typing import Optional
 
-from const import (
-    APP_VERSION,
-    APPDATA,
-    CONFIG_APPDATA,
-    CONFIG_INFOS,
-    CONFIG_INFOS_DEFAULT,
-    CONFIG_PROCESSES,
-    CONFIG_PROCESSES_DEFAULT,
-    CONFIG_PROPS,
-    CONFIG_PROPS_DEFAULT,
-    CONFIG_SETTINGS,
-    CONFIG_USERS,
-    LOGON,
-    STYLES,
-)
+from const import APP_VERSION
+from const import APPDATA
+from const import CONFIG_APPDATA
+from const import CONFIG_INFOS
+from const import CONFIG_INFOS_DEFAULT
+from const import CONFIG_PROCESSES
+from const import CONFIG_PROCESSES_DEFAULT
+from const import CONFIG_PROPS
+from const import CONFIG_PROPS_DEFAULT
+from const import CONFIG_SETTINGS
+from const import CONFIG_USERS
+from const import LOGON
+from const import STYLES
 from resources.utils import expand_env_vars
 
 
@@ -200,6 +203,7 @@ class Settings:  # pylint: disable=R0902
     debug: bool
     demo: bool
     link_material: bool
+    min_brightness: int | None
     revision: int | str
     restrictions: SettingsRestrictions
     verifications: SettingsVerifications
@@ -379,6 +383,7 @@ class AppData:
     counter: int = 0
     theme: str = STYLES[0]
     set_view: bool = True
+    sync_color: bool = True
 
     def __post_init__(self) -&gt; None:
         self.version = (
@@ -626,7 +631,7 @@ resource = Resources()</code></pre>
 <dl>
 <dt id="pytia_property_manager.resources.AppData"><code class="flex name class">
 <span>class <span class="ident">AppData</span></span>
-<span>(</span><span>*, version: str = '0.4.0', counter: int = 0, theme: str = 'cosmo', set_view: bool = True)</span>
+<span>(</span><span>*, version: str = '0.4.1', counter: int = 0, theme: str = 'cosmo', set_view: bool = True, sync_color: bool = True)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Dataclass for appdata settings.</p></div>
@@ -642,6 +647,7 @@ class AppData:
     counter: int = 0
     theme: str = STYLES[0]
     set_view: bool = True
+    sync_color: bool = True
 
     def __post_init__(self) -&gt; None:
         self.version = (
@@ -656,6 +662,10 @@ class AppData:
 <div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
 </dd>
 <dt id="pytia_property_manager.resources.AppData.set_view"><code class="name">var <span class="ident">set_view</span> : bool</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.AppData.sync_color"><code class="name">var <span class="ident">sync_color</span> : bool</code></dt>
 <dd>
 <div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
 </dd>
@@ -1664,7 +1674,7 @@ current session if logon is omitted.</p>
 </dd>
 <dt id="pytia_property_manager.resources.Settings"><code class="flex name class">
 <span>class <span class="ident">Settings</span></span>
-<span>(</span><span>*, title: str, debug: bool, demo: bool, link_material: bool, revision: int | str, restrictions: <a title="pytia_property_manager.resources.SettingsRestrictions" href="#pytia_property_manager.resources.SettingsRestrictions">SettingsRestrictions</a>, verifications: <a title="pytia_property_manager.resources.SettingsVerifications" href="#pytia_property_manager.resources.SettingsVerifications">SettingsVerifications</a>, separators: <a title="pytia_property_manager.resources.SettingsSeparators" href="#pytia_property_manager.resources.SettingsSeparators">SettingsSeparators</a>, nomenclature: <a title="pytia_property_manager.resources.SettingsNomenclature" href="#pytia_property_manager.resources.SettingsNomenclature">SettingsNomenclature</a>, processes: <a title="pytia_property_manager.resources.SettingsProcesses" href="#pytia_property_manager.resources.SettingsProcesses">SettingsProcesses</a>, auto_group: <a title="pytia_property_manager.resources.SettingsAutoGroup" href="#pytia_property_manager.resources.SettingsAutoGroup">SettingsAutoGroup</a>, tolerances: List[str], spare_part_level: List[str], files: <a title="pytia_property_manager.resources.SettingsFiles" href="#pytia_property_manager.resources.SettingsFiles">SettingsFiles</a>, paths: <a title="pytia_property_manager.resources.SettingsPaths" href="#pytia_property_manager.resources.SettingsPaths">SettingsPaths</a>, urls: <a title="pytia_property_manager.resources.SettingsUrls" href="#pytia_property_manager.resources.SettingsUrls">SettingsUrls</a>, mails: <a title="pytia_property_manager.resources.SettingsMails" href="#pytia_property_manager.resources.SettingsMails">SettingsMails</a>)</span>
+<span>(</span><span>*, title: str, debug: bool, demo: bool, link_material: bool, min_brightness: Optional[int], revision: int | str, restrictions: <a title="pytia_property_manager.resources.SettingsRestrictions" href="#pytia_property_manager.resources.SettingsRestrictions">SettingsRestrictions</a>, verifications: <a title="pytia_property_manager.resources.SettingsVerifications" href="#pytia_property_manager.resources.SettingsVerifications">SettingsVerifications</a>, separators: <a title="pytia_property_manager.resources.SettingsSeparators" href="#pytia_property_manager.resources.SettingsSeparators">SettingsSeparators</a>, nomenclature: <a title="pytia_property_manager.resources.SettingsNomenclature" href="#pytia_property_manager.resources.SettingsNomenclature">SettingsNomenclature</a>, processes: <a title="pytia_property_manager.resources.SettingsProcesses" href="#pytia_property_manager.resources.SettingsProcesses">SettingsProcesses</a>, auto_group: <a title="pytia_property_manager.resources.SettingsAutoGroup" href="#pytia_property_manager.resources.SettingsAutoGroup">SettingsAutoGroup</a>, tolerances: List[str], spare_part_level: List[str], files: <a title="pytia_property_manager.resources.SettingsFiles" href="#pytia_property_manager.resources.SettingsFiles">SettingsFiles</a>, paths: <a title="pytia_property_manager.resources.SettingsPaths" href="#pytia_property_manager.resources.SettingsPaths">SettingsPaths</a>, urls: <a title="pytia_property_manager.resources.SettingsUrls" href="#pytia_property_manager.resources.SettingsUrls">SettingsUrls</a>, mails: <a title="pytia_property_manager.resources.SettingsMails" href="#pytia_property_manager.resources.SettingsMails">SettingsMails</a>)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Dataclass for settings (settings.json).</p></div>
@@ -1680,6 +1690,7 @@ class Settings:  # pylint: disable=R0902
     debug: bool
     demo: bool
     link_material: bool
+    min_brightness: int | None
     revision: int | str
     restrictions: SettingsRestrictions
     verifications: SettingsVerifications
@@ -1729,6 +1740,10 @@ class Settings:  # pylint: disable=R0902
 <div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
 </dd>
 <dt id="pytia_property_manager.resources.Settings.mails"><code class="name">var <span class="ident">mails</span> : <a title="pytia_property_manager.resources.SettingsMails" href="#pytia_property_manager.resources.SettingsMails">SettingsMails</a></code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.Settings.min_brightness"><code class="name">var <span class="ident">min_brightness</span> : Optional[int]</code></dt>
 <dd>
 <div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
 </dd>
@@ -2333,6 +2348,7 @@ def values(self) -&gt; List[str]:
 <ul class="">
 <li><code><a title="pytia_property_manager.resources.AppData.counter" href="#pytia_property_manager.resources.AppData.counter">counter</a></code></li>
 <li><code><a title="pytia_property_manager.resources.AppData.set_view" href="#pytia_property_manager.resources.AppData.set_view">set_view</a></code></li>
+<li><code><a title="pytia_property_manager.resources.AppData.sync_color" href="#pytia_property_manager.resources.AppData.sync_color">sync_color</a></code></li>
 <li><code><a title="pytia_property_manager.resources.AppData.theme" href="#pytia_property_manager.resources.AppData.theme">theme</a></code></li>
 <li><code><a title="pytia_property_manager.resources.AppData.version" href="#pytia_property_manager.resources.AppData.version">version</a></code></li>
 </ul>
@@ -2434,6 +2450,7 @@ def values(self) -&gt; List[str]:
 <li><code><a title="pytia_property_manager.resources.Settings.files" href="#pytia_property_manager.resources.Settings.files">files</a></code></li>
 <li><code><a title="pytia_property_manager.resources.Settings.link_material" href="#pytia_property_manager.resources.Settings.link_material">link_material</a></code></li>
 <li><code><a title="pytia_property_manager.resources.Settings.mails" href="#pytia_property_manager.resources.Settings.mails">mails</a></code></li>
+<li><code><a title="pytia_property_manager.resources.Settings.min_brightness" href="#pytia_property_manager.resources.Settings.min_brightness">min_brightness</a></code></li>
 <li><code><a title="pytia_property_manager.resources.Settings.nomenclature" href="#pytia_property_manager.resources.Settings.nomenclature">nomenclature</a></code></li>
 <li><code><a title="pytia_property_manager.resources.Settings.paths" href="#pytia_property_manager.resources.Settings.paths">paths</a></code></li>
 <li><code><a title="pytia_property_manager.resources.Settings.processes" href="#pytia_property_manager.resources.Settings.processes">processes</a></code></li>

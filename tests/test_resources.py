@@ -21,6 +21,12 @@ def test_settings():
     assert len(resource.settings.title) > 0
     assert isinstance(resource.settings.debug, bool)
     assert isinstance(resource.settings.demo, bool)
+    assert isinstance(resource.settings.revision, int)
+    assert isinstance(resource.settings.link_material, bool)
+    assert (
+        isinstance(resource.settings.min_brightness, int)
+        or resource.settings.min_brightness is None
+    )
 
     assert isinstance(resource.settings.restrictions.allow_all_users, bool)
     assert isinstance(resource.settings.restrictions.allow_all_editors, bool)

@@ -13,12 +13,19 @@
 import tkinter as tk
 from tkinter import StringVar
 from tkinter import messagebox as tkmsg
-from typing import Callable, Dict, List, Literal, Optional
+from typing import Callable
+from typing import Dict
+from typing import List
+from typing import Literal
+from typing import Optional
 
 from pytia.log import log
 from pytia_ui_tools.widgets.texts import ScrolledText
 from resources import resource
-from ttkbootstrap import Combobox, Frame, Label, Labelframe
+from ttkbootstrap import Combobox
+from ttkbootstrap import Frame
+from ttkbootstrap import Label
+from ttkbootstrap import Labelframe
 
 
 class ProcessWidget:

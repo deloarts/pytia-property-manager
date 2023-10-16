@@ -19,6 +19,7 @@ This file contains the basic settings for the app.
     "debug": false,
     "demo": false,
     "revision": 0,
+    "min_brightness": 65,
     "restrictions": {
         "allow_all_users": true,
         "allow_all_editors": true,
@@ -104,6 +105,7 @@ title | `str` | The apps title. This will be visible in the title bar of the win
 debug | `bool` | The flag to declare the debug-state of the app. The app cannot be built if this value is true.
 demo | `bool` | The flag to declare the demo-state of the app. If set to `true` only the UI will be loaded, and no connection to CATIA will be established.
 link_material | `bool` | If set to `true`, the applied material will be linked to the material catalog.
+min_brightness | `int` or `null` | The minimum brightness level for the main body color synchronization. If set to `null` the brightness of the main body color will not be adjusted, and thus may be too dark, depending on ambient color of the applied material.
 revision | `int` | The starting revision for a document. Can be any number or a letter `a-z` or `A-Z`.
 restrictions.allow_all_users | `bool` | If set to `true` any user can make changes to the documents properties. If set to `false` only those users from the **users.json** file can modify the properties.
 restrictions.allow_all_editors | `bool` | If set to `true` any user can make changes to the documents properties. If set to `false` only those users which are declared in the **workspace** file can modify the properties. If no workspace file is found, or no **editors** list-item is inside the workspace file, then this is omitted, and everyone can make changes.

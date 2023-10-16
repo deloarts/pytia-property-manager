@@ -3,8 +3,10 @@
 """
 
 from dataclasses import dataclass
-from tkinter import StringVar, Toplevel
-from typing import Dict, List
+from tkinter import StringVar
+from tkinter import Toplevel
+from typing import Dict
+from typing import List
 
 
 @dataclass(slots=True, kw_only=True)

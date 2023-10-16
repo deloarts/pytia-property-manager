@@ -3,7 +3,8 @@
 """
 
 
-from ttkbootstrap import Toplevel, Frame
+from ttkbootstrap import Frame
+from ttkbootstrap import Toplevel
 
 
 class Frames:

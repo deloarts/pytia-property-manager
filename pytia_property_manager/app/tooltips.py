@@ -156,3 +156,15 @@ class ToolTips:
             "Sets the view to ISO and fits in the visible item on save.",
         )
         # endregion
+
+        # region SYNC COLOR
+        ToolTip(
+            layout.toggle_sync_color,
+            (
+                "Synchronizes the ambient color from the applied material with the "
+                "main body.\n\nIf the main body doesn't have a material applied, the "
+                "color will be set to CATIAs default."
+                f"{' If the color is too dark it will be brightened up, to prevent visual hurdles.' if resource.settings.min_brightness else ''}"
+            ),
+        )
+        # endregion

@@ -11,12 +11,17 @@
 
 import tkinter as tk
 from tkinter import StringVar
-from typing import Dict, List, Literal, Optional
+from typing import Dict
+from typing import List
+from typing import Literal
+from typing import Optional
 
 from pytia.exceptions import PytiaValueError
 from pytia_ui_tools.widgets.texts import ScrolledText
 from resources import resource
-from ttkbootstrap import Frame, Label, Labelframe
+from ttkbootstrap import Frame
+from ttkbootstrap import Label
+from ttkbootstrap import Labelframe
 
 
 class NoteWidget:

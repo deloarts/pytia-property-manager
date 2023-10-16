@@ -2,20 +2,29 @@
     The callbacks submodule for the main window.
 """
 
+# pylint: disable=E0611
+
 import os
 import re
 import shutil
 import sys
 from pathlib import Path
-from stat import S_IREAD, S_IRGRP, S_IROTH, S_IWUSR
-from tkinter import StringVar, Tk
+from stat import S_IREAD
+from stat import S_IRGRP
+from stat import S_IROTH
+from stat import S_IWUSR
+from tkinter import StringVar
+from tkinter import Tk
 from tkinter import messagebox as tkmsg
 from tkinter import simpledialog
 
 from app.layout import Layout
 from app.state_setter import UISetter
 from app.vars import Variables
-from const import PROP_DRAWING_PATH, REVISION_FOLDER, SUFFIX_DRAWING, Source
+from const import PROP_DRAWING_PATH
+from const import REVISION_FOLDER
+from const import SUFFIX_DRAWING
+from const import Source
 from handler.properties import Properties
 from helper.launcher import launch_bounding_box_app
 from helper.lazy_loaders import LazyDocumentHelper
@@ -99,7 +108,7 @@ class Callbacks:
             properties (Properties): The properties of the main window.
             workspace (Workspace): The workspace instance.
             ui_setter (UISetter): The ui setter instance of the main window.
-        """ """"""
+        """
         self.root = root
         self.vars = variables
         self.doc_helper = lazy_document_helper
@@ -161,6 +170,7 @@ class Callbacks:
         if self.properties.verify():
             self.properties.checkout()
             self.doc_helper.setup_main_body(variables=self.vars)
+
             if resource.appdata.set_view:
                 self.doc_helper.set_view()
 
@@ -305,9 +315,9 @@ class Callbacks:
         # prompt with "do you want to open the document again" would appear.
         if linked_doc.name in self.doc_helper.get_all_open_windows():
             self.doc_helper.framework.catia.windows.item(linked_doc.name).activate()
-            log.info(f"User opened linked document (window).")
+            log.info("User opened linked document (window).")
             sys.exit()
         if linked_doc.is_file() and linked_doc.suffix == SUFFIX_DRAWING:
             self.doc_helper.framework.catia.documents.open(str(linked_doc))
-            log.info(f"User opened linked document (file).")
+            log.info("User opened linked document (file).")
             sys.exit()

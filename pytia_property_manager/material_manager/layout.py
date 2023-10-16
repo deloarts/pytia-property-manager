@@ -3,10 +3,15 @@
 """
 
 import tkinter as tk
-from ttkbootstrap import Button, Combobox, Entry, Label, Menu, Toplevel
 
 from material_manager.frames import Frames
 from material_manager.vars import Variables
+from ttkbootstrap import Button
+from ttkbootstrap import Combobox
+from ttkbootstrap import Entry
+from ttkbootstrap import Label
+from ttkbootstrap import Menu
+from ttkbootstrap import Toplevel
 
 
 class Layout:

@@ -3,7 +3,7 @@
 A visual tool for managing CATIA properties.
 
 ![state](https://img.shields.io/badge/State-beta-brown.svg?style=for-the-badge)
-![version](https://img.shields.io/badge/Version-0.4.0-orange.svg?style=for-the-badge)
+![version](https://img.shields.io/badge/Version-0.4.1-orange.svg?style=for-the-badge)
 
 [![python](https://img.shields.io/badge/Python-3.10-blue.svg?style=for-the-badge)](https://www.python.org/downloads/)
 ![catia](https://img.shields.io/badge/CATIA-V5%206R2017-blue.svg?style=for-the-badge)
@@ -357,7 +357,8 @@ On a new revision, do the following:
 
 ## 7 changelog
 
-**v0.4.0** Add themes.  
+**v0.4.1**: Add color synchronization.  
+**v0.4.0**: Add themes.  
 **v0.3.1**: Update pytia to fix material manager.  
 **v0.3.0**: Add configurable verifications and auto-group.  
 **v0.2.5**: Resolve symlink for drawing path.  
