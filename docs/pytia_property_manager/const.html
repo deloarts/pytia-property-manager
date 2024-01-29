@@ -35,7 +35,7 @@ import os
 from enum import Enum
 from pathlib import Path
 
-__version__ = &#34;0.4.1&#34;
+__version__ = &#34;0.4.2&#34;
 
 PYTIA = &#34;pytia&#34;
 PYTIA_PROPERTY_MANAGER = &#34;pytia_property_manager&#34;
@@ -44,7 +44,7 @@ PYTIA_BOUNDING_BOX = &#34;pytia_bounding_box&#34;
 APP_NAME = &#34;PYTIA Property Manager&#34;
 APP_VERSION = __version__
 
-LOGON = str(os.environ.get(&#34;USERNAME&#34;))
+LOGON = str(os.environ.get(&#34;USERNAME&#34;)).lower()
 CNEXT = &#34;win_b64\\code\\bin\\CNEXT.exe&#34;
 TEMP = str(os.environ.get(&#34;TEMP&#34;))
 APPDATA = f&#34;{str(os.environ.get(&#39;APPDATA&#39;))}\\{PYTIA}\\{PYTIA_PROPERTY_MANAGER}&#34;
