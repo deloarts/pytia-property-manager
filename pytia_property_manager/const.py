@@ -15,7 +15,7 @@ PYTIA_BOUNDING_BOX = "pytia_bounding_box"
 APP_NAME = "PYTIA Property Manager"
 APP_VERSION = __version__
 
-LOGON = str(os.environ.get("USERNAME"))
+LOGON = str(os.environ.get("USERNAME")).lower()
 CNEXT = "win_b64\\code\\bin\\CNEXT.exe"
 TEMP = str(os.environ.get("TEMP"))
 APPDATA = f"{str(os.environ.get('APPDATA'))}\\{PYTIA}\\{PYTIA_PROPERTY_MANAGER}"
