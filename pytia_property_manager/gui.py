@@ -50,7 +50,9 @@ class GUI(tk.Tk):
         self.style = ttk.Style(theme=resource.appdata.theme)
 
         # CLASS VARS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        self.doc_helper: LazyDocumentHelper  # Instantiate later for performance improvement
+        self.doc_helper: (
+            LazyDocumentHelper  # Instantiate later for performance improvement
+        )
         self.properties: Properties  # Instantiate later, dependent on doc_helper
         self.workspace: Workspace  # Instantiate later, dependent on doc_helper
         self.set_ui: UISetter  # Instantiate later, dependent on doc_helper
@@ -225,6 +227,7 @@ class GUI(tk.Tk):
             style=self.style,
             state_setter=self.set_ui,
             doc_helper=self.doc_helper,
+            workspace=self.workspace,
         )
 
     def tooltips(self) -> None:

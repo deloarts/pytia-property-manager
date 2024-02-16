@@ -15,6 +15,7 @@ from const import SUFFIX_DRAWING
 from const import Source
 from helper.lazy_loaders import LazyDocumentHelper
 from pytia.log import log
+from pytia_ui_tools.handlers.workspace_handler import Workspace
 from resources import resource
 from resources.utils import expand_env_vars
 from ttkbootstrap import Style
@@ -30,6 +31,7 @@ class Traces:
         style: Style,
         state_setter: UISetter,
         doc_helper: LazyDocumentHelper,
+        workspace: Workspace,
     ) -> None:
         """
         Inits the Traces class. Adds the main windows' variable traces.
@@ -44,6 +46,7 @@ class Traces:
         self.style = style
         self.set_ui = state_setter
         self.doc_helper = doc_helper
+        self.workspace = workspace
 
         self._add_traces()
         log.info("Traces initialized.")
@@ -71,9 +74,14 @@ class Traces:
 
     def trace_linked_doc(self, *_) -> None:
         """Trace callback for the `linked_doc` StringVar"""
-        linked_doc = Path(
-            expand_env_vars(self.vars.linked_doc.get(), ignore_not_found=True)
-        )
+        drawing_file_value = self.vars.linked_doc.get()
+        if drawing_file_value.startswith(".\\") and self.workspace.workspace_folder:
+            relative_path = Path(drawing_file_value[2:])
+            linked_doc = Path(self.workspace.workspace_folder, relative_path)
+        else:
+            linked_doc = Path(
+                expand_env_vars(drawing_file_value, ignore_not_found=True)
+            )
 
         if self.vars.linked_doc.get() == "":
             self.vars.linked_doc_display.set("-")
