@@ -22,6 +22,7 @@ from const import LOGON
 from const import REVISION_FOLDER
 from const import Source
 from helper.values import set_perceived_brightness
+from pycatia.knowledge_interfaces.str_param import StrParam
 from pytia.exceptions import PytiaDifferentDocumentError
 from pytia.exceptions import PytiaDocumentNotSavedError
 from pytia.exceptions import PytiaWrongDocumentTypeError
@@ -325,11 +326,24 @@ class LazyDocumentHelper:
             Optional[str]: The value of the property as string. Returns None, if the property \
                 doesn't exists.
         """
-        if self.document.properties.exists(name):
-            param = str(self.document.properties.get_by_name(name).value)
-            log.info(f"Retrieved property {name} ({param}) from part.")
-            return param
-        log.info(f"Couldn't retrieve property {name} from part: Doesn't exists.")
+
+        # if self.document.properties.exists(name):
+        #     param = str(self.document.properties.get_by_name(name).value)
+        #     log.info(f"Retrieved property {name} ({param}) from part.")
+        #     return param
+
+        try:
+            prop_value = StrParam(
+                self.document.product.user_ref_properties.get_item(name).com_object
+            ).value
+            log.info(f"Retrieved property {name} ({prop_value}) from part.")
+            return prop_value
+
+        except Exception as e:
+            log.info(
+                f"Couldn't retrieve property {name} from part: Doesn't exists. Verbose: {e}"
+            )
+
         return None
 
     # @_ensure_doc_not_changed
