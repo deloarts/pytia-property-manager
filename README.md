@@ -359,6 +359,7 @@ On a new revision, do the following:
 
 ## 7 changelog
 
+[**v0.4.3**](https://github.com/deloarts/pytia-property-manager/releases/tag/v0.4.3): Read drawing path from workspace level.  
 [**v0.4.2**](https://github.com/deloarts/pytia-property-manager/releases/tag/v0.4.2): Fix deprecation.  
 [**v0.4.1**](https://github.com/deloarts/pytia-property-manager/releases/tag/v0.4.1): Add color synchronization.  
 [**v0.4.0**](https://github.com/deloarts/pytia-property-manager/releases/tag/v0.4.0): Add themes.  

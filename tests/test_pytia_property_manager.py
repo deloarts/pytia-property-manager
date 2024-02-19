@@ -4,7 +4,7 @@ import toml
 
 from pytia_property_manager.const import APP_VERSION
 
-VERSION = "0.4.2"
+VERSION = "0.4.3"
 
 directory = os.path.dirname(os.path.realpath("__file__"))
 with open(os.path.join(directory, "pyproject.toml"), "r") as f:
