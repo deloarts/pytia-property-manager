@@ -9,6 +9,7 @@ from tkinter import StringVar
 from zlib import adler32
 
 from pytia.exceptions import PytiaValueError
+from resources import resource
 
 
 def get_new_revision(variable: StringVar) -> str:
@@ -57,7 +58,10 @@ def calculate_definition(
         str: The calculated definition.
     """
     to_encode = f"{machine.get()} {partnumber.get()} {revision.get()}"
-    return str(hex(adler32(to_encode.encode()))).split("x")[-1].upper()
+    encoded = str(hex(adler32(to_encode.encode()))).split("x")[-1].upper()
+    if resource.settings.auto_definition.prefix:
+        encoded = resource.settings.auto_definition.prefix + encoded
+    return encoded
 
 
 def interpolate_colors(

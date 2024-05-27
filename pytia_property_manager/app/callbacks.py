@@ -56,7 +56,7 @@ def on_source_made(
         revision (StringVar): The revision variable.
     """
 
-    if not resource.settings.auto_definition:
+    if not resource.settings.auto_definition.enable:
         return
 
     calculated_definition = calculate_definition(
@@ -254,7 +254,7 @@ class Callbacks:
             prompt=(
                 "Enter a brief description of the changes you're about to make "
                 f"between revision {current_revision} and {new_revision}. "
-                f"{'The definition of the document will be changed. ' if resource.settings.auto_definition else ''}"
+                f"{'The definition of the document will be changed. ' if resource.settings.auto_definition.enable else ''}"
                 "\n\nCreating a new revision must be done before changing anything "
                 "in the document."
             ),
@@ -279,7 +279,7 @@ class Callbacks:
                 self.vars.description.set(
                     f"Revision {new_revision}: {user_input}{line_ending}{current_desc}"
                 )
-                if resource.settings.auto_definition:
+                if resource.settings.auto_definition.enable:
                     self.vars.definition.set(
                         calculate_definition(
                             machine=self.vars.machine,
