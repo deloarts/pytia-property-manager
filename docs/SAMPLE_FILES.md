@@ -60,6 +60,7 @@ This file contains the basic settings for the app.
         "min": 3,
         "max": 6
     },
+    "auto_definition": true,
     "auto_group": {
         "unknown": null,
         "made": "Made Parts",
@@ -131,6 +132,7 @@ nomenclature.bought | `str` | The nomenclature for bought parts or products.
 processes.first | `int` | The index of the first process. Can be 0 or 1.
 processes.min | `int` | The minimum amount of processes to display in the UI.
 processes.max | `int` | The maximum amount of processes to display in the UI.
+auto_definition | `bool` | Wether to automatically generate the definition for made parts or not. The definition is compressed from the three properties `machine partnumber revision` using the hexadecimal representation of the adler-32 algorithm output.
 auto_group.made | `str` or `null` | The value of the group that will be automatically assigned if the source is changed to `made`. If this value is set to `null` the group won't be changed. If you want the group to be empty on change of source, the value must be an empty string `""`.
 auto_group.bought | `str` or `null` | The value of the group that will be automatically assigned if the source is changed to `bought`. If this value is set to `null` the group won't be changed. If you want the group to be empty on change of source, the value must be an empty string `""`.
 tolerances | `List[str]` | A list of available tolerances.

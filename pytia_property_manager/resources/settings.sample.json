@@ -45,6 +45,7 @@
         "min": 3,
         "max": 6
     },
+    "auto_definition": true,
     "auto_group": {
         "made": "Made Parts",
         "bought": null
