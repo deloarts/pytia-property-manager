@@ -28,6 +28,7 @@ from const import Source
 from handler.properties import Properties
 from helper.launcher import launch_bounding_box_app
 from helper.lazy_loaders import LazyDocumentHelper
+from helper.values import calculate_definition
 from helper.values import get_new_revision
 from material_manager import MaterialManager
 from pytia.log import log
@@ -37,6 +38,44 @@ from resources import resource
 from resources.utils import expand_env_vars
 from win32api import SetFileAttributes
 from win32con import FILE_ATTRIBUTE_HIDDEN
+
+
+def on_source_made(
+    machine: StringVar,
+    partnumber: StringVar,
+    definition: StringVar,
+    revision: StringVar,
+    force: bool = False,
+) -> None:
+    """Callback function for the made option.
+
+    Args:
+        machine (StringVar): The machine variable.
+        partnumber (StringVar): The partnumber variable.
+        definition (StringVar): The definition variable.
+        revision (StringVar): The revision variable.
+    """
+
+    if not resource.settings.auto_definition.enable:
+        return
+
+    calculated_definition = calculate_definition(
+        machine=machine, partnumber=partnumber, revision=revision
+    )
+
+    if not definition.get() or force:
+        definition.set(calculated_definition)
+
+    elif definition.get() != calculated_definition:
+        tkmsg.showinfo(
+            title=resource.settings.title,
+            message=(
+                f"The app wants to set the definition to {calculated_definition!r}, "
+                "but there's already a value applied to the definition field.\n\n"
+                "If you want to apply the calculated value, you have to click the "
+                "'Reload' button besides the source dropdown in the app."
+            ),
+        )
 
 
 def on_source_bought(
@@ -214,9 +253,10 @@ class Callbacks:
             title=resource.settings.title,
             prompt=(
                 "Enter a brief description of the changes you're about to make "
-                f"between revision {current_revision} and {new_revision}.\n"
-                "Creating a new revision must be done before changing anything "
-                "in the document.\n"
+                f"between revision {current_revision} and {new_revision}. "
+                f"{'The definition of the document will be changed. ' if resource.settings.auto_definition.enable else ''}"
+                "\n\nCreating a new revision must be done before changing anything "
+                "in the document."
             ),
         )
 
@@ -239,6 +279,14 @@ class Callbacks:
                 self.vars.description.set(
                     f"Revision {new_revision}: {user_input}{line_ending}{current_desc}"
                 )
+                if resource.settings.auto_definition.enable:
+                    self.vars.definition.set(
+                        calculate_definition(
+                            machine=self.vars.machine,
+                            partnumber=self.vars.partnumber,
+                            revision=self.vars.revision,
+                        )
+                    )
 
                 log.info(
                     f"Created new revision ({new_revision}) for document "
@@ -296,6 +344,14 @@ class Callbacks:
                 partnumber=self.vars.partnumber,
                 definition=self.vars.definition,
                 manufacturer=self.vars.manufacturer,
+                force=True,
+            )
+        elif self.vars.source.get() == Source.MADE.value:
+            on_source_made(
+                machine=self.vars.machine,
+                partnumber=self.vars.partnumber,
+                definition=self.vars.definition,
+                revision=self.vars.revision,
                 force=True,
             )
 

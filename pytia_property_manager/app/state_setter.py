@@ -74,17 +74,21 @@ class UISetter:
         self.layout.input_partnumber.config(state="readonly")
 
         self.layout.input_project.config(
-            state="readonly"
-            if resource.settings.restrictions.strict_project
-            and self.workspace.elements.projects
-            else tk.NORMAL
+            state=(
+                "readonly"
+                if resource.settings.restrictions.strict_project
+                and self.workspace.elements.projects
+                else tk.NORMAL
+            )
         )
 
         self.layout.input_machine.config(
-            state="readonly"
-            if resource.settings.restrictions.strict_machine
-            and self.workspace.elements.machine
-            else tk.NORMAL
+            state=(
+                "readonly"
+                if resource.settings.restrictions.strict_machine
+                and self.workspace.elements.machine
+                else tk.NORMAL
+            )
         )
 
         self.vars.definition.set("")
@@ -146,21 +150,27 @@ class UISetter:
         self.layout.input_partnumber.config(state="readonly")
 
         self.layout.input_project.config(
-            state="readonly"
-            if resource.settings.restrictions.strict_project
-            and self.workspace.elements.projects
-            else tk.NORMAL
+            state=(
+                "readonly"
+                if resource.settings.restrictions.strict_project
+                and self.workspace.elements.projects
+                else tk.NORMAL
+            )
         )
 
         self.layout.input_machine.config(
-            state="readonly"
-            if resource.settings.restrictions.strict_machine
-            and self.workspace.elements.machine
-            else tk.NORMAL,
-            cursor="arrow"
-            if resource.settings.restrictions.strict_machine
-            and self.workspace.elements.machine
-            else "xterm",
+            state=(
+                "readonly"
+                if resource.settings.restrictions.strict_machine
+                and self.workspace.elements.machine
+                else tk.NORMAL
+            ),
+            cursor=(
+                "arrow"
+                if resource.settings.restrictions.strict_machine
+                and self.workspace.elements.machine
+                else "xterm"
+            ),
         )
 
         self.layout.input_definition.config(state=tk.NORMAL)
@@ -169,7 +179,7 @@ class UISetter:
         self.layout.button_revision.configure(state=tk.NORMAL)
 
         self.layout.input_source.config(state="readonly")
-        self.layout.button_source.configure(state=tk.DISABLED)
+        self.layout.button_source.configure(state=tk.NORMAL)
 
         self.layout.input_material.configure(state="readonly")
         self.doc_helper.setvar_material(self.vars.material, self.vars.material_meta)
@@ -216,17 +226,21 @@ class UISetter:
         self.layout.input_partnumber.config(state="readonly")
 
         self.layout.input_project.config(
-            state="readonly"
-            if resource.settings.restrictions.strict_project
-            and self.workspace.elements.projects
-            else tk.NORMAL
+            state=(
+                "readonly"
+                if resource.settings.restrictions.strict_project
+                and self.workspace.elements.projects
+                else tk.NORMAL
+            )
         )
 
         self.layout.input_machine.config(
-            state="readonly"
-            if resource.settings.restrictions.strict_machine
-            and self.workspace.elements.machine
-            else tk.NORMAL
+            state=(
+                "readonly"
+                if resource.settings.restrictions.strict_machine
+                and self.workspace.elements.machine
+                else tk.NORMAL
+            )
         )
 
         self.layout.input_definition.config(state=tk.NORMAL)
