@@ -6,6 +6,7 @@ from pathlib import Path
 from tkinter import messagebox as tkmsg
 
 from app.callbacks import on_source_bought
+from app.callbacks import on_source_made
 from app.layout import Layout
 from app.state_setter import UISetter
 from app.tooltips import ToolTip
@@ -176,6 +177,12 @@ class Traces:
 
                 case Source.MADE.value:
                     self.set_ui.made()
+                    on_source_made(
+                        machine=self.vars.machine,
+                        partnumber=self.vars.partnumber,
+                        definition=self.vars.definition,
+                        revision=self.vars.revision,
+                    )
                     if resource.settings.auto_group.made is not None:
                         self.vars.group.set(resource.settings.auto_group.made)
 

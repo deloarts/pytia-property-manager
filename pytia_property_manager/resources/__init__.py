@@ -179,6 +179,7 @@ class Settings:  # pylint: disable=R0902
     separators: SettingsSeparators
     nomenclature: SettingsNomenclature
     processes: SettingsProcesses
+    auto_definition: bool
     auto_group: SettingsAutoGroup
     tolerances: List[str]
     spare_part_level: List[str]
