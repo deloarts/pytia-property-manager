@@ -147,6 +147,14 @@ class SettingsProcesses:
 
 
 @dataclass(slots=True, kw_only=True, frozen=True)
+class SettingsAutoDefinition:
+    &#34;&#34;&#34;Dataclass for auto definition calculation.&#34;&#34;&#34;
+
+    enable: bool
+    prefix: str | None
+
+
+@dataclass(slots=True, kw_only=True, frozen=True)
 class SettingsAutoGroup:
     &#34;&#34;&#34;Dataclass for conditional groups.&#34;&#34;&#34;
 
@@ -210,6 +218,7 @@ class Settings:  # pylint: disable=R0902
     separators: SettingsSeparators
     nomenclature: SettingsNomenclature
     processes: SettingsProcesses
+    auto_definition: SettingsAutoDefinition
     auto_group: SettingsAutoGroup
     tolerances: List[str]
     spare_part_level: List[str]
@@ -224,6 +233,7 @@ class Settings:  # pylint: disable=R0902
         self.separators = SettingsSeparators(**dict(self.separators))  # type: ignore
         self.nomenclature = SettingsNomenclature(**dict(self.nomenclature))  # type: ignore
         self.processes = SettingsProcesses(**dict(self.processes))  # type: ignore
+        self.auto_definition = SettingsAutoDefinition(**dict(self.auto_definition))  # type: ignore
         self.auto_group = SettingsAutoGroup(**dict(self.auto_group))  # type: ignore
         self.files = SettingsFiles(**dict(self.files))  # type: ignore
         self.paths = SettingsPaths(**dict(self.paths))  # type: ignore
@@ -631,7 +641,7 @@ resource = Resources()</code></pre>
 <dl>
 <dt id="pytia_property_manager.resources.AppData"><code class="flex name class">
 <span>class <span class="ident">AppData</span></span>
-<span>(</span><span>*, version: str = '0.4.3', counter: int = 0, theme: str = 'cosmo', set_view: bool = True, sync_color: bool = True)</span>
+<span>(</span><span>*, version: str = '0.5.0', counter: int = 0, theme: str = 'cosmo', set_view: bool = True, sync_color: bool = True)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Dataclass for appdata settings.</p></div>
@@ -1674,7 +1684,7 @@ current session if logon is omitted.</p>
 </dd>
 <dt id="pytia_property_manager.resources.Settings"><code class="flex name class">
 <span>class <span class="ident">Settings</span></span>
-<span>(</span><span>*, title: str, debug: bool, demo: bool, link_material: bool, min_brightness: Optional[int], revision: int | str, restrictions: <a title="pytia_property_manager.resources.SettingsRestrictions" href="#pytia_property_manager.resources.SettingsRestrictions">SettingsRestrictions</a>, verifications: <a title="pytia_property_manager.resources.SettingsVerifications" href="#pytia_property_manager.resources.SettingsVerifications">SettingsVerifications</a>, separators: <a title="pytia_property_manager.resources.SettingsSeparators" href="#pytia_property_manager.resources.SettingsSeparators">SettingsSeparators</a>, nomenclature: <a title="pytia_property_manager.resources.SettingsNomenclature" href="#pytia_property_manager.resources.SettingsNomenclature">SettingsNomenclature</a>, processes: <a title="pytia_property_manager.resources.SettingsProcesses" href="#pytia_property_manager.resources.SettingsProcesses">SettingsProcesses</a>, auto_group: <a title="pytia_property_manager.resources.SettingsAutoGroup" href="#pytia_property_manager.resources.SettingsAutoGroup">SettingsAutoGroup</a>, tolerances: List[str], spare_part_level: List[str], files: <a title="pytia_property_manager.resources.SettingsFiles" href="#pytia_property_manager.resources.SettingsFiles">SettingsFiles</a>, paths: <a title="pytia_property_manager.resources.SettingsPaths" href="#pytia_property_manager.resources.SettingsPaths">SettingsPaths</a>, urls: <a title="pytia_property_manager.resources.SettingsUrls" href="#pytia_property_manager.resources.SettingsUrls">SettingsUrls</a>, mails: <a title="pytia_property_manager.resources.SettingsMails" href="#pytia_property_manager.resources.SettingsMails">SettingsMails</a>)</span>
+<span>(</span><span>*, title: str, debug: bool, demo: bool, link_material: bool, min_brightness: Optional[int], revision: int | str, restrictions: <a title="pytia_property_manager.resources.SettingsRestrictions" href="#pytia_property_manager.resources.SettingsRestrictions">SettingsRestrictions</a>, verifications: <a title="pytia_property_manager.resources.SettingsVerifications" href="#pytia_property_manager.resources.SettingsVerifications">SettingsVerifications</a>, separators: <a title="pytia_property_manager.resources.SettingsSeparators" href="#pytia_property_manager.resources.SettingsSeparators">SettingsSeparators</a>, nomenclature: <a title="pytia_property_manager.resources.SettingsNomenclature" href="#pytia_property_manager.resources.SettingsNomenclature">SettingsNomenclature</a>, processes: <a title="pytia_property_manager.resources.SettingsProcesses" href="#pytia_property_manager.resources.SettingsProcesses">SettingsProcesses</a>, auto_definition: <a title="pytia_property_manager.resources.SettingsAutoDefinition" href="#pytia_property_manager.resources.SettingsAutoDefinition">SettingsAutoDefinition</a>, auto_group: <a title="pytia_property_manager.resources.SettingsAutoGroup" href="#pytia_property_manager.resources.SettingsAutoGroup">SettingsAutoGroup</a>, tolerances: List[str], spare_part_level: List[str], files: <a title="pytia_property_manager.resources.SettingsFiles" href="#pytia_property_manager.resources.SettingsFiles">SettingsFiles</a>, paths: <a title="pytia_property_manager.resources.SettingsPaths" href="#pytia_property_manager.resources.SettingsPaths">SettingsPaths</a>, urls: <a title="pytia_property_manager.resources.SettingsUrls" href="#pytia_property_manager.resources.SettingsUrls">SettingsUrls</a>, mails: <a title="pytia_property_manager.resources.SettingsMails" href="#pytia_property_manager.resources.SettingsMails">SettingsMails</a>)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Dataclass for settings (settings.json).</p></div>
@@ -1697,6 +1707,7 @@ class Settings:  # pylint: disable=R0902
     separators: SettingsSeparators
     nomenclature: SettingsNomenclature
     processes: SettingsProcesses
+    auto_definition: SettingsAutoDefinition
     auto_group: SettingsAutoGroup
     tolerances: List[str]
     spare_part_level: List[str]
@@ -1711,6 +1722,7 @@ class Settings:  # pylint: disable=R0902
         self.separators = SettingsSeparators(**dict(self.separators))  # type: ignore
         self.nomenclature = SettingsNomenclature(**dict(self.nomenclature))  # type: ignore
         self.processes = SettingsProcesses(**dict(self.processes))  # type: ignore
+        self.auto_definition = SettingsAutoDefinition(**dict(self.auto_definition))  # type: ignore
         self.auto_group = SettingsAutoGroup(**dict(self.auto_group))  # type: ignore
         self.files = SettingsFiles(**dict(self.files))  # type: ignore
         self.paths = SettingsPaths(**dict(self.paths))  # type: ignore
@@ -1719,6 +1731,10 @@ class Settings:  # pylint: disable=R0902
 </details>
 <h3>Instance variables</h3>
 <dl>
+<dt id="pytia_property_manager.resources.Settings.auto_definition"><code class="name">var <span class="ident">auto_definition</span> : <a title="pytia_property_manager.resources.SettingsAutoDefinition" href="#pytia_property_manager.resources.SettingsAutoDefinition">SettingsAutoDefinition</a></code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
 <dt id="pytia_property_manager.resources.Settings.auto_group"><code class="name">var <span class="ident">auto_group</span> : <a title="pytia_property_manager.resources.SettingsAutoGroup" href="#pytia_property_manager.resources.SettingsAutoGroup">SettingsAutoGroup</a></code></dt>
 <dd>
 <div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
@@ -1788,6 +1804,35 @@ class Settings:  # pylint: disable=R0902
 <div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
 </dd>
 <dt id="pytia_property_manager.resources.Settings.verifications"><code class="name">var <span class="ident">verifications</span> : <a title="pytia_property_manager.resources.SettingsVerifications" href="#pytia_property_manager.resources.SettingsVerifications">SettingsVerifications</a></code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="pytia_property_manager.resources.SettingsAutoDefinition"><code class="flex name class">
+<span>class <span class="ident">SettingsAutoDefinition</span></span>
+<span>(</span><span>*, enable: bool, prefix: Optional[str])</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Dataclass for auto definition calculation.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass(slots=True, kw_only=True, frozen=True)
+class SettingsAutoDefinition:
+    &#34;&#34;&#34;Dataclass for auto definition calculation.&#34;&#34;&#34;
+
+    enable: bool
+    prefix: str | None</code></pre>
+</details>
+<h3>Instance variables</h3>
+<dl>
+<dt id="pytia_property_manager.resources.SettingsAutoDefinition.enable"><code class="name">var <span class="ident">enable</span> : bool</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.resources.SettingsAutoDefinition.prefix"><code class="name">var <span class="ident">prefix</span> : Optional[str]</code></dt>
 <dd>
 <div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
 </dd>
@@ -2444,6 +2489,7 @@ def values(self) -&gt; List[str]:
 <li>
 <h4><code><a title="pytia_property_manager.resources.Settings" href="#pytia_property_manager.resources.Settings">Settings</a></code></h4>
 <ul class="two-column">
+<li><code><a title="pytia_property_manager.resources.Settings.auto_definition" href="#pytia_property_manager.resources.Settings.auto_definition">auto_definition</a></code></li>
 <li><code><a title="pytia_property_manager.resources.Settings.auto_group" href="#pytia_property_manager.resources.Settings.auto_group">auto_group</a></code></li>
 <li><code><a title="pytia_property_manager.resources.Settings.debug" href="#pytia_property_manager.resources.Settings.debug">debug</a></code></li>
 <li><code><a title="pytia_property_manager.resources.Settings.demo" href="#pytia_property_manager.resources.Settings.demo">demo</a></code></li>
@@ -2462,6 +2508,13 @@ def values(self) -&gt; List[str]:
 <li><code><a title="pytia_property_manager.resources.Settings.tolerances" href="#pytia_property_manager.resources.Settings.tolerances">tolerances</a></code></li>
 <li><code><a title="pytia_property_manager.resources.Settings.urls" href="#pytia_property_manager.resources.Settings.urls">urls</a></code></li>
 <li><code><a title="pytia_property_manager.resources.Settings.verifications" href="#pytia_property_manager.resources.Settings.verifications">verifications</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="pytia_property_manager.resources.SettingsAutoDefinition" href="#pytia_property_manager.resources.SettingsAutoDefinition">SettingsAutoDefinition</a></code></h4>
+<ul class="">
+<li><code><a title="pytia_property_manager.resources.SettingsAutoDefinition.enable" href="#pytia_property_manager.resources.SettingsAutoDefinition.enable">enable</a></code></li>
+<li><code><a title="pytia_property_manager.resources.SettingsAutoDefinition.prefix" href="#pytia_property_manager.resources.SettingsAutoDefinition.prefix">prefix</a></code></li>
 </ul>
 </li>
 <li>

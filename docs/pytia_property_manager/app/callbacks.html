@@ -57,6 +57,7 @@ from const import Source
 from handler.properties import Properties
 from helper.launcher import launch_bounding_box_app
 from helper.lazy_loaders import LazyDocumentHelper
+from helper.values import calculate_definition
 from helper.values import get_new_revision
 from material_manager import MaterialManager
 from pytia.log import log
@@ -66,6 +67,44 @@ from resources import resource
 from resources.utils import expand_env_vars
 from win32api import SetFileAttributes
 from win32con import FILE_ATTRIBUTE_HIDDEN
+
+
+def on_source_made(
+    machine: StringVar,
+    partnumber: StringVar,
+    definition: StringVar,
+    revision: StringVar,
+    force: bool = False,
+) -&gt; None:
+    &#34;&#34;&#34;Callback function for the made option.
+
+    Args:
+        machine (StringVar): The machine variable.
+        partnumber (StringVar): The partnumber variable.
+        definition (StringVar): The definition variable.
+        revision (StringVar): The revision variable.
+    &#34;&#34;&#34;
+
+    if not resource.settings.auto_definition.enable:
+        return
+
+    calculated_definition = calculate_definition(
+        machine=machine, partnumber=partnumber, revision=revision
+    )
+
+    if not definition.get() or force:
+        definition.set(calculated_definition)
+
+    elif definition.get() != calculated_definition:
+        tkmsg.showinfo(
+            title=resource.settings.title,
+            message=(
+                f&#34;The app wants to set the definition to {calculated_definition!r}, &#34;
+                &#34;but there&#39;s already a value applied to the definition field.\n\n&#34;
+                &#34;If you want to apply the calculated value, you have to click the &#34;
+                &#34;&#39;Reload&#39; button besides the source dropdown in the app.&#34;
+            ),
+        )
 
 
 def on_source_bought(
@@ -243,9 +282,10 @@ class Callbacks:
             title=resource.settings.title,
             prompt=(
                 &#34;Enter a brief description of the changes you&#39;re about to make &#34;
-                f&#34;between revision {current_revision} and {new_revision}.\n&#34;
-                &#34;Creating a new revision must be done before changing anything &#34;
-                &#34;in the document.\n&#34;
+                f&#34;between revision {current_revision} and {new_revision}. &#34;
+                f&#34;{&#39;The definition of the document will be changed. &#39; if resource.settings.auto_definition.enable else &#39;&#39;}&#34;
+                &#34;\n\nCreating a new revision must be done before changing anything &#34;
+                &#34;in the document.&#34;
             ),
         )
 
@@ -268,6 +308,14 @@ class Callbacks:
                 self.vars.description.set(
                     f&#34;Revision {new_revision}: {user_input}{line_ending}{current_desc}&#34;
                 )
+                if resource.settings.auto_definition.enable:
+                    self.vars.definition.set(
+                        calculate_definition(
+                            machine=self.vars.machine,
+                            partnumber=self.vars.partnumber,
+                            revision=self.vars.revision,
+                        )
+                    )
 
                 log.info(
                     f&#34;Created new revision ({new_revision}) for document &#34;
@@ -325,6 +373,14 @@ class Callbacks:
                 partnumber=self.vars.partnumber,
                 definition=self.vars.definition,
                 manufacturer=self.vars.manufacturer,
+                force=True,
+            )
+        elif self.vars.source.get() == Source.MADE.value:
+            on_source_made(
+                machine=self.vars.machine,
+                partnumber=self.vars.partnumber,
+                definition=self.vars.definition,
+                revision=self.vars.revision,
                 force=True,
             )
 
@@ -425,6 +481,64 @@ result of the nomenclature check. Defaults to False.</dd>
                 f&#34;The nomenclature is:\n{resource.settings.nomenclature.bought}, &#34;
                 f&#34;where the separator is {resource.settings.separators.bought!r}&#34;
             )
+        )</code></pre>
+</details>
+</dd>
+<dt id="pytia_property_manager.app.callbacks.on_source_made"><code class="name flex">
+<span>def <span class="ident">on_source_made</span></span>(<span>machine: tkinter.StringVar, partnumber: tkinter.StringVar, definition: tkinter.StringVar, revision: tkinter.StringVar, force: bool = False) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Callback function for the made option.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>machine</code></strong> :&ensp;<code>StringVar</code></dt>
+<dd>The machine variable.</dd>
+<dt><strong><code>partnumber</code></strong> :&ensp;<code>StringVar</code></dt>
+<dd>The partnumber variable.</dd>
+<dt><strong><code>definition</code></strong> :&ensp;<code>StringVar</code></dt>
+<dd>The definition variable.</dd>
+<dt><strong><code>revision</code></strong> :&ensp;<code>StringVar</code></dt>
+<dd>The revision variable.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def on_source_made(
+    machine: StringVar,
+    partnumber: StringVar,
+    definition: StringVar,
+    revision: StringVar,
+    force: bool = False,
+) -&gt; None:
+    &#34;&#34;&#34;Callback function for the made option.
+
+    Args:
+        machine (StringVar): The machine variable.
+        partnumber (StringVar): The partnumber variable.
+        definition (StringVar): The definition variable.
+        revision (StringVar): The revision variable.
+    &#34;&#34;&#34;
+
+    if not resource.settings.auto_definition.enable:
+        return
+
+    calculated_definition = calculate_definition(
+        machine=machine, partnumber=partnumber, revision=revision
+    )
+
+    if not definition.get() or force:
+        definition.set(calculated_definition)
+
+    elif definition.get() != calculated_definition:
+        tkmsg.showinfo(
+            title=resource.settings.title,
+            message=(
+                f&#34;The app wants to set the definition to {calculated_definition!r}, &#34;
+                &#34;but there&#39;s already a value applied to the definition field.\n\n&#34;
+                &#34;If you want to apply the calculated value, you have to click the &#34;
+                &#34;&#39;Reload&#39; button besides the source dropdown in the app.&#34;
+            ),
         )</code></pre>
 </details>
 </dd>
@@ -591,9 +705,10 @@ result of the nomenclature check. Defaults to False.</dd>
             title=resource.settings.title,
             prompt=(
                 &#34;Enter a brief description of the changes you&#39;re about to make &#34;
-                f&#34;between revision {current_revision} and {new_revision}.\n&#34;
-                &#34;Creating a new revision must be done before changing anything &#34;
-                &#34;in the document.\n&#34;
+                f&#34;between revision {current_revision} and {new_revision}. &#34;
+                f&#34;{&#39;The definition of the document will be changed. &#39; if resource.settings.auto_definition.enable else &#39;&#39;}&#34;
+                &#34;\n\nCreating a new revision must be done before changing anything &#34;
+                &#34;in the document.&#34;
             ),
         )
 
@@ -616,6 +731,14 @@ result of the nomenclature check. Defaults to False.</dd>
                 self.vars.description.set(
                     f&#34;Revision {new_revision}: {user_input}{line_ending}{current_desc}&#34;
                 )
+                if resource.settings.auto_definition.enable:
+                    self.vars.definition.set(
+                        calculate_definition(
+                            machine=self.vars.machine,
+                            partnumber=self.vars.partnumber,
+                            revision=self.vars.revision,
+                        )
+                    )
 
                 log.info(
                     f&#34;Created new revision ({new_revision}) for document &#34;
@@ -673,6 +796,14 @@ result of the nomenclature check. Defaults to False.</dd>
                 partnumber=self.vars.partnumber,
                 definition=self.vars.definition,
                 manufacturer=self.vars.manufacturer,
+                force=True,
+            )
+        elif self.vars.source.get() == Source.MADE.value:
+            on_source_made(
+                machine=self.vars.machine,
+                partnumber=self.vars.partnumber,
+                definition=self.vars.definition,
+                revision=self.vars.revision,
                 force=True,
             )
 
@@ -796,6 +927,14 @@ result of the nomenclature check. Defaults to False.</dd>
             definition=self.vars.definition,
             manufacturer=self.vars.manufacturer,
             force=True,
+        )
+    elif self.vars.source.get() == Source.MADE.value:
+        on_source_made(
+            machine=self.vars.machine,
+            partnumber=self.vars.partnumber,
+            definition=self.vars.definition,
+            revision=self.vars.revision,
+            force=True,
         )</code></pre>
 </details>
 </dd>
@@ -837,9 +976,10 @@ result of the nomenclature check. Defaults to False.</dd>
         title=resource.settings.title,
         prompt=(
             &#34;Enter a brief description of the changes you&#39;re about to make &#34;
-            f&#34;between revision {current_revision} and {new_revision}.\n&#34;
-            &#34;Creating a new revision must be done before changing anything &#34;
-            &#34;in the document.\n&#34;
+            f&#34;between revision {current_revision} and {new_revision}. &#34;
+            f&#34;{&#39;The definition of the document will be changed. &#39; if resource.settings.auto_definition.enable else &#39;&#39;}&#34;
+            &#34;\n\nCreating a new revision must be done before changing anything &#34;
+            &#34;in the document.&#34;
         ),
     )
 
@@ -862,6 +1002,14 @@ result of the nomenclature check. Defaults to False.</dd>
             self.vars.description.set(
                 f&#34;Revision {new_revision}: {user_input}{line_ending}{current_desc}&#34;
             )
+            if resource.settings.auto_definition.enable:
+                self.vars.definition.set(
+                    calculate_definition(
+                        machine=self.vars.machine,
+                        partnumber=self.vars.partnumber,
+                        revision=self.vars.revision,
+                    )
+                )
 
             log.info(
                 f&#34;Created new revision ({new_revision}) for document &#34;
@@ -970,6 +1118,7 @@ documents properties.</p></div>
 <li><h3><a href="#header-functions">Functions</a></h3>
 <ul class="">
 <li><code><a title="pytia_property_manager.app.callbacks.on_source_bought" href="#pytia_property_manager.app.callbacks.on_source_bought">on_source_bought</a></code></li>
+<li><code><a title="pytia_property_manager.app.callbacks.on_source_made" href="#pytia_property_manager.app.callbacks.on_source_made">on_source_made</a></code></li>
 </ul>
 </li>
 <li><h3><a href="#header-classes">Classes</a></h3>

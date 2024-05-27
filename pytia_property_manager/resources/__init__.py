@@ -116,6 +116,14 @@ class SettingsProcesses:
 
 
 @dataclass(slots=True, kw_only=True, frozen=True)
+class SettingsAutoDefinition:
+    """Dataclass for auto definition calculation."""
+
+    enable: bool
+    prefix: str | None
+
+
+@dataclass(slots=True, kw_only=True, frozen=True)
 class SettingsAutoGroup:
     """Dataclass for conditional groups."""
 
@@ -179,6 +187,7 @@ class Settings:  # pylint: disable=R0902
     separators: SettingsSeparators
     nomenclature: SettingsNomenclature
     processes: SettingsProcesses
+    auto_definition: SettingsAutoDefinition
     auto_group: SettingsAutoGroup
     tolerances: List[str]
     spare_part_level: List[str]
@@ -193,6 +202,7 @@ class Settings:  # pylint: disable=R0902
         self.separators = SettingsSeparators(**dict(self.separators))  # type: ignore
         self.nomenclature = SettingsNomenclature(**dict(self.nomenclature))  # type: ignore
         self.processes = SettingsProcesses(**dict(self.processes))  # type: ignore
+        self.auto_definition = SettingsAutoDefinition(**dict(self.auto_definition))  # type: ignore
         self.auto_group = SettingsAutoGroup(**dict(self.auto_group))  # type: ignore
         self.files = SettingsFiles(**dict(self.files))  # type: ignore
         self.paths = SettingsPaths(**dict(self.paths))  # type: ignore

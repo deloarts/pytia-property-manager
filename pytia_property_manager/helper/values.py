@@ -6,8 +6,10 @@ from copy import deepcopy
 from string import ascii_lowercase
 from string import ascii_uppercase
 from tkinter import StringVar
+from zlib import adler32
 
 from pytia.exceptions import PytiaValueError
+from resources import resource
 
 
 def get_new_revision(variable: StringVar) -> str:
@@ -38,6 +40,28 @@ def get_new_revision(variable: StringVar) -> str:
             raise NotImplementedError
         return ascii_lowercase[ascii_lowercase.index(value) + 1]
     raise PytiaValueError(f"Cannot increase revision value {value}")
+
+
+def calculate_definition(
+    machine: StringVar, partnumber: StringVar, revision: StringVar
+) -> str:
+    """Calculates the hex representation of the adler-32 output of the given input.
+    The returned value is in upper case. The 0x at the beginning of the hex value will
+    be removed.
+
+    Args:
+        machine (StringVar): The machine StrVar.
+        partnumber (StringVar): The partnumber StrVar.
+        revision (StringVar): The revision StrVar.
+
+    Returns:
+        str: The calculated definition.
+    """
+    to_encode = f"{machine.get()} {partnumber.get()} {revision.get()}"
+    encoded = str(hex(adler32(to_encode.encode()))).split("x")[-1].upper()
+    if resource.settings.auto_definition.prefix:
+        encoded = resource.settings.auto_definition.prefix + encoded
+    return encoded
 
 
 def interpolate_colors(
