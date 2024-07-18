@@ -42,6 +42,7 @@
         "tkmsg",
         "toolwindow",
         "ttkbootstrap",
+        "weblink",
         "zipfile"
     ],
     "editor.formatOnSave": true,
