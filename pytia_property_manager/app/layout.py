@@ -1,6 +1,7 @@
 """
     The layout of the app.
 """
+
 from tkinter import DISABLED
 from tkinter import WORD
 from tkinter import Tk
@@ -346,10 +347,34 @@ class Layout:
         )
         # endregion
 
+        # region weblink
+        lbl_weblink = Label(frames.infrastructure, text="Weblink")
+        lbl_weblink.grid(
+            row=12, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky="nsew"
+        )
+
+        self._entry_weblink = Entry(
+            frames.infrastructure,
+            textvariable=variables.weblink,
+            state=DISABLED,
+        )
+        self._entry_weblink.grid(row=12, column=1, padx=5, pady=2, sticky="nsew")
+
+        self._btn_weblink = Button(
+            frames.infrastructure,
+            text="Open",
+            style="outline",
+            state=DISABLED,
+        )
+        self._btn_weblink.grid(
+            row=12, column=2, padx=(0, Layout.MARGIN_X), pady=2, sticky="nsew"
+        )
+        # endregion
+
         # region group
         lbl_group = Label(frames.infrastructure, text="Group")
         lbl_group.grid(
-            row=12, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky="nsew"
+            row=13, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky="nsew"
         )
 
         self._combo_group = Combobox(
@@ -360,7 +385,7 @@ class Layout:
             state=DISABLED,
         )
         self._combo_group.grid(
-            row=12,
+            row=13,
             column=1,
             padx=(5, Layout.MARGIN_X),
             pady=(1, 2),
@@ -372,7 +397,7 @@ class Layout:
         # region tolerance
         lbl_tolerance = Label(frames.infrastructure, text="Tolerance")
         lbl_tolerance.grid(
-            row=13, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky="nsew"
+            row=14, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky="nsew"
         )
 
         self._combo_tolerance = Combobox(
@@ -383,7 +408,7 @@ class Layout:
             state=DISABLED,
         )
         self._combo_tolerance.grid(
-            row=13,
+            row=14,
             column=1,
             padx=(5, Layout.MARGIN_X),
             pady=2,
@@ -395,7 +420,7 @@ class Layout:
         # region spare part level
         lbl_spare_part = Label(frames.infrastructure, text="Spare Part Level")
         lbl_spare_part.grid(
-            row=14, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky="nsew"
+            row=15, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky="nsew"
         )
 
         self._combo_spare_part = Combobox(
@@ -406,7 +431,7 @@ class Layout:
             width=27,
         )
         self._combo_spare_part.grid(
-            row=14,
+            row=15,
             column=1,
             padx=(5, Layout.MARGIN_X),
             pady=2,
@@ -418,7 +443,7 @@ class Layout:
         # region description
         lbl_description = Label(frames.infrastructure, text="Description")
         lbl_description.grid(
-            row=15,
+            row=16,
             column=0,
             padx=(Layout.MARGIN_X, 5),
             pady=2,
@@ -437,7 +462,7 @@ class Layout:
             font=("Segoe UI", 9),
         )
         self._text_description.grid(
-            row=15,
+            row=16,
             column=1,
             padx=(3, Layout.MARGIN_X - 1),
             pady=2,
@@ -449,7 +474,7 @@ class Layout:
         # region creator
         lbl_creator = Label(frames.infrastructure, text="Creator")
         lbl_creator.grid(
-            row=16,
+            row=17,
             column=0,
             padx=(Layout.MARGIN_X, 5),
             pady=(Layout.MARGIN_Y, 2),
@@ -459,7 +484,7 @@ class Layout:
             frames.infrastructure, textvariable=variables.creator_display
         )
         self._lbl_creator_value.grid(
-            row=16,
+            row=17,
             column=1,
             padx=(5, Layout.MARGIN_X),
             pady=(Layout.MARGIN_Y, 2),
@@ -471,7 +496,7 @@ class Layout:
         # region creator
         lbl_modifier = Label(frames.infrastructure, text="Modifier")
         lbl_modifier.grid(
-            row=17,
+            row=18,
             column=0,
             padx=(Layout.MARGIN_X, 5),
             pady=(2, 2),
@@ -481,7 +506,7 @@ class Layout:
             frames.infrastructure, textvariable=variables.modifier_display
         )
         self._lbl_modifier_value.grid(
-            row=17,
+            row=18,
             column=1,
             padx=(5, Layout.MARGIN_X),
             pady=(2, 2),
@@ -493,7 +518,7 @@ class Layout:
         # region linked doc
         lbl_linked_doc = Label(frames.infrastructure, text="Linked Drawing")
         lbl_linked_doc.grid(
-            row=18,
+            row=19,
             column=0,
             padx=(Layout.MARGIN_X, 5),
             pady=(2, Layout.MARGIN_Y),
@@ -503,7 +528,7 @@ class Layout:
             frames.infrastructure, textvariable=variables.linked_doc_display
         )
         self._lbl_linked_doc_value.grid(
-            row=18,
+            row=19,
             column=1,
             padx=(5, Layout.MARGIN_X),
             pady=(2, Layout.MARGIN_Y),
@@ -650,6 +675,16 @@ class Layout:
     def input_supplier(self) -> Entry:
         """Returns the supplier entry."""
         return self._entry_supplier
+
+    @property
+    def input_weblink(self) -> Entry:
+        """Returns the supplier weblink."""
+        return self._entry_weblink
+
+    @property
+    def button_weblink(self) -> Button:
+        """Returns the weblink button."""
+        return self._btn_weblink
 
     @property
     def input_group(self) -> Combobox:

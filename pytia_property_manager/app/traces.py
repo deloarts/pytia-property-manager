@@ -3,6 +3,8 @@
 """
 
 from pathlib import Path
+from tkinter import DISABLED
+from tkinter import NORMAL
 from tkinter import messagebox as tkmsg
 
 from app.callbacks import on_source_bought
@@ -15,6 +17,7 @@ from const import PROP_DRAWING_PATH
 from const import SUFFIX_DRAWING
 from const import Source
 from helper.lazy_loaders import LazyDocumentHelper
+from helper.verifications import verify_url
 from pytia.log import log
 from pytia_ui_tools.handlers.workspace_handler import Workspace
 from resources import resource
@@ -58,6 +61,7 @@ class Traces:
         self.vars.mass.trace_add("write", self.trace_mass)
         self.vars.project.trace_add("write", self.trace_project)
         self.vars.base_size.trace_add("write", self.trace_base_size)
+        self.vars.weblink.trace_add("write", self.trace_weblink)
         self.vars.creator.trace_add("write", self.trace_creator)
         self.vars.modifier.trace_add("write", self.trace_modifier)
         self.vars.linked_doc.trace_add("write", self.trace_linked_doc)
@@ -137,6 +141,14 @@ class Traces:
         log.info(f"Trace callback for variable 'base_size': {value}")
         if not value:
             self.vars.base_size_preset.set("")
+
+    def trace_weblink(self, *_) -> None:
+        """Trace callback for the `weblink` StringVar"""
+        value = self.vars.weblink.get()
+        log.info(f"Trace callback for variable 'weblink': {value}")
+        self.layout.button_weblink.configure(
+            state=NORMAL if verify_url(self.vars.weblink.get()) else DISABLED
+        )
 
     def trace_source(self, *_) -> None:
         """Trace callback for the `source` StringVar. Sets the UI depending on the source value."""
