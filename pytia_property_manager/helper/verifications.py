@@ -4,6 +4,7 @@
 
 from tkinter import StringVar
 from typing import Literal
+from urllib.parse import urlparse
 
 from app.layout import Layout
 from app.widgets.processes import ProcessWidgets
@@ -41,3 +42,11 @@ def verify_process(
             critical.append(msg)
         elif settings_verification == VERIFY_WARNING:
             warning.append(msg)
+
+
+def verify_url(url: str) -> bool:
+    try:
+        result = urlparse(url=url)
+        return all([result.scheme, result.netloc])
+    except AttributeError:
+        return False

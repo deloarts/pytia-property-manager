@@ -16,6 +16,7 @@ from app.layout import Layout
 from app.vars import Variables
 from const import Source
 from helper.lazy_loaders import LazyDocumentHelper
+from helper.verifications import verify_url
 from pytia.log import log
 from pytia_ui_tools.handlers.workspace_handler import Workspace
 from resources import resource
@@ -121,6 +122,9 @@ class UISetter:
         self.vars.supplier.set("")
         self.layout.input_supplier.config(state=tk.DISABLED)
 
+        self.vars.weblink.set("")
+        self.layout.input_weblink.config(state=tk.DISABLED)
+
         self.vars.group.set("")
         self.layout.input_group.config(state=tk.DISABLED)
 
@@ -196,6 +200,11 @@ class UISetter:
 
         self.layout.input_supplier.config(state=tk.NORMAL)
 
+        self.layout.input_weblink.config(state=tk.NORMAL)
+        self.layout.button_weblink.configure(
+            state=tk.NORMAL if verify_url(self.vars.weblink.get()) else tk.DISABLED
+        )
+
         self.layout.input_group.config(state=tk.NORMAL)
 
         self.layout.input_tolerance.config(state=tk.NORMAL)
@@ -267,6 +276,11 @@ class UISetter:
 
         self.layout.input_supplier.config(state=tk.NORMAL)
 
+        self.layout.input_weblink.config(state=tk.NORMAL)
+        self.layout.button_weblink.configure(
+            state=tk.NORMAL if verify_url(self.vars.weblink.get()) else tk.DISABLED
+        )
+
         self.layout.input_group.config(state=tk.NORMAL)
 
         self.vars.tolerance.set("")
@@ -331,6 +345,9 @@ class UISetter:
         self.layout.input_manufacturer.config(state=tk.DISABLED)
 
         self.layout.input_supplier.config(state=tk.DISABLED)
+
+        self.layout.input_weblink.config(state=tk.DISABLED)
+        self.layout.button_weblink.configure(state=tk.DISABLED)
 
         self.layout.input_group.config(state=tk.DISABLED)
 

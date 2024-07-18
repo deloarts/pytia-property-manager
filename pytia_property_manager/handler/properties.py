@@ -16,6 +16,7 @@ from helper.messages import datafield_message
 from helper.translators import translate_nomenclature
 from helper.translators import translate_source
 from helper.verifications import verify_process
+from helper.verifications import verify_url
 from helper.verifications import verify_variable
 from pytia.log import log
 from pytia_ui_tools.handlers.workspace_handler import Workspace
@@ -83,6 +84,13 @@ class Properties:
         self.doc_helper.write_property(
             resource.props.infra.supplier, self.vars.supplier.get()
         )
+
+        if not verify_url(self.vars.weblink.get()):
+            self.vars.weblink.set("")
+        self.doc_helper.write_property(
+            resource.props.infra.weblink, self.vars.weblink.get()
+        )
+
         self.doc_helper.write_property(
             resource.props.infra.group, self.vars.group.get()
         )
@@ -227,9 +235,11 @@ class Properties:
             variable=self.vars.project,
             property_name=resource.props.infra.project,
             widget=self.layout.input_project,
-            default=self.workspace.elements.projects[0]
-            if self.workspace.elements.projects
-            else None,
+            default=(
+                self.workspace.elements.projects[0]
+                if self.workspace.elements.projects
+                else None
+            ),
             items=self.workspace.elements.projects,
         )
 
@@ -262,6 +272,7 @@ class Properties:
         self.doc_helper.setvar_property(
             self.vars.supplier, resource.props.infra.supplier
         )
+        self.doc_helper.setvar_property(self.vars.weblink, resource.props.infra.weblink)
         self.doc_helper.setvar_combo_property(
             variable=self.vars.group,
             property_name=resource.props.infra.group,
