@@ -8,6 +8,7 @@ import os
 import re
 import shutil
 import sys
+import webbrowser
 from pathlib import Path
 from stat import S_IREAD
 from stat import S_IRGRP
@@ -171,6 +172,7 @@ class Callbacks:
         self.layout.button_material.configure(command=self.on_btn_material)
         self.layout.button_base_size.configure(command=self.on_btn_bounding_box)
         self.layout.button_mass.configure(command=self.on_btn_mass)
+        self.layout.button_weblink.configure(command=self.on_btn_weblink)
         self.layout.button_save.configure(command=self.on_btn_save)
         self.layout.button_abort.configure(command=self.on_btn_abort)
 
@@ -361,6 +363,11 @@ class Callbacks:
         self.set_ui.loading()
         self.doc_helper.setvar_mass(self.vars.mass, force=True)
         self.set_ui.reset()
+
+    def on_btn_weblink(self) -> None:
+        """Callback function for the weblink button. Loads the mass of the document."""
+        log.info("Callback for button 'Weblink': Opening weblink")
+        webbrowser.open(self.vars.weblink.get())
 
     def on_lbl_linked_doc(self) -> None:
         """Opens the linked document, if there is one and closes the app."""

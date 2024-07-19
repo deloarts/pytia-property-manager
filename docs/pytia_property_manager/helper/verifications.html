@@ -33,6 +33,7 @@
 
 from tkinter import StringVar
 from typing import Literal
+from urllib.parse import urlparse
 
 from app.layout import Layout
 from app.widgets.processes import ProcessWidgets
@@ -69,7 +70,15 @@ def verify_process(
         if settings_verification == VERIFY_CRITICAL:
             critical.append(msg)
         elif settings_verification == VERIFY_WARNING:
-            warning.append(msg)</code></pre>
+            warning.append(msg)
+
+
+def verify_url(url: str) -&gt; bool:
+    try:
+        result = urlparse(url=url)
+        return all([result.scheme, result.netloc])
+    except AttributeError:
+        return False</code></pre>
 </details>
 </section>
 <section>
@@ -104,6 +113,23 @@ def verify_process(
             critical.append(msg)
         elif settings_verification == VERIFY_WARNING:
             warning.append(msg)</code></pre>
+</details>
+</dd>
+<dt id="pytia_property_manager.helper.verifications.verify_url"><code class="name flex">
+<span>def <span class="ident">verify_url</span></span>(<span>url: str) ‑> bool</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def verify_url(url: str) -&gt; bool:
+    try:
+        result = urlparse(url=url)
+        return all([result.scheme, result.netloc])
+    except AttributeError:
+        return False</code></pre>
 </details>
 </dd>
 <dt id="pytia_property_manager.helper.verifications.verify_variable"><code class="name flex">
@@ -148,6 +174,7 @@ def verify_process(
 <li><h3><a href="#header-functions">Functions</a></h3>
 <ul class="">
 <li><code><a title="pytia_property_manager.helper.verifications.verify_process" href="#pytia_property_manager.helper.verifications.verify_process">verify_process</a></code></li>
+<li><code><a title="pytia_property_manager.helper.verifications.verify_url" href="#pytia_property_manager.helper.verifications.verify_url">verify_url</a></code></li>
 <li><code><a title="pytia_property_manager.helper.verifications.verify_variable" href="#pytia_property_manager.helper.verifications.verify_variable">verify_variable</a></code></li>
 </ul>
 </li>

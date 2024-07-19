@@ -42,6 +42,7 @@
         "tkmsg",
         "toolwindow",
         "ttkbootstrap",
+        "weblink",
         "zipfile"
     ],
     "editor.formatOnSave": true,
@@ -56,6 +57,9 @@
         },
         "editor.defaultFormatter": "ms-python.black-formatter"
     },
+    "python.analysis.extraPaths": [
+        "./pytia_property_manager"
+    ],
     "python.testing.pytestArgs": [
         "tests"
     ],

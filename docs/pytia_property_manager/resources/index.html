@@ -253,6 +253,7 @@ class PropsInfra:
     mass: str
     manufacturer: str
     supplier: str
+    weblink: str
     group: str
     tolerance: str
     spare_part_level: str
@@ -641,7 +642,7 @@ resource = Resources()</code></pre>
 <dl>
 <dt id="pytia_property_manager.resources.AppData"><code class="flex name class">
 <span>class <span class="ident">AppData</span></span>
-<span>(</span><span>*, version: str = '0.5.0', counter: int = 0, theme: str = 'cosmo', set_view: bool = True, sync_color: bool = True)</span>
+<span>(</span><span>*, version: str = '0.6.0', counter: int = 0, theme: str = 'cosmo', set_view: bool = True, sync_color: bool = True)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Dataclass for appdata settings.</p></div>
@@ -879,7 +880,7 @@ def values(self) -&gt; List[str]:
 </dd>
 <dt id="pytia_property_manager.resources.PropsInfra"><code class="flex name class">
 <span>class <span class="ident">PropsInfra</span></span>
-<span>(</span><span>*, project: str, machine: str, material: str, base_size: str, base_size_preset: str, mass: str, manufacturer: str, supplier: str, group: str, tolerance: str, spare_part_level: str, creator: str, modifier: str)</span>
+<span>(</span><span>*, project: str, machine: str, material: str, base_size: str, base_size_preset: str, mass: str, manufacturer: str, supplier: str, weblink: str, group: str, tolerance: str, spare_part_level: str, creator: str, modifier: str)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Dataclass for infrastructure properties on the document (properties.json).</p></div>
@@ -899,6 +900,7 @@ class PropsInfra:
     mass: str
     manufacturer: str
     supplier: str
+    weblink: str
     group: str
     tolerance: str
     spare_part_level: str
@@ -994,6 +996,10 @@ def values(self) -&gt; List[str]:
     &#34;&#34;&#34;Returns a list of all values from the PropsInfra dataclass.&#34;&#34;&#34;
     return [getattr(self, f.name) for f in fields(self)]</code></pre>
 </details>
+</dd>
+<dt id="pytia_property_manager.resources.PropsInfra.weblink"><code class="name">var <span class="ident">weblink</span> : str</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
 </dd>
 </dl>
 </dd>
@@ -2446,6 +2452,7 @@ def values(self) -&gt; List[str]:
 <li><code><a title="pytia_property_manager.resources.PropsInfra.supplier" href="#pytia_property_manager.resources.PropsInfra.supplier">supplier</a></code></li>
 <li><code><a title="pytia_property_manager.resources.PropsInfra.tolerance" href="#pytia_property_manager.resources.PropsInfra.tolerance">tolerance</a></code></li>
 <li><code><a title="pytia_property_manager.resources.PropsInfra.values" href="#pytia_property_manager.resources.PropsInfra.values">values</a></code></li>
+<li><code><a title="pytia_property_manager.resources.PropsInfra.weblink" href="#pytia_property_manager.resources.PropsInfra.weblink">weblink</a></code></li>
 </ul>
 </li>
 <li>
