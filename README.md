@@ -359,6 +359,7 @@ On a new revision, do the following:
 
 ## 7 changelog
 
+[**v0.6.0**](https://github.com/deloarts/pytia-property-manager/releases/tag/v0.6.0): Add weblink property.  
 [**v0.5.0**](https://github.com/deloarts/pytia-property-manager/releases/tag/v0.5.0): Add auto definition feature.  
 [**v0.4.3**](https://github.com/deloarts/pytia-property-manager/releases/tag/v0.4.3): Read drawing path from workspace level.  
 [**v0.4.2**](https://github.com/deloarts/pytia-property-manager/releases/tag/v0.4.2): Fix deprecation.  

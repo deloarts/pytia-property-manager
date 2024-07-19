@@ -37,6 +37,7 @@ import os
 import re
 import shutil
 import sys
+import webbrowser
 from pathlib import Path
 from stat import S_IREAD
 from stat import S_IRGRP
@@ -200,6 +201,7 @@ class Callbacks:
         self.layout.button_material.configure(command=self.on_btn_material)
         self.layout.button_base_size.configure(command=self.on_btn_bounding_box)
         self.layout.button_mass.configure(command=self.on_btn_mass)
+        self.layout.button_weblink.configure(command=self.on_btn_weblink)
         self.layout.button_save.configure(command=self.on_btn_save)
         self.layout.button_abort.configure(command=self.on_btn_abort)
 
@@ -390,6 +392,11 @@ class Callbacks:
         self.set_ui.loading()
         self.doc_helper.setvar_mass(self.vars.mass, force=True)
         self.set_ui.reset()
+
+    def on_btn_weblink(self) -&gt; None:
+        &#34;&#34;&#34;Callback function for the weblink button. Loads the mass of the document.&#34;&#34;&#34;
+        log.info(&#34;Callback for button &#39;Weblink&#39;: Opening weblink&#34;)
+        webbrowser.open(self.vars.weblink.get())
 
     def on_lbl_linked_doc(self) -&gt; None:
         &#34;&#34;&#34;Opens the linked document, if there is one and closes the app.&#34;&#34;&#34;
@@ -623,6 +630,7 @@ result of the nomenclature check. Defaults to False.</dd>
         self.layout.button_material.configure(command=self.on_btn_material)
         self.layout.button_base_size.configure(command=self.on_btn_bounding_box)
         self.layout.button_mass.configure(command=self.on_btn_mass)
+        self.layout.button_weblink.configure(command=self.on_btn_weblink)
         self.layout.button_save.configure(command=self.on_btn_save)
         self.layout.button_abort.configure(command=self.on_btn_abort)
 
@@ -813,6 +821,11 @@ result of the nomenclature check. Defaults to False.</dd>
         self.set_ui.loading()
         self.doc_helper.setvar_mass(self.vars.mass, force=True)
         self.set_ui.reset()
+
+    def on_btn_weblink(self) -&gt; None:
+        &#34;&#34;&#34;Callback function for the weblink button. Loads the mass of the document.&#34;&#34;&#34;
+        log.info(&#34;Callback for button &#39;Weblink&#39;: Opening weblink&#34;)
+        webbrowser.open(self.vars.weblink.get())
 
     def on_lbl_linked_doc(self) -&gt; None:
         &#34;&#34;&#34;Opens the linked document, if there is one and closes the app.&#34;&#34;&#34;
@@ -1073,6 +1086,21 @@ documents properties.</p></div>
         self.set_ui.reset()</code></pre>
 </details>
 </dd>
+<dt id="pytia_property_manager.app.callbacks.Callbacks.on_btn_weblink"><code class="name flex">
+<span>def <span class="ident">on_btn_weblink</span></span>(<span>self) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Callback function for the weblink button. Loads the mass of the document.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def on_btn_weblink(self) -&gt; None:
+    &#34;&#34;&#34;Callback function for the weblink button. Loads the mass of the document.&#34;&#34;&#34;
+    log.info(&#34;Callback for button &#39;Weblink&#39;: Opening weblink&#34;)
+    webbrowser.open(self.vars.weblink.get())</code></pre>
+</details>
+</dd>
 <dt id="pytia_property_manager.app.callbacks.Callbacks.on_lbl_linked_doc"><code class="name flex">
 <span>def <span class="ident">on_lbl_linked_doc</span></span>(<span>self) ‑> None</span>
 </code></dt>
@@ -1133,6 +1161,7 @@ documents properties.</p></div>
 <li><code><a title="pytia_property_manager.app.callbacks.Callbacks.on_btn_reload_source" href="#pytia_property_manager.app.callbacks.Callbacks.on_btn_reload_source">on_btn_reload_source</a></code></li>
 <li><code><a title="pytia_property_manager.app.callbacks.Callbacks.on_btn_revision" href="#pytia_property_manager.app.callbacks.Callbacks.on_btn_revision">on_btn_revision</a></code></li>
 <li><code><a title="pytia_property_manager.app.callbacks.Callbacks.on_btn_save" href="#pytia_property_manager.app.callbacks.Callbacks.on_btn_save">on_btn_save</a></code></li>
+<li><code><a title="pytia_property_manager.app.callbacks.Callbacks.on_btn_weblink" href="#pytia_property_manager.app.callbacks.Callbacks.on_btn_weblink">on_btn_weblink</a></code></li>
 <li><code><a title="pytia_property_manager.app.callbacks.Callbacks.on_lbl_linked_doc" href="#pytia_property_manager.app.callbacks.Callbacks.on_lbl_linked_doc">on_lbl_linked_doc</a></code></li>
 </ul>
 </li>
