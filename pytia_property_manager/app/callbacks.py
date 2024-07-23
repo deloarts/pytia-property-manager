@@ -371,9 +371,16 @@ class Callbacks:
 
     def on_lbl_linked_doc(self) -> None:
         """Opens the linked document, if there is one and closes the app."""
-        linked_doc = Path(
-            expand_env_vars(self.vars.linked_doc.get(), ignore_not_found=True)
-        )
+        drawing_file_value = self.vars.linked_doc.get()
+        if drawing_file_value.startswith(".\\") and self.workspace.workspace_folder:
+            relative_path = Path(drawing_file_value[2:])
+            linked_doc = Path(self.workspace.workspace_folder, relative_path)
+        else:
+            linked_doc = Path(
+                expand_env_vars(drawing_file_value, ignore_not_found=True)
+            )
+        log.debug(f"Linked doc path: {linked_doc}")
+
         # We have to check if the document is available in a window, otherwise a
         # prompt with "do you want to open the document again" would appear.
         if linked_doc.name in self.doc_helper.get_all_open_windows():
