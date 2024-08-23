@@ -400,9 +400,16 @@ class Callbacks:
 
     def on_lbl_linked_doc(self) -&gt; None:
         &#34;&#34;&#34;Opens the linked document, if there is one and closes the app.&#34;&#34;&#34;
-        linked_doc = Path(
-            expand_env_vars(self.vars.linked_doc.get(), ignore_not_found=True)
-        )
+        drawing_file_value = self.vars.linked_doc.get()
+        if drawing_file_value.startswith(&#34;.\\&#34;) and self.workspace.workspace_folder:
+            relative_path = Path(drawing_file_value[2:])
+            linked_doc = Path(self.workspace.workspace_folder, relative_path)
+        else:
+            linked_doc = Path(
+                expand_env_vars(drawing_file_value, ignore_not_found=True)
+            )
+        log.debug(f&#34;Linked doc path: {linked_doc}&#34;)
+
         # We have to check if the document is available in a window, otherwise a
         # prompt with &#34;do you want to open the document again&#34; would appear.
         if linked_doc.name in self.doc_helper.get_all_open_windows():
@@ -829,9 +836,16 @@ result of the nomenclature check. Defaults to False.</dd>
 
     def on_lbl_linked_doc(self) -&gt; None:
         &#34;&#34;&#34;Opens the linked document, if there is one and closes the app.&#34;&#34;&#34;
-        linked_doc = Path(
-            expand_env_vars(self.vars.linked_doc.get(), ignore_not_found=True)
-        )
+        drawing_file_value = self.vars.linked_doc.get()
+        if drawing_file_value.startswith(&#34;.\\&#34;) and self.workspace.workspace_folder:
+            relative_path = Path(drawing_file_value[2:])
+            linked_doc = Path(self.workspace.workspace_folder, relative_path)
+        else:
+            linked_doc = Path(
+                expand_env_vars(drawing_file_value, ignore_not_found=True)
+            )
+        log.debug(f&#34;Linked doc path: {linked_doc}&#34;)
+
         # We have to check if the document is available in a window, otherwise a
         # prompt with &#34;do you want to open the document again&#34; would appear.
         if linked_doc.name in self.doc_helper.get_all_open_windows():
@@ -1112,9 +1126,16 @@ documents properties.</p></div>
 </summary>
 <pre><code class="python">def on_lbl_linked_doc(self) -&gt; None:
     &#34;&#34;&#34;Opens the linked document, if there is one and closes the app.&#34;&#34;&#34;
-    linked_doc = Path(
-        expand_env_vars(self.vars.linked_doc.get(), ignore_not_found=True)
-    )
+    drawing_file_value = self.vars.linked_doc.get()
+    if drawing_file_value.startswith(&#34;.\\&#34;) and self.workspace.workspace_folder:
+        relative_path = Path(drawing_file_value[2:])
+        linked_doc = Path(self.workspace.workspace_folder, relative_path)
+    else:
+        linked_doc = Path(
+            expand_env_vars(drawing_file_value, ignore_not_found=True)
+        )
+    log.debug(f&#34;Linked doc path: {linked_doc}&#34;)
+
     # We have to check if the document is available in a window, otherwise a
     # prompt with &#34;do you want to open the document again&#34; would appear.
     if linked_doc.name in self.doc_helper.get_all_open_windows():
