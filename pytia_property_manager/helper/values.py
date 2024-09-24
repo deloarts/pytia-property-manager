@@ -43,24 +43,27 @@ def get_new_revision(variable: StringVar) -> str:
 
 
 def calculate_definition(
-    machine: StringVar, partnumber: StringVar, revision: StringVar
+    product_number: StringVar,
+    partnumber: StringVar,
+    revision: StringVar,
+    prefix: str | None,
 ) -> str:
     """Calculates the hex representation of the adler-32 output of the given input.
     The returned value is in upper case. The 0x at the beginning of the hex value will
     be removed.
 
     Args:
-        machine (StringVar): The machine StrVar.
+        product_number (StringVar): The product_number StrVar.
         partnumber (StringVar): The partnumber StrVar.
         revision (StringVar): The revision StrVar.
 
     Returns:
         str: The calculated definition.
     """
-    to_encode = f"{machine.get()} {partnumber.get()} {revision.get()}"
+    to_encode = f"{product_number.get()} {partnumber.get()} {revision.get()}"
     encoded = str(hex(adler32(to_encode.encode()))).split("x")[-1].upper()
-    if resource.settings.auto_definition.prefix:
-        encoded = resource.settings.auto_definition.prefix + encoded
+    if prefix:
+        encoded = prefix + encoded
     return encoded
 
 

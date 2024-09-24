@@ -22,7 +22,7 @@ class Variables:
     description: StringVar
 
     project: StringVar
-    machine: StringVar
+    product_number: StringVar
     material: StringVar
     material_meta: StringVar
     base_size: StringVar
@@ -62,7 +62,7 @@ class Variables:
         self.description = StringVar(master=root, name="description")
 
         self.project = StringVar(master=root, name="project")
-        self.machine = StringVar(master=root, name="machine")
+        self.product_number = StringVar(master=root, name="product_number")
         self.revision = StringVar(master=root, name="revision")
         self.material = StringVar(master=root, name="material")
         self.material_meta = StringVar(master=root, name="material_meta")

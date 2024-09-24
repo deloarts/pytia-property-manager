@@ -248,9 +248,11 @@ class Callbacks:
                 if resource.settings.auto_definition.enable:
                     self.vars.definition.set(
                         calculate_definition(
-                            machine=self.vars.machine,
+                            product_number=self.vars.product_number,
                             partnumber=self.vars.partnumber,
                             revision=self.vars.revision,
+                            prefix=self.workspace.elements.definition_prefix
+                            or resource.settings.auto_definition.prefix,
                         )
                     )
 

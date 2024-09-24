@@ -58,7 +58,7 @@ class Layout:
         # region partnumber
         lbl_partnumber = Label(
             frames.infrastructure,
-            text="Partnumber",
+            text="Part Number",
             width=15,
         )
         lbl_partnumber.grid(
@@ -86,10 +86,31 @@ class Layout:
         )
         # endregion
 
-        # region project
-        lbl_project = Label(frames.infrastructure, text="Project")
-        lbl_project.grid(
+        # region product number
+        lbl_product_number = Label(frames.infrastructure, text="Product Number")
+        lbl_product_number.grid(
             row=1, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky="nsew"
+        )
+
+        self._entry_product_number = Entry(
+            frames.infrastructure,
+            textvariable=variables.product_number,
+            state=DISABLED,
+        )
+        self._entry_product_number.grid(
+            row=1,
+            column=1,
+            padx=(5, Layout.MARGIN_X),
+            pady=2,
+            sticky="nsew",
+            columnspan=2,
+        )
+        # endregion
+
+        # region project number
+        lbl_project = Label(frames.infrastructure, text="Project Number")
+        lbl_project.grid(
+            row=2, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky="nsew"
         )
 
         self._combo_project = Combobox(
@@ -100,31 +121,10 @@ class Layout:
             state=DISABLED,
         )
         self._combo_project.grid(
-            row=1,
-            column=1,
-            padx=(5, Layout.MARGIN_X),
-            pady=(1, 2),
-            sticky="nsew",
-            columnspan=2,
-        )
-        # endregion
-
-        # region machine
-        lbl_project = Label(frames.infrastructure, text="Machine")
-        lbl_project.grid(
-            row=2, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky="nsew"
-        )
-
-        self._entry_machine = Entry(
-            frames.infrastructure,
-            textvariable=variables.machine,
-            state=DISABLED,
-        )
-        self._entry_machine.grid(
             row=2,
             column=1,
             padx=(5, Layout.MARGIN_X),
-            pady=2,
+            pady=(1, 2),
             sticky="nsew",
             columnspan=2,
         )
@@ -637,9 +637,9 @@ class Layout:
         return self._combo_project
 
     @property
-    def input_machine(self) -> Entry:
-        """Returns the machine entry."""
-        return self._entry_machine
+    def input_product_number(self) -> Entry:
+        """Returns the product number entry."""
+        return self._entry_product_number
 
     @property
     def input_revision(self) -> Entry:

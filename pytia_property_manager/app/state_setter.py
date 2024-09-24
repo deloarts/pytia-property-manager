@@ -83,11 +83,11 @@ class UISetter:
             )
         )
 
-        self.layout.input_machine.config(
+        self.layout.input_product_number.config(
             state=(
                 "readonly"
-                if resource.settings.restrictions.strict_machine
-                and self.workspace.elements.machine
+                if resource.settings.restrictions.strict_product
+                and self.workspace.elements.product
                 else tk.NORMAL
             )
         )
@@ -162,17 +162,17 @@ class UISetter:
             )
         )
 
-        self.layout.input_machine.config(
+        self.layout.input_product_number.config(
             state=(
                 "readonly"
-                if resource.settings.restrictions.strict_machine
-                and self.workspace.elements.machine
+                if resource.settings.restrictions.strict_product
+                and self.workspace.elements.product
                 else tk.NORMAL
             ),
             cursor=(
                 "arrow"
-                if resource.settings.restrictions.strict_machine
-                and self.workspace.elements.machine
+                if resource.settings.restrictions.strict_product
+                and self.workspace.elements.product
                 else "xterm"
             ),
         )
@@ -243,11 +243,11 @@ class UISetter:
             )
         )
 
-        self.layout.input_machine.config(
+        self.layout.input_product_number.config(
             state=(
                 "readonly"
-                if resource.settings.restrictions.strict_machine
-                and self.workspace.elements.machine
+                if resource.settings.restrictions.strict_product
+                and self.workspace.elements.product
                 else tk.NORMAL
             )
         )
@@ -322,7 +322,7 @@ class UISetter:
 
         self.layout.input_project.config(state=tk.DISABLED)
 
-        self.layout.input_machine.config(state=tk.DISABLED)
+        self.layout.input_product_number.config(state=tk.DISABLED)
 
         self.layout.input_revision.config(state=tk.DISABLED)
         self.layout.button_revision.configure(state=tk.DISABLED)
