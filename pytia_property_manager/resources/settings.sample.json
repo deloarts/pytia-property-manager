@@ -22,12 +22,12 @@
             "group": "warning"
         },
         "made": {
-            "definition": null,
+            "order_number": null,
             "material": "warning",
             "process_1": "warning"
         },
         "bought": {
-            "definition": "critical",
+            "order_number": "critical",
             "manufacturer": "critical",
             "supplier": null
         }

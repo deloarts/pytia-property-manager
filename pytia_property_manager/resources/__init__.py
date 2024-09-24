@@ -62,7 +62,7 @@ class SettingsVerificationsBasic:
 class SettingsVerificationsMade:
     """Dataclass for made property verification settings."""
 
-    definition: Literal["critical", "warning"] | None
+    order_number: Literal["critical", "warning"] | None
     material: Literal["critical", "warning"] | None
     process_1: Literal["critical", "warning"] | None
 
@@ -71,7 +71,7 @@ class SettingsVerificationsMade:
 class SettingsVerificationsBought:
     """Dataclass for bought property verification settings."""
 
-    definition: Literal["critical", "warning"] | None
+    order_number: Literal["critical", "warning"] | None
     manufacturer: Literal["critical", "warning"] | None
     supplier: Literal["critical", "warning"] | None
 
@@ -220,6 +220,7 @@ class PropsInfra:
     base_size: str
     base_size_preset: str
     mass: str
+    order_number: str
     manufacturer: str
     supplier: str
     weblink: str

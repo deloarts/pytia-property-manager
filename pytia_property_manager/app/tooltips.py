@@ -113,8 +113,8 @@ class ToolTips:
         ToolTip(
             layout.button_source,
             (
-                "Reloads the partnumber, the definition and the manufacturer from the documents "
-                "filename if the source is set to 'bought'.\n\n"
+                "Reloads the partnumber, the order number and the manufacturer from "
+                "the documents filename if the source is set to 'bought'.\n\n"
                 "Overwrites any existing text of these items."
             ),
         )

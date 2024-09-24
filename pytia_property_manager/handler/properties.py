@@ -8,13 +8,12 @@ from pathlib import Path
 from app.layout import Layout
 from app.vars import Variables
 from const import PROP_DRAWING_PATH
-from const import VERIFY_CRITICAL
-from const import VERIFY_WARNING
 from const import Source
 from helper.lazy_loaders import LazyDocumentHelper
 from helper.messages import datafield_message
 from helper.translators import translate_nomenclature
 from helper.translators import translate_source
+from helper.values import calculate_definition
 from helper.verifications import verify_process
 from helper.verifications import verify_url
 from helper.verifications import verify_variable
@@ -78,6 +77,10 @@ class Properties:
             self.vars.base_size_preset.get(),
         )
         self.doc_helper.write_property(resource.props.infra.mass, self.vars.mass.get())
+
+        self.doc_helper.write_property(
+            resource.props.infra.order_number, self.vars.order_number.get()
+        )
         self.doc_helper.write_property(
             resource.props.infra.manufacturer, self.vars.manufacturer.get()
         )
@@ -162,13 +165,13 @@ class Properties:
 
         match self.vars.source.get():
             case Source.MADE.value:
-                # Verify definition
+                # Verify order number
                 verify_variable(
                     critical=critical,
                     warning=warning,
-                    variable=self.vars.definition,
-                    settings_verification=resource.settings.verifications.made.definition,
-                    msg="The definition is not set.",
+                    variable=self.vars.order_number,
+                    settings_verification=resource.settings.verifications.made.order_number,
+                    msg="The order number is not set.",
                 )
                 # Verify material
                 if self.doc_helper.is_part:
@@ -190,13 +193,13 @@ class Properties:
                 )
 
             case Source.BOUGHT.value:
-                # Verify definition
+                # Verify order number
                 verify_variable(
                     critical=critical,
                     warning=warning,
-                    variable=self.vars.definition,
-                    settings_verification=resource.settings.verifications.bought.definition,
-                    msg="The definition is not set.",
+                    variable=self.vars.order_number,
+                    settings_verification=resource.settings.verifications.bought.order_number,
+                    msg="The order number is not set.",
                 )
                 # Verify manufacturer
                 verify_variable(
@@ -266,6 +269,10 @@ class Properties:
             self.vars.base_size_preset, resource.props.infra.base_size_preset
         )
         self.doc_helper.setvar_mass(self.vars.mass)
+
+        self.doc_helper.setvar_property(
+            self.vars.order_number, resource.props.infra.order_number
+        )
         self.doc_helper.setvar_property(
             self.vars.manufacturer, resource.props.infra.manufacturer
         )
@@ -301,7 +308,6 @@ class Properties:
         # We retrieve the default catia properties after the user properties, because the source
         # property has a trace, which set the state of the UI.
         self.doc_helper.setvar(self.vars.partnumber, self.doc_helper.partnumber)
-        self.doc_helper.setvar(self.vars.definition, self.doc_helper.definition)
         self.doc_helper.setvar(
             self.vars.revision,
             self.doc_helper.revision,
@@ -311,5 +317,16 @@ class Properties:
             self.vars.source, translate_source(self.doc_helper.source)
         )
         self.doc_helper.setvar(self.vars.description, self.doc_helper.description)
+
+        # Lastly the definition is set. This is depends on the settings.
+        if resource.settings.auto_definition:
+            _definition = calculate_definition(
+                machine=self.vars.machine,
+                partnumber=self.vars.partnumber,
+                revision=self.vars.revision,
+            )
+        else:
+            _definition = self.doc_helper.definition
+        self.doc_helper.setvar(self.vars.definition, _definition)
 
         log.info("Retrieved all properties.")

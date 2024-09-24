@@ -37,12 +37,12 @@ This file contains the basic settings for the app.
             "group": "warning"
         },
         "made": {
-            "definition": null,
+            "order_number": null,
             "material": "warning",
             "process_1": "warning"
         },
         "bought": {
-            "definition": "critical",
+            "order_number": "critical",
             "manufacturer": "critical",
             "supplier": null
         }
@@ -122,10 +122,10 @@ verifications.basic.project | `str` (`critical` or `warning`) or `null` | Sets t
 verifications.basic.machine | `str` (`critical` or `warning`) or `null` | Sets the verification level for the **machine number**. If set to `critical` the property must have a value. If set to `warning` the user receives a warning that the value is empty. If set to `null` the property won't be verified.
 verifications.basic.revision | `str` (`critical` or `warning`) or `null` | Sets the verification level for the **revision number**. If set to `critical` the property must have a value. If set to `warning` the user receives a warning that the value is empty. If set to `null` the property won't be verified.
 verifications.basic.group | `str` (`critical` or `warning`) or `null` | Sets the verification level for the **group**. If set to `critical` the property must have a value. If set to `warning` the user receives a warning that the value is empty. If set to `null` the property won't be verified.
-verifications.made.definition | `str` (`critical` or `warning`) or `null` | Sets the verification level for the **definition** for `made` parts. If set to `critical` the property must have a value. If set to `warning` the user receives a warning that the value is empty. If set to `null` the property won't be verified.
+verifications.made.order_number | `str` (`critical` or `warning`) or `null` | Sets the verification level for the **order number** for `made` parts. If set to `critical` the property must have a value. If set to `warning` the user receives a warning that the value is empty. If set to `null` the property won't be verified.
 verifications.made.material | `str` (`critical` or `warning`) or `null` | Sets the verification level for the **material** for `made` parts. If set to `critical` the property must have a value. If set to `warning` the user receives a warning that the value is empty. If set to `null` the property won't be verified.
 verifications.made.process_1 | `str` (`critical` or `warning`) or `null` | Sets the verification level for the **first process** for `made` parts. If set to `critical` the property must have a value. If set to `warning` the user receives a warning that the value is empty. If set to `null` the property won't be verified.
-verifications.bought.definition | `str` (`critical` or `warning`) or `null` | Sets the verification level for the **definition** for `bought` parts. If set to `critical` the property must have a value. If set to `warning` the user receives a warning that the value is empty. If set to `null` the property won't be verified.
+verifications.bought.order_number | `str` (`critical` or `warning`) or `null` | Sets the verification level for the **order number** for `bought` parts. If set to `critical` the property must have a value. If set to `warning` the user receives a warning that the value is empty. If set to `null` the property won't be verified.
 verifications.bought.manufacturer | `str` (`critical` or `warning`) or `null` | Sets the verification level for the **manufacturer** for `bought` parts. If set to `critical` the property must have a value. If set to `warning` the user receives a warning that the value is empty. If set to `null` the property won't be verified.
 verifications.bought.supplier | `str` (`critical` or `warning`) or `null` | Sets the verification level for the **supplier** for `bought` parts. If set to `critical` the property must have a value. If set to `warning` the user receives a warning that the value is empty. If set to `null` the property won't be verified.
 separators.bought | `str` | The separator that is used for the bought nomenclature.
@@ -135,7 +135,7 @@ nomenclature.bought | `str` | The nomenclature for bought parts or products.
 processes.first | `int` | The index of the first process. Can be 0 or 1.
 processes.min | `int` | The minimum amount of processes to display in the UI.
 processes.max | `int` | The maximum amount of processes to display in the UI.
-auto_definition.enable | `bool` | Wether to automatically generate the definition for made parts or not. The definition is compressed from the three properties `machine partnumber revision` using the hexadecimal representation of the adler-32 algorithm output.
+auto_definition.enable | `bool` | Wether to automatically generate the definition for parts and products or not. The definition is compressed from the three properties `machine partnumber revision` using the hexadecimal representation of the adler-32 algorithm output.
 auto_definition.prefix | `str` | A text that will be prefixed to the calculated definition.
 auto_group.made | `str` or `null` | The value of the group that will be automatically assigned if the source is changed to `made`. If this value is set to `null` the group won't be changed. If you want the group to be empty on change of source, the value must be an empty string `""`.
 auto_group.bought | `str` or `null` | The value of the group that will be automatically assigned if the source is changed to `bought`. If this value is set to `null` the group won't be changed. If you want the group to be empty on change of source, the value must be an empty string `""`.
