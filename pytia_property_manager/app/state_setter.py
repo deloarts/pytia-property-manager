@@ -92,9 +92,6 @@ class UISetter:
             )
         )
 
-        self.vars.definition.set("")
-        self.layout.input_definition.config(state=tk.DISABLED)
-
         self.layout.input_revision.config(state="readonly")
         self.layout.button_revision.configure(state=tk.NORMAL)
 
@@ -115,6 +112,9 @@ class UISetter:
         self.vars.mass.set("")
         self.layout.input_mass.config(state=tk.DISABLED)
         self.layout.button_mass.configure(state=tk.DISABLED)
+
+        self.vars.order_number.set("")
+        self.layout.input_order_number.config(state=tk.DISABLED)
 
         self.vars.manufacturer.set("")
         self.layout.input_manufacturer.config(state=tk.DISABLED)
@@ -177,8 +177,6 @@ class UISetter:
             ),
         )
 
-        self.layout.input_definition.config(state=tk.NORMAL)
-
         self.layout.input_revision.config(state="readonly")
         self.layout.button_revision.configure(state=tk.NORMAL)
 
@@ -195,6 +193,8 @@ class UISetter:
 
         self.layout.input_mass.config(state="readonly")
         self.layout.button_mass.configure(state=tk.NORMAL)
+
+        self.layout.input_order_number.config(state=tk.NORMAL)
 
         self.layout.input_manufacturer.config(state=tk.NORMAL)
 
@@ -252,8 +252,6 @@ class UISetter:
             )
         )
 
-        self.layout.input_definition.config(state=tk.NORMAL)
-
         self.layout.input_revision.config(state="readonly")
         self.layout.button_revision.configure(state=tk.NORMAL)
 
@@ -271,6 +269,8 @@ class UISetter:
 
         self.layout.input_mass.config(state="readonly")
         self.layout.button_mass.configure(state=tk.NORMAL)
+
+        self.layout.input_order_number.config(state=tk.NORMAL)
 
         self.layout.input_manufacturer.config(state=tk.NORMAL)
 
@@ -324,8 +324,6 @@ class UISetter:
 
         self.layout.input_machine.config(state=tk.DISABLED)
 
-        self.layout.input_definition.config(state=tk.DISABLED)
-
         self.layout.input_revision.config(state=tk.DISABLED)
         self.layout.button_revision.configure(state=tk.DISABLED)
 
@@ -341,6 +339,8 @@ class UISetter:
 
         self.layout.input_mass.config(state=tk.DISABLED)
         self.layout.button_mass.configure(state=tk.DISABLED)
+
+        self.layout.input_order_number.config(state=tk.DISABLED)
 
         self.layout.input_manufacturer.config(state=tk.DISABLED)
 

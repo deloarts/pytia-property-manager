@@ -8,7 +8,6 @@ from tkinter import NORMAL
 from tkinter import messagebox as tkmsg
 
 from app.callbacks import on_source_bought
-from app.callbacks import on_source_made
 from app.layout import Layout
 from app.state_setter import UISetter
 from app.tooltips import ToolTip
@@ -181,7 +180,7 @@ class Traces:
                     self.set_ui.bought()
                     on_source_bought(
                         partnumber=self.vars.partnumber,
-                        definition=self.vars.definition,
+                        order_number=self.vars.order_number,
                         manufacturer=self.vars.manufacturer,
                     )
                     if resource.settings.auto_group.bought is not None:
@@ -189,12 +188,6 @@ class Traces:
 
                 case Source.MADE.value:
                     self.set_ui.made()
-                    on_source_made(
-                        machine=self.vars.machine,
-                        partnumber=self.vars.partnumber,
-                        definition=self.vars.definition,
-                        revision=self.vars.revision,
-                    )
                     if resource.settings.auto_group.made is not None:
                         self.vars.group.set(resource.settings.auto_group.made)
 

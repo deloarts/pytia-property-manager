@@ -28,6 +28,8 @@ class Variables:
     base_size: StringVar
     base_size_preset: StringVar
     mass: StringVar
+
+    order_number: StringVar
     manufacturer: StringVar
     supplier: StringVar
     weblink: StringVar
@@ -67,6 +69,7 @@ class Variables:
         self.base_size = StringVar(master=root, name="base_size")
         self.base_size_preset = StringVar(master=root, name="base_size_preset")
         self.mass = StringVar(master=root, name="mass")
+        self.order_number = StringVar(master=root, name="order_number")
         self.manufacturer = StringVar(master=root, name="manufacturer")
         self.supplier = StringVar(master=root, name="supplier")
         self.weblink = StringVar(master=root, name="weblink")

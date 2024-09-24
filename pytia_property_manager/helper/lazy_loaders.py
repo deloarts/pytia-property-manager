@@ -239,11 +239,10 @@ class LazyDocumentHelper:
                     # Set the main body name
                     if variables.machine.get() != "":
                         main_body_name = (
-                            f"{variables.machine.get()}"
-                            " - "
-                            f"{variables.partnumber.get()}"
-                            " - Rev"
-                            f"{variables.revision.get()}"
+                            f"{variables.machine.get()} "
+                            f"{variables.partnumber.get()} "
+                            f"Rev{variables.revision.get()} "
+                            f"({variables.definition.get()})"
                         )
                     else:
                         main_body_name = variables.partnumber.get()
