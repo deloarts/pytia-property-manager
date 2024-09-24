@@ -43,6 +43,7 @@ customer | `str` | The name of the customer of the project.
 description | `str` | The description of the project.
 product | `str` | The product number, in which the part is assembled.
 projects | `List[str]` or `str` | The list of projects associated with this product/workspace.
+definition_prefix | `str` | The prefix for the calculated definition.
 groups | `List[str]` or `str` | A list of default groups for sorting the graph tree and the bill of material.
 responsible | `str` | The name of the person that is responsible for the project.
 delegate | `str` | The name of the person that is representative for the responsible person.
