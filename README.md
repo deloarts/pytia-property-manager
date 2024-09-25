@@ -359,6 +359,7 @@ On a new revision, do the following:
 
 ## 7 changelog
 
+[**v0.7.0**](https://github.com/deloarts/pytia-property-manager/releases/tag/v0.7.0): Add order number and rename machine to product.  
 [**v0.6.1**](https://github.com/deloarts/pytia-property-manager/releases/tag/v0.6.1): Fix linked doc manager.  
 [**v0.6.0**](https://github.com/deloarts/pytia-property-manager/releases/tag/v0.6.0): Add weblink property.  
 [**v0.5.0**](https://github.com/deloarts/pytia-property-manager/releases/tag/v0.5.0): Add auto definition feature.  

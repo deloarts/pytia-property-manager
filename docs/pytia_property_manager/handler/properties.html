@@ -39,13 +39,12 @@ from pathlib import Path
 from app.layout import Layout
 from app.vars import Variables
 from const import PROP_DRAWING_PATH
-from const import VERIFY_CRITICAL
-from const import VERIFY_WARNING
 from const import Source
 from helper.lazy_loaders import LazyDocumentHelper
 from helper.messages import datafield_message
 from helper.translators import translate_nomenclature
 from helper.translators import translate_source
+from helper.values import calculate_definition
 from helper.verifications import verify_process
 from helper.verifications import verify_url
 from helper.verifications import verify_variable
@@ -96,7 +95,7 @@ class Properties:
             resource.props.infra.project, self.vars.project.get()
         )
         self.doc_helper.write_property(
-            resource.props.infra.machine, self.vars.machine.get()
+            resource.props.infra.product, self.vars.product_number.get()
         )
         self.doc_helper.write_property(
             resource.props.infra.material, self.vars.material.get()
@@ -109,6 +108,10 @@ class Properties:
             self.vars.base_size_preset.get(),
         )
         self.doc_helper.write_property(resource.props.infra.mass, self.vars.mass.get())
+
+        self.doc_helper.write_property(
+            resource.props.infra.order_number, self.vars.order_number.get()
+        )
         self.doc_helper.write_property(
             resource.props.infra.manufacturer, self.vars.manufacturer.get()
         )
@@ -166,13 +169,13 @@ class Properties:
             settings_verification=resource.settings.verifications.basic.project,
             msg=&#34;The project number is not set.&#34;,
         )
-        # Verify machine number
+        # Verify product number
         verify_variable(
             critical=critical,
             warning=warning,
-            variable=self.vars.machine,
-            settings_verification=resource.settings.verifications.basic.machine,
-            msg=&#34;The machine number is not set.&#34;,
+            variable=self.vars.product_number,
+            settings_verification=resource.settings.verifications.basic.product,
+            msg=&#34;The product number is not set.&#34;,
         )
         # Verify revision number
         verify_variable(
@@ -193,13 +196,13 @@ class Properties:
 
         match self.vars.source.get():
             case Source.MADE.value:
-                # Verify definition
+                # Verify order number
                 verify_variable(
                     critical=critical,
                     warning=warning,
-                    variable=self.vars.definition,
-                    settings_verification=resource.settings.verifications.made.definition,
-                    msg=&#34;The definition is not set.&#34;,
+                    variable=self.vars.order_number,
+                    settings_verification=resource.settings.verifications.made.order_number,
+                    msg=&#34;The order number is not set.&#34;,
                 )
                 # Verify material
                 if self.doc_helper.is_part:
@@ -221,13 +224,13 @@ class Properties:
                 )
 
             case Source.BOUGHT.value:
-                # Verify definition
+                # Verify order number
                 verify_variable(
                     critical=critical,
                     warning=warning,
-                    variable=self.vars.definition,
-                    settings_verification=resource.settings.verifications.bought.definition,
-                    msg=&#34;The definition is not set.&#34;,
+                    variable=self.vars.order_number,
+                    settings_verification=resource.settings.verifications.bought.order_number,
+                    msg=&#34;The order number is not set.&#34;,
                 )
                 # Verify manufacturer
                 verify_variable(
@@ -275,18 +278,18 @@ class Properties:
         )
 
         if (
-            resource.settings.restrictions.strict_machine
-            and self.workspace.elements.machine
+            resource.settings.restrictions.strict_product
+            and self.workspace.elements.product
         ):
             self.doc_helper.setvar(
-                variable=self.vars.machine,
-                value=self.workspace.elements.machine,
+                variable=self.vars.product_number,
+                value=self.workspace.elements.product,
             )
         else:
             self.doc_helper.setvar_property(
-                self.vars.machine,
-                resource.props.infra.machine,
-                default=self.workspace.elements.machine,
+                self.vars.product_number,
+                resource.props.infra.product,
+                default=self.workspace.elements.product,
             )
 
         self.doc_helper.setvar_material(self.vars.material, self.vars.material_meta)
@@ -297,6 +300,10 @@ class Properties:
             self.vars.base_size_preset, resource.props.infra.base_size_preset
         )
         self.doc_helper.setvar_mass(self.vars.mass)
+
+        self.doc_helper.setvar_property(
+            self.vars.order_number, resource.props.infra.order_number
+        )
         self.doc_helper.setvar_property(
             self.vars.manufacturer, resource.props.infra.manufacturer
         )
@@ -332,7 +339,6 @@ class Properties:
         # We retrieve the default catia properties after the user properties, because the source
         # property has a trace, which set the state of the UI.
         self.doc_helper.setvar(self.vars.partnumber, self.doc_helper.partnumber)
-        self.doc_helper.setvar(self.vars.definition, self.doc_helper.definition)
         self.doc_helper.setvar(
             self.vars.revision,
             self.doc_helper.revision,
@@ -342,6 +348,19 @@ class Properties:
             self.vars.source, translate_source(self.doc_helper.source)
         )
         self.doc_helper.setvar(self.vars.description, self.doc_helper.description)
+
+        # Lastly the definition is set. This is depends on the settings.
+        if resource.settings.auto_definition:
+            _definition = calculate_definition(
+                product_number=self.vars.product_number,
+                partnumber=self.vars.partnumber,
+                revision=self.vars.revision,
+                prefix=self.workspace.elements.definition_prefix
+                or resource.settings.auto_definition.prefix,
+            )
+        else:
+            _definition = self.doc_helper.definition
+        self.doc_helper.setvar(self.vars.definition, _definition)
 
         log.info(&#34;Retrieved all properties.&#34;)</code></pre>
 </details>
@@ -419,7 +438,7 @@ class Properties:
             resource.props.infra.project, self.vars.project.get()
         )
         self.doc_helper.write_property(
-            resource.props.infra.machine, self.vars.machine.get()
+            resource.props.infra.product, self.vars.product_number.get()
         )
         self.doc_helper.write_property(
             resource.props.infra.material, self.vars.material.get()
@@ -432,6 +451,10 @@ class Properties:
             self.vars.base_size_preset.get(),
         )
         self.doc_helper.write_property(resource.props.infra.mass, self.vars.mass.get())
+
+        self.doc_helper.write_property(
+            resource.props.infra.order_number, self.vars.order_number.get()
+        )
         self.doc_helper.write_property(
             resource.props.infra.manufacturer, self.vars.manufacturer.get()
         )
@@ -489,13 +512,13 @@ class Properties:
             settings_verification=resource.settings.verifications.basic.project,
             msg=&#34;The project number is not set.&#34;,
         )
-        # Verify machine number
+        # Verify product number
         verify_variable(
             critical=critical,
             warning=warning,
-            variable=self.vars.machine,
-            settings_verification=resource.settings.verifications.basic.machine,
-            msg=&#34;The machine number is not set.&#34;,
+            variable=self.vars.product_number,
+            settings_verification=resource.settings.verifications.basic.product,
+            msg=&#34;The product number is not set.&#34;,
         )
         # Verify revision number
         verify_variable(
@@ -516,13 +539,13 @@ class Properties:
 
         match self.vars.source.get():
             case Source.MADE.value:
-                # Verify definition
+                # Verify order number
                 verify_variable(
                     critical=critical,
                     warning=warning,
-                    variable=self.vars.definition,
-                    settings_verification=resource.settings.verifications.made.definition,
-                    msg=&#34;The definition is not set.&#34;,
+                    variable=self.vars.order_number,
+                    settings_verification=resource.settings.verifications.made.order_number,
+                    msg=&#34;The order number is not set.&#34;,
                 )
                 # Verify material
                 if self.doc_helper.is_part:
@@ -544,13 +567,13 @@ class Properties:
                 )
 
             case Source.BOUGHT.value:
-                # Verify definition
+                # Verify order number
                 verify_variable(
                     critical=critical,
                     warning=warning,
-                    variable=self.vars.definition,
-                    settings_verification=resource.settings.verifications.bought.definition,
-                    msg=&#34;The definition is not set.&#34;,
+                    variable=self.vars.order_number,
+                    settings_verification=resource.settings.verifications.bought.order_number,
+                    msg=&#34;The order number is not set.&#34;,
                 )
                 # Verify manufacturer
                 verify_variable(
@@ -598,18 +621,18 @@ class Properties:
         )
 
         if (
-            resource.settings.restrictions.strict_machine
-            and self.workspace.elements.machine
+            resource.settings.restrictions.strict_product
+            and self.workspace.elements.product
         ):
             self.doc_helper.setvar(
-                variable=self.vars.machine,
-                value=self.workspace.elements.machine,
+                variable=self.vars.product_number,
+                value=self.workspace.elements.product,
             )
         else:
             self.doc_helper.setvar_property(
-                self.vars.machine,
-                resource.props.infra.machine,
-                default=self.workspace.elements.machine,
+                self.vars.product_number,
+                resource.props.infra.product,
+                default=self.workspace.elements.product,
             )
 
         self.doc_helper.setvar_material(self.vars.material, self.vars.material_meta)
@@ -620,6 +643,10 @@ class Properties:
             self.vars.base_size_preset, resource.props.infra.base_size_preset
         )
         self.doc_helper.setvar_mass(self.vars.mass)
+
+        self.doc_helper.setvar_property(
+            self.vars.order_number, resource.props.infra.order_number
+        )
         self.doc_helper.setvar_property(
             self.vars.manufacturer, resource.props.infra.manufacturer
         )
@@ -655,7 +682,6 @@ class Properties:
         # We retrieve the default catia properties after the user properties, because the source
         # property has a trace, which set the state of the UI.
         self.doc_helper.setvar(self.vars.partnumber, self.doc_helper.partnumber)
-        self.doc_helper.setvar(self.vars.definition, self.doc_helper.definition)
         self.doc_helper.setvar(
             self.vars.revision,
             self.doc_helper.revision,
@@ -665,6 +691,19 @@ class Properties:
             self.vars.source, translate_source(self.doc_helper.source)
         )
         self.doc_helper.setvar(self.vars.description, self.doc_helper.description)
+
+        # Lastly the definition is set. This is depends on the settings.
+        if resource.settings.auto_definition:
+            _definition = calculate_definition(
+                product_number=self.vars.product_number,
+                partnumber=self.vars.partnumber,
+                revision=self.vars.revision,
+                prefix=self.workspace.elements.definition_prefix
+                or resource.settings.auto_definition.prefix,
+            )
+        else:
+            _definition = self.doc_helper.definition
+        self.doc_helper.setvar(self.vars.definition, _definition)
 
         log.info(&#34;Retrieved all properties.&#34;)</code></pre>
 </details>
@@ -697,7 +736,7 @@ class Properties:
         resource.props.infra.project, self.vars.project.get()
     )
     self.doc_helper.write_property(
-        resource.props.infra.machine, self.vars.machine.get()
+        resource.props.infra.product, self.vars.product_number.get()
     )
     self.doc_helper.write_property(
         resource.props.infra.material, self.vars.material.get()
@@ -710,6 +749,10 @@ class Properties:
         self.vars.base_size_preset.get(),
     )
     self.doc_helper.write_property(resource.props.infra.mass, self.vars.mass.get())
+
+    self.doc_helper.write_property(
+        resource.props.infra.order_number, self.vars.order_number.get()
+    )
     self.doc_helper.write_property(
         resource.props.infra.manufacturer, self.vars.manufacturer.get()
     )
@@ -768,18 +811,18 @@ class Properties:
     )
 
     if (
-        resource.settings.restrictions.strict_machine
-        and self.workspace.elements.machine
+        resource.settings.restrictions.strict_product
+        and self.workspace.elements.product
     ):
         self.doc_helper.setvar(
-            variable=self.vars.machine,
-            value=self.workspace.elements.machine,
+            variable=self.vars.product_number,
+            value=self.workspace.elements.product,
         )
     else:
         self.doc_helper.setvar_property(
-            self.vars.machine,
-            resource.props.infra.machine,
-            default=self.workspace.elements.machine,
+            self.vars.product_number,
+            resource.props.infra.product,
+            default=self.workspace.elements.product,
         )
 
     self.doc_helper.setvar_material(self.vars.material, self.vars.material_meta)
@@ -790,6 +833,10 @@ class Properties:
         self.vars.base_size_preset, resource.props.infra.base_size_preset
     )
     self.doc_helper.setvar_mass(self.vars.mass)
+
+    self.doc_helper.setvar_property(
+        self.vars.order_number, resource.props.infra.order_number
+    )
     self.doc_helper.setvar_property(
         self.vars.manufacturer, resource.props.infra.manufacturer
     )
@@ -825,7 +872,6 @@ class Properties:
     # We retrieve the default catia properties after the user properties, because the source
     # property has a trace, which set the state of the UI.
     self.doc_helper.setvar(self.vars.partnumber, self.doc_helper.partnumber)
-    self.doc_helper.setvar(self.vars.definition, self.doc_helper.definition)
     self.doc_helper.setvar(
         self.vars.revision,
         self.doc_helper.revision,
@@ -835,6 +881,19 @@ class Properties:
         self.vars.source, translate_source(self.doc_helper.source)
     )
     self.doc_helper.setvar(self.vars.description, self.doc_helper.description)
+
+    # Lastly the definition is set. This is depends on the settings.
+    if resource.settings.auto_definition:
+        _definition = calculate_definition(
+            product_number=self.vars.product_number,
+            partnumber=self.vars.partnumber,
+            revision=self.vars.revision,
+            prefix=self.workspace.elements.definition_prefix
+            or resource.settings.auto_definition.prefix,
+        )
+    else:
+        _definition = self.doc_helper.definition
+    self.doc_helper.setvar(self.vars.definition, _definition)
 
     log.info(&#34;Retrieved all properties.&#34;)</code></pre>
 </details>
@@ -873,13 +932,13 @@ class Properties:
         settings_verification=resource.settings.verifications.basic.project,
         msg=&#34;The project number is not set.&#34;,
     )
-    # Verify machine number
+    # Verify product number
     verify_variable(
         critical=critical,
         warning=warning,
-        variable=self.vars.machine,
-        settings_verification=resource.settings.verifications.basic.machine,
-        msg=&#34;The machine number is not set.&#34;,
+        variable=self.vars.product_number,
+        settings_verification=resource.settings.verifications.basic.product,
+        msg=&#34;The product number is not set.&#34;,
     )
     # Verify revision number
     verify_variable(
@@ -900,13 +959,13 @@ class Properties:
 
     match self.vars.source.get():
         case Source.MADE.value:
-            # Verify definition
+            # Verify order number
             verify_variable(
                 critical=critical,
                 warning=warning,
-                variable=self.vars.definition,
-                settings_verification=resource.settings.verifications.made.definition,
-                msg=&#34;The definition is not set.&#34;,
+                variable=self.vars.order_number,
+                settings_verification=resource.settings.verifications.made.order_number,
+                msg=&#34;The order number is not set.&#34;,
             )
             # Verify material
             if self.doc_helper.is_part:
@@ -928,13 +987,13 @@ class Properties:
             )
 
         case Source.BOUGHT.value:
-            # Verify definition
+            # Verify order number
             verify_variable(
                 critical=critical,
                 warning=warning,
-                variable=self.vars.definition,
-                settings_verification=resource.settings.verifications.bought.definition,
-                msg=&#34;The definition is not set.&#34;,
+                variable=self.vars.order_number,
+                settings_verification=resource.settings.verifications.bought.order_number,
+                msg=&#34;The order number is not set.&#34;,
             )
             # Verify manufacturer
             verify_variable(
