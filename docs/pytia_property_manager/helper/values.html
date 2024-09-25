@@ -72,24 +72,27 @@ def get_new_revision(variable: StringVar) -&gt; str:
 
 
 def calculate_definition(
-    machine: StringVar, partnumber: StringVar, revision: StringVar
+    product_number: StringVar,
+    partnumber: StringVar,
+    revision: StringVar,
+    prefix: str | None,
 ) -&gt; str:
     &#34;&#34;&#34;Calculates the hex representation of the adler-32 output of the given input.
     The returned value is in upper case. The 0x at the beginning of the hex value will
     be removed.
 
     Args:
-        machine (StringVar): The machine StrVar.
+        product_number (StringVar): The product_number StrVar.
         partnumber (StringVar): The partnumber StrVar.
         revision (StringVar): The revision StrVar.
 
     Returns:
         str: The calculated definition.
     &#34;&#34;&#34;
-    to_encode = f&#34;{machine.get()} {partnumber.get()} {revision.get()}&#34;
+    to_encode = f&#34;{product_number.get()} {partnumber.get()} {revision.get()}&#34;
     encoded = str(hex(adler32(to_encode.encode()))).split(&#34;x&#34;)[-1].upper()
-    if resource.settings.auto_definition.prefix:
-        encoded = resource.settings.auto_definition.prefix + encoded
+    if prefix:
+        encoded = prefix + encoded
     return encoded
 
 
@@ -157,7 +160,7 @@ def set_perceived_brightness(rgb: tuple, brightness: float) -&gt; tuple:
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
 <dt id="pytia_property_manager.helper.values.calculate_definition"><code class="name flex">
-<span>def <span class="ident">calculate_definition</span></span>(<span>machine: tkinter.StringVar, partnumber: tkinter.StringVar, revision: tkinter.StringVar) ‑> str</span>
+<span>def <span class="ident">calculate_definition</span></span>(<span>product_number: tkinter.StringVar, partnumber: tkinter.StringVar, revision: tkinter.StringVar, prefix: Optional[str]) ‑> str</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Calculates the hex representation of the adler-32 output of the given input.
@@ -165,8 +168,8 @@ The returned value is in upper case. The 0x at the beginning of the hex value wi
 be removed.</p>
 <h2 id="args">Args</h2>
 <dl>
-<dt><strong><code>machine</code></strong> :&ensp;<code>StringVar</code></dt>
-<dd>The machine StrVar.</dd>
+<dt><strong><code>product_number</code></strong> :&ensp;<code>StringVar</code></dt>
+<dd>The product_number StrVar.</dd>
 <dt><strong><code>partnumber</code></strong> :&ensp;<code>StringVar</code></dt>
 <dd>The partnumber StrVar.</dd>
 <dt><strong><code>revision</code></strong> :&ensp;<code>StringVar</code></dt>
@@ -182,24 +185,27 @@ be removed.</p>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def calculate_definition(
-    machine: StringVar, partnumber: StringVar, revision: StringVar
+    product_number: StringVar,
+    partnumber: StringVar,
+    revision: StringVar,
+    prefix: str | None,
 ) -&gt; str:
     &#34;&#34;&#34;Calculates the hex representation of the adler-32 output of the given input.
     The returned value is in upper case. The 0x at the beginning of the hex value will
     be removed.
 
     Args:
-        machine (StringVar): The machine StrVar.
+        product_number (StringVar): The product_number StrVar.
         partnumber (StringVar): The partnumber StrVar.
         revision (StringVar): The revision StrVar.
 
     Returns:
         str: The calculated definition.
     &#34;&#34;&#34;
-    to_encode = f&#34;{machine.get()} {partnumber.get()} {revision.get()}&#34;
+    to_encode = f&#34;{product_number.get()} {partnumber.get()} {revision.get()}&#34;
     encoded = str(hex(adler32(to_encode.encode()))).split(&#34;x&#34;)[-1].upper()
-    if resource.settings.auto_definition.prefix:
-        encoded = resource.settings.auto_definition.prefix + encoded
+    if prefix:
+        encoded = prefix + encoded
     return encoded</code></pre>
 </details>
 </dd>

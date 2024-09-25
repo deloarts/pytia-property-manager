@@ -72,38 +72,38 @@ class ToolTips:
             )
         # endregion
 
-        # region MACHINE NUMBER
-        if resource.settings.restrictions.strict_machine and workspace.elements.machine:
+        # region PRODUCT NUMBER
+        if resource.settings.restrictions.strict_product and workspace.elements.product:
             ToolTip(
-                widget=layout.input_machine,
+                widget=layout.input_product_number,
                 text=(
-                    "The rule for the machine number is set to 'strict'.\n\n"
-                    "The machine number is given by the workspace configuration. "
-                    "To change the machine number you need to edit the workspace file.\n\n"
-                    "Note: An existing machine number in this document will be overwritten with "
+                    "The rule for the product number is set to 'strict'.\n\n"
+                    "The product number is given by the workspace configuration. "
+                    "To change the product number you need to edit the workspace file.\n\n"
+                    "Note: An existing product number in this document will be overwritten with "
                     "the value provided in the workspace file."
                 ),
             )
         elif (
-            resource.settings.restrictions.strict_machine
+            resource.settings.restrictions.strict_product
             and workspace.available
-            and not workspace.elements.machine
+            and not workspace.elements.product
         ):
             ToolTip(
-                widget=layout.input_machine,
+                widget=layout.input_product_number,
                 text=(
-                    "The rule for the machine number is set to 'strict'.\n\n"
-                    "Warning: No machine number is set in the workspace, you are allowed to use "
-                    "any machine number of your choice. But it is recommended to setup the "
+                    "The rule for the product number is set to 'strict'.\n\n"
+                    "Warning: No product number is set in the workspace, you are allowed to use "
+                    "any product number of your choice. But it is recommended to setup the "
                     "workspace file correctly."
                 ),
             )
-        elif resource.settings.restrictions.strict_machine and not workspace.available:
+        elif resource.settings.restrictions.strict_product and not workspace.available:
             ToolTip(
-                widget=layout.input_machine,
+                widget=layout.input_product_number,
                 text=(
-                    "The rule for the machine numbers is set to 'strict'.\n\n"
-                    "Warning: No workspace file found. You are allowed to use any machine number "
+                    "The rule for the product numbers is set to 'strict'.\n\n"
+                    "Warning: No workspace file found. You are allowed to use any product number "
                     "but you should consider setting up the workspace file correctly."
                 ),
             )
@@ -113,8 +113,8 @@ class ToolTips:
         ToolTip(
             layout.button_source,
             (
-                "Reloads the partnumber, the definition and the manufacturer from the documents "
-                "filename if the source is set to 'bought'.\n\n"
+                "Reloads the partnumber, the order number and the manufacturer from "
+                "the documents filename if the source is set to 'bought'.\n\n"
                 "Overwrites any existing text of these items."
             ),
         )

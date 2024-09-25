@@ -22,12 +22,14 @@ class Variables:
     description: StringVar
 
     project: StringVar
-    machine: StringVar
+    product_number: StringVar
     material: StringVar
     material_meta: StringVar
     base_size: StringVar
     base_size_preset: StringVar
     mass: StringVar
+
+    order_number: StringVar
     manufacturer: StringVar
     supplier: StringVar
     weblink: StringVar
@@ -60,13 +62,14 @@ class Variables:
         self.description = StringVar(master=root, name="description")
 
         self.project = StringVar(master=root, name="project")
-        self.machine = StringVar(master=root, name="machine")
+        self.product_number = StringVar(master=root, name="product_number")
         self.revision = StringVar(master=root, name="revision")
         self.material = StringVar(master=root, name="material")
         self.material_meta = StringVar(master=root, name="material_meta")
         self.base_size = StringVar(master=root, name="base_size")
         self.base_size_preset = StringVar(master=root, name="base_size_preset")
         self.mass = StringVar(master=root, name="mass")
+        self.order_number = StringVar(master=root, name="order_number")
         self.manufacturer = StringVar(master=root, name="manufacturer")
         self.supplier = StringVar(master=root, name="supplier")
         self.weblink = StringVar(master=root, name="weblink")

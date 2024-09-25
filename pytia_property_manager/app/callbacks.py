@@ -41,63 +41,25 @@ from win32api import SetFileAttributes
 from win32con import FILE_ATTRIBUTE_HIDDEN
 
 
-def on_source_made(
-    machine: StringVar,
-    partnumber: StringVar,
-    definition: StringVar,
-    revision: StringVar,
-    force: bool = False,
-) -> None:
-    """Callback function for the made option.
-
-    Args:
-        machine (StringVar): The machine variable.
-        partnumber (StringVar): The partnumber variable.
-        definition (StringVar): The definition variable.
-        revision (StringVar): The revision variable.
-    """
-
-    if not resource.settings.auto_definition.enable:
-        return
-
-    calculated_definition = calculate_definition(
-        machine=machine, partnumber=partnumber, revision=revision
-    )
-
-    if not definition.get() or force:
-        definition.set(calculated_definition)
-
-    elif definition.get() != calculated_definition:
-        tkmsg.showinfo(
-            title=resource.settings.title,
-            message=(
-                f"The app wants to set the definition to {calculated_definition!r}, "
-                "but there's already a value applied to the definition field.\n\n"
-                "If you want to apply the calculated value, you have to click the "
-                "'Reload' button besides the source dropdown in the app."
-            ),
-        )
-
-
 def on_source_bought(
     partnumber: StringVar,
-    definition: StringVar,
+    order_number: StringVar,
     manufacturer: StringVar,
     force: bool = False,
 ) -> None:
     """
     Callback function for the bought option.
 
-    Checks the nomenclature of the partnumber. Writes the definition and the manufacturer if
+    Checks the nomenclature of the partnumber. Writes the order number and the manufacturer if
     the nomenclature is valid. Shows a warning message if the nomenclature is not valid.
 
     Does not overwrite existing values, except when the `force` flag is set to True.
 
     Args:
         partnumber (StringVar): The partnumber variable.
-        definition (StringVar): The definition variable.
+        order_number (StringVar): The order_number variable.
         manufacturer (StringVar): The manufacturer variable.
-        force (bool, optional): Deletes the current definition value and replaces it with the \
+        force (bool, optional): Deletes the current order_number value and replaces it with the \
             result of the nomenclature check. Defaults to False.
     """
     value = partnumber.get()
@@ -107,8 +69,10 @@ def on_source_bought(
             manufacturer.set(values[-1])
         values.pop(-1)
         values.pop(0)
-        if not definition.get() or force:
-            definition.set(resource.settings.separators.bought.join(v for v in values))
+        if not order_number.get() or force:
+            order_number.set(
+                resource.settings.separators.bought.join(v for v in values)
+            )
     else:
         log.info(
             "Source option 'bought' is selected, but the nomenclature is not valid. "
@@ -284,9 +248,11 @@ class Callbacks:
                 if resource.settings.auto_definition.enable:
                     self.vars.definition.set(
                         calculate_definition(
-                            machine=self.vars.machine,
+                            product_number=self.vars.product_number,
                             partnumber=self.vars.partnumber,
                             revision=self.vars.revision,
+                            prefix=self.workspace.elements.definition_prefix
+                            or resource.settings.auto_definition.prefix,
                         )
                     )
 
@@ -344,16 +310,8 @@ class Callbacks:
         if self.vars.source.get() == Source.BOUGHT.value:
             on_source_bought(
                 partnumber=self.vars.partnumber,
-                definition=self.vars.definition,
+                order_number=self.vars.order_number,
                 manufacturer=self.vars.manufacturer,
-                force=True,
-            )
-        elif self.vars.source.get() == Source.MADE.value:
-            on_source_made(
-                machine=self.vars.machine,
-                partnumber=self.vars.partnumber,
-                definition=self.vars.definition,
-                revision=self.vars.revision,
                 force=True,
             )
 

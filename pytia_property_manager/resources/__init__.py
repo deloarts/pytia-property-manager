@@ -44,7 +44,7 @@ class SettingsRestrictions:
     allow_unsaved: bool
     allow_outside_workspace: bool
     strict_project: bool
-    strict_machine: bool
+    strict_product: bool
     enable_information: bool
 
 
@@ -53,7 +53,7 @@ class SettingsVerificationsBasic:
     """Dataclass for basic property verification settings."""
 
     project: Literal["critical", "warning"] | None
-    machine: Literal["critical", "warning"] | None
+    product: Literal["critical", "warning"] | None
     revision: Literal["critical", "warning"] | None
     group: Literal["critical", "warning"] | None
 
@@ -62,7 +62,7 @@ class SettingsVerificationsBasic:
 class SettingsVerificationsMade:
     """Dataclass for made property verification settings."""
 
-    definition: Literal["critical", "warning"] | None
+    order_number: Literal["critical", "warning"] | None
     material: Literal["critical", "warning"] | None
     process_1: Literal["critical", "warning"] | None
 
@@ -71,7 +71,7 @@ class SettingsVerificationsMade:
 class SettingsVerificationsBought:
     """Dataclass for bought property verification settings."""
 
-    definition: Literal["critical", "warning"] | None
+    order_number: Literal["critical", "warning"] | None
     manufacturer: Literal["critical", "warning"] | None
     supplier: Literal["critical", "warning"] | None
 
@@ -215,11 +215,12 @@ class PropsInfra:
     """Dataclass for infrastructure properties on the document (properties.json)."""
 
     project: str
-    machine: str
+    product: str
     material: str
     base_size: str
     base_size_preset: str
     mass: str
+    order_number: str
     manufacturer: str
     supplier: str
     weblink: str

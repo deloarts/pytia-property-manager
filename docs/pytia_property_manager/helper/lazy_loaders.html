@@ -266,13 +266,12 @@ class LazyDocumentHelper:
             match variables.source.get():
                 case Source.MADE.value:
                     # Set the main body name
-                    if variables.machine.get() != &#34;&#34;:
+                    if variables.product_number.get() != &#34;&#34;:
                         main_body_name = (
-                            f&#34;{variables.machine.get()}&#34;
-                            &#34; - &#34;
-                            f&#34;{variables.partnumber.get()}&#34;
-                            &#34; - Rev&#34;
-                            f&#34;{variables.revision.get()}&#34;
+                            f&#34;{variables.product_number.get()} &#34;
+                            f&#34;{variables.partnumber.get()} &#34;
+                            f&#34;Rev{variables.revision.get()} &#34;
+                            f&#34;({variables.definition.get()})&#34;
                         )
                     else:
                         main_body_name = variables.partnumber.get()
@@ -856,13 +855,12 @@ document changes all operations will be made on the original document.</p>
             match variables.source.get():
                 case Source.MADE.value:
                     # Set the main body name
-                    if variables.machine.get() != &#34;&#34;:
+                    if variables.product_number.get() != &#34;&#34;:
                         main_body_name = (
-                            f&#34;{variables.machine.get()}&#34;
-                            &#34; - &#34;
-                            f&#34;{variables.partnumber.get()}&#34;
-                            &#34; - Rev&#34;
-                            f&#34;{variables.revision.get()}&#34;
+                            f&#34;{variables.product_number.get()} &#34;
+                            f&#34;{variables.partnumber.get()} &#34;
+                            f&#34;Rev{variables.revision.get()} &#34;
+                            f&#34;({variables.definition.get()})&#34;
                         )
                     else:
                         main_body_name = variables.partnumber.get()
@@ -1503,13 +1501,12 @@ on the source.</p>
         match variables.source.get():
             case Source.MADE.value:
                 # Set the main body name
-                if variables.machine.get() != &#34;&#34;:
+                if variables.product_number.get() != &#34;&#34;:
                     main_body_name = (
-                        f&#34;{variables.machine.get()}&#34;
-                        &#34; - &#34;
-                        f&#34;{variables.partnumber.get()}&#34;
-                        &#34; - Rev&#34;
-                        f&#34;{variables.revision.get()}&#34;
+                        f&#34;{variables.product_number.get()} &#34;
+                        f&#34;{variables.partnumber.get()} &#34;
+                        f&#34;Rev{variables.revision.get()} &#34;
+                        f&#34;({variables.definition.get()})&#34;
                     )
                 else:
                     main_body_name = variables.partnumber.get()

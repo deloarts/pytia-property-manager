@@ -51,12 +51,14 @@ class Variables:
     description: StringVar
 
     project: StringVar
-    machine: StringVar
+    product_number: StringVar
     material: StringVar
     material_meta: StringVar
     base_size: StringVar
     base_size_preset: StringVar
     mass: StringVar
+
+    order_number: StringVar
     manufacturer: StringVar
     supplier: StringVar
     weblink: StringVar
@@ -89,13 +91,14 @@ class Variables:
         self.description = StringVar(master=root, name=&#34;description&#34;)
 
         self.project = StringVar(master=root, name=&#34;project&#34;)
-        self.machine = StringVar(master=root, name=&#34;machine&#34;)
+        self.product_number = StringVar(master=root, name=&#34;product_number&#34;)
         self.revision = StringVar(master=root, name=&#34;revision&#34;)
         self.material = StringVar(master=root, name=&#34;material&#34;)
         self.material_meta = StringVar(master=root, name=&#34;material_meta&#34;)
         self.base_size = StringVar(master=root, name=&#34;base_size&#34;)
         self.base_size_preset = StringVar(master=root, name=&#34;base_size_preset&#34;)
         self.mass = StringVar(master=root, name=&#34;mass&#34;)
+        self.order_number = StringVar(master=root, name=&#34;order_number&#34;)
         self.manufacturer = StringVar(master=root, name=&#34;manufacturer&#34;)
         self.supplier = StringVar(master=root, name=&#34;supplier&#34;)
         self.weblink = StringVar(master=root, name=&#34;weblink&#34;)
@@ -160,12 +163,14 @@ class Variables:
     description: StringVar
 
     project: StringVar
-    machine: StringVar
+    product_number: StringVar
     material: StringVar
     material_meta: StringVar
     base_size: StringVar
     base_size_preset: StringVar
     mass: StringVar
+
+    order_number: StringVar
     manufacturer: StringVar
     supplier: StringVar
     weblink: StringVar
@@ -198,13 +203,14 @@ class Variables:
         self.description = StringVar(master=root, name=&#34;description&#34;)
 
         self.project = StringVar(master=root, name=&#34;project&#34;)
-        self.machine = StringVar(master=root, name=&#34;machine&#34;)
+        self.product_number = StringVar(master=root, name=&#34;product_number&#34;)
         self.revision = StringVar(master=root, name=&#34;revision&#34;)
         self.material = StringVar(master=root, name=&#34;material&#34;)
         self.material_meta = StringVar(master=root, name=&#34;material_meta&#34;)
         self.base_size = StringVar(master=root, name=&#34;base_size&#34;)
         self.base_size_preset = StringVar(master=root, name=&#34;base_size_preset&#34;)
         self.mass = StringVar(master=root, name=&#34;mass&#34;)
+        self.order_number = StringVar(master=root, name=&#34;order_number&#34;)
         self.manufacturer = StringVar(master=root, name=&#34;manufacturer&#34;)
         self.supplier = StringVar(master=root, name=&#34;supplier&#34;)
         self.weblink = StringVar(master=root, name=&#34;weblink&#34;)
@@ -269,10 +275,6 @@ class Variables:
 <dd>
 <div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
 </dd>
-<dt id="pytia_property_manager.app.vars.Variables.machine"><code class="name">var <span class="ident">machine</span> : tkinter.StringVar</code></dt>
-<dd>
-<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
-</dd>
 <dt id="pytia_property_manager.app.vars.Variables.manufacturer"><code class="name">var <span class="ident">manufacturer</span> : tkinter.StringVar</code></dt>
 <dd>
 <div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
@@ -297,11 +299,19 @@ class Variables:
 <dd>
 <div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
 </dd>
+<dt id="pytia_property_manager.app.vars.Variables.order_number"><code class="name">var <span class="ident">order_number</span> : tkinter.StringVar</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
 <dt id="pytia_property_manager.app.vars.Variables.partnumber"><code class="name">var <span class="ident">partnumber</span> : tkinter.StringVar</code></dt>
 <dd>
 <div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
 </dd>
 <dt id="pytia_property_manager.app.vars.Variables.previous_source"><code class="name">var <span class="ident">previous_source</span> : tkinter.StringVar</code></dt>
+<dd>
+<div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
+</dd>
+<dt id="pytia_property_manager.app.vars.Variables.product_number"><code class="name">var <span class="ident">product_number</span> : tkinter.StringVar</code></dt>
 <dd>
 <div class="desc"><p>Return an attribute of instance, which is of type owner.</p></div>
 </dd>
@@ -371,15 +381,16 @@ class Variables:
 <li><code><a title="pytia_property_manager.app.vars.Variables.group" href="#pytia_property_manager.app.vars.Variables.group">group</a></code></li>
 <li><code><a title="pytia_property_manager.app.vars.Variables.linked_doc" href="#pytia_property_manager.app.vars.Variables.linked_doc">linked_doc</a></code></li>
 <li><code><a title="pytia_property_manager.app.vars.Variables.linked_doc_display" href="#pytia_property_manager.app.vars.Variables.linked_doc_display">linked_doc_display</a></code></li>
-<li><code><a title="pytia_property_manager.app.vars.Variables.machine" href="#pytia_property_manager.app.vars.Variables.machine">machine</a></code></li>
 <li><code><a title="pytia_property_manager.app.vars.Variables.manufacturer" href="#pytia_property_manager.app.vars.Variables.manufacturer">manufacturer</a></code></li>
 <li><code><a title="pytia_property_manager.app.vars.Variables.mass" href="#pytia_property_manager.app.vars.Variables.mass">mass</a></code></li>
 <li><code><a title="pytia_property_manager.app.vars.Variables.material" href="#pytia_property_manager.app.vars.Variables.material">material</a></code></li>
 <li><code><a title="pytia_property_manager.app.vars.Variables.material_meta" href="#pytia_property_manager.app.vars.Variables.material_meta">material_meta</a></code></li>
 <li><code><a title="pytia_property_manager.app.vars.Variables.modifier" href="#pytia_property_manager.app.vars.Variables.modifier">modifier</a></code></li>
 <li><code><a title="pytia_property_manager.app.vars.Variables.modifier_display" href="#pytia_property_manager.app.vars.Variables.modifier_display">modifier_display</a></code></li>
+<li><code><a title="pytia_property_manager.app.vars.Variables.order_number" href="#pytia_property_manager.app.vars.Variables.order_number">order_number</a></code></li>
 <li><code><a title="pytia_property_manager.app.vars.Variables.partnumber" href="#pytia_property_manager.app.vars.Variables.partnumber">partnumber</a></code></li>
 <li><code><a title="pytia_property_manager.app.vars.Variables.previous_source" href="#pytia_property_manager.app.vars.Variables.previous_source">previous_source</a></code></li>
+<li><code><a title="pytia_property_manager.app.vars.Variables.product_number" href="#pytia_property_manager.app.vars.Variables.product_number">product_number</a></code></li>
 <li><code><a title="pytia_property_manager.app.vars.Variables.project" href="#pytia_property_manager.app.vars.Variables.project">project</a></code></li>
 <li><code><a title="pytia_property_manager.app.vars.Variables.revision" href="#pytia_property_manager.app.vars.Variables.revision">revision</a></code></li>
 <li><code><a title="pytia_property_manager.app.vars.Variables.set_view" href="#pytia_property_manager.app.vars.Variables.set_view">set_view</a></code></li>
