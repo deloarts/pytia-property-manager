@@ -11,13 +11,13 @@
         "allow_unsaved": true,
         "allow_outside_workspace": true,
         "strict_project": false,
-        "strict_machine": false,
+        "strict_product": false,
         "enable_information": true
     },
     "verifications": {
         "basic": {
             "project": "critical",
-            "machine": "critical",
+            "product": "critical",
             "revision": "critical",
             "group": "warning"
         },
@@ -37,7 +37,7 @@
         "metadata": " -- "
     },
     "nomenclature": {
-        "made": "MACHINE-ASSEMBLY-PART",
+        "made": "PRODUCT-ASSEMBLY-PART",
         "bought": "NAME - ORDER NUMBER - MANUFACTURER"
     },
     "processes": {

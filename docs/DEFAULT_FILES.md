@@ -83,7 +83,7 @@ This file contains all part properties, which are required for this app.
 {
     "infra": {
         "project": "pytia.project",
-        "machine": "pytia.machine",
+        "product": "pytia.product",
         "material": "pytia.material",
         "base_size": "pytia.base_size",
         "base_size_preset": "pytia.base_size_preset",

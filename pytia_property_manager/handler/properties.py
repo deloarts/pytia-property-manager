@@ -64,7 +64,7 @@ class Properties:
             resource.props.infra.project, self.vars.project.get()
         )
         self.doc_helper.write_property(
-            resource.props.infra.machine, self.vars.machine.get()
+            resource.props.infra.product, self.vars.product_number.get()
         )
         self.doc_helper.write_property(
             resource.props.infra.material, self.vars.material.get()
@@ -138,13 +138,13 @@ class Properties:
             settings_verification=resource.settings.verifications.basic.project,
             msg="The project number is not set.",
         )
-        # Verify machine number
+        # Verify product number
         verify_variable(
             critical=critical,
             warning=warning,
-            variable=self.vars.machine,
-            settings_verification=resource.settings.verifications.basic.machine,
-            msg="The machine number is not set.",
+            variable=self.vars.product_number,
+            settings_verification=resource.settings.verifications.basic.product,
+            msg="The product number is not set.",
         )
         # Verify revision number
         verify_variable(
@@ -247,18 +247,18 @@ class Properties:
         )
 
         if (
-            resource.settings.restrictions.strict_machine
-            and self.workspace.elements.machine
+            resource.settings.restrictions.strict_product
+            and self.workspace.elements.product
         ):
             self.doc_helper.setvar(
-                variable=self.vars.machine,
-                value=self.workspace.elements.machine,
+                variable=self.vars.product_number,
+                value=self.workspace.elements.product,
             )
         else:
             self.doc_helper.setvar_property(
-                self.vars.machine,
-                resource.props.infra.machine,
-                default=self.workspace.elements.machine,
+                self.vars.product_number,
+                resource.props.infra.product,
+                default=self.workspace.elements.product,
             )
 
         self.doc_helper.setvar_material(self.vars.material, self.vars.material_meta)
@@ -321,9 +321,11 @@ class Properties:
         # Lastly the definition is set. This is depends on the settings.
         if resource.settings.auto_definition:
             _definition = calculate_definition(
-                machine=self.vars.machine,
+                product_number=self.vars.product_number,
                 partnumber=self.vars.partnumber,
                 revision=self.vars.revision,
+                prefix=self.workspace.elements.definition_prefix
+                or resource.settings.auto_definition.prefix,
             )
         else:
             _definition = self.doc_helper.definition

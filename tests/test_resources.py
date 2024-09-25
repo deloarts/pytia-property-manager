@@ -33,7 +33,7 @@ def test_settings():
     assert isinstance(resource.settings.restrictions.allow_unsaved, bool)
     assert isinstance(resource.settings.restrictions.allow_outside_workspace, bool)
     assert isinstance(resource.settings.restrictions.strict_project, bool)
-    assert isinstance(resource.settings.restrictions.strict_machine, bool)
+    assert isinstance(resource.settings.restrictions.strict_product, bool)
     assert isinstance(resource.settings.restrictions.enable_information, bool)
 
     assert isinstance(resource.settings.separators.bought, str)
@@ -72,7 +72,7 @@ def test_properties():
     from pytia_property_manager.resources import resource
 
     assert "project" in resource.props.infra.keys
-    assert "machine" in resource.props.infra.keys
+    assert "product" in resource.props.infra.keys
     assert "material" in resource.props.infra.keys
     assert "base_size" in resource.props.infra.keys
     assert "base_size_preset" in resource.props.infra.keys
