@@ -127,6 +127,7 @@ class Callbacks:
 
         self._bind_button_callbacks()
         self._bind_widget_callbacks()
+        self._bind_menu_callbacks()
         log.info("Callbacks initialized.")
 
     def _bind_button_callbacks(self) -> None:
@@ -134,11 +135,14 @@ class Callbacks:
         self.layout.button_revision.configure(command=self.on_btn_revision)
         self.layout.button_source.configure(command=self.on_btn_reload_source)
         self.layout.button_material.configure(command=self.on_btn_material)
-        self.layout.button_base_size.configure(command=self.on_btn_bounding_box)
         self.layout.button_mass.configure(command=self.on_btn_mass)
         self.layout.button_weblink.configure(command=self.on_btn_weblink)
         self.layout.button_save.configure(command=self.on_btn_save)
         self.layout.button_abort.configure(command=self.on_btn_abort)
+
+    def _bind_menu_callbacks(self) -> None:
+        """Binds all callbacks to the menubar."""
+        self.layout.tools_menu.entryconfig(0, command=self.on_calculate_bounding_box)
 
     def _bind_widget_callbacks(self) -> None:
         """Binds all callbacks to the main windows widgets."""
@@ -288,8 +292,9 @@ class Callbacks:
             ui_setter=self.set_ui,
         )
 
-    def on_btn_bounding_box(self) -> None:
-        """Callback function for the bounding box button. Launches the bounding box app."""
+    def on_calculate_bounding_box(self) -> None:
+        """Callback function for the bounding box tool menu entry.
+        Launches the bounding box app."""
         log.info("Callback for button 'Bounding Box'.")
         self.set_ui.loading()
 

@@ -17,7 +17,7 @@ class Frames:
             row=0, column=0, sticky="nsew", padx=(10, 20), pady=(10, 5)
         )
         self._frame_left.grid_columnconfigure(1, weight=1)
-        self._frame_left.grid_rowconfigure(16, weight=1)
+        self._frame_left.grid_rowconfigure(15, weight=1)
 
         self._frame_middle = Labelframe(master=root, text="Notes")
         self._frame_middle.grid(
