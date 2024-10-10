@@ -47,6 +47,9 @@ class Layout:
             self._appearance_menu.add_command(label=style)
 
         self._tools_menu = Menu(menubar, tearoff=False)
+        self._tools_menu.add_command(label="Add Drawing File")
+        self._tools_menu.add_command(label="Remove Drawing File")
+        self._tools_menu.add_separator()
         self._tools_menu.add_command(label="Calculate Bounding Box")
 
         menubar.add_cascade(label="Help", command=show_help)
