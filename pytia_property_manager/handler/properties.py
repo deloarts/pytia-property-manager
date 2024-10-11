@@ -111,6 +111,10 @@ class Properties:
         self.doc_helper.write_process_notes(self.layout.processes)
 
         self.doc_helper.write_modifier()
+
+        self.doc_helper.write_property(
+            PROP_DRAWING_PATH, value=self.vars.linked_doc.get()
+        )
         log.info("Checked out custom properties.")
 
     def verify(self) -> bool:

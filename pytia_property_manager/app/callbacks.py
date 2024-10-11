@@ -16,6 +16,7 @@ from stat import S_IROTH
 from stat import S_IWUSR
 from tkinter import StringVar
 from tkinter import Tk
+from tkinter import filedialog
 from tkinter import messagebox as tkmsg
 from tkinter import simpledialog
 
@@ -36,6 +37,8 @@ from pytia.log import log
 from pytia_ui_tools.handlers.workspace_handler import Workspace
 from pytia_ui_tools.helper.values import add_current_value_to_combobox_list
 from resources import resource
+from resources.utils import create_path_symlink
+from resources.utils import create_path_workspace_level
 from resources.utils import expand_env_vars
 from win32api import SetFileAttributes
 from win32con import FILE_ATTRIBUTE_HIDDEN
@@ -142,7 +145,9 @@ class Callbacks:
 
     def _bind_menu_callbacks(self) -> None:
         """Binds all callbacks to the menubar."""
-        self.layout.tools_menu.entryconfig(0, command=self.on_calculate_bounding_box)
+        self.layout.tools_menu.entryconfig(0, command=self.on_add_drawing_file)
+        self.layout.tools_menu.entryconfig(1, command=self.on_remove_drawing_file)
+        self.layout.tools_menu.entryconfig(3, command=self.on_calculate_bounding_box)
 
     def _bind_widget_callbacks(self) -> None:
         """Binds all callbacks to the main windows widgets."""
@@ -351,6 +356,45 @@ class Callbacks:
             log.info("User opened linked document (window).")
             sys.exit()
         if linked_doc.is_file() and linked_doc.suffix == SUFFIX_DRAWING:
-            self.doc_helper.framework.catia.documents.open(str(linked_doc))
+            self.doc_helper.framework.catia.documents.open(linked_doc)
             log.info("User opened linked document (file).")
             sys.exit()
+
+    def on_add_drawing_file(self) -> None:
+        """Adds a drawing file to the doc properties"""
+        drawing_file = Path(
+            filedialog.askopenfilename(
+                parent=self.root,
+                title=resource.settings.title,
+                initialdir=self.workspace.workspace_folder,
+                defaultextension="*.CATDrawing",
+                filetypes=[("CATDrawing", "*.CATDrawing")],
+            )
+        )
+        if not drawing_file.is_file():
+            tkmsg.showwarning(
+                title=resource.settings.title,
+                message=("The given path is not a valid file."),
+            )
+            return
+
+        if self.workspace and self.workspace.workspace_folder:
+            self.vars.linked_doc.set(
+                create_path_workspace_level(
+                    path=drawing_file,
+                    workspace_folder=self.workspace.workspace_folder,
+                    always_apply_relative=False,
+                )
+            )
+        else:
+            self.vars.linked_doc.set(
+                create_path_symlink(
+                    path=drawing_file,
+                    alway_apply_symlink=False,
+                )
+            )
+
+    def on_remove_drawing_file(self) -> None:
+        """Removes the drawing file link from the documents properties"""
+        self.doc_helper.document.properties.delete(PROP_DRAWING_PATH)
+        self.vars.linked_doc_display.set("Link removed")
