@@ -45,6 +45,7 @@ from stat import S_IROTH
 from stat import S_IWUSR
 from tkinter import StringVar
 from tkinter import Tk
+from tkinter import filedialog
 from tkinter import messagebox as tkmsg
 from tkinter import simpledialog
 
@@ -65,6 +66,8 @@ from pytia.log import log
 from pytia_ui_tools.handlers.workspace_handler import Workspace
 from pytia_ui_tools.helper.values import add_current_value_to_combobox_list
 from resources import resource
+from resources.utils import create_path_symlink
+from resources.utils import create_path_workspace_level
 from resources.utils import expand_env_vars
 from win32api import SetFileAttributes
 from win32con import FILE_ATTRIBUTE_HIDDEN
@@ -156,6 +159,7 @@ class Callbacks:
 
         self._bind_button_callbacks()
         self._bind_widget_callbacks()
+        self._bind_menu_callbacks()
         log.info(&#34;Callbacks initialized.&#34;)
 
     def _bind_button_callbacks(self) -&gt; None:
@@ -163,11 +167,16 @@ class Callbacks:
         self.layout.button_revision.configure(command=self.on_btn_revision)
         self.layout.button_source.configure(command=self.on_btn_reload_source)
         self.layout.button_material.configure(command=self.on_btn_material)
-        self.layout.button_base_size.configure(command=self.on_btn_bounding_box)
         self.layout.button_mass.configure(command=self.on_btn_mass)
         self.layout.button_weblink.configure(command=self.on_btn_weblink)
         self.layout.button_save.configure(command=self.on_btn_save)
         self.layout.button_abort.configure(command=self.on_btn_abort)
+
+    def _bind_menu_callbacks(self) -&gt; None:
+        &#34;&#34;&#34;Binds all callbacks to the menubar.&#34;&#34;&#34;
+        self.layout.tools_menu.entryconfig(0, command=self.on_add_drawing_file)
+        self.layout.tools_menu.entryconfig(1, command=self.on_remove_drawing_file)
+        self.layout.tools_menu.entryconfig(3, command=self.on_calculate_bounding_box)
 
     def _bind_widget_callbacks(self) -&gt; None:
         &#34;&#34;&#34;Binds all callbacks to the main windows widgets.&#34;&#34;&#34;
@@ -317,8 +326,9 @@ class Callbacks:
             ui_setter=self.set_ui,
         )
 
-    def on_btn_bounding_box(self) -&gt; None:
-        &#34;&#34;&#34;Callback function for the bounding box button. Launches the bounding box app.&#34;&#34;&#34;
+    def on_calculate_bounding_box(self) -&gt; None:
+        &#34;&#34;&#34;Callback function for the bounding box tool menu entry.
+        Launches the bounding box app.&#34;&#34;&#34;
         log.info(&#34;Callback for button &#39;Bounding Box&#39;.&#34;)
         self.set_ui.loading()
 
@@ -375,9 +385,48 @@ class Callbacks:
             log.info(&#34;User opened linked document (window).&#34;)
             sys.exit()
         if linked_doc.is_file() and linked_doc.suffix == SUFFIX_DRAWING:
-            self.doc_helper.framework.catia.documents.open(str(linked_doc))
+            self.doc_helper.framework.catia.documents.open(linked_doc)
             log.info(&#34;User opened linked document (file).&#34;)
-            sys.exit()</code></pre>
+            sys.exit()
+
+    def on_add_drawing_file(self) -&gt; None:
+        &#34;&#34;&#34;Adds a drawing file to the doc properties&#34;&#34;&#34;
+        drawing_file = Path(
+            filedialog.askopenfilename(
+                parent=self.root,
+                title=resource.settings.title,
+                initialdir=self.workspace.workspace_folder,
+                defaultextension=&#34;*.CATDrawing&#34;,
+                filetypes=[(&#34;CATDrawing&#34;, &#34;*.CATDrawing&#34;)],
+            )
+        )
+        if not drawing_file.is_file():
+            tkmsg.showwarning(
+                title=resource.settings.title,
+                message=(&#34;The given path is not a valid file.&#34;),
+            )
+            return
+
+        if self.workspace and self.workspace.workspace_folder:
+            self.vars.linked_doc.set(
+                create_path_workspace_level(
+                    path=drawing_file,
+                    workspace_folder=self.workspace.workspace_folder,
+                    always_apply_relative=False,
+                )
+            )
+        else:
+            self.vars.linked_doc.set(
+                create_path_symlink(
+                    path=drawing_file,
+                    alway_apply_symlink=False,
+                )
+            )
+
+    def on_remove_drawing_file(self) -&gt; None:
+        &#34;&#34;&#34;Removes the drawing file link from the documents properties&#34;&#34;&#34;
+        self.doc_helper.document.properties.delete(PROP_DRAWING_PATH)
+        self.vars.linked_doc_display.set(&#34;Link removed&#34;)</code></pre>
 </details>
 </section>
 <section>
@@ -530,6 +579,7 @@ result of the nomenclature check. Defaults to False.</dd>
 
         self._bind_button_callbacks()
         self._bind_widget_callbacks()
+        self._bind_menu_callbacks()
         log.info(&#34;Callbacks initialized.&#34;)
 
     def _bind_button_callbacks(self) -&gt; None:
@@ -537,11 +587,16 @@ result of the nomenclature check. Defaults to False.</dd>
         self.layout.button_revision.configure(command=self.on_btn_revision)
         self.layout.button_source.configure(command=self.on_btn_reload_source)
         self.layout.button_material.configure(command=self.on_btn_material)
-        self.layout.button_base_size.configure(command=self.on_btn_bounding_box)
         self.layout.button_mass.configure(command=self.on_btn_mass)
         self.layout.button_weblink.configure(command=self.on_btn_weblink)
         self.layout.button_save.configure(command=self.on_btn_save)
         self.layout.button_abort.configure(command=self.on_btn_abort)
+
+    def _bind_menu_callbacks(self) -&gt; None:
+        &#34;&#34;&#34;Binds all callbacks to the menubar.&#34;&#34;&#34;
+        self.layout.tools_menu.entryconfig(0, command=self.on_add_drawing_file)
+        self.layout.tools_menu.entryconfig(1, command=self.on_remove_drawing_file)
+        self.layout.tools_menu.entryconfig(3, command=self.on_calculate_bounding_box)
 
     def _bind_widget_callbacks(self) -&gt; None:
         &#34;&#34;&#34;Binds all callbacks to the main windows widgets.&#34;&#34;&#34;
@@ -691,8 +746,9 @@ result of the nomenclature check. Defaults to False.</dd>
             ui_setter=self.set_ui,
         )
 
-    def on_btn_bounding_box(self) -&gt; None:
-        &#34;&#34;&#34;Callback function for the bounding box button. Launches the bounding box app.&#34;&#34;&#34;
+    def on_calculate_bounding_box(self) -&gt; None:
+        &#34;&#34;&#34;Callback function for the bounding box tool menu entry.
+        Launches the bounding box app.&#34;&#34;&#34;
         log.info(&#34;Callback for button &#39;Bounding Box&#39;.&#34;)
         self.set_ui.loading()
 
@@ -749,12 +805,95 @@ result of the nomenclature check. Defaults to False.</dd>
             log.info(&#34;User opened linked document (window).&#34;)
             sys.exit()
         if linked_doc.is_file() and linked_doc.suffix == SUFFIX_DRAWING:
-            self.doc_helper.framework.catia.documents.open(str(linked_doc))
+            self.doc_helper.framework.catia.documents.open(linked_doc)
             log.info(&#34;User opened linked document (file).&#34;)
-            sys.exit()</code></pre>
+            sys.exit()
+
+    def on_add_drawing_file(self) -&gt; None:
+        &#34;&#34;&#34;Adds a drawing file to the doc properties&#34;&#34;&#34;
+        drawing_file = Path(
+            filedialog.askopenfilename(
+                parent=self.root,
+                title=resource.settings.title,
+                initialdir=self.workspace.workspace_folder,
+                defaultextension=&#34;*.CATDrawing&#34;,
+                filetypes=[(&#34;CATDrawing&#34;, &#34;*.CATDrawing&#34;)],
+            )
+        )
+        if not drawing_file.is_file():
+            tkmsg.showwarning(
+                title=resource.settings.title,
+                message=(&#34;The given path is not a valid file.&#34;),
+            )
+            return
+
+        if self.workspace and self.workspace.workspace_folder:
+            self.vars.linked_doc.set(
+                create_path_workspace_level(
+                    path=drawing_file,
+                    workspace_folder=self.workspace.workspace_folder,
+                    always_apply_relative=False,
+                )
+            )
+        else:
+            self.vars.linked_doc.set(
+                create_path_symlink(
+                    path=drawing_file,
+                    alway_apply_symlink=False,
+                )
+            )
+
+    def on_remove_drawing_file(self) -&gt; None:
+        &#34;&#34;&#34;Removes the drawing file link from the documents properties&#34;&#34;&#34;
+        self.doc_helper.document.properties.delete(PROP_DRAWING_PATH)
+        self.vars.linked_doc_display.set(&#34;Link removed&#34;)</code></pre>
 </details>
 <h3>Methods</h3>
 <dl>
+<dt id="pytia_property_manager.app.callbacks.Callbacks.on_add_drawing_file"><code class="name flex">
+<span>def <span class="ident">on_add_drawing_file</span></span>(<span>self) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Adds a drawing file to the doc properties</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def on_add_drawing_file(self) -&gt; None:
+    &#34;&#34;&#34;Adds a drawing file to the doc properties&#34;&#34;&#34;
+    drawing_file = Path(
+        filedialog.askopenfilename(
+            parent=self.root,
+            title=resource.settings.title,
+            initialdir=self.workspace.workspace_folder,
+            defaultextension=&#34;*.CATDrawing&#34;,
+            filetypes=[(&#34;CATDrawing&#34;, &#34;*.CATDrawing&#34;)],
+        )
+    )
+    if not drawing_file.is_file():
+        tkmsg.showwarning(
+            title=resource.settings.title,
+            message=(&#34;The given path is not a valid file.&#34;),
+        )
+        return
+
+    if self.workspace and self.workspace.workspace_folder:
+        self.vars.linked_doc.set(
+            create_path_workspace_level(
+                path=drawing_file,
+                workspace_folder=self.workspace.workspace_folder,
+                always_apply_relative=False,
+            )
+        )
+    else:
+        self.vars.linked_doc.set(
+            create_path_symlink(
+                path=drawing_file,
+                alway_apply_symlink=False,
+            )
+        )</code></pre>
+</details>
+</dd>
 <dt id="pytia_property_manager.app.callbacks.Callbacks.on_btn_abort"><code class="name flex">
 <span>def <span class="ident">on_btn_abort</span></span>(<span>self) ‑> None</span>
 </code></dt>
@@ -769,32 +908,6 @@ result of the nomenclature check. Defaults to False.</dd>
     log.info(&#34;Callback for button &#39;Abort&#39;.&#34;)
     self.root.withdraw()
     self.root.destroy()</code></pre>
-</details>
-</dd>
-<dt id="pytia_property_manager.app.callbacks.Callbacks.on_btn_bounding_box"><code class="name flex">
-<span>def <span class="ident">on_btn_bounding_box</span></span>(<span>self) ‑> None</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Callback function for the bounding box button. Launches the bounding box app.</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def on_btn_bounding_box(self) -&gt; None:
-    &#34;&#34;&#34;Callback function for the bounding box button. Launches the bounding box app.&#34;&#34;&#34;
-    log.info(&#34;Callback for button &#39;Bounding Box&#39;.&#34;)
-    self.set_ui.loading()
-
-    launch_bounding_box_app()
-    self.doc_helper.document.current()
-    self.doc_helper.setvar_property(
-        self.vars.base_size, resource.props.infra.base_size
-    )
-    self.doc_helper.setvar_property(
-        self.vars.base_size_preset, resource.props.infra.base_size_preset
-    )
-
-    self.set_ui.reset()</code></pre>
 </details>
 </dd>
 <dt id="pytia_property_manager.app.callbacks.Callbacks.on_btn_mass"><code class="name flex">
@@ -1005,6 +1118,34 @@ documents properties.</p></div>
     webbrowser.open(self.vars.weblink.get())</code></pre>
 </details>
 </dd>
+<dt id="pytia_property_manager.app.callbacks.Callbacks.on_calculate_bounding_box"><code class="name flex">
+<span>def <span class="ident">on_calculate_bounding_box</span></span>(<span>self) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Callback function for the bounding box tool menu entry.
+Launches the bounding box app.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def on_calculate_bounding_box(self) -&gt; None:
+    &#34;&#34;&#34;Callback function for the bounding box tool menu entry.
+    Launches the bounding box app.&#34;&#34;&#34;
+    log.info(&#34;Callback for button &#39;Bounding Box&#39;.&#34;)
+    self.set_ui.loading()
+
+    launch_bounding_box_app()
+    self.doc_helper.document.current()
+    self.doc_helper.setvar_property(
+        self.vars.base_size, resource.props.infra.base_size
+    )
+    self.doc_helper.setvar_property(
+        self.vars.base_size_preset, resource.props.infra.base_size_preset
+    )
+
+    self.set_ui.reset()</code></pre>
+</details>
+</dd>
 <dt id="pytia_property_manager.app.callbacks.Callbacks.on_lbl_linked_doc"><code class="name flex">
 <span>def <span class="ident">on_lbl_linked_doc</span></span>(<span>self) ‑> None</span>
 </code></dt>
@@ -1033,9 +1174,24 @@ documents properties.</p></div>
         log.info(&#34;User opened linked document (window).&#34;)
         sys.exit()
     if linked_doc.is_file() and linked_doc.suffix == SUFFIX_DRAWING:
-        self.doc_helper.framework.catia.documents.open(str(linked_doc))
+        self.doc_helper.framework.catia.documents.open(linked_doc)
         log.info(&#34;User opened linked document (file).&#34;)
         sys.exit()</code></pre>
+</details>
+</dd>
+<dt id="pytia_property_manager.app.callbacks.Callbacks.on_remove_drawing_file"><code class="name flex">
+<span>def <span class="ident">on_remove_drawing_file</span></span>(<span>self) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Removes the drawing file link from the documents properties</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def on_remove_drawing_file(self) -&gt; None:
+    &#34;&#34;&#34;Removes the drawing file link from the documents properties&#34;&#34;&#34;
+    self.doc_helper.document.properties.delete(PROP_DRAWING_PATH)
+    self.vars.linked_doc_display.set(&#34;Link removed&#34;)</code></pre>
 </details>
 </dd>
 </dl>
@@ -1064,15 +1220,17 @@ documents properties.</p></div>
 <li>
 <h4><code><a title="pytia_property_manager.app.callbacks.Callbacks" href="#pytia_property_manager.app.callbacks.Callbacks">Callbacks</a></code></h4>
 <ul class="">
+<li><code><a title="pytia_property_manager.app.callbacks.Callbacks.on_add_drawing_file" href="#pytia_property_manager.app.callbacks.Callbacks.on_add_drawing_file">on_add_drawing_file</a></code></li>
 <li><code><a title="pytia_property_manager.app.callbacks.Callbacks.on_btn_abort" href="#pytia_property_manager.app.callbacks.Callbacks.on_btn_abort">on_btn_abort</a></code></li>
-<li><code><a title="pytia_property_manager.app.callbacks.Callbacks.on_btn_bounding_box" href="#pytia_property_manager.app.callbacks.Callbacks.on_btn_bounding_box">on_btn_bounding_box</a></code></li>
 <li><code><a title="pytia_property_manager.app.callbacks.Callbacks.on_btn_mass" href="#pytia_property_manager.app.callbacks.Callbacks.on_btn_mass">on_btn_mass</a></code></li>
 <li><code><a title="pytia_property_manager.app.callbacks.Callbacks.on_btn_material" href="#pytia_property_manager.app.callbacks.Callbacks.on_btn_material">on_btn_material</a></code></li>
 <li><code><a title="pytia_property_manager.app.callbacks.Callbacks.on_btn_reload_source" href="#pytia_property_manager.app.callbacks.Callbacks.on_btn_reload_source">on_btn_reload_source</a></code></li>
 <li><code><a title="pytia_property_manager.app.callbacks.Callbacks.on_btn_revision" href="#pytia_property_manager.app.callbacks.Callbacks.on_btn_revision">on_btn_revision</a></code></li>
 <li><code><a title="pytia_property_manager.app.callbacks.Callbacks.on_btn_save" href="#pytia_property_manager.app.callbacks.Callbacks.on_btn_save">on_btn_save</a></code></li>
 <li><code><a title="pytia_property_manager.app.callbacks.Callbacks.on_btn_weblink" href="#pytia_property_manager.app.callbacks.Callbacks.on_btn_weblink">on_btn_weblink</a></code></li>
+<li><code><a title="pytia_property_manager.app.callbacks.Callbacks.on_calculate_bounding_box" href="#pytia_property_manager.app.callbacks.Callbacks.on_calculate_bounding_box">on_calculate_bounding_box</a></code></li>
 <li><code><a title="pytia_property_manager.app.callbacks.Callbacks.on_lbl_linked_doc" href="#pytia_property_manager.app.callbacks.Callbacks.on_lbl_linked_doc">on_lbl_linked_doc</a></code></li>
+<li><code><a title="pytia_property_manager.app.callbacks.Callbacks.on_remove_drawing_file" href="#pytia_property_manager.app.callbacks.Callbacks.on_remove_drawing_file">on_remove_drawing_file</a></code></li>
 </ul>
 </li>
 </ul>

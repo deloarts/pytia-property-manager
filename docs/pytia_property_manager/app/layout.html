@@ -75,8 +75,15 @@ class Layout:
         for style in STYLES:
             self._appearance_menu.add_command(label=style)
 
+        self._tools_menu = Menu(menubar, tearoff=False)
+        self._tools_menu.add_command(label=&#34;Add Drawing File&#34;)
+        self._tools_menu.add_command(label=&#34;Remove Drawing File&#34;)
+        self._tools_menu.add_separator()
+        self._tools_menu.add_command(label=&#34;Calculate Bounding Box&#34;)
+
         menubar.add_cascade(label=&#34;Help&#34;, command=show_help)
         menubar.add_cascade(label=&#34;Appearance&#34;, menu=self._appearance_menu)
+        menubar.add_cascade(label=&#34;Tools&#34;, menu=self._tools_menu)
 
         set_appearance_menu(self._appearance_menu)
         root.configure(menu=menubar)
@@ -199,7 +206,7 @@ class Layout:
             frames.infrastructure,
             text=&#34;New Revision&#34;,
             style=&#34;outline&#34;,
-            width=15,
+            width=12,
             state=DISABLED,
         )
         self._btn_revision.grid(
@@ -229,6 +236,7 @@ class Layout:
             frames.infrastructure,
             text=&#34;Reload&#34;,
             style=&#34;outline&#34;,
+            width=12,
             state=DISABLED,
         )
         self._btn_reload_source.grid(
@@ -261,6 +269,7 @@ class Layout:
             frames.infrastructure,
             text=&#34;Select&#34;,
             style=&#34;outline&#34;,
+            width=12,
             state=DISABLED,
         )
         self._btn_material.grid(
@@ -285,44 +294,24 @@ class Layout:
             state=DISABLED,
             cursor=&#34;arrow&#34;,
         )
-        self._entry_base_size.grid(row=6, column=1, padx=5, pady=2, sticky=&#34;nsew&#34;)
-
-        self._btn_base_size = Button(
-            frames.infrastructure,
-            text=&#34;Calculate&#34;,
-            style=&#34;outline&#34;,
-            state=DISABLED,
-        )
-        self._btn_base_size.grid(
-            row=6,
-            column=2,
-            padx=(0, Layout.MARGIN_X),
-            pady=2,
-            sticky=&#34;nsew&#34;,
-            rowspan=2,
-        )
-
-        lbl_base_size_preset = Label(frames.infrastructure, text=&#34;Base Size Preset&#34;)
-        lbl_base_size_preset.grid(
-            row=7, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky=&#34;nsew&#34;
-        )
+        self._entry_base_size.grid(row=6, column=1, padx=(5, 5), pady=2, sticky=&#34;nsew&#34;)
 
         self._entry_base_size_preset = Entry(
             frames.infrastructure,
             textvariable=variables.base_size_preset,
-            width=18,
             state=DISABLED,
+            width=12,
             cursor=&#34;arrow&#34;,
         )
         self._entry_base_size_preset.grid(
-            row=7, column=1, padx=5, pady=2, sticky=&#34;nsew&#34;
+            row=6, column=2, padx=(0, Layout.MARGIN_X), pady=2, sticky=&#34;nsew&#34;
         )
         # endregion
 
         # region tolerance
         lbl_tolerance = Label(frames.infrastructure, text=&#34;Tolerance&#34;)
         lbl_tolerance.grid(
-            row=8, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky=&#34;nsew&#34;
+            row=7, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky=&#34;nsew&#34;
         )
 
         self._combo_tolerance = Combobox(
@@ -333,7 +322,7 @@ class Layout:
             state=DISABLED,
         )
         self._combo_tolerance.grid(
-            row=8,
+            row=7,
             column=1,
             padx=(5, Layout.MARGIN_X),
             pady=2,
@@ -344,7 +333,7 @@ class Layout:
 
         # region mass
         lbl_mass = Label(frames.infrastructure, text=&#34;Mass&#34;)
-        lbl_mass.grid(row=9, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky=&#34;nsew&#34;)
+        lbl_mass.grid(row=8, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky=&#34;nsew&#34;)
 
         self._entry_mass = Entry(
             frames.infrastructure,
@@ -353,23 +342,24 @@ class Layout:
             state=DISABLED,
             cursor=&#34;arrow&#34;,
         )
-        self._entry_mass.grid(row=9, column=1, padx=5, pady=2, sticky=&#34;nsew&#34;)
+        self._entry_mass.grid(row=8, column=1, padx=5, pady=2, sticky=&#34;nsew&#34;)
 
         self._btn_mass = Button(
             frames.infrastructure,
             text=&#34;Calculate&#34;,
             style=&#34;outline&#34;,
+            width=12,
             state=DISABLED,
         )
         self._btn_mass.grid(
-            row=9, column=2, padx=(0, Layout.MARGIN_X), pady=2, sticky=&#34;nsew&#34;
+            row=8, column=2, padx=(0, Layout.MARGIN_X), pady=2, sticky=&#34;nsew&#34;
         )
         # endregion
 
         # region order number
         lbl_order_number = Label(frames.infrastructure, text=&#34;Order Number&#34;)
         lbl_order_number.grid(
-            row=10,
+            row=9,
             column=0,
             padx=(Layout.MARGIN_X, 5),
             pady=(Layout.MARGIN_Y, 2),
@@ -382,7 +372,7 @@ class Layout:
             state=DISABLED,
         )
         self._entry_order_number.grid(
-            row=10,
+            row=9,
             column=1,
             padx=(5, Layout.MARGIN_X),
             pady=(Layout.MARGIN_Y, 2),
@@ -394,7 +384,7 @@ class Layout:
         # region manufacturer
         lbl_manufacturer = Label(frames.infrastructure, text=&#34;Manufacturer&#34;)
         lbl_manufacturer.grid(
-            row=11, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky=&#34;nsew&#34;
+            row=10, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky=&#34;nsew&#34;
         )
 
         self._entry_manufacturer = Entry(
@@ -404,7 +394,7 @@ class Layout:
             state=DISABLED,
         )
         self._entry_manufacturer.grid(
-            row=11,
+            row=10,
             column=1,
             padx=(5, Layout.MARGIN_X),
             pady=2,
@@ -416,7 +406,7 @@ class Layout:
         # region supplier
         lbl_supplier = Label(frames.infrastructure, text=&#34;Supplier&#34;)
         lbl_supplier.grid(
-            row=12, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky=&#34;nsew&#34;
+            row=11, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky=&#34;nsew&#34;
         )
 
         self._entry_supplier = Entry(
@@ -425,7 +415,7 @@ class Layout:
             state=DISABLED,
         )
         self._entry_supplier.grid(
-            row=12,
+            row=11,
             column=1,
             padx=(5, Layout.MARGIN_X),
             pady=2,
@@ -437,7 +427,7 @@ class Layout:
         # region weblink
         lbl_weblink = Label(frames.infrastructure, text=&#34;Weblink&#34;)
         lbl_weblink.grid(
-            row=13, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky=&#34;nsew&#34;
+            row=12, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky=&#34;nsew&#34;
         )
 
         self._entry_weblink = Entry(
@@ -445,23 +435,24 @@ class Layout:
             textvariable=variables.weblink,
             state=DISABLED,
         )
-        self._entry_weblink.grid(row=13, column=1, padx=5, pady=2, sticky=&#34;nsew&#34;)
+        self._entry_weblink.grid(row=12, column=1, padx=5, pady=2, sticky=&#34;nsew&#34;)
 
         self._btn_weblink = Button(
             frames.infrastructure,
             text=&#34;Open&#34;,
             style=&#34;outline&#34;,
+            width=12,
             state=DISABLED,
         )
         self._btn_weblink.grid(
-            row=13, column=2, padx=(0, Layout.MARGIN_X), pady=2, sticky=&#34;nsew&#34;
+            row=12, column=2, padx=(0, Layout.MARGIN_X), pady=2, sticky=&#34;nsew&#34;
         )
         # endregion
 
         # region group
         lbl_group = Label(frames.infrastructure, text=&#34;Group&#34;)
         lbl_group.grid(
-            row=14, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky=&#34;nsew&#34;
+            row=13, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky=&#34;nsew&#34;
         )
 
         self._combo_group = Combobox(
@@ -472,7 +463,7 @@ class Layout:
             state=DISABLED,
         )
         self._combo_group.grid(
-            row=14,
+            row=13,
             column=1,
             padx=(5, Layout.MARGIN_X),
             pady=(1, 2),
@@ -484,7 +475,7 @@ class Layout:
         # region spare part level
         lbl_spare_part = Label(frames.infrastructure, text=&#34;Spare Part Level&#34;)
         lbl_spare_part.grid(
-            row=15, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky=&#34;nsew&#34;
+            row=14, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky=&#34;nsew&#34;
         )
 
         self._combo_spare_part = Combobox(
@@ -495,7 +486,7 @@ class Layout:
             width=27,
         )
         self._combo_spare_part.grid(
-            row=15,
+            row=14,
             column=1,
             padx=(5, Layout.MARGIN_X),
             pady=2,
@@ -507,7 +498,7 @@ class Layout:
         # region description
         lbl_description = Label(frames.infrastructure, text=&#34;Description&#34;)
         lbl_description.grid(
-            row=16,
+            row=15,
             column=0,
             padx=(Layout.MARGIN_X, 5),
             pady=2,
@@ -526,7 +517,7 @@ class Layout:
             font=(&#34;Segoe UI&#34;, 9),
         )
         self._text_description.grid(
-            row=16,
+            row=15,
             column=1,
             padx=(3, Layout.MARGIN_X - 1),
             pady=2,
@@ -538,7 +529,7 @@ class Layout:
         # region creator
         lbl_creator = Label(frames.infrastructure, text=&#34;Creator&#34;)
         lbl_creator.grid(
-            row=17,
+            row=16,
             column=0,
             padx=(Layout.MARGIN_X, 5),
             pady=(Layout.MARGIN_Y, 2),
@@ -548,7 +539,7 @@ class Layout:
             frames.infrastructure, textvariable=variables.creator_display
         )
         self._lbl_creator_value.grid(
-            row=17,
+            row=16,
             column=1,
             padx=(5, Layout.MARGIN_X),
             pady=(Layout.MARGIN_Y, 2),
@@ -560,7 +551,7 @@ class Layout:
         # region creator
         lbl_modifier = Label(frames.infrastructure, text=&#34;Modifier&#34;)
         lbl_modifier.grid(
-            row=18,
+            row=17,
             column=0,
             padx=(Layout.MARGIN_X, 5),
             pady=(2, 2),
@@ -570,7 +561,7 @@ class Layout:
             frames.infrastructure, textvariable=variables.modifier_display
         )
         self._lbl_modifier_value.grid(
-            row=18,
+            row=17,
             column=1,
             padx=(5, Layout.MARGIN_X),
             pady=(2, 2),
@@ -582,7 +573,7 @@ class Layout:
         # region linked doc
         lbl_linked_doc = Label(frames.infrastructure, text=&#34;Linked Drawing&#34;)
         lbl_linked_doc.grid(
-            row=19,
+            row=18,
             column=0,
             padx=(Layout.MARGIN_X, 5),
             pady=(2, Layout.MARGIN_Y),
@@ -592,7 +583,7 @@ class Layout:
             frames.infrastructure, textvariable=variables.linked_doc_display
         )
         self._lbl_linked_doc_value.grid(
-            row=19,
+            row=18,
             column=1,
             padx=(5, Layout.MARGIN_X),
             pady=(2, Layout.MARGIN_Y),
@@ -656,6 +647,11 @@ class Layout:
         # endregion
 
     @property
+    def tools_menu(self) -&gt; Menu:
+        &#34;&#34;&#34;Returns the tools menu bar entry&#34;&#34;&#34;
+        return self._tools_menu
+
+    @property
     def input_partnumber(self) -&gt; Entry:
         &#34;&#34;&#34;Returns the part number entry.&#34;&#34;&#34;
         return self._entry_partnumber
@@ -709,11 +705,6 @@ class Layout:
     def input_base_size_preset(self) -&gt; Entry:
         &#34;&#34;&#34;Returns the base size preset entry.&#34;&#34;&#34;
         return self._entry_base_size_preset
-
-    @property
-    def button_base_size(self) -&gt; Button:
-        &#34;&#34;&#34;Returns the base size button.&#34;&#34;&#34;
-        return self._btn_base_size
 
     @property
     def input_mass(self) -&gt; Entry:
@@ -867,8 +858,15 @@ class Layout:
         for style in STYLES:
             self._appearance_menu.add_command(label=style)
 
+        self._tools_menu = Menu(menubar, tearoff=False)
+        self._tools_menu.add_command(label=&#34;Add Drawing File&#34;)
+        self._tools_menu.add_command(label=&#34;Remove Drawing File&#34;)
+        self._tools_menu.add_separator()
+        self._tools_menu.add_command(label=&#34;Calculate Bounding Box&#34;)
+
         menubar.add_cascade(label=&#34;Help&#34;, command=show_help)
         menubar.add_cascade(label=&#34;Appearance&#34;, menu=self._appearance_menu)
+        menubar.add_cascade(label=&#34;Tools&#34;, menu=self._tools_menu)
 
         set_appearance_menu(self._appearance_menu)
         root.configure(menu=menubar)
@@ -991,7 +989,7 @@ class Layout:
             frames.infrastructure,
             text=&#34;New Revision&#34;,
             style=&#34;outline&#34;,
-            width=15,
+            width=12,
             state=DISABLED,
         )
         self._btn_revision.grid(
@@ -1021,6 +1019,7 @@ class Layout:
             frames.infrastructure,
             text=&#34;Reload&#34;,
             style=&#34;outline&#34;,
+            width=12,
             state=DISABLED,
         )
         self._btn_reload_source.grid(
@@ -1053,6 +1052,7 @@ class Layout:
             frames.infrastructure,
             text=&#34;Select&#34;,
             style=&#34;outline&#34;,
+            width=12,
             state=DISABLED,
         )
         self._btn_material.grid(
@@ -1077,44 +1077,24 @@ class Layout:
             state=DISABLED,
             cursor=&#34;arrow&#34;,
         )
-        self._entry_base_size.grid(row=6, column=1, padx=5, pady=2, sticky=&#34;nsew&#34;)
-
-        self._btn_base_size = Button(
-            frames.infrastructure,
-            text=&#34;Calculate&#34;,
-            style=&#34;outline&#34;,
-            state=DISABLED,
-        )
-        self._btn_base_size.grid(
-            row=6,
-            column=2,
-            padx=(0, Layout.MARGIN_X),
-            pady=2,
-            sticky=&#34;nsew&#34;,
-            rowspan=2,
-        )
-
-        lbl_base_size_preset = Label(frames.infrastructure, text=&#34;Base Size Preset&#34;)
-        lbl_base_size_preset.grid(
-            row=7, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky=&#34;nsew&#34;
-        )
+        self._entry_base_size.grid(row=6, column=1, padx=(5, 5), pady=2, sticky=&#34;nsew&#34;)
 
         self._entry_base_size_preset = Entry(
             frames.infrastructure,
             textvariable=variables.base_size_preset,
-            width=18,
             state=DISABLED,
+            width=12,
             cursor=&#34;arrow&#34;,
         )
         self._entry_base_size_preset.grid(
-            row=7, column=1, padx=5, pady=2, sticky=&#34;nsew&#34;
+            row=6, column=2, padx=(0, Layout.MARGIN_X), pady=2, sticky=&#34;nsew&#34;
         )
         # endregion
 
         # region tolerance
         lbl_tolerance = Label(frames.infrastructure, text=&#34;Tolerance&#34;)
         lbl_tolerance.grid(
-            row=8, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky=&#34;nsew&#34;
+            row=7, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky=&#34;nsew&#34;
         )
 
         self._combo_tolerance = Combobox(
@@ -1125,7 +1105,7 @@ class Layout:
             state=DISABLED,
         )
         self._combo_tolerance.grid(
-            row=8,
+            row=7,
             column=1,
             padx=(5, Layout.MARGIN_X),
             pady=2,
@@ -1136,7 +1116,7 @@ class Layout:
 
         # region mass
         lbl_mass = Label(frames.infrastructure, text=&#34;Mass&#34;)
-        lbl_mass.grid(row=9, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky=&#34;nsew&#34;)
+        lbl_mass.grid(row=8, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky=&#34;nsew&#34;)
 
         self._entry_mass = Entry(
             frames.infrastructure,
@@ -1145,23 +1125,24 @@ class Layout:
             state=DISABLED,
             cursor=&#34;arrow&#34;,
         )
-        self._entry_mass.grid(row=9, column=1, padx=5, pady=2, sticky=&#34;nsew&#34;)
+        self._entry_mass.grid(row=8, column=1, padx=5, pady=2, sticky=&#34;nsew&#34;)
 
         self._btn_mass = Button(
             frames.infrastructure,
             text=&#34;Calculate&#34;,
             style=&#34;outline&#34;,
+            width=12,
             state=DISABLED,
         )
         self._btn_mass.grid(
-            row=9, column=2, padx=(0, Layout.MARGIN_X), pady=2, sticky=&#34;nsew&#34;
+            row=8, column=2, padx=(0, Layout.MARGIN_X), pady=2, sticky=&#34;nsew&#34;
         )
         # endregion
 
         # region order number
         lbl_order_number = Label(frames.infrastructure, text=&#34;Order Number&#34;)
         lbl_order_number.grid(
-            row=10,
+            row=9,
             column=0,
             padx=(Layout.MARGIN_X, 5),
             pady=(Layout.MARGIN_Y, 2),
@@ -1174,7 +1155,7 @@ class Layout:
             state=DISABLED,
         )
         self._entry_order_number.grid(
-            row=10,
+            row=9,
             column=1,
             padx=(5, Layout.MARGIN_X),
             pady=(Layout.MARGIN_Y, 2),
@@ -1186,7 +1167,7 @@ class Layout:
         # region manufacturer
         lbl_manufacturer = Label(frames.infrastructure, text=&#34;Manufacturer&#34;)
         lbl_manufacturer.grid(
-            row=11, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky=&#34;nsew&#34;
+            row=10, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky=&#34;nsew&#34;
         )
 
         self._entry_manufacturer = Entry(
@@ -1196,7 +1177,7 @@ class Layout:
             state=DISABLED,
         )
         self._entry_manufacturer.grid(
-            row=11,
+            row=10,
             column=1,
             padx=(5, Layout.MARGIN_X),
             pady=2,
@@ -1208,7 +1189,7 @@ class Layout:
         # region supplier
         lbl_supplier = Label(frames.infrastructure, text=&#34;Supplier&#34;)
         lbl_supplier.grid(
-            row=12, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky=&#34;nsew&#34;
+            row=11, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky=&#34;nsew&#34;
         )
 
         self._entry_supplier = Entry(
@@ -1217,7 +1198,7 @@ class Layout:
             state=DISABLED,
         )
         self._entry_supplier.grid(
-            row=12,
+            row=11,
             column=1,
             padx=(5, Layout.MARGIN_X),
             pady=2,
@@ -1229,7 +1210,7 @@ class Layout:
         # region weblink
         lbl_weblink = Label(frames.infrastructure, text=&#34;Weblink&#34;)
         lbl_weblink.grid(
-            row=13, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky=&#34;nsew&#34;
+            row=12, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky=&#34;nsew&#34;
         )
 
         self._entry_weblink = Entry(
@@ -1237,23 +1218,24 @@ class Layout:
             textvariable=variables.weblink,
             state=DISABLED,
         )
-        self._entry_weblink.grid(row=13, column=1, padx=5, pady=2, sticky=&#34;nsew&#34;)
+        self._entry_weblink.grid(row=12, column=1, padx=5, pady=2, sticky=&#34;nsew&#34;)
 
         self._btn_weblink = Button(
             frames.infrastructure,
             text=&#34;Open&#34;,
             style=&#34;outline&#34;,
+            width=12,
             state=DISABLED,
         )
         self._btn_weblink.grid(
-            row=13, column=2, padx=(0, Layout.MARGIN_X), pady=2, sticky=&#34;nsew&#34;
+            row=12, column=2, padx=(0, Layout.MARGIN_X), pady=2, sticky=&#34;nsew&#34;
         )
         # endregion
 
         # region group
         lbl_group = Label(frames.infrastructure, text=&#34;Group&#34;)
         lbl_group.grid(
-            row=14, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky=&#34;nsew&#34;
+            row=13, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky=&#34;nsew&#34;
         )
 
         self._combo_group = Combobox(
@@ -1264,7 +1246,7 @@ class Layout:
             state=DISABLED,
         )
         self._combo_group.grid(
-            row=14,
+            row=13,
             column=1,
             padx=(5, Layout.MARGIN_X),
             pady=(1, 2),
@@ -1276,7 +1258,7 @@ class Layout:
         # region spare part level
         lbl_spare_part = Label(frames.infrastructure, text=&#34;Spare Part Level&#34;)
         lbl_spare_part.grid(
-            row=15, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky=&#34;nsew&#34;
+            row=14, column=0, padx=(Layout.MARGIN_X, 5), pady=2, sticky=&#34;nsew&#34;
         )
 
         self._combo_spare_part = Combobox(
@@ -1287,7 +1269,7 @@ class Layout:
             width=27,
         )
         self._combo_spare_part.grid(
-            row=15,
+            row=14,
             column=1,
             padx=(5, Layout.MARGIN_X),
             pady=2,
@@ -1299,7 +1281,7 @@ class Layout:
         # region description
         lbl_description = Label(frames.infrastructure, text=&#34;Description&#34;)
         lbl_description.grid(
-            row=16,
+            row=15,
             column=0,
             padx=(Layout.MARGIN_X, 5),
             pady=2,
@@ -1318,7 +1300,7 @@ class Layout:
             font=(&#34;Segoe UI&#34;, 9),
         )
         self._text_description.grid(
-            row=16,
+            row=15,
             column=1,
             padx=(3, Layout.MARGIN_X - 1),
             pady=2,
@@ -1330,7 +1312,7 @@ class Layout:
         # region creator
         lbl_creator = Label(frames.infrastructure, text=&#34;Creator&#34;)
         lbl_creator.grid(
-            row=17,
+            row=16,
             column=0,
             padx=(Layout.MARGIN_X, 5),
             pady=(Layout.MARGIN_Y, 2),
@@ -1340,7 +1322,7 @@ class Layout:
             frames.infrastructure, textvariable=variables.creator_display
         )
         self._lbl_creator_value.grid(
-            row=17,
+            row=16,
             column=1,
             padx=(5, Layout.MARGIN_X),
             pady=(Layout.MARGIN_Y, 2),
@@ -1352,7 +1334,7 @@ class Layout:
         # region creator
         lbl_modifier = Label(frames.infrastructure, text=&#34;Modifier&#34;)
         lbl_modifier.grid(
-            row=18,
+            row=17,
             column=0,
             padx=(Layout.MARGIN_X, 5),
             pady=(2, 2),
@@ -1362,7 +1344,7 @@ class Layout:
             frames.infrastructure, textvariable=variables.modifier_display
         )
         self._lbl_modifier_value.grid(
-            row=18,
+            row=17,
             column=1,
             padx=(5, Layout.MARGIN_X),
             pady=(2, 2),
@@ -1374,7 +1356,7 @@ class Layout:
         # region linked doc
         lbl_linked_doc = Label(frames.infrastructure, text=&#34;Linked Drawing&#34;)
         lbl_linked_doc.grid(
-            row=19,
+            row=18,
             column=0,
             padx=(Layout.MARGIN_X, 5),
             pady=(2, Layout.MARGIN_Y),
@@ -1384,7 +1366,7 @@ class Layout:
             frames.infrastructure, textvariable=variables.linked_doc_display
         )
         self._lbl_linked_doc_value.grid(
-            row=19,
+            row=18,
             column=1,
             padx=(5, Layout.MARGIN_X),
             pady=(2, Layout.MARGIN_Y),
@@ -1448,6 +1430,11 @@ class Layout:
         # endregion
 
     @property
+    def tools_menu(self) -&gt; Menu:
+        &#34;&#34;&#34;Returns the tools menu bar entry&#34;&#34;&#34;
+        return self._tools_menu
+
+    @property
     def input_partnumber(self) -&gt; Entry:
         &#34;&#34;&#34;Returns the part number entry.&#34;&#34;&#34;
         return self._entry_partnumber
@@ -1501,11 +1488,6 @@ class Layout:
     def input_base_size_preset(self) -&gt; Entry:
         &#34;&#34;&#34;Returns the base size preset entry.&#34;&#34;&#34;
         return self._entry_base_size_preset
-
-    @property
-    def button_base_size(self) -&gt; Button:
-        &#34;&#34;&#34;Returns the base size button.&#34;&#34;&#34;
-        return self._btn_base_size
 
     @property
     def input_mass(self) -&gt; Entry:
@@ -1631,19 +1613,6 @@ class Layout:
 def button_abort(self) -&gt; Button:
     &#34;&#34;&#34;Returns the abort button.&#34;&#34;&#34;
     return self._btn_abort</code></pre>
-</details>
-</dd>
-<dt id="pytia_property_manager.app.layout.Layout.button_base_size"><code class="name">var <span class="ident">button_base_size</span> : tkinter.ttk.Button</code></dt>
-<dd>
-<div class="desc"><p>Returns the base size button.</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">@property
-def button_base_size(self) -&gt; Button:
-    &#34;&#34;&#34;Returns the base size button.&#34;&#34;&#34;
-    return self._btn_base_size</code></pre>
 </details>
 </dd>
 <dt id="pytia_property_manager.app.layout.Layout.button_mass"><code class="name">var <span class="ident">button_mass</span> : tkinter.ttk.Button</code></dt>
@@ -2036,6 +2005,19 @@ def toggle_sync_color(self) -&gt; Checkbutton:
     return self._sync_color_toggle</code></pre>
 </details>
 </dd>
+<dt id="pytia_property_manager.app.layout.Layout.tools_menu"><code class="name">var <span class="ident">tools_menu</span> : tkinter.Menu</code></dt>
+<dd>
+<div class="desc"><p>Returns the tools menu bar entry</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def tools_menu(self) -&gt; Menu:
+    &#34;&#34;&#34;Returns the tools menu bar entry&#34;&#34;&#34;
+    return self._tools_menu</code></pre>
+</details>
+</dd>
 </dl>
 </dd>
 </dl>
@@ -2060,7 +2042,6 @@ def toggle_sync_color(self) -&gt; Checkbutton:
 <li><code><a title="pytia_property_manager.app.layout.Layout.MARGIN_X" href="#pytia_property_manager.app.layout.Layout.MARGIN_X">MARGIN_X</a></code></li>
 <li><code><a title="pytia_property_manager.app.layout.Layout.MARGIN_Y" href="#pytia_property_manager.app.layout.Layout.MARGIN_Y">MARGIN_Y</a></code></li>
 <li><code><a title="pytia_property_manager.app.layout.Layout.button_abort" href="#pytia_property_manager.app.layout.Layout.button_abort">button_abort</a></code></li>
-<li><code><a title="pytia_property_manager.app.layout.Layout.button_base_size" href="#pytia_property_manager.app.layout.Layout.button_base_size">button_base_size</a></code></li>
 <li><code><a title="pytia_property_manager.app.layout.Layout.button_mass" href="#pytia_property_manager.app.layout.Layout.button_mass">button_mass</a></code></li>
 <li><code><a title="pytia_property_manager.app.layout.Layout.button_material" href="#pytia_property_manager.app.layout.Layout.button_material">button_material</a></code></li>
 <li><code><a title="pytia_property_manager.app.layout.Layout.button_revision" href="#pytia_property_manager.app.layout.Layout.button_revision">button_revision</a></code></li>
@@ -2091,6 +2072,7 @@ def toggle_sync_color(self) -&gt; Checkbutton:
 <li><code><a title="pytia_property_manager.app.layout.Layout.processes" href="#pytia_property_manager.app.layout.Layout.processes">processes</a></code></li>
 <li><code><a title="pytia_property_manager.app.layout.Layout.toggle_iso_view" href="#pytia_property_manager.app.layout.Layout.toggle_iso_view">toggle_iso_view</a></code></li>
 <li><code><a title="pytia_property_manager.app.layout.Layout.toggle_sync_color" href="#pytia_property_manager.app.layout.Layout.toggle_sync_color">toggle_sync_color</a></code></li>
+<li><code><a title="pytia_property_manager.app.layout.Layout.tools_menu" href="#pytia_property_manager.app.layout.Layout.tools_menu">tools_menu</a></code></li>
 </ul>
 </li>
 </ul>

@@ -39,6 +39,7 @@ must work on its own without any other dependencies!</p>
 import os
 import re
 import sys
+from pathlib import Path
 from tkinter import messagebox as tkmsg
 
 
@@ -71,7 +72,71 @@ def expand_env_vars(value: str, ignore_not_found: bool = False) -&gt; str:
                 ),
             )
             sys.exit()
-    return output</code></pre>
+    return output
+
+
+def create_path_symlink(path: Path, alway_apply_symlink: bool) -&gt; str:
+    &#34;&#34;&#34;
+    Replaces paths of the given path with the environment variable, if exists
+    and the users agrees. Starts with the deepest folder and runs upwards.
+
+    E.g.: Replaces `C:/Users/.../OneDrive/foo/bar` with `%ONEDRIVE%/foo/bar`
+
+    The environment variable will be encapsuled within two percentage symbols.
+
+    Return the original path if no symlink is found.
+    &#34;&#34;&#34;
+    path_str = str(path)
+
+    for parent in path.parents:
+        for key, value in os.environ.items():
+            if str(parent) == value:
+                symlinked = path_str.replace(str(parent), f&#34;%{key}%&#34;)
+                if alway_apply_symlink or tkmsg.askyesno(
+                    title=&#34;Symlink has been found.&#34;,
+                    message=(
+                        &#34;A symlink has been found for the drawing documents path:\n&#34;
+                        f&#34; - Path: {str(parent)!r}.\n&#34;
+                        f&#34; - Symlink: {key!r}\n\n&#34;
+                        &#34;Do you want to save the symlink to the linked documents path?\n\n&#34;
+                        &#34;Depending on your choice, the following path will be written &#34;
+                        &#34;to the linked document:\n&#34;
+                        f&#34; - Yes: {symlinked!r}\n&#34;
+                        f&#34; - No:  {path_str!r}&#34;
+                    ),
+                ):
+                    return symlinked
+                else:
+                    return path_str
+    return path_str
+
+
+def create_path_workspace_level(
+    path: Path, workspace_folder: Path, always_apply_relative: bool
+) -&gt; str:
+    path_str = str(path)
+    workspace_folder_str = str(workspace_folder)
+
+    if workspace_folder_str in path_str:
+        relative_path = &#34;.&#34; + path_str.split(workspace_folder_str)[-1]
+        if always_apply_relative or tkmsg.askyesno(
+            title=&#34;Workspace has been found.&#34;,
+            message=(
+                &#34;A workspace file has been found for the drawing documents path:\n&#34;
+                f&#34; - Workspace: {workspace_folder_str!r}.\n&#34;
+                f&#34; - Relative path: {relative_path!r}.\n\n&#34;
+                &#34;Do you want to save the relative path to the linked documents path?\n\n&#34;
+                &#34;Depending on your choice, the following path will be written &#34;
+                &#34;to the linked document:\n&#34;
+                f&#34; - Yes: {relative_path!r}\n&#34;
+                f&#34; - No:  {path_str!r}&#34;
+            ),
+        ):
+            return relative_path
+        else:
+            return path_str
+
+    return path_str</code></pre>
 </details>
 </section>
 <section>
@@ -81,6 +146,92 @@ def expand_env_vars(value: str, ignore_not_found: bool = False) -&gt; str:
 <section>
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
+<dt id="pytia_property_manager.resources.utils.create_path_symlink"><code class="name flex">
+<span>def <span class="ident">create_path_symlink</span></span>(<span>path: pathlib.Path, alway_apply_symlink: bool) ‑> str</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Replaces paths of the given path with the environment variable, if exists
+and the users agrees. Starts with the deepest folder and runs upwards.</p>
+<p>E.g.: Replaces <code>C:/Users/.../OneDrive/foo/bar</code> with <code>%ONEDRIVE%/foo/bar</code></p>
+<p>The environment variable will be encapsuled within two percentage symbols.</p>
+<p>Return the original path if no symlink is found.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def create_path_symlink(path: Path, alway_apply_symlink: bool) -&gt; str:
+    &#34;&#34;&#34;
+    Replaces paths of the given path with the environment variable, if exists
+    and the users agrees. Starts with the deepest folder and runs upwards.
+
+    E.g.: Replaces `C:/Users/.../OneDrive/foo/bar` with `%ONEDRIVE%/foo/bar`
+
+    The environment variable will be encapsuled within two percentage symbols.
+
+    Return the original path if no symlink is found.
+    &#34;&#34;&#34;
+    path_str = str(path)
+
+    for parent in path.parents:
+        for key, value in os.environ.items():
+            if str(parent) == value:
+                symlinked = path_str.replace(str(parent), f&#34;%{key}%&#34;)
+                if alway_apply_symlink or tkmsg.askyesno(
+                    title=&#34;Symlink has been found.&#34;,
+                    message=(
+                        &#34;A symlink has been found for the drawing documents path:\n&#34;
+                        f&#34; - Path: {str(parent)!r}.\n&#34;
+                        f&#34; - Symlink: {key!r}\n\n&#34;
+                        &#34;Do you want to save the symlink to the linked documents path?\n\n&#34;
+                        &#34;Depending on your choice, the following path will be written &#34;
+                        &#34;to the linked document:\n&#34;
+                        f&#34; - Yes: {symlinked!r}\n&#34;
+                        f&#34; - No:  {path_str!r}&#34;
+                    ),
+                ):
+                    return symlinked
+                else:
+                    return path_str
+    return path_str</code></pre>
+</details>
+</dd>
+<dt id="pytia_property_manager.resources.utils.create_path_workspace_level"><code class="name flex">
+<span>def <span class="ident">create_path_workspace_level</span></span>(<span>path: pathlib.Path, workspace_folder: pathlib.Path, always_apply_relative: bool) ‑> str</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def create_path_workspace_level(
+    path: Path, workspace_folder: Path, always_apply_relative: bool
+) -&gt; str:
+    path_str = str(path)
+    workspace_folder_str = str(workspace_folder)
+
+    if workspace_folder_str in path_str:
+        relative_path = &#34;.&#34; + path_str.split(workspace_folder_str)[-1]
+        if always_apply_relative or tkmsg.askyesno(
+            title=&#34;Workspace has been found.&#34;,
+            message=(
+                &#34;A workspace file has been found for the drawing documents path:\n&#34;
+                f&#34; - Workspace: {workspace_folder_str!r}.\n&#34;
+                f&#34; - Relative path: {relative_path!r}.\n\n&#34;
+                &#34;Do you want to save the relative path to the linked documents path?\n\n&#34;
+                &#34;Depending on your choice, the following path will be written &#34;
+                &#34;to the linked document:\n&#34;
+                f&#34; - Yes: {relative_path!r}\n&#34;
+                f&#34; - No:  {path_str!r}&#34;
+            ),
+        ):
+            return relative_path
+        else:
+            return path_str
+
+    return path_str</code></pre>
+</details>
+</dd>
 <dt id="pytia_property_manager.resources.utils.expand_env_vars"><code class="name flex">
 <span>def <span class="ident">expand_env_vars</span></span>(<span>value: str, ignore_not_found: bool = False) ‑> str</span>
 </code></dt>
@@ -145,6 +296,8 @@ return the original value otherwise.</p></div>
 </li>
 <li><h3><a href="#header-functions">Functions</a></h3>
 <ul class="">
+<li><code><a title="pytia_property_manager.resources.utils.create_path_symlink" href="#pytia_property_manager.resources.utils.create_path_symlink">create_path_symlink</a></code></li>
+<li><code><a title="pytia_property_manager.resources.utils.create_path_workspace_level" href="#pytia_property_manager.resources.utils.create_path_workspace_level">create_path_workspace_level</a></code></li>
 <li><code><a title="pytia_property_manager.resources.utils.expand_env_vars" href="#pytia_property_manager.resources.utils.expand_env_vars">expand_env_vars</a></code></li>
 </ul>
 </li>
