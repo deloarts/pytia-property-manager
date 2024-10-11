@@ -356,7 +356,7 @@ class Callbacks:
             log.info("User opened linked document (window).")
             sys.exit()
         if linked_doc.is_file() and linked_doc.suffix == SUFFIX_DRAWING:
-            self.doc_helper.framework.catia.documents.open(str(linked_doc))
+            self.doc_helper.framework.catia.documents.open(linked_doc)
             log.info("User opened linked document (file).")
             sys.exit()
 
