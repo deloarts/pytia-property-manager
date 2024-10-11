@@ -107,7 +107,6 @@ class UISetter:
         self.vars.base_size_preset.set("")
         self.layout.input_base_size.config(state=tk.DISABLED)
         self.layout.input_base_size_preset.config(state=tk.DISABLED)
-        self.layout.button_base_size.configure(state=tk.DISABLED)
 
         self.vars.mass.set("")
         self.layout.input_mass.config(state=tk.DISABLED)
@@ -189,7 +188,6 @@ class UISetter:
 
         self.layout.input_base_size.config(state="readonly")
         self.layout.input_base_size_preset.config(state="readonly")
-        self.layout.button_base_size.configure(state=tk.NORMAL)
 
         self.layout.input_mass.config(state="readonly")
         self.layout.button_mass.configure(state=tk.NORMAL)
@@ -265,7 +263,6 @@ class UISetter:
         self.vars.base_size.set("")
         self.layout.input_base_size.config(state=tk.DISABLED)
         self.layout.input_base_size_preset.config(state=tk.DISABLED)
-        self.layout.button_base_size.configure(state=tk.DISABLED)
 
         self.layout.input_mass.config(state="readonly")
         self.layout.button_mass.configure(state=tk.NORMAL)
@@ -335,7 +332,6 @@ class UISetter:
 
         self.layout.input_base_size.config(state=tk.DISABLED)
         self.layout.input_base_size_preset.config(state=tk.DISABLED)
-        self.layout.button_base_size.configure(state=tk.DISABLED)
 
         self.layout.input_mass.config(state=tk.DISABLED)
         self.layout.button_mass.configure(state=tk.DISABLED)
