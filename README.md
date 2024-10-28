@@ -1,13 +1,17 @@
 # pytia property manager
 
-A visual tool for managing CATIA properties.
-
 ![state](https://img.shields.io/badge/State-beta-brown.svg?style=for-the-badge)
 ![version](https://img.shields.io/github/v/release/deloarts/pytia-property-manager?style=for-the-badge&color=orange)
 
 [![python](https://img.shields.io/badge/Python-3.10-blue.svg?style=for-the-badge)](https://www.python.org/downloads/)
 ![catia](https://img.shields.io/badge/CATIA-V5%206R2017-blue.svg?style=for-the-badge)
 ![OS](https://img.shields.io/badge/OS-WIN11-blue.svg?style=for-the-badge)
+
+*Handle your CATIA documents meta data with ease.*
+
+The property manager allows you to create and edit the user-ref-properties of a part or product in an intuitive interface with rules and checks, so your engineering team doesn't have to worry about anything other than their tasks.
+
+![App](assets/images/banner.png)
 
 > ⚠️ The layout of this app is heavily biased towards the workflow and needs of my companies' engineering team. Although almost everything can be changed via config files and presets, the apps basic functionality is built to work in the environment of said company.
 
@@ -359,6 +363,7 @@ On a new revision, do the following:
 
 ## 7 changelog
 
+[**v0.7.2**](https://github.com/deloarts/pytia-property-manager/releases/tag/v0.7.2): Fix drawing link removal bug.  
 [**v0.7.1**](https://github.com/deloarts/pytia-property-manager/releases/tag/v0.7.1): Add linked drawing handler.  
 [**v0.7.0**](https://github.com/deloarts/pytia-property-manager/releases/tag/v0.7.0): Add order number and rename machine to product.  
 [**v0.6.1**](https://github.com/deloarts/pytia-property-manager/releases/tag/v0.6.1): Fix linked doc manager.  
