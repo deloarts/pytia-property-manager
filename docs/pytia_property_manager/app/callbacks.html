@@ -426,6 +426,7 @@ class Callbacks:
     def on_remove_drawing_file(self) -&gt; None:
         &#34;&#34;&#34;Removes the drawing file link from the documents properties&#34;&#34;&#34;
         self.doc_helper.document.properties.delete(PROP_DRAWING_PATH)
+        self.vars.linked_doc.set(&#34;&#34;)
         self.vars.linked_doc_display.set(&#34;Link removed&#34;)</code></pre>
 </details>
 </section>
@@ -846,6 +847,7 @@ result of the nomenclature check. Defaults to False.</dd>
     def on_remove_drawing_file(self) -&gt; None:
         &#34;&#34;&#34;Removes the drawing file link from the documents properties&#34;&#34;&#34;
         self.doc_helper.document.properties.delete(PROP_DRAWING_PATH)
+        self.vars.linked_doc.set(&#34;&#34;)
         self.vars.linked_doc_display.set(&#34;Link removed&#34;)</code></pre>
 </details>
 <h3>Methods</h3>
@@ -1191,6 +1193,7 @@ Launches the bounding box app.</p></div>
 <pre><code class="python">def on_remove_drawing_file(self) -&gt; None:
     &#34;&#34;&#34;Removes the drawing file link from the documents properties&#34;&#34;&#34;
     self.doc_helper.document.properties.delete(PROP_DRAWING_PATH)
+    self.vars.linked_doc.set(&#34;&#34;)
     self.vars.linked_doc_display.set(&#34;Link removed&#34;)</code></pre>
 </details>
 </dd>
