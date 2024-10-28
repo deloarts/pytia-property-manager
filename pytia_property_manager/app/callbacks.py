@@ -397,4 +397,5 @@ class Callbacks:
     def on_remove_drawing_file(self) -> None:
         """Removes the drawing file link from the documents properties"""
         self.doc_helper.document.properties.delete(PROP_DRAWING_PATH)
+        self.vars.linked_doc.set("")
         self.vars.linked_doc_display.set("Link removed")
