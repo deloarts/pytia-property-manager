@@ -40,15 +40,6 @@ Table of contents:
     - [2.4 release](#24-release)
     - [2.5 docs](#25-docs)
   - [3 usage](#3-usage)
-    - [3.1 buttons](#31-buttons)
-      - [3.1.1 revision button](#311-revision-button)
-      - [3.1.2 reload button](#312-reload-button)
-      - [3.1.3 select material button](#313-select-material-button)
-      - [3.1.4 calculate bounding box button](#314-calculate-bounding-box-button)
-      - [3.1.5 calculate mass button](#315-calculate-mass-button)
-      - [3.1.6 save button](#316-save-button)
-      - [3.1.6 abort button](#316-abort-button)
-    - [3.2 text inputs](#32-text-inputs)
   - [4 workspace](#4-workspace)
   - [5 developing](#5-developing)
     - [5.1 repository](#51-repository)
@@ -144,57 +135,9 @@ You can find the documentation in the [docs folder](/docs).
 
 ## 3 usage
 
-Use the launcher (a.k.a the catvbs-file) to launch the app. On the first run all required dependencies will be installed:
-
-![Installer](assets/images/installer.png)
-
-After the installation you can run the app.
+For a complete overview of the apps functionality see the [usage](/docs/USAGE.md) readme file.
 
 ![App](assets/images/app.png)
-
-The app retrieves all information from the documents properties, except the material value, which is fetched from the applied material.
-
-The usage itself is pretty straight forward, as long as all config files are setup properly.
-
-### 3.1 buttons
-
-#### 3.1.1 revision button
-
-Increases the revision. Creates a backup of the part or product first. The backup is a copy of the file, located in a new `.rev` folder, where the original file is located.
-
-#### 3.1.2 reload button
-
-This reloads the definition and the manufacturer. Works as long as the partnumbers' nomenclature matches the nomenclature of the **settings file**.
-
-#### 3.1.3 select material button
-
-This button opens the material manager.
-
-![App](assets/images/material_manager.png)
-
-To use the material manager, all materials must be named like specified in the **settings file**. The default looks like this:
-
-![App](assets/images/material_catalog.png)
-
-#### 3.1.4 calculate bounding box button
-
-This opens the [pytia bounding box app](https://github.com/deloarts/pytia-bounding-box). This requires the app to be available.
-
-#### 3.1.5 calculate mass button
-
-This triggers the mass calculation. For parts this is done when the app starts, but for products this must be done by hand (mass calculation takes a fair amount of time on big assemblies).
-
-#### 3.1.6 save button
-
-Writes the changes to the documents' properties and closes the app.
-
-#### 3.1.6 abort button
-
-Discards all changes and closes the app.
-
-### 3.2 text inputs
-
-A double click on a text input widget opens the text editor.
 
 ## 4 workspace
 
