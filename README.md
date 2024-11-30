@@ -1,13 +1,13 @@
 # pytia property manager
 
+*Handle your CATIA documents meta data with ease.*
+
 ![state](https://img.shields.io/badge/State-beta-brown.svg?style=for-the-badge)
 ![version](https://img.shields.io/github/v/release/deloarts/pytia-property-manager?style=for-the-badge&color=orange)
 
 [![python](https://img.shields.io/badge/Python-3.10-blue.svg?style=for-the-badge)](https://www.python.org/downloads/)
 ![catia](https://img.shields.io/badge/CATIA-V5%206R2017-blue.svg?style=for-the-badge)
 ![OS](https://img.shields.io/badge/OS-WIN11-blue.svg?style=for-the-badge)
-
-*Handle your CATIA documents meta data with ease.*
 
 The property manager allows you to create and edit the user-ref-properties of a part or product in an intuitive interface with rules and checks, so your engineering team doesn't have to worry about anything other than their tasks.
 
@@ -69,15 +69,14 @@ Table of contents:
 
 ## 1 installation
 
-> ✏️ For a guided installation visit [https://pytia.deloarts.com](https://pytia.deloarts.com/installation/v0.html)
->
+For a guided installation visit the [installation guide](/docs/INSTALLATION.md).
+
 > ⚠️ Do not manually install any dependencies. The app installs all required packages on its own.
 
 On the users machine you need to install the following:
 
 - CATIA
 - [Python](https://www.python.org/downloads/)
-- [Git](https://gitforwindows.org/)
 
 When the user starts the app it will automatically install all its requirements. Further the app also updates outdated dependencies if needed. The apps environment will be created in the users appdata-folder: `C:\Users\User\AppData\Roaming\pytia\pytia_property_manager`
 
@@ -86,8 +85,6 @@ Recommended python install options for the user:
 ```powershell
 python-installer.exe /passive PrependPath=1 Include_doc=0 Include_test=0 SimpleInstall=1 SimpleInstallDescription="python for pytia"
 ```
-
-For convenience there is a powershell script that will install the required python version for you, see [assets/python_installer.ps1](assets/python_installer.ps1).
 
 ## 2 setup
 
@@ -151,7 +148,7 @@ Use the launcher (a.k.a the catvbs-file) to launch the app. On the first run all
 
 ![Installer](assets/images/installer.png)
 
-After the installation the app starts automatically:
+After the installation you can run the app.
 
 ![App](assets/images/app.png)
 
