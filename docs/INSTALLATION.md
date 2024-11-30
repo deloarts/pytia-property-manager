@@ -48,7 +48,7 @@
 
 Install the following software on your machine:
 
-- CATIA V5 6R2017 or higher
+- CATIA V5 6R2023 or higher
 - [Python](https://www.python.org/downloads/)
 - [Git](https://gitforwindows.org/)
 - [Poetry](https://python-poetry.org/docs/master/#installation)
@@ -231,7 +231,7 @@ If you just do a change in the config you can do this safely without checking fo
 
 Install the following software on the users machine:
 
-- CATIA V5 6R2017 or higher
+- CATIA V5 6R2023 or higher
 - [Python](https://www.python.org/downloads/)
 
 #### 2.1.1 python on the users machine

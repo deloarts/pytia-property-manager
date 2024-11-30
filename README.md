@@ -6,7 +6,7 @@
 ![version](https://img.shields.io/github/v/release/deloarts/pytia-property-manager?style=for-the-badge&color=orange)
 
 [![python](https://img.shields.io/badge/Python-3.10-blue.svg?style=for-the-badge)](https://www.python.org/downloads/)
-![catia](https://img.shields.io/badge/CATIA-V5%206R2017-blue.svg?style=for-the-badge)
+![catia](https://img.shields.io/badge/CATIA-V5%206R2023-blue.svg?style=for-the-badge)
 ![OS](https://img.shields.io/badge/OS-WIN11-blue.svg?style=for-the-badge)
 
 The property manager allows you to create and edit the user-ref-properties of a part or product in an intuitive interface with rules and checks, so your engineering team doesn't have to worry about anything other than their tasks.
