@@ -81,7 +81,7 @@ This file contains the basic settings for the app.
         "Annual"
     ],
     "paths": {
-        "catia": "C:\\CATIA\\V5-6R2017\\B27",
+        "catia": "C:\\CATIA\\V5-6R2023\\B27",
         "material": "C:\\pytia\\material",
         "release": "C:\\pytia\\release"
     },
