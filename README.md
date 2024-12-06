@@ -1,13 +1,13 @@
 # pytia property manager
 
+*Handle your CATIA documents meta data with ease.*
+
 ![state](https://img.shields.io/badge/State-beta-brown.svg?style=for-the-badge)
 ![version](https://img.shields.io/github/v/release/deloarts/pytia-property-manager?style=for-the-badge&color=orange)
 
 [![python](https://img.shields.io/badge/Python-3.10-blue.svg?style=for-the-badge)](https://www.python.org/downloads/)
-![catia](https://img.shields.io/badge/CATIA-V5%206R2017-blue.svg?style=for-the-badge)
+![catia](https://img.shields.io/badge/CATIA-V5%206R2023-blue.svg?style=for-the-badge)
 ![OS](https://img.shields.io/badge/OS-WIN11-blue.svg?style=for-the-badge)
-
-*Handle your CATIA documents meta data with ease.*
 
 The property manager allows you to create and edit the user-ref-properties of a part or product in an intuitive interface with rules and checks, so your engineering team doesn't have to worry about anything other than their tasks.
 
@@ -17,14 +17,14 @@ The property manager allows you to create and edit the user-ref-properties of a 
 
 Check out the pytia ecosystem:
 
-- **pytia** ([web](https://pytia.deloarts.com/), [repo](https://github.com/deloarts/pytia)): The heart of this project.
-- **pytia-property-manager** ([web](https://pytia.deloarts.com/property-manager/v0.html), [repo](https://github.com/deloarts/pytia-property-manager)) : An app to edit part and product properties.
-- **pytia-bounding-box** ([web](https://pytia.deloarts.com/bounding-box/v0.html), [repo](https://github.com/deloarts/pytia-bounding-box)): For retrieving the bounding box of a part.
-- **pytia-bill-of-material** ([web](https://pytia.deloarts.com/bill-of-material/v0.html), [repo](https://github.com/deloarts/pytia-bill-of-material)): Exports the bill of material and data of a product.
-- **pytia-title-block** ([web](https://pytia.deloarts.com/title-block/v0.html), [repo](https://github.com/deloarts/pytia-title-block)): An app to edit a drawing's title block.
-- **pytia-quick-export** ([web](https://pytia.deloarts.com/quick-export/v0.html), [repo](https://github.com/deloarts/pytia-quick-export)): Single file export with useful features.
-- **pytia-reorder-tree** ([web](https://pytia.deloarts.com/reorder-tree/v0.html), [repo](https://github.com/deloarts/pytia-reorder-tree)): Brings order in your product graph tree.
-- **pytia-ui-tools** ([web](https://pytia.deloarts.com/), [repo](https://github.com/deloarts/pytia-ui-tools)): A toolbox for all pytia apps.
+- **[pytia](https://github.com/deloarts/pytia)**: The heart of this project
+- **[pytia-property-manager](https://github.com/deloarts/pytia-property-manager)**: An app to edit part and product properties
+- **[pytia-bounding-box](https://github.com/deloarts/pytia-bounding-box)**: For retrieving the bounding box of a part
+- **[pytia-bill-of-material](https://github.com/deloarts/pytia-bill-of-material)**: Exports the bill of material and data of a product
+- **[pytia-title-block](https://github.com/deloarts/pytia-title-block)**: An app to edit a drawing's title block
+- **[pytia-quick-export](https://github.com/deloarts/pytia-quick-export)**: Single file export with useful features
+- **[pytia-reorder-tree](https://github.com/deloarts/pytia-reorder-tree)**: Brings order in your product graph tree
+- **[pytia-ui-tools](https://github.com/deloarts/pytia-ui-tools)**: A toolbox for all pytia apps
 
 Table of contents:
 
@@ -40,15 +40,6 @@ Table of contents:
     - [2.4 release](#24-release)
     - [2.5 docs](#25-docs)
   - [3 usage](#3-usage)
-    - [3.1 buttons](#31-buttons)
-      - [3.1.1 revision button](#311-revision-button)
-      - [3.1.2 reload button](#312-reload-button)
-      - [3.1.3 select material button](#313-select-material-button)
-      - [3.1.4 calculate bounding box button](#314-calculate-bounding-box-button)
-      - [3.1.5 calculate mass button](#315-calculate-mass-button)
-      - [3.1.6 save button](#316-save-button)
-      - [3.1.6 abort button](#316-abort-button)
-    - [3.2 text inputs](#32-text-inputs)
   - [4 workspace](#4-workspace)
   - [5 developing](#5-developing)
     - [5.1 repository](#51-repository)
@@ -69,15 +60,14 @@ Table of contents:
 
 ## 1 installation
 
-> ✏️ For a guided installation visit [https://pytia.deloarts.com](https://pytia.deloarts.com/installation/v0.html)
->
+For a guided installation visit the [installation guide](/docs/INSTALLATION.md).
+
 > ⚠️ Do not manually install any dependencies. The app installs all required packages on its own.
 
 On the users machine you need to install the following:
 
 - CATIA
 - [Python](https://www.python.org/downloads/)
-- [Git](https://gitforwindows.org/)
 
 When the user starts the app it will automatically install all its requirements. Further the app also updates outdated dependencies if needed. The apps environment will be created in the users appdata-folder: `C:\Users\User\AppData\Roaming\pytia\pytia_property_manager`
 
@@ -86,8 +76,6 @@ Recommended python install options for the user:
 ```powershell
 python-installer.exe /passive PrependPath=1 Include_doc=0 Include_test=0 SimpleInstall=1 SimpleInstallDescription="python for pytia"
 ```
-
-For convenience there is a powershell script that will install the required python version for you, see [assets/python_installer.ps1](assets/python_installer.ps1).
 
 ## 2 setup
 
@@ -147,57 +135,9 @@ You can find the documentation in the [docs folder](/docs).
 
 ## 3 usage
 
-Use the launcher (a.k.a the catvbs-file) to launch the app. On the first run all required dependencies will be installed:
-
-![Installer](assets/images/installer.png)
-
-After the installation the app starts automatically:
+For a complete overview of the apps functionality see the [usage](/docs/USAGE.md) readme file.
 
 ![App](assets/images/app.png)
-
-The app retrieves all information from the documents properties, except the material value, which is fetched from the applied material.
-
-The usage itself is pretty straight forward, as long as all config files are setup properly.
-
-### 3.1 buttons
-
-#### 3.1.1 revision button
-
-Increases the revision. Creates a backup of the part or product first. The backup is a copy of the file, located in a new `.rev` folder, where the original file is located.
-
-#### 3.1.2 reload button
-
-This reloads the definition and the manufacturer. Works as long as the partnumbers' nomenclature matches the nomenclature of the **settings file**.
-
-#### 3.1.3 select material button
-
-This button opens the material manager.
-
-![App](assets/images/material_manager.png)
-
-To use the material manager, all materials must be named like specified in the **settings file**. The default looks like this:
-
-![App](assets/images/material_catalog.png)
-
-#### 3.1.4 calculate bounding box button
-
-This opens the [pytia bounding box app](https://github.com/deloarts/pytia-bounding-box). This requires the app to be available.
-
-#### 3.1.5 calculate mass button
-
-This triggers the mass calculation. For parts this is done when the app starts, but for products this must be done by hand (mass calculation takes a fair amount of time on big assemblies).
-
-#### 3.1.6 save button
-
-Writes the changes to the documents' properties and closes the app.
-
-#### 3.1.6 abort button
-
-Discards all changes and closes the app.
-
-### 3.2 text inputs
-
-A double click on a text input widget opens the text editor.
 
 ## 4 workspace
 
@@ -363,6 +303,7 @@ On a new revision, do the following:
 
 ## 7 changelog
 
+[**v0.7.3**](https://github.com/deloarts/pytia-property-manager/releases/tag/v0.7.3): Update deps.  
 [**v0.7.2**](https://github.com/deloarts/pytia-property-manager/releases/tag/v0.7.2): Fix drawing link removal bug.  
 [**v0.7.1**](https://github.com/deloarts/pytia-property-manager/releases/tag/v0.7.1): Add linked drawing handler.  
 [**v0.7.0**](https://github.com/deloarts/pytia-property-manager/releases/tag/v0.7.0): Add order number and rename machine to product.  
