@@ -2,7 +2,7 @@
 
 *Handle your CATIA documents meta data with ease.*
 
-![state](https://img.shields.io/badge/State-beta-brown.svg?style=for-the-badge)
+![state](https://img.shields.io/badge/State-archived-brown.svg?style=for-the-badge)
 ![version](https://img.shields.io/github/v/release/deloarts/pytia-property-manager?style=for-the-badge&color=orange)
 
 [![python](https://img.shields.io/badge/Python-3.10-blue.svg?style=for-the-badge)](https://www.python.org/downloads/)
@@ -13,7 +13,7 @@ The property manager allows you to create and edit the user-ref-properties of a 
 
 ![App](assets/images/banner.png)
 
-> ⚠️ The layout of this app is heavily biased towards the workflow and needs of my companies' engineering team. Although almost everything can be changed via config files and presets, the apps basic functionality is built to work in the environment of said company.
+> ⚠️ Due to the lack of a CATIA License I'm no longer able to develop this app. I leave it here for others to use, but keep in mind that I can't provide updates or fixes.
 
 Check out the pytia ecosystem:
 
